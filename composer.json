@@ -1,7 +1,7 @@
 {
 
-  "name": "danack/params",
-  "description": "Converts user input into correctly typed parameters",
+  "name": "danack/typespec",
+  "description": "A library that makes programatic types easier",
   "license": "MIT",
   "require": {
     "php" : "^8.0",
