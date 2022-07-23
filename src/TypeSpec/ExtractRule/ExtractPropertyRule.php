@@ -13,7 +13,6 @@ use TypeSpec\ValidationResult;
  * The first rule for a property of a type. It should extract the
  * initial value out of the InputStorage.
  *
- * @package Params
  */
 interface ExtractPropertyRule extends PropertyRule
 {

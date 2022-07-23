@@ -20,7 +20,7 @@ use TypeSpec\Value\Ordering;
 use TypeSpec\TypeSpec;
 
 // TODO - change to type?
-class GetArticlesParams implements TypeSpec
+class GetArticlesParameters implements TypeSpec
 {
     use SafeAccess;
     use CreateFromRequest;
@@ -44,8 +44,8 @@ class GetArticlesParams implements TypeSpec
     public static function getKnownOrderNames()
     {
         return [
-            GetArticlesParams::ARTICLE_ID_NAME,
-            GetArticlesParams::ARTICLE_DATE_NAME
+            GetArticlesParameters::ARTICLE_ID_NAME,
+            GetArticlesParameters::ARTICLE_DATE_NAME
         ];
     }
 

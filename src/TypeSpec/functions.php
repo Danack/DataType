@@ -85,7 +85,7 @@ function createArrayOfTypeFromInputStorage(
     $items = [];
     /** @var \TypeSpec\ValidationProblem[] $allValidationProblems */
     $allValidationProblems = [];
-    $paramsValuesImpl = new ProcessedValues();
+    $processedValues = new ProcessedValues();
     $index = 0;
 
     $itemData = $dataStorage->getCurrentValue();
@@ -98,7 +98,7 @@ function createArrayOfTypeFromInputStorage(
         $dataStorageForItem = $dataStorage->moveKey($key);
 
         $result = $typeExtractor->process(
-            $paramsValuesImpl,
+            $processedValues,
             $dataStorageForItem
         );
 
@@ -181,19 +181,19 @@ function getInputTypeSpecListForClass(string $className): array
 /**
  * @template T
  * @param class-string<T> $classname
- * @param \ReflectionParameter[] $constructor_params,
+ * @param \ReflectionParameter[] $constructor_parameters,
  * @param ProcessedValues $processedValues
  * @return mixed[]
  * @throws \ReflectionException
  * @throws NoConstructorException
  */
-function get_all_constructor_params(
+function get_all_constructor_parameters(
     string $classname,
-    array $constructor_params,
+    array $constructor_parameters,
     ProcessedValues $processedValues
 ) {
-    $built_params = [];
-    foreach ($constructor_params as $constructor_param) {
+    $built_parameters = [];
+    foreach ($constructor_parameters as $constructor_param) {
         $name = $constructor_param->getName();
         [$value, $available] = $processedValues->getValueForTargetProperty($name);
         if ($available !== true) {
@@ -202,10 +202,10 @@ function get_all_constructor_params(
                 $name
             );
         }
-        $built_params[] = $value;
+        $built_parameters[] = $value;
     }
 
-    return $built_params;
+    return $built_parameters;
 }
 
 /**
@@ -222,7 +222,7 @@ function createObjectFromProcessedValues(string $classname, ProcessedValues $pro
 
     $r_constructor = $reflection_class->getConstructor();
 
-    // No constructor, can't create the object with params.
+    // No constructor, can't create the object with parameters.
     // Yes this is an arbitrary choice, but it seems sensible.
     if ($r_constructor === null) {
         throw NoConstructorException::noConstructor($classname);
@@ -232,22 +232,22 @@ function createObjectFromProcessedValues(string $classname, ProcessedValues $pro
         throw NoConstructorException::notPublicConstructor($classname);
     }
 
-    $constructor_params = $r_constructor->getParameters();
-    if (count($constructor_params) !== $processedValues->getCount()) {
+    $constructor_parameters = $r_constructor->getParameters();
+    if (count($constructor_parameters) !== $processedValues->getCount()) {
         throw IncorrectNumberOfParametersException::wrongNumber(
             $classname,
-            count($constructor_params),
+            count($constructor_parameters),
             $processedValues->getCount()
         );
     }
 
-    $built_params = get_all_constructor_params(
+    $built_parameters = get_all_constructor_parameters(
         $classname,
-        $constructor_params,
+        $constructor_parameters,
         $processedValues
     );
 
-    $object = $reflection_class->newInstanceArgs($built_params);
+    $object = $reflection_class->newInstanceArgs($built_parameters);
 
     /** @var T $object */
     return $object;
@@ -300,11 +300,11 @@ function create(
  */
 function createOrError($classname, $inputTypeSpecList, DataStorage $dataStorage)
 {
-    $paramsValuesImpl = new ProcessedValues();
+    $processedValues = new ProcessedValues();
 
     $validationProblems = processInputTypeSpecList(
         $inputTypeSpecList,
-        $paramsValuesImpl,
+        $processedValues,
         $dataStorage
     );
 
@@ -312,7 +312,7 @@ function createOrError($classname, $inputTypeSpecList, DataStorage $dataStorage)
         return [null, $validationProblems];
     }
 
-    $object = createObjectFromProcessedValues($classname, $paramsValuesImpl);
+    $object = createObjectFromProcessedValues($classname, $processedValues);
 
     return [$object, []];
 }

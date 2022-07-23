@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use TypeSpecExample\GetArticlesParams;
+use TypeSpecExample\GetArticlesParameters;
 use VarMap\ArrayVarMap;
 use TypeSpec\Exception\ValidationException;
 
@@ -12,7 +12,7 @@ $varMap = new ArrayVarMap([]);
 
 try {
     $varMap = new ArrayVarMap(['ordering' => 'not a valid value']);
-    $articleGetIndexParams = GetArticlesParams::createFromVarMap($varMap);
+    $articleGetIndexParams = GetArticlesParameters::createFromVarMap($varMap);
 
     echo "shouldn't reach here.";
     exit(-1);

@@ -20,7 +20,7 @@ class InvalidLocationException extends TypeSpecException
     public static function badArrayDataStorage(array $location): self
     {
         $message = sprintf(
-            "Invalid location detected in ArrayDataStorage. This shouldn't happen and is likely a bug in the params library. Location was %s",
+            "Invalid location detected in ArrayDataStorage. This shouldn't happen and is likely a bug in the TypeSpec library. Location was %s",
             implode(", ", $location)
         );
 
@@ -33,7 +33,7 @@ class InvalidLocationException extends TypeSpecException
     public static function badComplexDataStorage(array $location): self
     {
         $message = sprintf(
-            "Invalid location detected in ComplexDataStorage. This shouldn't happen and is likely a bug in the params library. Location was %s",
+            "Invalid location detected in ComplexDataStorage. This shouldn't happen and is likely a bug in the TypeSpec library. Location was %s",
             implode(", ", $location)
         );
 
@@ -46,7 +46,7 @@ class InvalidLocationException extends TypeSpecException
     public static function intNotAllowedComplexDataStorage(array $location): self
     {
         $message = sprintf(
-            "Tried to use int as key to object in ComplexDataStorage. This shouldn't happen and is likely a bug in the params library. Location was %s",
+            "Tried to use int as key to object in ComplexDataStorage. This shouldn't happen and is likely a bug in the TypeSpec library. Location was %s",
             implode(", ", $location)
         );
 

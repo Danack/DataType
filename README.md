@@ -1,19 +1,18 @@
-# Params
+# TypeSpec
 
 A framework agnostic library for validating input parameters.
 
-[![Build Status](https://travis-ci.org/Danack/Params.svg?branch=master)](https://travis-ci.org/Danack/Params)
 
-[![Actions Status](https://github.com/Danack/Params/workflows/Tests/badge.svg)](https://github.com/Danack/Params/actions)
+[![Actions Status](https://github.com/Danack/TypeSpec/workflows/Tests/badge.svg)](https://github.com/Danack/TypeSpec/actions)
 
 # Installation
 
-```composer require danack/params```
+```composer require danack/typespec```
 
 
 # TL:DR - Using in an application
 
-This library allows you to define a [set of rules](https://github.com/Danack/Params/blob/1121bda4f5e6a04fcdb4f82a21da0ed83fe79d2f/lib/ParamsExample/GetArticlesParams.php#L71-L92) that define the expected input parameters, and then validate them.
+This library allows you to define a set of rules that define the expected input parameters, and then validate them.
 
 As an example, this is what the code looks like in a controller for retrieving a list of articles:
 
@@ -22,8 +21,8 @@ function getArticles(Request $request)
 {
     $getArticlesParams = GetArticlesParams::createFromRequest($request);
 
-    echo "After Id: " . $articleGetIndexParams->getAfterId() . PHP_EOL;
-    echo "Limit:    " . $articleGetIndexParams->getLimit() . PHP_EOL;
+    echo "After Id: " . $articleGetIndexParameters->getAfterId() . PHP_EOL;
+    echo "Limit:    " . $articleGetIndexParameters->getLimit() . PHP_EOL;
 }
 ```
 
@@ -40,8 +39,8 @@ function getArticles(Request $request)
         // do something about those errors.
     }
 
-    echo "After Id: " . $articleGetIndexParams->getAfterId() . PHP_EOL;
-    echo "Limit:    " . $articleGetIndexParams->getLimit() . PHP_EOL;
+    echo "After Id: " . $articleGetIndexParameters->getAfterId() . PHP_EOL;
+    echo "Limit:    " . $articleGetIndexParameters->getLimit() . PHP_EOL;
 }
 ```
 

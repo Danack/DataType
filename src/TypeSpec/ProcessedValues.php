@@ -39,7 +39,7 @@ class ProcessedValues
 
     /**
      * TODO - is this required?
-     * Gets the currently processed params.
+     * Gets the currently processed values.
      * @return array<int|string, mixed>
      */
     public function getAllValues()

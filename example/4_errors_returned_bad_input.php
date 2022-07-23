@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use TypeSpecExample\GetArticlesParams;
+use TypeSpecExample\GetArticlesParameters;
 use VarMap\ArrayVarMap;
 
 require __DIR__ . "/../vendor/autoload.php";
 
 // Handle errors
 $varmap = new ArrayVarMap(['ordering' => 'error']);
-[$articleGetIndexParams, $validationErrors] = GetArticlesParams::createOrErrorFromVarMap($varmap);
+[$articleGetIndexParams, $validationErrors] = GetArticlesParameters::createOrErrorFromVarMap($varmap);
 
 if (count($validationErrors) !== 0) {
     echo "There were errors creating ArticleGetIndexParams from input\n  ";

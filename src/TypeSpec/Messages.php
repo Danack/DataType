@@ -77,7 +77,7 @@ class Messages
     public const MUST_RETURN_ARRAY_OF_PROPERTY_DEFINITION ='Function %s::getPropertyDefinitionList must return array of %s. Item at index %d is wrong type.';
     public const CLASS_NOT_FOUND = "Class %s isn't available through auto-loader.";
     public const CLASS_MUST_IMPLEMENT_INPUT_PARAMETER = "Class %s doesn't implement the %s interface and does not have annotations for Params. Cannot be used to get array of type.";
-    public const INCORRECT_NUMBER_OF_PARAMETERS = "Class %s expects %d params but we have %d.";
+    public const INCORRECT_NUMBER_OF_PARAMETERS = "Class %s expects %d parameters but we have %d.";
     public const MISSING_PARAMETER_NAME = "Class '%s' requires a parameter named '%s', but that is missing.";
     public const PROPERTY_MULTIPLE_INPUT_TYPE_SPEC = "Property '%s' in class %s has more than one InputTypeSpec annotation.";
     public const PROPERTY_ANNOTATION_DOES_NOT_EXIST = "Property '%s' in class %s has an annotation for %s, but that class does not exist.";

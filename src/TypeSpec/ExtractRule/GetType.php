@@ -64,10 +64,10 @@ class GetType implements ExtractPropertyRule
             return ValidationResult::errorResult($dataStorage, Messages::VALUE_NOT_SET);
         }
 
-        $paramsValuesImpl = new ProcessedValues();
+        $newProcessedValues = new ProcessedValues();
         $validationProblems = processInputTypeSpecList(
             $this->inputParameterList,
-            $paramsValuesImpl,
+            $newProcessedValues,
             $dataStorage
         );
 
@@ -75,7 +75,7 @@ class GetType implements ExtractPropertyRule
             return ValidationResult::fromValidationProblems($validationProblems);
         }
 
-        $item = createObjectFromProcessedValues($this->className, $paramsValuesImpl);
+        $item = createObjectFromProcessedValues($this->className, $newProcessedValues);
 
         return ValidationResult::valueResult($item);
     }
