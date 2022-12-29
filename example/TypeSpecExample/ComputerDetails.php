@@ -6,14 +6,14 @@ namespace TypeSpecExample;
 
 use TypeSpec\Create\CreateOrErrorFromArray;
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\ProcessRule\MaxLength;
 use TypeSpec\SafeAccess;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpecExample\MacAddressType;
 
-class ComputerDetails implements TypeSpec
+class ComputerDetails implements HasDataTypeList
 {
     use SafeAccess;
     use CreateOrErrorFromArray;
@@ -36,12 +36,12 @@ class ComputerDetails implements TypeSpec
     }
 
     /**
-     * @return \TypeSpec\InputTypeSpec[]
+     * @return \TypeSpec\DataType[]
      */
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'name',
                 new GetString(),
                 new MinLength(2),

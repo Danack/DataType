@@ -8,23 +8,23 @@ use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
-use TypeSpec\PropertyInputTypeSpec;
+use TypeSpec\HasDataType;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createObjectFromProcessedValues;
-use function TypeSpec\processSingleInputParameter;
+use function TypeSpec\processSingleInputType;
 
 class GetParam implements ExtractPropertyRule
 {
     /** @var class-string */
     private string $className;
 
-    private PropertyInputTypeSpec $propertyInputTypeSpec;
+    private HasDataType $propertyInputTypeSpec;
 
     /**
      * @param class-string $className
-     * @param PropertyInputTypeSpec $propertyInputTypeSpec
+     * @param HasDataType $propertyInputTypeSpec
      */
-    public function __construct(string $className, PropertyInputTypeSpec $propertyInputTypeSpec)
+    public function __construct(string $className, HasDataType $propertyInputTypeSpec)
     {
         $this->className = $className;
         $this->propertyInputTypeSpec = $propertyInputTypeSpec;
@@ -48,7 +48,7 @@ class GetParam implements ExtractPropertyRule
         }
 
         $newProcessedValues = new ProcessedValues();
-        $validationProblems = processSingleInputParameter(
+        $validationProblems = processSingleInputType(
             $this->propertyInputTypeSpec,
             $newProcessedValues,
             $dataStorage

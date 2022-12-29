@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeSpecTest\Exception;
 
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 use TypeSpec\Messages;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\Exception\TypeNotInputParameterListException;
@@ -26,7 +26,7 @@ class TypeNotInputParameterListExceptionTest extends BaseTestCase
         );
 
         // This should survive class renaming.
-        $this->assertStringContainsString(TypeSpec::class, $exception->getMessage());
+        $this->assertStringContainsString(HasDataTypeList::class, $exception->getMessage());
         $this->assertStringContainsString(self::class, $exception->getMessage());
         $this->assertSame(0, $exception->getCode());
     }

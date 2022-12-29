@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace TypeSpec\Exception;
 
-class ValidationException extends \TypeSpec\Exception\TypeSpecException
+class ValidationException extends TypeSpecException
 {
     /**
      * @var \TypeSpec\ValidationProblem[]

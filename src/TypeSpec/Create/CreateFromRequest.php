@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TypeSpec\DataStorage\ArrayDataStorage;
 use VarMap\Psr7VarMap;
 use function TypeSpec\create;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 /**
  * Use this trait when the parameters arrive as named parameters e.g
@@ -24,7 +24,7 @@ trait CreateFromRequest
     public static function createFromRequest(ServerRequestInterface $request)
     {
         $variableMap = new Psr7VarMap($request);
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 
         $object = create(static::class, $rules, $dataStorage);

@@ -16,9 +16,9 @@ use TypeSpec\Exception\TypeNotInputParameterListException;
 use TypeSpec\ExtractRule\ExtractPropertyRule;
 use TypeSpec\ExtractRule\GetInt;
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Messages;
-use TypeSpec\PropertyInputTypeSpec;
+use TypeSpec\HasDataType;
 use TypeSpec\ProcessedValue;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\AlwaysEndsRule;
@@ -31,7 +31,7 @@ use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\ExtractRule\GetType;
 use TypeSpec\ValidationResult;
 use TypeSpec\Exception\ValidationException;
-use TypeSpecTest\ImagickColorPropertyInputTypeSpec;
+use TypeSpecTest\ImagickColorHasDataType;
 use VarMap\ArrayVarMap;
 use TypeSpecTest\Integration\FooParams;
 use TypeSpec\Exception\NoConstructorException;
@@ -42,20 +42,19 @@ use function TypeSpec\check_only_digits;
 use function TypeSpec\normalise_order_parameter;
 use function TypeSpec\escapeJsonPointer;
 use function TypeSpec\getRawCharacters;
-use function TypeSpec\getInputTypeSpecListForClass;
-use function TypeSpec\processInputTypeSpecList;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\getDataTypeListForClass;
+use function TypeSpec\processInputTypeList;
+use function TypeSpec\processInputType;
 use function TypeSpec\processProcessingRules;
 use function TypeSpec\createArrayOfTypeFromInputStorage;
 use function TypeSpec\createArrayOfType;
 use function TypeSpec\createArrayOfTypeOrError;
 use function TypeSpec\checkAllowedFormatsAreStrings;
-use function TypeSpec\getInputTypeSpecListFromAnnotations;
+use function TypeSpec\getDataTypeListFromAnnotations;
 use function TypeSpec\getDefaultSupportedTimeFormats;
 use function TypeSpec\getReflectionClassOfAttribute;
 use function TypeSpec\createObjectFromProcessedValues;
-use function TypeSpec\processSingleInputParameter;
-use function TypeSpec\getParamForClass;
+use function TypeSpec\processSingleInputType;
 use function TypeSpec\createSingleValue;
 use function TypeSpec\createSingleValueOrError;
 
@@ -350,7 +349,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_getInputParameterListForClass()
     {
-        $inputParameters = getInputTypeSpecListForClass(\TestParams::class);
+        $inputParameters = getDataTypeListForClass(\TestParams::class);
         $this->assertCount(1, $inputParameters);
     }
 
@@ -360,7 +359,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_missing_class()
     {
         $this->expectException(MissingClassException::class);
-        $inputParameters = getInputTypeSpecListForClass("does_not_exist");
+        $inputParameters = getDataTypeListForClass("does_not_exist");
     }
 
     /**
@@ -369,7 +368,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_missing_implements()
     {
         $this->expectException(TypeNotInputParameterListException::class);
-        $inputParameters = getInputTypeSpecListForClass(
+        $inputParameters = getDataTypeListForClass(
             \DoesNotImplementInputParameterList::class
         );
     }
@@ -380,22 +379,14 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_non_inputparameter()
     {
         $this->expectException(TypeDefinitionException::class);
-        $inputParameters = getInputTypeSpecListForClass(
-            \ReturnsBadTypeSpec::class
+        $inputParameters = getDataTypeListForClass(
+            \ReturnsBadHasDataTypeList::class
         );
     }
 
 
 
 
-
-    /**
-     * @covers ::\TypeSpec\getParamForClass
-     */
-    public function test_getParamForClass()
-    {
-        $param = getParamForClass(\TestParams::class);
-    }
 
 
     public function test_processSingleInputParameter()
@@ -410,7 +401,7 @@ class FunctionsTest extends BaseTestCase
 
         $param = new Quantity('foo');
 
-        $result = processSingleInputParameter(
+        $result = processSingleInputType(
             $param,
             $paramValues,
             $dataStorage
@@ -428,14 +419,14 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_processInputParameters()
     {
-        $inputParameters = \AlwaysErrorsParams::getInputTypeSpecList();
+        $inputParameters = \AlwaysErrorsParams::getDataTypeList();
         $dataStorage = TestArrayDataStorage::fromArray([
             'foo' => 'foo string',
             'bar' => 'bar string'
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputTypeSpecList(
+        $validationProblems = processInputTypeList(
             $inputParameters,
             $paramValues,
             $dataStorage
@@ -609,7 +600,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_processInputParameter_works()
     {
-        $inputParameter = new InputTypeSpec(
+        $inputParameter = new DataType(
             'bar',
             new GetString()
         );
@@ -619,7 +610,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -638,7 +629,7 @@ class FunctionsTest extends BaseTestCase
     public function test_processInputParameter_errors_on_extract()
     {
 
-        $inputParameter = new InputTypeSpec(
+        $inputParameter = new DataType(
             'bar',
             new GetInt()
         );
@@ -648,7 +639,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues = new ProcessedValues();
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -691,7 +682,7 @@ class FunctionsTest extends BaseTestCase
             }
         };
 
-        $inputParameter = new InputTypeSpec(
+        $inputParameter = new DataType(
             'bar',
             $extractIsFinal
         );
@@ -701,7 +692,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues = new ProcessedValues();
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -721,7 +712,7 @@ class FunctionsTest extends BaseTestCase
     {
         $errorMessage = "There was error.";
 
-        $inputParameter = new InputTypeSpec(
+        $inputParameter = new DataType(
             'bar',
             new GetString(),
             new AlwaysErrorsRule($errorMessage)
@@ -733,7 +724,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -887,9 +878,9 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_getParamsFromAnnotations()
     {
-        $inputParameters = getInputTypeSpecListFromAnnotations(\ThreeColors::class);
+        $inputParameters = getDataTypeListFromAnnotations(\ThreeColors::class);
         foreach ($inputParameters as $inputParameter) {
-            $this->assertInstanceOf(InputTypeSpec::class, $inputParameter);
+            $this->assertInstanceOf(DataType::class, $inputParameter);
             $this->assertInstanceOf(GetStringOrDefault::class, $inputParameter->getExtractRule());
 
             $processRules = $inputParameter->getProcessRules();
@@ -906,7 +897,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getParamsFromAnnotations_non_existant_param_class()
     {
         try {
-            $inputParameters = getInputTypeSpecListFromAnnotations(
+            $inputParameters = getDataTypeListFromAnnotations(
                 \OneColorWithOtherAnnotationThatDoesNotExist::class
             );
         }
@@ -923,7 +914,7 @@ class FunctionsTest extends BaseTestCase
     public function testMultipleParamsErrors()
     {
         try {
-            $inputParameters = getInputTypeSpecListFromAnnotations(
+            $inputParameters = getDataTypeListFromAnnotations(
                 \MultipleParamAnnotations::class
             );
         }
@@ -941,14 +932,14 @@ class FunctionsTest extends BaseTestCase
     public function test_getParamsFromAnnotations_skips_non_param_annotation()
     {
 
-        $inputParameters = getInputTypeSpecListFromAnnotations(
+        $inputParameters = getDataTypeListFromAnnotations(
             \OneColorWithOtherAnnotationThatIsNotAParam::class
         );
 
         $this->assertCount(1, $inputParameters);
         $inputParameter = $inputParameters[0];
 
-        $this->assertSame('background_color', $inputParameter->getInputName());
+        $this->assertSame('background_color', $inputParameter->getName());
     }
 
     /**
@@ -1077,7 +1068,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function testCreateSingleValue()
     {
-        $colorInputTypeSpec = new ImagickColorPropertyInputTypeSpec(
+        $colorInputTypeSpec = new ImagickColorHasDataType(
             'rgb(225, 225, 225)',
             'background_color'
         );
@@ -1108,7 +1099,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function testCreateSingleValueOrError()
     {
-        $colorInputTypeSpec = new ImagickColorPropertyInputTypeSpec(
+        $colorInputTypeSpec = new ImagickColorHasDataType(
             'rgb(225, 225, 225)',
             'background_color'
         );

@@ -7,7 +7,7 @@ namespace TypeSpec\Create;
 use TypeSpec\DataStorage\ArrayDataStorage;
 use function JsonSafe\json_decode_safe;
 use function TypeSpec\createOrError;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 trait CreateOrErrorFromJson
 {
@@ -21,7 +21,7 @@ trait CreateOrErrorFromJson
     {
         $data = json_decode_safe($json);
 
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($data);
 
         return createOrError(static::class, $rules, $dataStorage);

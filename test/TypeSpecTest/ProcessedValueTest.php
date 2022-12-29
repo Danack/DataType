@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace TypeSpecTest;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessedValue;
 use TypeSpec\ExtractRule\FixedValue;
 
@@ -20,12 +20,12 @@ class ProcessedValueTest extends BaseTestCase
     public function testMissingGivesException()
     {
         $value = 5;
-        $foo = new InputTypeSpec(
+        $foo = new DataType(
             'john',
             new FixedValue($value)
         );
         $processedValues = new ProcessedValue($foo, $value);
         $this->assertSame($value, $processedValues->getValue());
-        $this->assertSame($foo, $processedValues->getInputTypeSpec());
+        $this->assertSame($foo, $processedValues->getDataType());
     }
 }

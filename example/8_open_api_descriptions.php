@@ -8,7 +8,7 @@ use TypeSpec\OpenApi\OpenApiV300ParamDescription;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-$inputToParamRuleList = GetArticlesParameters::getInputTypeSpecList();
+$inputToParamRuleList = GetArticlesParameters::getDataTypeList();
 
 $descriptions = OpenApiV300ParamDescription::createFromInputTypeSpecList($inputToParamRuleList);
 

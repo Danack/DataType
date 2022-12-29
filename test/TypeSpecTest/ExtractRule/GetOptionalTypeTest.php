@@ -50,7 +50,7 @@ class GetOptionalTypeTest extends BaseTestCase
 
         $rule = GetOptionalType::fromClassAndRules(
             ReviewScore::class,
-            ReviewScore::getInputTypeSpecList()
+            ReviewScore::getDataTypeList()
         );
         $validationResult = $rule->process(
             $validator, TestArrayDataStorage::fromArray($data)

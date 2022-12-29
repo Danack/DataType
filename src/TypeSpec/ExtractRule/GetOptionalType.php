@@ -37,7 +37,7 @@ class GetOptionalType implements ExtractPropertyRule
 
     /**
      * @param class-string $className
-     * @param \TypeSpec\InputTypeSpec[] $inputParameterList
+     * @param \TypeSpec\DataType[] $inputParameterList
      */
     public static function fromClassAndRules(string $className, $inputParameterList): self
     {

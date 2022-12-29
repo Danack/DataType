@@ -9,7 +9,7 @@ use TypeSpec\Create\CreateFromVarMap;
 use TypeSpec\Create\CreateOrErrorFromVarMap;
 use TypeSpec\ExtractRule\GetIntOrDefault;
 use TypeSpec\ExtractRule\GetStringOrDefault;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\SafeAccess;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MaxLength;
@@ -17,10 +17,10 @@ use TypeSpec\ProcessRule\MinIntValue;
 use TypeSpec\ProcessRule\Order;
 use TypeSpec\ProcessRule\SkipIfNull;
 use TypeSpec\Value\Ordering;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
 // TODO - change to type?
-class GetArticlesParameters implements TypeSpec
+class GetArticlesParameters implements HasDataTypeList
 {
     use SafeAccess;
     use CreateFromRequest;
@@ -66,23 +66,23 @@ class GetArticlesParameters implements TypeSpec
     }
 
     /**
-     * @return \TypeSpec\InputTypeSpec[]
+     * @return \TypeSpec\DataType[]
      */
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'ordering',
                 new GetStringOrDefault('-date'),
                 new Order(self::getKnownOrderNames())
             ),
-            new InputTypeSpec(
+            new DataType(
                 'limit',
                 new GetIntOrDefault(self::LIMIT_DEFAULT),
                 new MinIntValue(self::LIMIT_MIN),
                 new MaxIntValue(self::LIMIT_MAX)
             ),
-            new InputTypeSpec(
+            new DataType(
                 'afterId',
                 new GetStringOrDefault(null),
                 new SkipIfNull(),

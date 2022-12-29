@@ -3,22 +3,22 @@
 namespace TypeSpecTest\PropertyTypes;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
-use TypeSpec\PropertyInputTypeSpec;
+use TypeSpec\DataType;
+use TypeSpec\HasDataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinIntValue;
 
 #[\Attribute]
-class Quantity implements PropertyInputTypeSpec
+class Quantity implements HasDataType
 {
     public function __construct(
         private string $name
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetInt(),
             new MinIntValue(1),

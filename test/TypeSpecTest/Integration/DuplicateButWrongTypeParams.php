@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeSpecTest\Integration;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\SafeAccess;
 use TypeSpec\ExtractRule\GetString;
 use TypeSpec\Create\CreateOrErrorFromVarMap;
@@ -29,11 +29,11 @@ class DuplicateButWrongTypeParams
     public static function getInputParameterList()
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'days',
                 new GetInt()
             ),
-            new InputTypeSpec(
+            new DataType(
                 'days_repeat',
                 new GetString(),
                 new DuplicatesParam('days')

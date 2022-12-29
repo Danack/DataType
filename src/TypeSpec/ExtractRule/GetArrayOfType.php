@@ -10,14 +10,14 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createArrayOfTypeFromInputStorage;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 class GetArrayOfType implements ExtractPropertyRule
 {
     /** @var class-string */
     private string $className;
 
-    /** @var \TypeSpec\InputTypeSpec[] */
+    /** @var \TypeSpec\DataType[] */
     private array $inputParameterList;
 
     private GetType $typeExtractor;
@@ -28,7 +28,7 @@ class GetArrayOfType implements ExtractPropertyRule
     public function __construct(string $className)
     {
         $this->className = $className;
-        $this->inputParameterList = getInputTypeSpecListForClass($this->className);
+        $this->inputParameterList = getDataTypeListForClass($this->className);
 
         $this->typeExtractor = GetType::fromClassAndRules(
             $this->className,

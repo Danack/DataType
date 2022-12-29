@@ -6,11 +6,11 @@ namespace TypeSpecTest\DTOTypes;
 
 use TypeSpecTest\PropertyTypes\MultipleBasicDTO;
 use TypeSpecTest\PropertyTypes\Quantity;
-use TypeSpec\InputTypeSpecListFromAttributes;
+use TypeSpec\GetDataTypeListFromAttributes;
 
 class AdvancedDTO
 {
-    use InputTypeSpecListFromAttributes;
+    use GetDataTypeListFromAttributes;
 
     public function __construct(
         #[MultipleBasicDTO('colors')]

@@ -10,7 +10,7 @@ use TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\PropertyInputTypeSpec\StringRangeLengthOrDefault;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\processInputType;
 
 /**
  * @coversNothing
@@ -45,8 +45,8 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputTypeSpec(
-            $intRange->getInputTypeSpec(),
+        $validationProblems = processInputType(
+            $intRange->getDataType(),
             $processedValues,
             $dataStorage
         );
@@ -70,12 +70,12 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
             $name = 'foo',
             $default_value
         );
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::createMissing('foo');
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -107,7 +107,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
             'some other string'
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -115,7 +115,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
             $input_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage

@@ -5,12 +5,12 @@ declare(strict_types=1);
 
 namespace TypeSpecTest;
 
-use TypeSpec\PropertyInputTypeSpec;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\HasDataType;
+use TypeSpec\DataType;
 use TypeSpec\ExtractRule\GetStringOrDefault;
 use TypeSpec\ProcessRule\IsRgbColor;
 
-class ColorPropertyInputTypeSpec implements PropertyInputTypeSpec
+class ColorHasDataType implements HasDataType
 {
     public function __construct(
         private string $name,
@@ -18,9 +18,9 @@ class ColorPropertyInputTypeSpec implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetStringOrDefault($this->default),
             new IsRgbColor()

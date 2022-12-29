@@ -9,7 +9,7 @@ use TypeSpec\DataStorage\ArrayDataStorage;
 use TypeSpec\Exception;
 use VarMap\Psr7VarMap;
 use function TypeSpec\createOrError;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 trait CreateOrErrorFromRequest
 {
@@ -22,7 +22,7 @@ trait CreateOrErrorFromRequest
     public static function createOrErrorFromRequest(ServerRequestInterface $request)
     {
         $variableMap = new Psr7VarMap($request);
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 
         return createOrError(static::class, $rules, $dataStorage);

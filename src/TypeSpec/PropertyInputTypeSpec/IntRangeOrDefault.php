@@ -3,12 +3,12 @@
 namespace TypeSpec\PropertyInputTypeSpec;
 
 use TypeSpec\ExtractRule\GetIntOrDefault;
-use TypeSpec\PropertyInputTypeSpec;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\HasDataType;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\RangeIntValue;
 
 #[\Attribute]
-class IntRangeOrDefault implements PropertyInputTypeSpec
+class IntRangeOrDefault implements HasDataType
 {
     public function __construct(
         private int $minimum,
@@ -18,9 +18,9 @@ class IntRangeOrDefault implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetIntOrDefault($this->default),
             new RangeIntValue($this->minimum, $this->maximum),

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeSpecTest\OpenApi;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\OpenApi\ShouldNeverBeCalledParamDescription;
 use TypeSpec\OpenApi\OpenApiV300ParamDescription;
 use TypeSpec\ProcessRule\Enum;
@@ -44,7 +44,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules =  [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new Enum($values)
@@ -93,7 +93,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetInt()
             ),
@@ -114,7 +114,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetIntOrDefault($default)
             ),
@@ -135,7 +135,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetStringOrDefault($default)
             ),
@@ -154,7 +154,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetOptionalInt()
             ),
@@ -173,7 +173,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetOptionalString()
             ),
@@ -191,7 +191,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetInt(),
                 new MinIntValue($maxValue)
@@ -209,7 +209,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new MaxLength($maxLength)
@@ -234,7 +234,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new MinLength($minLength)
@@ -256,7 +256,7 @@ class DescriptionTest extends BaseTestCase
     public function testInvalidMininumLength($minLength)
     {
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new MinLength($minLength)
@@ -280,7 +280,7 @@ class DescriptionTest extends BaseTestCase
     public function testInvalidMaximumLength($maxLength)
     {
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new MaxLength($maxLength)
@@ -303,7 +303,7 @@ class DescriptionTest extends BaseTestCase
     public function testValidMaximumLength($maxLength)
     {
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new MaxLength($maxLength)
@@ -334,7 +334,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetInt(),
                 new MaxIntValue($maxValue)
@@ -354,7 +354,7 @@ class DescriptionTest extends BaseTestCase
         ];
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetInt(),
                 new PositiveInt()
@@ -387,7 +387,7 @@ class DescriptionTest extends BaseTestCase
             'format' => 'date'
         ];
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new ValidDate()
@@ -404,7 +404,7 @@ class DescriptionTest extends BaseTestCase
             'format' => 'date-time'
         ];
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'value',
                 new GetString(),
                 new ValidDatetime()
@@ -417,7 +417,7 @@ class DescriptionTest extends BaseTestCase
 
     /**
      * @param $schemaExpectations
-     * @param InputTypeSpec[] $rules
+     * @param DataType[] $rules
      * @throws OpenApiException
  */
     private function performSchemaTest($schemaExpectations, $rules)

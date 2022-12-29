@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace TypeSpecTest\Integration;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinIntValue;
 use TypeSpec\SafeAccess;
 use TypeSpec\ProcessRule\CastToInt;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
-class SingleIntParams implements TypeSpec
+class SingleIntParams implements HasDataTypeList
 {
     use SafeAccess;
 
@@ -23,10 +23,10 @@ class SingleIntParams implements TypeSpec
         $this->limit = $limit;
     }
 
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'limit',
                 new GetInt(),
                 new CastToInt(),

@@ -5,11 +5,11 @@ declare(strict_types = 1);
 namespace TypeSpecTest\DTOTypes;
 
 use TypeSpecTest\PropertyTypes\MultipleBasicArray;
-use TypeSpec\InputTypeSpecListFromAttributes;
+use TypeSpec\GetDataTypeListFromAttributes;
 
 class DTOThatHasArrayOfParam
 {
-    use InputTypeSpecListFromAttributes;
+    use GetDataTypeListFromAttributes;
 
     public function __construct(
         #[MultipleBasicArray('quantities')]

@@ -6,15 +6,15 @@ namespace TypeSpecTest\Integration;
 
 use TypeSpec\ExtractRule\GetString;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxLength;
 use TypeSpec\SafeAccess;
 use TypeSpec\Create\CreateFromVarMap;
 use TypeSpec\Create\CreateOrErrorFromVarMap;
 use TypeSpec\ExtractRule\GetArrayOfType;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
-class ItemListParams implements TypeSpec
+class ItemListParams implements HasDataTypeList
 {
     use SafeAccess;
     use CreateFromVarMap;
@@ -36,14 +36,14 @@ class ItemListParams implements TypeSpec
         $this->description = $description;
     }
 
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'items',
                 new GetArrayOfType(ReviewScore::class)
             ),
-            new InputTypeSpec(
+            new DataType(
                 'description',
                 new GetString(),
                 new MaxLength(120)

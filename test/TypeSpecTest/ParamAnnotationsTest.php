@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeSpecTest;
 
 use TypeSpec\ExtractRule\GetStringOrDefault;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Messages;
 use TypeSpec\ProcessRule\ImagickIsRgbColor;
 use TypeSpecTest\Integration\IntArrayParams;
@@ -62,7 +62,7 @@ class ParamAnnotationsTest extends BaseTestCase
         $threeColors = \ThreeColors::createFromVarMap($varMap);
         $this->assertInstanceOf(\ThreeColors::class, $threeColors);
 
-        $inputParameters = $threeColors::getInputTypeSpecList();
+        $inputParameters = $threeColors::getDataTypeList();
 
         $this->assertCount(3, $inputParameters);
 
@@ -77,11 +77,11 @@ class ParamAnnotationsTest extends BaseTestCase
             $expectedName = $namesAndDefaults[$count][0];
             $expectedDefault = $namesAndDefaults[$count][1];
 
-            $this->assertInstanceOf(InputTypeSpec::class, $inputParameter);
+            $this->assertInstanceOf(DataType::class, $inputParameter);
 
             $this->assertSame(
                 $expectedName,
-                $inputParameter->getInputName()
+                $inputParameter->getName()
             );
 
             $extractRule = $inputParameter->getExtractRule();

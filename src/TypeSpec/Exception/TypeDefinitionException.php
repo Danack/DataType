@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace TypeSpec\Exception;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Messages;
 
 class TypeDefinitionException extends TypeSpecException
@@ -14,7 +14,7 @@ class TypeDefinitionException extends TypeSpecException
         $message = sprintf(
             Messages::MUST_RETURN_ARRAY_OF_PROPERTY_DEFINITION,
             $classname,
-            InputTypeSpec::class,
+            DataType::class,
             $index
         );
 

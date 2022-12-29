@@ -67,7 +67,7 @@ class OpenApiV300ParamDescription implements ParamDescription
      * OpenApi 3.0.0 spec
      *
      * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md
-     * @param \TypeSpec\InputTypeSpec[] $inputTypeSpecList
+     * @param \TypeSpec\DataType[] $inputTypeSpecList
      * @return array
      * @throws OpenApiException
      */
@@ -76,7 +76,7 @@ class OpenApiV300ParamDescription implements ParamDescription
         $ruleDescriptions = [];
 
         foreach ($inputTypeSpecList as $inputTypeSpec) {
-            $description = new self($inputTypeSpec->getInputName());
+            $description = new self($inputTypeSpec->getName());
 
             $firstRule = $inputTypeSpec->getExtractRule();
             $firstRule->updateParamDescription($description);

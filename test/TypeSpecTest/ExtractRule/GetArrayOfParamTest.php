@@ -6,7 +6,7 @@ namespace TypeSpecTest\ExtractRule;
 
 use TypeSpec\Messages;
 use TypeSpecTest\BaseTestCase;
-use TypeSpec\ExtractRule\GetArrayOfParam;
+use TypeSpec\ExtractRule\GetArrayOfType;
 use TypeSpecTest\Integration\ReviewScore;
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\Integration\SingleIntParams;
@@ -19,7 +19,7 @@ use TypeSpecTest\PropertyTypes\Quantity;
 class GetArrayOfParamTest extends BaseTestCase
 {
     /**
-     * @covers \TypeSpec\ExtractRule\GetArrayOfParam
+     * @covers \TypeSpec\ExtractRule\GetArrayOfType
      */
     public function testWorksForComplexType()
     {

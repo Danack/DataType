@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace TypeSpecTest;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\AlwaysEndsRule;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\processInputType;
 
 /**
  * @coversNothing
@@ -52,7 +52,7 @@ class ParamsValidatorTest extends BaseTestCase
     {
         $finalValue = 123;
 
-        $param = new InputTypeSpec(
+        $param = new DataType(
             'foo',
             new GetInt(),
             // This rule will stop processing
@@ -63,7 +63,7 @@ class ParamsValidatorTest extends BaseTestCase
 
         $processedValues = new ProcessedValues();
 
-        $errors = processInputTypeSpec(
+        $errors = processInputType(
             $param,
             $processedValues,
             TestArrayDataStorage::fromArray(['foo' => 5])

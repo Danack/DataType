@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace TypeSpecTest\Integration;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinIntValue;
 use TypeSpec\SafeAccess;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 use TypeSpec\ProcessRule\CastToInt;
 
-class FooParams implements TypeSpec
+class FooParams implements HasDataTypeList
 {
     use SafeAccess;
 
@@ -27,10 +27,10 @@ class FooParams implements TypeSpec
     /**
      * @return array
      */
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'limit',
                 new GetInt(),
                 new CastToInt(),

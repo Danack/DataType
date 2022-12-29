@@ -8,13 +8,13 @@ use TypeSpec\Create\CreateFromVarMap;
 use TypeSpec\Create\CreateArrayOfTypeFromArray;
 use TypeSpec\ExtractRule\GetInt;
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\SafeAccess;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
-class ReviewScore implements TypeSpec
+class ReviewScore implements HasDataTypeList
 {
     use SafeAccess;
     use CreateFromVarMap;
@@ -36,17 +36,17 @@ class ReviewScore implements TypeSpec
     }
 
     /**
-     * @return \TypeSpec\InputTypeSpec[]
+     * @return \TypeSpec\DataType[]
      */
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'score',
                 new GetInt(),
                 new MaxIntValue(100)
             ),
-            new InputTypeSpec(
+            new DataType(
                 'comment',
                 new GetString(),
                 new MinLength(4)

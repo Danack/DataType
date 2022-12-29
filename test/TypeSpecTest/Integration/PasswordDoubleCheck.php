@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace TypeSpecTest\Integration;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\SafeAccess;
 use TypeSpec\ExtractRule\GetString;
 use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\ProcessRule\MaxLength;
 use TypeSpec\Create\CreateOrErrorFromVarMap;
 use TypeSpec\ProcessRule\DuplicatesParam;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
-class PasswordDoubleCheck implements TypeSpec
+class PasswordDoubleCheck implements HasDataTypeList
 {
     use SafeAccess;
     use CreateOrErrorFromVarMap;
@@ -30,16 +30,16 @@ class PasswordDoubleCheck implements TypeSpec
         $this->password_repeat = $password_repeat;
     }
 
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'password',
                 new GetString(),
                 new MinLength(6),
                 new MaxLength(60)
             ),
-            new InputTypeSpec(
+            new DataType(
                 'password_repeat',
                 new GetString(),
                 new DuplicatesParam('password')

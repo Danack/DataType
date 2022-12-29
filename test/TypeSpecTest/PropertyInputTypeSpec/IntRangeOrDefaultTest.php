@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace TypeSpecTest\PropertyInputTypeSpec;
 
 use TypeSpec\DataStorage\DataStorage;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Messages;
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\processInputType;
 
 /**
  * @coversNothing
@@ -39,12 +39,12 @@ class IntRangeOrDefaultTest extends BaseTestCase
             $expected_value
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::createEmptyAtRoot();
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -71,12 +71,12 @@ class IntRangeOrDefaultTest extends BaseTestCase
             $name = 'foo',
             $default_value
         );
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::createMissing('foo');
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -108,7 +108,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
             $expected_value
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -116,7 +116,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage

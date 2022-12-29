@@ -3,8 +3,8 @@
 namespace TypeSpec\PropertyInputTypeSpec;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\PropertyInputTypeSpec;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\HasDataType;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\RangeIntValue;
 
 #[\Attribute]
@@ -13,7 +13,7 @@ use TypeSpec\ProcessRule\RangeIntValue;
  * and maximum values. If input value is not set for that name,
  * then a default value is used instead.
  */
-class IntRange implements PropertyInputTypeSpec
+class IntRange implements HasDataType
 {
     /**
      *
@@ -28,9 +28,9 @@ class IntRange implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetInt(),
             new RangeIntValue($this->minimum, $this->maximum),

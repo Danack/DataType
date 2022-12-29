@@ -9,7 +9,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\PropertyInputTypeSpec\StringRangeLength;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\processInputType;
 
 /**
  * @coversNothing
@@ -37,7 +37,7 @@ class StringRangeLengthTest extends BaseTestCase
             $name = 'foo'
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -45,7 +45,7 @@ class StringRangeLengthTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -76,7 +76,7 @@ class StringRangeLengthTest extends BaseTestCase
             $name = 'foo'
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -84,7 +84,7 @@ class StringRangeLengthTest extends BaseTestCase
             $input_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage

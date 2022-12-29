@@ -3,8 +3,8 @@
 namespace TypeSpec\PropertyInputTypeSpec;
 
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\PropertyInputTypeSpec;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\HasDataType;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\RangeIntValue;
 use TypeSpec\ProcessRule\RangeStringLength;
 
@@ -13,7 +13,7 @@ use TypeSpec\ProcessRule\RangeStringLength;
  * Gets a string by name from input, and checks it for minimum
  * and maximum length.
  */
-class StringRangeLength implements PropertyInputTypeSpec
+class StringRangeLength implements HasDataType
 {
     public function __construct(
         private int $minimumLength,
@@ -22,9 +22,9 @@ class StringRangeLength implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetString(),
             new RangeStringLength($this->minimumLength, $this->maximumLength),

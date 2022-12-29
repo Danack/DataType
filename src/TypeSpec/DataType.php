@@ -8,15 +8,15 @@ use TypeSpec\ExtractRule\ExtractPropertyRule;
 use TypeSpec\ProcessRule\ProcessPropertyRule;
 
 /**
- * The definition of how a property of a type should be extracted
+ * The definition of how a type should be extracted
  * and processed.
  */
-class InputTypeSpec // InputTypeSpec
+class DataType
 {
     /**
      * The name of the input to use.
      */
-    private string $inputName;
+    private string $name;
 
     private ?string $target_parameter_name = null;
 
@@ -33,42 +33,19 @@ class InputTypeSpec // InputTypeSpec
 
     /**
      *
-     * @param string $input_name
-     * @param ExtractPropertyRule $first_rule
-     * @param ProcessPropertyRule ...$subsequent_rules
+     * @param string $input_name The key/name that the initial value will be extracted from
+     * @param ExtractPropertyRule $extract_rule The initial rule that will extract the value from the source data where it will exist as a string.
+     * @param ProcessPropertyRule ...$subsequent_rules The subsequent rules that will be used to process the value.
      */
     public function __construct(
         string              $input_name, // TODO - this should be a locator component...
-        ExtractPropertyRule $first_rule,
+        ExtractPropertyRule $extract_rule,
         ProcessPropertyRule ...$subsequent_rules
     ) {
-        $this->inputName = $input_name;
-        $this->extractRule = $first_rule;
+        $this->name = $input_name;
+        $this->extractRule = $extract_rule;
         $this->processRules = $subsequent_rules;
     }
-
-//    private static function withoutTargetName(
-//        string              $input_name, // TODO - this should be a locator component...
-//        ExtractPropertyRule $first_rule,
-//        ProcessPropertyRule ...$subsequent_rules
-//    ) {
-//        $this->inputName = $input_name;
-//        $this->extractRule = $first_rule;
-//        $this->processRules = $subsequent_rules;
-//    }
-//
-//    private static function createComplete(
-//        string              $input_name, // TODO - this should be a locator component...
-//        string              $target_parameter_name,
-//        ExtractPropertyRule $first_rule,
-//        ProcessPropertyRule ...$subsequent_rules
-//    ) {
-//        $this->inputName = $input_name;
-//        $this->target_parameter_name = $target_parameter_name;
-//        $this->extractRule = $first_rule;
-//        $this->processRules = $subsequent_rules;
-//        $this->target_parameter_name = $name;
-//    }
 
     public function setTargetParameterName(string $name): void
     {
@@ -81,7 +58,7 @@ class InputTypeSpec // InputTypeSpec
     public function getTargetParameterName(): string
     {
         if ($this->target_parameter_name === null) {
-            return $this->inputName;
+            return $this->name;
         }
 
         return $this->target_parameter_name;
@@ -90,9 +67,9 @@ class InputTypeSpec // InputTypeSpec
     /**
      * @return string
      */
-    public function getInputName(): string
+    public function getName(): string
     {
-        return $this->inputName;
+        return $this->name;
     }
 
     /**

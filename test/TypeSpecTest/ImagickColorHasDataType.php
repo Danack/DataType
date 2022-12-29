@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace TypeSpecTest;
 
 use Attribute;
-use TypeSpec\PropertyInputTypeSpec;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\HasDataType;
+use TypeSpec\DataType;
 use TypeSpec\ExtractRule\GetStringOrDefault;
 use TypeSpec\ProcessRule\ImagickIsRgbColor;
 
@@ -15,7 +15,7 @@ use TypeSpec\ProcessRule\ImagickIsRgbColor;
 // than once solely for testing purposes. It is not expected for
 // people to use Attribute::IS_REPEATABLE normally.
 #[Attribute(Attribute::TARGET_PROPERTY|Attribute::IS_REPEATABLE)]
-class ImagickColorPropertyInputTypeSpec implements PropertyInputTypeSpec
+class ImagickColorHasDataType implements HasDataType
 {
     public function __construct(
         private string $default,
@@ -23,9 +23,9 @@ class ImagickColorPropertyInputTypeSpec implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetStringOrDefault($this->default),
             new ImagickIsRgbColor()

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace TypeSpecExample;
 
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 
 class MacAddressType
 {
@@ -29,9 +29,9 @@ class MacAddressType
         return $this->value;
     }
 
-    public static function getParamInfo(string $inputName): InputTypeSpec
+    public static function getParamInfo(string $inputName): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $inputName,
             new GetString(),
             new RespectMacRule()

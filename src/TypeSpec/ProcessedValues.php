@@ -46,7 +46,7 @@ class ProcessedValues
     {
         $values = [];
         foreach ($this->processedValues as $processedValue) {
-            $values[$processedValue->getInputTypeSpec()->getInputName()] = $processedValue->getValue();
+            $values[$processedValue->getDataType()->getName()] = $processedValue->getValue();
         }
 
         return $values;
@@ -71,7 +71,7 @@ class ProcessedValues
     public function hasValue($name): bool
     {
         foreach ($this->processedValues as $processedValue) {
-            if ($name === $processedValue->getInputTypeSpec()->getInputName()) {
+            if ($name === $processedValue->getDataType()->getName()) {
                 return true;
             }
         }
@@ -85,7 +85,7 @@ class ProcessedValues
     public function getValue(string $name): mixed
     {
         foreach ($this->processedValues as $processedValue) {
-            if ($name === $processedValue->getInputTypeSpec()->getInputName()) {
+            if ($name === $processedValue->getDataType()->getName()) {
                 return $processedValue->getValue();
             }
         }
@@ -94,10 +94,10 @@ class ProcessedValues
 
 
     /**
-     * @param InputTypeSpec $param
+     * @param DataType $param
      * @param mixed $value
      */
-    public function setValue(InputTypeSpec $param, mixed $value): void
+    public function setValue(DataType $param, mixed $value): void
     {
         $this->processedValues[] = new ProcessedValue($param, $value);
     }
@@ -112,7 +112,7 @@ class ProcessedValues
     public function getValueForTargetProperty(string $name): array
     {
         foreach ($this->processedValues as $processedValue) {
-            if ($name === $processedValue->getInputTypeSpec()->getTargetParameterName()) {
+            if ($name === $processedValue->getDataType()->getTargetParameterName()) {
                 return [$processedValue->getValue(), true];
             }
         }

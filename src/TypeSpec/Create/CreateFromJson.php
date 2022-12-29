@@ -8,7 +8,7 @@ use TypeSpec\DataStorage\ArrayDataStorage;
 use VarMap\ArrayVarMap;
 use function JsonSafe\json_decode_safe;
 use function TypeSpec\create;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 /**
  * Use this trait when the parameters arrive as named parameters e.g
@@ -23,7 +23,7 @@ trait CreateFromJson
      */
     public static function createFromJson($json)
     {
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $data = json_decode_safe($json);
         $dataStorage = ArrayDataStorage::fromArray($data);
 

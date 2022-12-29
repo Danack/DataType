@@ -11,16 +11,16 @@ use TypeSpec\Create\CreateOrErrorFromArray;
 use TypeSpec\Create\CreateOrErrorFromJson;
 use TypeSpec\Create\CreateOrErrorFromRequest;
 use TypeSpec\ExtractRule\GetArrayOfInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinIntValue;
 use TypeSpec\SafeAccess;
 use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\ProcessRule\MaxLength;
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\TypeSpec;
+use TypeSpec\HasDataTypeList;
 
-class IntArrayParams implements TypeSpec
+class IntArrayParams implements HasDataTypeList
 {
     use SafeAccess;
     use CreateFromArray;
@@ -48,16 +48,16 @@ class IntArrayParams implements TypeSpec
         $this->counts = $counts;
     }
 
-    public static function getInputTypeSpecList(): array
+    public static function getDataTypeList(): array
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 'name',
                 new GetString(),
                 new MinLength(4),
                 new MaxLength(16)
             ),
-            new InputTypeSpec(
+            new DataType(
                 'counts',
                 new GetArrayOfInt(
                     new MinIntValue(1),

@@ -7,7 +7,7 @@ namespace TypeSpec\Create;
 use TypeSpec\DataStorage\ArrayDataStorage;
 use VarMap\VarMap;
 use function TypeSpec\createOrError;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 trait CreateOrErrorFromVarMap
 {
@@ -18,7 +18,7 @@ trait CreateOrErrorFromVarMap
      */
     public static function createOrErrorFromVarMap(VarMap $variableMap)
     {
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 
         return createOrError(static::class, $rules, $dataStorage);

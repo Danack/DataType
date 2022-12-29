@@ -6,7 +6,7 @@ namespace TypeSpecTest;
 
 use TypeSpec\ProcessedValues;
 use TypeSpec\Exception\LogicException;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ExtractRule\GetStringOrDefault;
 use TypeSpec\ProcessedValue;
 
@@ -61,7 +61,7 @@ class ProcessedValuesTest extends BaseTestCase
      */
     public function testGetCorrectTarget()
     {
-        $inputParameter = new InputTypeSpec(
+        $inputParameter = new DataType(
             'background_color',
             new GetStringOrDefault('red')
         );

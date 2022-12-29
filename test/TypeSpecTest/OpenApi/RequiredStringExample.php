@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TypeSpecTest\OpenApi;
 
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxLength;
 use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\ExtractRule\GetString;
@@ -25,7 +25,7 @@ class RequiredStringExample
     public static function getInputParameterList()
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 self::NAME,
                 new GetString(),
                 new MaxLength(self::MAX_LENGTH),

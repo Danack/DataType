@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TypeSpecTest\OpenApi;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\ProcessRule\MinIntValue;
 use TypeSpec\SafeAccess;
@@ -25,7 +25,7 @@ class RequiredIntExample
     public static function getInputParameterList()
     {
         return [
-            new InputTypeSpec(
+            new DataType(
                 self::NAME,
                 new GetInt(),
                 new MinIntValue(self::MIN),

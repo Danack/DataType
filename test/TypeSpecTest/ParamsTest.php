@@ -19,12 +19,12 @@ use TypeSpec\ProcessRule\ProcessPropertyRule;
 use TypeSpec\ValidationResult;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Exception\UnknownParamException;
 use function TypeSpec\create;
 use function TypeSpec\createOrError;
 use function TypeSpec\createTypeFromAnnotations;
-use function TypeSpec\processInputTypeSpecList;
+use function TypeSpec\processInputTypeList;
 
 /**
  * This is a general test suite for integration type stuff.
@@ -41,7 +41,7 @@ class ParamsTest extends BaseTestCase
     public function testWorksBasic()
     {
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'foo',
                 new GetIntOrDefault(5)
             )
@@ -50,7 +50,7 @@ class ParamsTest extends BaseTestCase
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
 
-        $problems = processInputTypeSpecList(
+        $problems = processInputTypeList(
             $rules,
             $processedValues,
             $dataStorage
@@ -70,7 +70,7 @@ class ParamsTest extends BaseTestCase
         $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'foo',
                 new GetInt()
             )
@@ -93,7 +93,7 @@ class ParamsTest extends BaseTestCase
         $dataStorage = TestArrayDataStorage::fromArray($data);
 
         $rules = [
-            new InputTypeSpec(
+            new DataType(
                 'foo',
                 new GetInt(),
                 // This rule will stop processing
@@ -105,7 +105,7 @@ class ParamsTest extends BaseTestCase
 
         $processedValues = new ProcessedValues();
 
-        $validationProblems = processInputTypeSpecList($rules, $processedValues, $dataStorage);
+        $validationProblems = processInputTypeList($rules, $processedValues, $dataStorage);
         $this->assertNoValidationProblems($validationProblems);
 
         $this->assertHasValue($finalValue, 'foo', $processedValues);
@@ -139,7 +139,7 @@ class ParamsTest extends BaseTestCase
         $dataStorage = TestArrayDataStorage::fromArray($data);
 
         $inputParameters = [
-            new InputTypeSpec(
+            new DataType(
                 'foo',
                 new GetInt(),
                 // This rule will stop processing
@@ -169,7 +169,7 @@ class ParamsTest extends BaseTestCase
      */
     public function testException()
     {
-        $rules = \TypeSpecTest\Integration\FooParams::getInputTypeSpecList();
+        $rules = \TypeSpecTest\Integration\FooParams::getDataTypeList();
         $this->expectException(\TypeSpec\Exception\TypeSpecException::class);
 
         $dataStorage =  TestArrayDataStorage::fromArraySetFirstValue([]);
@@ -186,7 +186,7 @@ class ParamsTest extends BaseTestCase
         $data = ['limit' => 5];
         $dataStorage =  TestArrayDataStorage::fromArray($data);
 
-        $rules = \TypeSpecTest\Integration\FooParams::getInputTypeSpecList();
+        $rules = \TypeSpecTest\Integration\FooParams::getDataTypeList();
         $fooParams = create(
             \TypeSpecTest\Integration\FooParams::class,
             $rules,
@@ -204,7 +204,7 @@ class ParamsTest extends BaseTestCase
     {
         $dataStorage = TestArrayDataStorage::fromArray([]);
 
-        $rules = \TypeSpecTest\Integration\FooParams::getInputTypeSpecList();
+        $rules = \TypeSpecTest\Integration\FooParams::getDataTypeList();
         [$params, $validationProblems] = createOrError(
             \TypeSpecTest\Integration\FooParams::class,
             $rules,
@@ -231,7 +231,7 @@ class ParamsTest extends BaseTestCase
     {
         $dataStorage = TestArrayDataStorage::fromArray(['limit' => 5]);
 
-        $rules = \TypeSpecTest\Integration\FooParams::getInputTypeSpecList();
+        $rules = \TypeSpecTest\Integration\FooParams::getDataTypeList();
         [$fooParams, $errors] = createOrError(
             \TypeSpecTest\Integration\FooParams::class,
             $rules,

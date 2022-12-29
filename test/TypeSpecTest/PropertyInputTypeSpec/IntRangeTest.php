@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace TypeSpecTest\PropertyInputTypeSpec;
 
 use TypeSpec\DataStorage\DataStorage;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\Messages;
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\PropertyInputTypeSpec\IntRange;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputTypeSpec;
+use function TypeSpec\processInputType;
 
 /**
  * @coversNothing
@@ -38,7 +38,7 @@ class IntRangeTest extends BaseTestCase
             $name = 'foo'
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -46,7 +46,7 @@ class IntRangeTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -76,7 +76,7 @@ class IntRangeTest extends BaseTestCase
             $name = 'foo'
         );
 
-        $typeSpec = $intRange->getInputTypeSpec();
+        $typeSpec = $intRange->getDataType();
 
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
@@ -84,7 +84,7 @@ class IntRangeTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputTypeSpec(
+        $validationProblems = processInputType(
             $typeSpec,
             $processedValues,
             $dataStorage

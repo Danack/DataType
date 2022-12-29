@@ -1,7 +1,7 @@
 <?php
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\ProcessedValue;
 use TypeSpec\ProcessedValues;
 
@@ -14,7 +14,7 @@ function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 
     foreach ($keyValues as $key => $value) {
         $extractRule = new GetInt();
-        $inputParameter = new InputTypeSpec($key, $extractRule);
+        $inputParameter = new DataType($key, $extractRule);
         $processedValues[] = new ProcessedValue($inputParameter, $value);
     }
 

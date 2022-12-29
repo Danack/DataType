@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace TypeSpecTest;
 
 use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\InputTypeSpec;
+use TypeSpec\DataType;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use TypeSpec\ProcessRule\RangeIntValue;
 
@@ -15,7 +15,7 @@ use TypeSpec\ProcessRule\RangeIntValue;
 class InputParameterTest extends BaseTestCase
 {
     /**
-     * @covers \TypeSpec\InputTypeSpec
+     * @covers \TypeSpec\DataType
      */
     public function testWorks()
     {
@@ -23,13 +23,13 @@ class InputParameterTest extends BaseTestCase
         $getIntRule = new GetInt();
         $processRule = new RangeIntValue(10, 20);
 
-        $inputParamter = new InputTypeSpec(
+        $inputParamter = new DataType(
             $name,
             $getIntRule,
             $processRule
         );
 
-        $this->assertSame($name, $inputParamter->getInputName());
+        $this->assertSame($name, $inputParamter->getName());
         $this->assertSame($getIntRule, $inputParamter->getExtractRule());
         $this->assertSame([$processRule], $inputParamter->getProcessRules());
     }

@@ -3,25 +3,25 @@
 
 namespace TypeSpecTest\PropertyTypes;
 
-use TypeSpec\ExtractRule\GetArrayOfParam;
-use TypeSpec\InputTypeSpec;
-use TypeSpec\PropertyInputTypeSpec;
+use TypeSpec\ExtractRule\GetArrayOfType;
+use TypeSpec\DataType;
+use TypeSpec\HasDataType;
 //use ParamsTest\DTOTypes\BasicDTO;
 use TypeSpecTest\PropertyTypes\Quantity;
 
 #[\Attribute]
-class MultipleBasicArray implements PropertyInputTypeSpec
+class MultipleBasicArray implements HasDataType
 {
     public function __construct(
         private string $name
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
-            new GetArrayOfParam(Quantity::class),
+            new GetArrayOfType(Quantity::class),
         );
     }
 }

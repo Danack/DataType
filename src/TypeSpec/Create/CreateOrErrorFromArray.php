@@ -6,7 +6,7 @@ namespace TypeSpec\Create;
 
 use TypeSpec\DataStorage\ArrayDataStorage;
 use function TypeSpec\createOrError;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 trait CreateOrErrorFromArray
 {
@@ -18,7 +18,7 @@ trait CreateOrErrorFromArray
      */
     public static function createOrErrorFromArray(array $data)
     {
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($data);
 
         return createOrError(static::class, $rules, $dataStorage);

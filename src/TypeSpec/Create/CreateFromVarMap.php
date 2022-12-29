@@ -7,7 +7,7 @@ namespace TypeSpec\Create;
 use TypeSpec\DataStorage\ArrayDataStorage;
 use VarMap\VarMap;
 use function TypeSpec\create;
-use function TypeSpec\getInputTypeSpecListForClass;
+use function TypeSpec\getDataTypeListForClass;
 
 /**
  * Use this trait when the parameters arrive as named parameters e.g
@@ -22,7 +22,7 @@ trait CreateFromVarMap
      */
     public static function createFromVarMap(VarMap $variableMap)
     {
-        $rules = getInputTypeSpecListForClass(self::class);
+        $rules = getDataTypeListForClass(self::class);
 
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 

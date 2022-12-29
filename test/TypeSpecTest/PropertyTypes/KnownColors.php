@@ -5,11 +5,11 @@ namespace TypeSpecTest\PropertyTypes;
 
 use TypeSpec\ExtractRule\GetStringOrDefault;
 use TypeSpec\ProcessRule\Enum;
-use TypeSpec\InputTypeSpec;
-use TypeSpec\PropertyInputTypeSpec;
+use TypeSpec\DataType;
+use TypeSpec\HasDataType;
 
 #[\Attribute]
-class KnownColors implements PropertyInputTypeSpec
+class KnownColors implements HasDataType
 {
     const KNOWN_COLORS = ['red', 'green', 'blue'];
 
@@ -18,9 +18,9 @@ class KnownColors implements PropertyInputTypeSpec
     ) {
     }
 
-    public function getInputTypeSpec(): InputTypeSpec
+    public function getDataType(): DataType
     {
-        return new InputTypeSpec(
+        return new DataType(
             $this->name,
             new GetStringOrDefault('blue'),
             new Enum(self::KNOWN_COLORS)

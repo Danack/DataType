@@ -6,11 +6,11 @@ namespace TypeSpecExample\DTOTypes;
 
 use TypeSpecExample\PropertyTypes\KnownColors;
 use TypeSpecExample\PropertyTypes\Quantity;
-use TypeSpec\InputTypeSpecListFromAttributes;
+use TypeSpec\GetDataTypeListFromAttributes;
 
 class TestDTO
 {
-    use InputTypeSpecListFromAttributes;
+    use GetDataTypeListFromAttributes;
 
     public function __construct(
         #[KnownColors('color')]

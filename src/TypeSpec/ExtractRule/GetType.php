@@ -10,20 +10,20 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createObjectFromProcessedValues;
-use function TypeSpec\getInputTypeSpecListForClass;
-use function TypeSpec\processInputTypeSpecList;
+use function TypeSpec\getDataTypeListForClass;
+use function TypeSpec\processInputTypeList;
 
 class GetType implements ExtractPropertyRule
 {
     /** @var class-string */
     private string $className;
 
-    /** @var \TypeSpec\InputTypeSpec[] */
+    /** @var \TypeSpec\DataType[] */
     private array $inputParameterList;
 
     /**
      * @param class-string $className
-     * @param \TypeSpec\InputTypeSpec[] $inputParameterList
+     * @param \TypeSpec\DataType[] $inputParameterList
      */
     public function __construct(string $className, $inputParameterList)
     {
@@ -38,14 +38,14 @@ class GetType implements ExtractPropertyRule
     {
         return new self(
             $classname,
-            getInputTypeSpecListForClass($classname)
+            getDataTypeListForClass($classname)
         );
     }
 
 
     /**
      * @param class-string $className
-     * @param \TypeSpec\InputTypeSpec[] $inputParameterList
+     * @param \TypeSpec\DataType[] $inputParameterList
      */
     public static function fromClassAndRules(string $className, $inputParameterList): self
     {
@@ -65,7 +65,7 @@ class GetType implements ExtractPropertyRule
         }
 
         $newProcessedValues = new ProcessedValues();
-        $validationProblems = processInputTypeSpecList(
+        $validationProblems = processInputTypeList(
             $this->inputParameterList,
             $newProcessedValues,
             $dataStorage

@@ -50,7 +50,7 @@ class GetTypeTest extends BaseTestCase
 
         $rule = GetType::fromClassAndRules(
             ReviewScore::class,
-            ReviewScore::getInputTypeSpecList()
+            ReviewScore::getDataTypeList()
         );
         $validationResult = $rule->process(
             $validator, TestArrayDataStorage::fromArray($data)
