@@ -62,14 +62,6 @@ class GetArrayOfInt implements ExtractPropertyRule
                 continue;
             }
 
-//            // Is this needed? Can a FirstRule be final?
-//            // Maybe but kind of useless.
-//            TODO - add this back with a test
-//            if ($result->isFinalResult() === true) {
-//                $items[] = $result->getValue();
-//                continue;
-//            }
-
             $validator2 = new ProcessedValues();
             [$newValidationProblems, $processedValue] = processProcessingRules(
                 $result->getValue(),
