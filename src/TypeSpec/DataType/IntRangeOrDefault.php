@@ -1,6 +1,6 @@
 <?php
 
-namespace TypeSpec\PropertyInputTypeSpec;
+namespace TypeSpec\DataType;
 
 use TypeSpec\ExtractRule\GetIntOrDefault;
 use TypeSpec\HasDataType;

@@ -6,9 +6,9 @@ namespace TypeSpecTest\PropertyInputTypeSpec;
 
 use TypeSpec\Messages;
 use TypeSpec\ProcessedValues;
-use TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault;
+use TypeSpec\DataType\IntRangeOrDefault;
 use TypeSpecTest\BaseTestCase;
-use TypeSpec\PropertyInputTypeSpec\StringRangeLengthOrDefault;
+use TypeSpec\DataType\StringRangeLengthOrDefault;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use function TypeSpec\processInputType;
 
@@ -27,7 +27,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\StringRangeLengthOrDefault
+     * @covers \TypeSpec\DataType\StringRangeLengthOrDefault
      * @dataProvider provideTestWorks
      */
     public function testWorks(int $minimum, int $maximum, $expected_value)
@@ -58,7 +58,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\StringRangeLengthOrDefault
+     * @covers \TypeSpec\DataType\StringRangeLengthOrDefault
      */
     public function testWorksWithDefault()
     {
@@ -95,7 +95,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\StringRangeLengthOrDefault
+     * @covers \TypeSpec\DataType\StringRangeLengthOrDefault
      * @dataProvider provideTestErrors
      */
     public function testErrors(int $minimum, int $maximum, $input_value, $expected_message)

@@ -7,7 +7,7 @@ namespace TypeSpecTest\PropertyInputTypeSpec;
 use TypeSpec\Messages;
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
-use TypeSpec\PropertyInputTypeSpec\StringRangeLength;
+use TypeSpec\DataType\StringRangeLength;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use function TypeSpec\processInputType;
 
@@ -26,7 +26,7 @@ class StringRangeLengthTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\StringRangeLength
+     * @covers \TypeSpec\DataType\StringRangeLength
      * @dataProvider provideTestWorks
      */
     public function testWorks(int $minimum, int $maximum, $expected_value)
@@ -65,7 +65,7 @@ class StringRangeLengthTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\StringRangeLength
+     * @covers \TypeSpec\DataType\StringRangeLength
      * @dataProvider provideTestErrors
      */
     public function testErrors(int $minimum, int $maximum, $input_value, $expected_message)

@@ -10,7 +10,7 @@ use TypeSpec\Messages;
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
-use TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault;
+use TypeSpec\DataType\IntRangeOrDefault;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use function TypeSpec\processInputType;
 
@@ -27,7 +27,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault
+     * @covers \TypeSpec\DataType\IntRangeOrDefault
      * @dataProvider provideTestWorks
      */
     public function testWorks(int $minimum, int $maximum, $expected_value)
@@ -57,7 +57,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault
+     * @covers \TypeSpec\DataType\IntRangeOrDefault
      */
     public function testWorksWithDefault()
     {
@@ -96,7 +96,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \TypeSpec\PropertyInputTypeSpec\IntRangeOrDefault
+     * @covers \TypeSpec\DataType\IntRangeOrDefault
      * @dataProvider provideTestErrors
      */
     public function testErrors(int $minimum, int $maximum, $expected_value, $expected_message)
