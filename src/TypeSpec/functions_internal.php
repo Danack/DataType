@@ -507,8 +507,6 @@ function processInputType(
     return $validationProblems;
 }
 
-
-
 /**
  * @param HasDataType $param
  * @param ProcessedValues $paramValues
@@ -544,11 +542,8 @@ function processInputTypeList(
     DataStorage     $dataStorage
 ) {
     $validationProblems = [];
-    //  $knownInputNames = [];
 
     foreach ($inputTypeList as $inputParameter) {
-        // See below.
-        // $knownInputNames[] = $inputParameter->getInputName();
         $newValidationProblems = processInputType(
             $inputParameter,
             $processedValues,
@@ -560,30 +555,6 @@ function processInputTypeList(
             continue;
         }
     }
-
-    // The code below is appropriate code for checking that there are no
-    // extra unused parameters. Although this might be appropriate in some
-    // scenarios, it is annoying in the main use of this library, as extra
-    // GET parameters happen for various reasons (e.g. cache-busting).
-    //
-    // Code is commented out as there is a good chance it could be needed.
-    //
-    //    if (false) {
-    //        $current_values = $dataStorage->getCurrentValue();
-    //        foreach ($current_values as $key => $value) {
-    //            if (in_array($key, $knownInputNames, true) === false) {
-    //                $message = sprintf(
-    //                    Messages::UNKNOWN_INPUT_PARAMETER,
-    //                    $key
-    //                );
-    //
-    //                $validationProblems[] = new ValidationProblem(
-    //                    $dataStorage,
-    //                    $message
-    //                );
-    //            }
-    //        }
-    //    }
 
     return $validationProblems;
 }
