@@ -37,7 +37,6 @@ use TypeSpecTest\PropertyTypes\Quantity;
 use function TypeSpec\array_value_exists;
 use function TypeSpec\check_only_digits;
 use function TypeSpec\normalise_order_parameter;
-use function TypeSpec\escapeJsonPointer;
 use function TypeSpec\getRawCharacters;
 use function TypeSpec\getDataTypeListForClass;
 use function TypeSpec\processDataTypeList;
@@ -54,6 +53,7 @@ use function TypeSpec\createObjectFromProcessedValues;
 use function TypeSpec\processSingleInputType;
 use function TypeSpec\createSingleValue;
 use function TypeSpec\createSingleValueOrError;
+use function TypeSpec\validate;
 
 /**
  * @coversNothing
@@ -1059,5 +1059,21 @@ class FunctionsTest extends BaseTestCase
         [$value, $validationErrors] = createSingleValueOrError($colorInputTypeSpec, $errorInputString);
         $this->assertCount(1, $validationErrors);
         $this->assertNull($value);
+    }
+
+
+    /**
+     * @covers ::\TypeSpec\validate
+     */
+    public function test_validate()
+    {
+
+        $dto = new \TypeSpecExample\DTOTypes\TestDTO('red', 5);
+        [$object, $validationProblems] = validate($dto);
+
+        $this->assertEmpty($validationProblems);
+        
+
+
     }
 }
