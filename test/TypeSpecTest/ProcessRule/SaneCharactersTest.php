@@ -83,6 +83,32 @@ class SaneCharactersTest extends BaseTestCase
         );
     }
 
+    /**
+     * @return void
+     * @covers \TypeSpec\ProcessRule\SaneCharacters
+     */
+    public function testInvalidCharacters()
+    {
+        // 0x8 = backspace
+        $testValue = "Hello \u{8}";
+
+        $rule = new SaneCharacters();
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition(
+            'foo', $testValue
+        );
+        $validationResult = $rule->process(
+            $testValue,
+            $processedValues,
+            $dataStorage
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::STRING_FOUND_INVALID_CHAR,
+            $validationResult->getValidationProblems()
+        );
+    }
 
     public function testPositionIsCorrect()
     {
@@ -93,12 +119,6 @@ class SaneCharactersTest extends BaseTestCase
         $validationResult = $rule->process(
             $testValue, $processedValues, $dataStorage
         );
-//        $messages = $validationResult->getValidationProblems();
-
-//        $this->assertEquals(
-//            "Invalid combining characters found at position 8",
-//            $messages['/foo']
-//        );
 
         $this->assertCount(1, $validationResult->getValidationProblems());
 

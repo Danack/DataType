@@ -104,9 +104,11 @@ class SaneCharacters implements ProcessPropertyRule
 
         $count = preg_match($disallowedPattern, $value, $matches, PREG_OFFSET_CAPTURE);
 
+        // @codeCoverageIgnoreStart
         if ($count === false) {
             throw new LogicException("preg_match failed");
         }
+        // @codeCoverageIgnoreEnd
 
         if ($count !== 0) {
             $badCharPosition = $matches[0][1];
