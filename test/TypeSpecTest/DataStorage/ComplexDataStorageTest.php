@@ -292,7 +292,4 @@ JSON;
         yield ['/foo/0/bar', ['foo', 0, 'bar']];
         yield ['/foo/bar/0', ['foo', 'bar', 0]];
     }
-
-
-
 }

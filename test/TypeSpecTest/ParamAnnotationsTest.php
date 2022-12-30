@@ -257,5 +257,4 @@ class ParamAnnotationsTest extends BaseTestCase
 
         createTypeFromAnnotations($varMap, \MultipleParamAnnotations::class);
     }
-
 }

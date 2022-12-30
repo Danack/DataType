@@ -6,7 +6,6 @@ namespace TypeSpec\DataStorage;
 
 use TypeSpec\Exception\InvalidLocationException;
 
-
 /**
  * Implementation of InputStorage that wraps around a simple array.
  *

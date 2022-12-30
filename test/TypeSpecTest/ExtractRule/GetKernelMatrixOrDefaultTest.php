@@ -343,6 +343,4 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
 
                 */
     }
-
-
 }

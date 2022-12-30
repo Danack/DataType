@@ -58,7 +58,6 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
         $matrix_value = json_decode($currentValue, $associative = true, 4);
         $lastError = json_last_error();
         if ($lastError !== JSON_ERROR_NONE) {
-
             $message = sprintf(
                 Messages::INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE,
                 json_last_error_msg()
@@ -92,7 +91,6 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
             $column_count = 0;
             foreach ($row as $value) {
                 if (is_float($value) === false && is_int($value) === false) {
-
                     $message = sprintf(
                         Messages::KERNEL_MATRIX_ERROR_AT_ROW_COLUMN_NUMBER_EXPECTED,
                         $row_count,

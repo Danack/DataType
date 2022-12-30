@@ -10,6 +10,4 @@ class ClassThatHasSingleConstructorParameter
     {
         $this->value = $value;
     }
-
-
 }
