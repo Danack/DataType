@@ -303,67 +303,6 @@ function escapeJsonPointer(string $pointer): string
 }
 
 
-
-/**
- * Unescapes a json pointer part
- *
- * https://tools.ietf.org/html/rfc6901#section-4
- *
- * @param string $pointer
- */
-function unescapeJsonPointer(string $pointer): string
-{
-    // first transforming any occurrence of the sequence '~1' to '/'
-    $result = str_replace('~1', '/', $pointer);
-
-    // then transforming any occurrence of the sequence '~0' to '~'
-
-    $result = str_replace('~0', '~', $result);
-
-    return $result;
-}
-
-
-
-
-/**
- * @param string $pointer
- * @return array<string|int>
- */
-function getJsonPointerParts(string $pointer): array
-{
-    if ($pointer === '') {
-        return [];
-    }
-
-    if ($pointer[0] !== '/') {
-        throw InvalidJsonPointerException::invalidFirstCharacter();
-    }
-
-    $remainingString = substr($pointer, 1);
-
-    $parts = explode('/', $remainingString);
-
-    $partsDecoded = [];
-
-    foreach ($parts as $part) {
-        $int = intval($part);
-
-        // It was an int, use as int
-        if ((string)$int === $part) {
-            $partsDecoded[] = $int;
-        }
-        else {
-            $partsDecoded[] = unescapeJsonPointer($part);
-        }
-    }
-
-    // TODO - normalise digits to integers?
-    return $partsDecoded;
-}
-
-
-
 /**
  * @param array<mixed> $array
  * @param mixed $value

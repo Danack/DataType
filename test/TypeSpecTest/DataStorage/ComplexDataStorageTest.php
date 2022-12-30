@@ -270,18 +270,6 @@ JSON;
     }
 
 
-    /**
-     * @dataProvider providesJsonPointer
-     */
-    public function testJsonPointer($jsonPointer, $expectedData)
-    {
-        $dataStorage = ComplexDataStorage::fromData(self::getTestJson());
-
-        $dataStorageAtLocation = $dataStorage->setLocationFromJsonPointer($jsonPointer);
-
-        $this->assertSame($expectedData, $dataStorageAtLocation->getCurrentValue());
-    }
-
 
     public function providesPathParts()
     {
@@ -306,13 +294,5 @@ JSON;
     }
 
 
-    /**
-     * @dataProvider providesPathParts
-     */
-    public function testPathParts($jsonPointer, $expectedParts)
-    {
-        $parts = getJsonPointerParts($jsonPointer);
 
-        $this->assertSame($expectedParts, $parts);
-    }
 }

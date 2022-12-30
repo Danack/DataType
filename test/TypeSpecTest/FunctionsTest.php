@@ -31,12 +31,9 @@ use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\ExtractRule\GetType;
 use TypeSpec\ValidationResult;
 use TypeSpec\Exception\ValidationException;
-use TypeSpecTest\ImagickColorHasDataType;
 use VarMap\ArrayVarMap;
 use TypeSpecTest\Integration\FooParams;
-use TypeSpec\Exception\NoConstructorException;
 use TypeSpecTest\PropertyTypes\Quantity;
-use function TypeSpec\unescapeJsonPointer;
 use function TypeSpec\array_value_exists;
 use function TypeSpec\check_only_digits;
 use function TypeSpec\normalise_order_parameter;
@@ -121,64 +118,6 @@ class FunctionsTest extends BaseTestCase
         $foundJuggledType = array_value_exists($values, 2);
         $this->assertFalse($foundJuggledType);
     }
-
-
-    public function providesEscapeJsonPointer()
-    {
-        return [
-
-            ["a/b", "a~1b"],
-            ["m~n", "m~0n"],
-
-            ["~/0", "~0~10"],
-            ["~/2", "~0~12"],
-        ];
-    }
-
-
-    /**
-     * @dataProvider providesEscapeJsonPointer
-     * @covers ::\TypeSpec\escapeJsonPointer
-     */
-    public function testEscapeJsonPointer($unescaped, $expectedEscaped)
-    {
-        $actualEscaped = escapeJsonPointer($unescaped);
-        $this->assertSame($expectedEscaped, $actualEscaped);
-    }
-
-    /**
-     * @dataProvider providesEscapeJsonPointer
-     * @covers ::TypeSpec\unescapeJsonPointer
-     */
-    public function testUnescapeJsonPointer($expectedUnescaped, $escaped)
-    {
-        $actualUnescaped = unescapeJsonPointer($escaped);
-        $this->assertSame($expectedUnescaped, $actualUnescaped);
-    }
-
-//    /**
-//     * @covers \Params\Functions::addChildErrorMessagesForArray
-//     */
-//    public function testaddChildErrorMessagesForArray()
-//    {
-//        $name = 'foo';
-//        $message = 'Something went wrong.';
-//        $problems = [
-//            '/bar' => $message
-//        ];
-//
-//        $problems = Functions::addChildErrorMessagesForArray(
-//            $name,
-//            $problems,
-//            []
-//        );
-//
-//        $expectedResult = [
-//            '/foo/bar' => $message
-//        ];
-//
-//        $this->assertSame($expectedResult, $problems);
-//    }
 
     public function provides_getRawCharacters()
     {
@@ -313,6 +252,7 @@ class FunctionsTest extends BaseTestCase
 
     public function provides_getJsonPointerParts()
     {
+        yield ['', []];
         yield ['/[3]', [3]];
         yield ['/', []];
         yield ['/[0]', [0]];
@@ -326,23 +266,32 @@ class FunctionsTest extends BaseTestCase
         yield ['/foo/bar[3]', ['foo', 'bar', 3]];
     }
 
-    /**
-     * @dataProvider provides_getJsonPointerParts
-     * @covers ::\TypeSpec\getJsonPointerParts
-     * @param $input
-     * @param $expected
-     */
-    public function test_getJsonPointerParts($input, $expected)
-    {
-        $message = "We should move to actually support json pointer correctly to make it easier to implement";
-        $message .= "Also, I can't remember what the correct behaviour is meant to be here.";
-        // The current behaviour is probably wrong for json pointer...there is a conflict
-        // between following that and useful (to PHP developers) error messages.
+//    /**
+//     * @dataProvider provides_getJsonPointerParts
+//     * @covers ::\TypeSpec\getJsonPointerParts
+//     * @param $input
+//     * @param $expected
+//     */
+//    public function test_getJsonPointerParts($input, $expected)
+//    {
+//        // The current behaviour is probably wrong for json pointer...there is a conflict
+//        // between following that and useful (to PHP developers) error messages.
+//
+//        $actual = \TypeSpec\getJsonPointerParts($input);
+//        $this->assertSame($expected, $actual);
+//    }
 
-        $this->markTestSkipped($message);
-        $actual = \TypeSpec\getJsonPointerParts($input);
-        $this->assertSame($expected, $actual);
-    }
+
+//    public function test_getJsonPointerParts_errors_correctly()
+//    {
+//        // The current behaviour is probably wrong for json pointer...there is a conflict
+//        // between following that and useful (to PHP developers) error messages.
+//
+//        $this->expectException(InvalidJsonPointerException::class);
+//        $this->expectExceptionMessage(Messages::INVALID_JSON_POINTER_FIRST);
+//
+//        \TypeSpec\getJsonPointerParts("John");
+//    }
 
     /**
      * @covers ::\TypeSpec\getDataTypeListForClass

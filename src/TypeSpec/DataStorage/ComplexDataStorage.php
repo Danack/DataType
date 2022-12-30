@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace TypeSpec\DataStorage;
 
 use TypeSpec\Exception\InvalidLocationException;
-use function TypeSpec\getJsonPointerParts;
 
 /**
  * Implementation of InputStorage that wraps around data structures that
@@ -147,17 +146,5 @@ class ComplexDataStorage implements DataStorage
         }
 
         return $path;
-    }
-
-
-    public function setLocationFromJsonPointer(string $jsonPointer): self
-    {
-        $parts = getJsonPointerParts($jsonPointer);
-        $clone = clone $this;
-        foreach ($parts as $part) {
-            $clone->currentLocation[] = $part;
-        }
-
-        return $clone;
     }
 }
