@@ -87,7 +87,7 @@ class Messages
     public const UNKNOWN_INPUT_PARAMETER = "Unknown input parameter '%s'.";
 
     // Rule erors
-    public const ERROR_DIFFERENT_TYPES = "Parameter cannot by the same as %s as they different types, %s and %s.";
+    public const ERROR_DIFFERENT_TYPES = "Parameter cannot by the same as %s as they are different types, %s and %s.";
     public const ERROR_NO_PREVIOUS_PARAMETER = "Parameter named '%s' was not previously processed.";
     public const ERROR_DIFFERENT_VALUE = "Parameter is different to parameter '%s'.";
     public const ERROR_MAXIMUM_COUNT_MINIMUM = "Maximum count must be zero or above.";

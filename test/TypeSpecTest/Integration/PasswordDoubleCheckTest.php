@@ -109,40 +109,4 @@ class PasswordDoubleCheckTest extends BaseTestCase
             $validationProblems
         );
     }
-
-
-    /**
-     * @covers \TypeSpecTest\Integration\PasswordDoubleCheck
-     */
-    public function testWrongTypePreviousValue()
-    {
-        $data = [
-            'password' => 'zyx12345',
-            'password_repeat' => 5
-        ];
-
-        $this->markTestSkipped("Test is skipped as correct behaviour is uncertain");
-        // TODO - password_repeat is defined as
-        //
-        // new InputParameter(
-        //     'password_repeat',
-        //     new GetString(),
-        //     new DuplicatesParam('password')
-        // ),
-        //
-
-        /** @var PasswordDoubleCheck $duplicateParams */
-        [$duplicateParams, $validationProblems] = PasswordDoubleCheck::createOrErrorFromVarMap(
-            new ArrayVarMap($data)
-        );
-
-        $this->assertNull($duplicateParams);
-        $this->assertCount(1, $validationProblems);
-
-        $this->assertValidationProblemRegexp(
-            '/password_repeat',
-            Messages::ERROR_DIFFERENT_TYPES,
-            $validationProblems
-        );
-    }
 }
