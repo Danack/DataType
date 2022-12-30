@@ -42,5 +42,11 @@ class LogicExceptionTest extends BaseTestCase
             LogicException::MISSING_VALUE,
             $exception->getMessage()
         );
+
+        $exception = LogicException::onlyProcessedValues('foo');
+        $this->assertStringMatchesTemplateString(
+            LogicException::ONLY_PROCESSED_VALUES,
+            $exception->getMessage()
+        );
     }
 }
