@@ -13,7 +13,6 @@ use TypeSpec\Exception\LogicException;
  */
 class LogicExceptionTest extends BaseTestCase
 {
-
     /**
      * @covers \TypeSpec\Exception\LogicException
      */
