@@ -25,8 +25,8 @@ class PositiveInt implements ProcessPropertyRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        $matches = null;
 
+        /**  @psalm-suppress MixedArgument */
         $errorMessage = check_only_digits($value);
         if ($errorMessage !== null) {
             return ValidationResult::errorResult($inputStorage, $errorMessage);

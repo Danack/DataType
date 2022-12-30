@@ -65,6 +65,7 @@ function createObjectFromProcessedValues(string $classname, ProcessedValues $pro
         $processedValues
     );
 
+    /**  @psalm-suppress MixedArgumentTypeCoercion */
     $object = $reflection_class->newInstanceArgs($built_parameters);
 
     /** @var T $object */
@@ -294,11 +295,10 @@ function array_value_exists(array $array, $value): bool
 }
 
 /**
-
- * @param mixed $value  The value of the variable
+ * @param string|int $value  The value of the variable
  * @return null|string returns an error string, when there is an error
  */
-function check_only_digits($value)
+function check_only_digits(string|int $value)
 {
     if (is_int($value) === true) {
         return null;
@@ -314,7 +314,10 @@ function check_only_digits($value)
     }
 
     if ($count !== 0) {
+        /**  @psalm-suppress MixedArrayAccess */
         $badCharPosition = $matches[0][1];
+
+        /** @psalm-suppress MixedArgument */
         $message = sprintf(
             Messages::INT_REQUIRED_FOUND_NON_DIGITS,
             $badCharPosition
