@@ -283,26 +283,6 @@ function createSingleValueOrError(HasDataType $propertyInputTypeSpec, mixed $inp
     return [$value, []];
 }
 
-
-
-/**
- * Escapes a json pointer part
- *
- * https://tools.ietf.org/html/rfc6901#section-4
- *
- * @param string $pointer
- */
-function escapeJsonPointer(string $pointer): string
-{
-    // then transforming any occurrence of the sequence '~0' to '~'
-    $result = str_replace('~', '~0', $pointer);
-    // first transforming any occurrence of the sequence '~1' to '/'
-    $result = str_replace('/', '~1', $result);
-
-    return $result;
-}
-
-
 /**
  * @param array<mixed> $array
  * @param mixed $value
