@@ -148,13 +148,6 @@ JSON Patch - https://tools.ietf.org/html/rfc6902
 Some people care whether a parameter is in the query string or body. This library currently doesn't support differentiating them.
 
 
-
-
-
-
-
-
-
 ## TODO 
 
 * colors.
