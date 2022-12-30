@@ -84,7 +84,7 @@ class Messages
     public const CLASS_LACKS_PUBLIC_CONSTRUCTOR = "Class %s has no public constructor, cannot be instantiated with params";
     public const NULL_NOT_ALLOWED = "null is not allowed.";
 
-    // Rule erors
+    // Rule errors
     public const ERROR_DIFFERENT_TYPES = "Parameter cannot by the same as %s as they are different types, %s and %s.";
     public const ERROR_NO_PREVIOUS_PARAMETER = "Parameter named '%s' was not previously processed.";
     public const ERROR_DIFFERENT_VALUE = "Parameter is different to parameter '%s'.";
