@@ -1072,8 +1072,5 @@ class FunctionsTest extends BaseTestCase
         [$object, $validationProblems] = validate($dto);
 
         $this->assertEmpty($validationProblems);
-        
-
-
     }
 }
