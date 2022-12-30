@@ -18,6 +18,11 @@ class DataType
      */
     private string $name;
 
+    /**
+     * The name of the parameter that the type will bind to. This only needs
+     * to be set if the api name is different from the property name.
+     * @var string|null
+     */
     private ?string $target_parameter_name = null;
 
     /**
