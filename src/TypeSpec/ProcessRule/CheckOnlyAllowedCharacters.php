@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace TypeSpec\ProcessRule;
 
 use TypeSpec\DataStorage\DataStorage;
+use TypeSpec\Exception\InvalidRulesException;
 use TypeSpec\Exception\LogicException;
 use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
@@ -29,6 +30,10 @@ class CheckOnlyAllowedCharacters implements ProcessPropertyRule
         $this->patternValidCharacters = $patternValidCharacters;
     }
 
+    /**
+     * @throws LogicException
+     * @throws InvalidRulesException
+     */
     public function process(
         $value,
         ProcessedValues $processedValues,
@@ -41,9 +46,11 @@ class CheckOnlyAllowedCharacters implements ProcessPropertyRule
         $matches = [];
         $count = preg_match($patternInvalidCharacters, $value, $matches, PREG_OFFSET_CAPTURE);
 
+        // @codeCoverageIgnoreStart
         if ($count === false) {
             throw new LogicException("preg_match failed");
         }
+        // @codeCoverageIgnoreEnd
 
         if ($count !== 0) {
             $badCharPosition = $matches[0][1];
