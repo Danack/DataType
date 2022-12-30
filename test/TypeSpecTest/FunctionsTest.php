@@ -333,11 +333,9 @@ class FunctionsTest extends BaseTestCase
         );
     }
 
-
-
-
-
-
+    /**
+     * @covers ::\TypeSpec\processSingleInputType
+     */
     public function test_processSingleInputParameter()
     {
         $inputValue = 5;
@@ -1010,7 +1008,7 @@ class FunctionsTest extends BaseTestCase
 //    }
 
     /**
-     * @covers ::\TypeSpec\createSingleValueOrError
+     * @covers ::\TypeSpec\createSingleValue
      * @throws ValidationException
      * @throws \TypeSpec\Exception\TypeSpecException
      */
