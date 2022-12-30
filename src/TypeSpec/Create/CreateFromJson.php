@@ -27,7 +27,6 @@ trait CreateFromJson
         $data = json_decode_safe($json);
         $dataStorage = ArrayDataStorage::fromArray($data);
 
-        $variableMap = new ArrayVarMap($data);
         $object = create(
             static::class,
             $rules,
