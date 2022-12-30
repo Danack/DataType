@@ -4,12 +4,9 @@ declare(strict_types = 1);
 
 namespace TypeSpecTest\ExtractRule;
 
-use TypeSpec\Messages;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ExtractRule\FixedValue;
 use TypeSpec\ProcessedValues;
-
-use TypeSpec\DataStorage\TestArrayDataStorage;
 use TypeSpec\DataStorage\ArrayDataStorage;
 
 /**
@@ -38,7 +35,7 @@ class FixedValueTest extends BaseTestCase
     /**
      * @covers \TypeSpec\ExtractRule\FixedValue
      */
-    public function coverage()
+    public function test_coverage()
     {
         $value = 4;
         $rule = new FixedValue($value);
