@@ -14,7 +14,7 @@ class Messages
     public const ERROR_MESSAGE_NOT_ARRAY_VARIANT_1 = "Value must be an array.";
     public const BAD_TYPE_FOR_ARRAY_ACCESS = "Cannot use type [%s] for array access";
     public const BAD_TYPE_FOR_STRING_PROCESS_RULE = "Rule %s can only process strings";
-    public const BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE = "Kernel Matrix can only process json strings";
+
     public const ERROR_TOO_FEW_ELEMENTS = "Number of elements too small. Min allowed is %d but only got %d.";
     public const ERROR_TOO_MANY_ELEMENTS = "Number of elements too large. Max allowed is %d but got %d.";
     public const ERROR_WRONG_TYPE = "Minimum count can only be applied to an array but tried to operate on %s.";
@@ -105,7 +105,17 @@ class Messages
     public const TIME_MUST_BE_BEFORE_TIME = "This datetime must be before time %s";
     public const TIME_MUST_BE_AFTER_TIME = "This datetime must be after time %s";
 
-    // Matrix
+    // Kernel/Matrix
+
+    public const INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE = "Invalid json %s";
+
+    public const BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE = "Kernel Matrix can only process json strings";
+    public const KERNEL_MATRIX_ARRAY_EXPECTED = "Kernel Matrix, array expected but value is %s";
+
+    public const KERNEL_MATRIX_ERROR_AT_ROW_2D_EXPECTED = "Error at row %s - 2d array expected";
+
+    public const KERNEL_MATRIX_ERROR_AT_ROW_COLUMN_NUMBER_EXPECTED = "Row %s column %s 2d array of numbers expected";
+
     public const MATRIX_INVALID_BAD_ROW = "KernelMatrix must be a 2d array of floats.";
     public const MATRIX_INVALID_BAD_CELL = "KernelMatrix must be a 2d array of floats.";
     public const MATRIX_MUST_BE_ODD_SIZED_ROWS_ARE_EVEN = "Matrix must be odd-size - number of rows is even";

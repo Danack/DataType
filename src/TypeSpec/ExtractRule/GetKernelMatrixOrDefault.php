@@ -58,28 +58,43 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
         $matrix_value = json_decode($currentValue, $associative = true, 4);
         $lastError = json_last_error();
         if ($lastError !== JSON_ERROR_NONE) {
-            return ValidationResult::errorResult($dataStorage, "Error parsing matrix" . json_last_error_msg());
-        }
 
-        if (is_array($matrix_value) !== true) {
-            $message = "2d array expected but value is " . var_export($matrix_value, true);
+            $message = sprintf(
+                Messages::INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE,
+                json_last_error_msg()
+            );
+
             return ValidationResult::errorResult($dataStorage, $message);
         }
 
-        $validationProblems = [];
+        if (is_array($matrix_value) !== true) {
+            $message = sprintf(
+                Messages::KERNEL_MATRIX_ARRAY_EXPECTED,
+                var_export($matrix_value, true)
+            );
+            return ValidationResult::errorResult($dataStorage, $message);
+        }
+
+//        $validationProblems = [];
         $row_count = 0;
-        $floatRule = new CastToFloat();
+//        $floatRule = new CastToFloat();
 
         foreach ($matrix_value as $row) {
             if (is_array($row) !== true) {
-                return ValidationResult::errorResult($dataStorage, "Row $row_count - 2d array expected");
+                $message = sprintf(
+                    Messages::KERNEL_MATRIX_ERROR_AT_ROW_2D_EXPECTED,
+                    $row_count
+                );
+
+                return ValidationResult::errorResult($dataStorage, $message);
             }
 
             $column_count = 0;
             foreach ($row as $value) {
                 if (is_float($value) === false && is_int($value) === false) {
+
                     $message = sprintf(
-                        "Row %s column %s 2d array expected",
+                        Messages::KERNEL_MATRIX_ERROR_AT_ROW_COLUMN_NUMBER_EXPECTED,
                         $row_count,
                         $column_count,
                     );
@@ -90,26 +105,29 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
                 $column_count += 1;
             }
 
-            foreach ($row as $value) {
-                $floatRuleResult = $floatRule->process(
-                    $value,
-                    $processedValues,
-                    $dataStorage
-                );
-
-                if ($floatRuleResult->anyErrorsFound()) {
-                    foreach ($floatRuleResult->getValidationProblems() as $validationProblem) {
-                        $validationProblems[] = $validationProblem;
-                    }
-                }
-            }
+// I think this code is dead, but leaving commented out for now.
+// The code above should force all values to be numbers, so theoretically
+// they should always pass the casting to float.
+//            foreach ($row as $value) {
+//                $floatRuleResult = $floatRule->process(
+//                    $value,
+//                    $processedValues,
+//                    $dataStorage
+//                );
+//
+//                if ($floatRuleResult->anyErrorsFound()) {
+//                    foreach ($floatRuleResult->getValidationProblems() as $validationProblem) {
+//                        $validationProblems[] = $validationProblem;
+//                    }
+//                }
+//            }
 
             $row_count += 1;
         }
 
-        if (count($validationProblems) !== 0) {
-            return ValidationResult::fromValidationProblems($validationProblems);
-        }
+//        if (count($validationProblems) !== 0) {
+//            return ValidationResult::fromValidationProblems($validationProblems);
+//        }
 
         return ValidationResult::valueResult($matrix_value);
     }
