@@ -29,6 +29,12 @@ class TestArrayDataStorageTest extends BaseTestCase
         $this->assertSame('/', $dataStorage->getPath());
     }
 
+    public function test_createEmptyAtRoot()
+    {
+        $dataStorage = TestArrayDataStorage::createEmptyAtRoot();
+        $this->assertSame('/', $dataStorage->getPath());
+    }
+
     public function test_createMissing()
     {
         $dataStorage = TestArrayDataStorage::createMissing('foo');
