@@ -354,7 +354,6 @@ function normalise_order_parameter(string $part)
  * @param DataStorage $dataStorage
  * @param ProcessPropertyRule ...$processRules
  * @return array{0:\TypeSpec\ValidationProblem[], 1:?mixed}
- * @throws Exception\ParamMissingException
  */
 function processProcessingRules(
     $value,
@@ -383,7 +382,6 @@ function processProcessingRules(
  * @param ProcessedValues $paramValues
  * @param DataStorage $dataStorage
  * @return ValidationProblem[]
- * @throws Exception\ParamMissingException
  */
 function processDataTypeWithDataStorage(
     DataType        $dataType,
@@ -433,7 +431,6 @@ function processDataTypeWithDataStorage(
  * @param ProcessedValues $paramValues
  * @param DataStorage $dataStorage
  * @return ValidationProblem[]
- * @throws Exception\ParamMissingException
  */
 function processSingleInputType(
     HasDataType     $param,
@@ -455,7 +452,6 @@ function processSingleInputType(
  * @param ProcessedValues $processedValues
  * @param DataStorage $dataStorage
  * @return \TypeSpec\ValidationProblem[]
- * @throws Exception\ParamMissingException
  */
 function processDataTypeList(
     array           $dataTypeList,
@@ -473,7 +469,6 @@ function processDataTypeList(
 
         if (count($newValidationProblems) !== 0) {
             $validationProblems = [...$validationProblems, ...$newValidationProblems];
-            continue;
         }
     }
 

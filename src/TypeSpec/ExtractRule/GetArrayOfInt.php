@@ -30,16 +30,14 @@ class GetArrayOfInt implements ExtractPropertyRule
 
         // Check its set
         if ($dataStorage->isValueAvailable() !== true) {
-            $message = sprintf(Messages::ERROR_MESSAGE_NOT_SET);
-            return ValidationResult::errorResult($dataStorage, $message);
+            return ValidationResult::errorResult($dataStorage, Messages::ERROR_MESSAGE_NOT_SET);
         }
 
         $itemData = $dataStorage->getCurrentValue();
 
         // Check its an array
         if (is_array($itemData) !== true) {
-            $message = sprintf(Messages::ERROR_MESSAGE_NOT_ARRAY);
-            return ValidationResult::errorResult($dataStorage, $message);
+            return ValidationResult::errorResult($dataStorage, Messages::ERROR_MESSAGE_NOT_ARRAY);
         }
 
         // Setup stuff

@@ -9,7 +9,6 @@ use TypeSpec\Exception\LogicException;
 use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
-use TypeSpec\ProcessRule\CastToFloat;
 use TypeSpec\ValidationResult;
 
 class GetKernelMatrixOrDefault implements ExtractPropertyRule

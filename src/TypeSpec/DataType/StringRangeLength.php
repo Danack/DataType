@@ -5,7 +5,6 @@ namespace TypeSpec\DataType;
 use TypeSpec\ExtractRule\GetString;
 use TypeSpec\HasDataType;
 use TypeSpec\DataType;
-use TypeSpec\ProcessRule\RangeIntValue;
 use TypeSpec\ProcessRule\RangeStringLength;
 
 #[\Attribute]

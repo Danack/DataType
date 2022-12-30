@@ -37,7 +37,6 @@ class Messages
     public const VALUE_NOT_SET = 'Value not set.';
     public const ERROR_MESSAGE_NOT_SET = "Value not set.";
     public const ERROR_MESSAGE_NOT_SET_VARIANT_1 = "Value must be set.";
-    public const INVALID_JSON_POINTER_FIRST = "First character must be /";
 
     // When a input type can't be converted to a desired type
     // e.g. resource -> bool
@@ -84,7 +83,6 @@ class Messages
     public const CLASS_LACKS_CONSTRUCTOR = "Class %s has no constructor, cannot be instantiated with params";
     public const CLASS_LACKS_PUBLIC_CONSTRUCTOR = "Class %s has no public constructor, cannot be instantiated with params";
     public const NULL_NOT_ALLOWED = "null is not allowed.";
-    public const UNKNOWN_INPUT_PARAMETER = "Unknown input parameter '%s'.";
 
     // Rule erors
     public const ERROR_DIFFERENT_TYPES = "Parameter cannot by the same as %s as they are different types, %s and %s.";

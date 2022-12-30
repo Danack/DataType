@@ -21,7 +21,6 @@ interface ProcessPropertyRule extends PropertyRule
      * @param DataStorage $inputStorage The InputStorage with the current path set to the
      *   appropriate place to find the current value by calling $inputStorage->getCurrentValue()
      * @return ValidationResult
-     * @throws \TypeSpec\Exception\ParamMissingException
      */
     public function process(
         $value,
