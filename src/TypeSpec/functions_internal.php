@@ -225,7 +225,7 @@ function createSingleValue(HasDataType $hasDataType, mixed $inputValue)
     $processedValues = new ProcessedValues();
     $inputTypeSpecList = [$inputTypeSpec];
 
-    $validationProblems = processInputTypeList(
+    $validationProblems = processDataTypeList(
         $inputTypeSpecList,
         $processedValues,
         $dataStorage
@@ -268,7 +268,7 @@ function createSingleValueOrError(HasDataType $propertyInputTypeSpec, mixed $inp
     $processedValues = new ProcessedValues();
     $inputTypeSpecList = [$inputTypeSpec];
 
-    $validationProblems = processInputTypeList(
+    $validationProblems = processDataTypeList(
         $inputTypeSpecList,
         $processedValues,
         $dataStorage
@@ -457,20 +457,19 @@ function processProcessingRules(
 
 
 /**
- * @param \TypeSpec\DataType $inputType
+ * @param \TypeSpec\DataType $dataType
  * @param ProcessedValues $paramValues
  * @param DataStorage $dataStorage
  * @return ValidationProblem[]
  * @throws Exception\ParamMissingException
  */
-function processInputType(
-    DataType        $inputType,
+function processDataTypeWithDataStorage(
+    DataType        $dataType,
     ProcessedValues $paramValues,
     DataStorage     $dataStorage
 ) {
-
-    $dataStorageForItem = $dataStorage->moveKey($inputType->getName());
-    $extractRule = $inputType->getExtractRule();
+    $dataStorageForItem = $dataStorage->moveKey($dataType->getName());
+    $extractRule = $dataType->getExtractRule();
     $validationResult = $extractRule->process(
         $paramValues,
         $dataStorageForItem
@@ -485,7 +484,7 @@ function processInputType(
     // Process has already ended.
     if ($validationResult->isFinalResult() === true) {
         // TODO - modify here
-        $paramValues->setValue($inputType, $value);
+        $paramValues->setValue($dataType, $value);
         return [];
     }
 
@@ -494,14 +493,14 @@ function processInputType(
         $value,
         $dataStorageForItem,
         $paramValues,
-        ...$inputType->getProcessRules()
+        ...$dataType->getProcessRules()
     );
 
     // There were no validation problems, so store the value
     // so other parameter validators can reference it and it can
     // be used later.
     if (count($validationProblems) === 0) {
-        $paramValues->setValue($inputType, $value);
+        $paramValues->setValue($dataType, $value);
     }
 
     return $validationProblems;
@@ -521,7 +520,7 @@ function processSingleInputType(
 ): array {
 
     $inputParameter = $param->getDataType();
-    return processInputType(
+    return processDataTypeWithDataStorage(
         $inputParameter,
         $paramValues,
         $dataStorage
@@ -530,21 +529,21 @@ function processSingleInputType(
 
 
 /**
- * @param \TypeSpec\DataType[] $inputTypeList
+ * @param \TypeSpec\DataType[] $dataTypeList
  * @param ProcessedValues $processedValues
  * @param DataStorage $dataStorage
  * @return \TypeSpec\ValidationProblem[]
  * @throws Exception\ParamMissingException
  */
-function processInputTypeList(
-    array           $inputTypeList,
+function processDataTypeList(
+    array           $dataTypeList,
     ProcessedValues $processedValues,
     DataStorage     $dataStorage
 ) {
     $validationProblems = [];
 
-    foreach ($inputTypeList as $inputParameter) {
-        $newValidationProblems = processInputType(
+    foreach ($dataTypeList as $inputParameter) {
+        $newValidationProblems = processDataTypeWithDataStorage(
             $inputParameter,
             $processedValues,
             $dataStorage

@@ -12,7 +12,7 @@ use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\DataType\IntRangeOrDefault;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputType;
+use function TypeSpec\processDataTypeWithDataStorage;
 
 /**
  * @coversNothing
@@ -44,7 +44,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::createEmptyAtRoot();
 
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -76,7 +76,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::createMissing('foo');
 
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -116,7 +116,7 @@ class IntRangeOrDefaultTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $typeSpec,
             $processedValues,
             $dataStorage

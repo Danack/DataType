@@ -32,7 +32,7 @@ function create(
 ) {
     $processedValues = new ProcessedValues();
 
-    $validationProblems = processInputTypeList(
+    $validationProblems = processDataTypeList(
         $inputTypeList,
         $processedValues,
         $dataStorage
@@ -63,7 +63,7 @@ function createOrError($classname, $inputTypeSpecList, DataStorage $dataStorage)
 {
     $processedValues = new ProcessedValues();
 
-    $validationProblems = processInputTypeList(
+    $validationProblems = processDataTypeList(
         $inputTypeSpecList,
         $processedValues,
         $dataStorage

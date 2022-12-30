@@ -43,8 +43,8 @@ use function TypeSpec\normalise_order_parameter;
 use function TypeSpec\escapeJsonPointer;
 use function TypeSpec\getRawCharacters;
 use function TypeSpec\getDataTypeListForClass;
-use function TypeSpec\processInputTypeList;
-use function TypeSpec\processInputType;
+use function TypeSpec\processDataTypeList;
+use function TypeSpec\processDataTypeWithDataStorage;
 use function TypeSpec\processProcessingRules;
 use function TypeSpec\createArrayOfTypeFromInputStorage;
 use function TypeSpec\createArrayOfType;
@@ -345,7 +345,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListForClass
+     * @covers ::\TypeSpec\getDataTypeListForClass
      */
     public function test_getInputParameterListForClass()
     {
@@ -354,7 +354,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListForClass
+     * @covers ::\TypeSpec\getDataTypeListForClass
      */
     public function test_getInputParameterListForClass_missing_class()
     {
@@ -363,7 +363,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListForClass
+     * @covers ::\TypeSpec\getDataTypeListForClass
      */
     public function test_getInputParameterListForClass_missing_implements()
     {
@@ -374,7 +374,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListForClass
+     * @covers ::\TypeSpec\getDataTypeListForClass
      */
     public function test_getInputParameterListForClass_non_inputparameter()
     {
@@ -415,7 +415,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\processInputTypeSpecList
+     * @covers ::\TypeSpec\processDataTypeList
      */
     public function test_processInputParameters()
     {
@@ -426,7 +426,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputTypeList(
+        $validationProblems = processDataTypeList(
             $inputParameters,
             $paramValues,
             $dataStorage
@@ -596,7 +596,7 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
-     * @covers ::\TypeSpec\processInputTypeSpec
+     * @covers ::\TypeSpec\processDataTypeWithDataStorage
      */
     public function test_processInputParameter_works()
     {
@@ -610,7 +610,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -624,11 +624,10 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
-     * @covers ::\TypeSpec\processInputTypeSpec
+     * @covers ::\TypeSpec\processDataTypeWithDataStorage
      */
     public function test_processInputParameter_errors_on_extract()
     {
-
         $inputParameter = new DataType(
             'bar',
             new GetInt()
@@ -639,7 +638,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues = new ProcessedValues();
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -654,7 +653,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\processInputTypeSpec
+     * @covers ::\TypeSpec\processDataTypeWithDataStorage
      */
     public function test_processInputParameter_extract_ends_processing()
     {
@@ -692,7 +691,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues = new ProcessedValues();
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -706,7 +705,7 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
-     * @covers ::\TypeSpec\processInputTypeSpec
+     * @covers ::\TypeSpec\processDataTypeWithDataStorage
      */
     public function test_processInputParameter_errors()
     {
@@ -724,7 +723,7 @@ class FunctionsTest extends BaseTestCase
         ]);
 
         $paramValues  = new ProcessedValues();
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $inputParameter,
             $paramValues,
             $dataStorage
@@ -874,7 +873,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListFromAnnotations
+     * @covers ::\TypeSpec\getDataTypeListFromAnnotations
      */
     public function test_getParamsFromAnnotations()
     {
@@ -892,7 +891,7 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListFromAnnotations
+     * @covers ::\TypeSpec\getDataTypeListFromAnnotations
      */
     public function test_getParamsFromAnnotations_non_existant_param_class()
     {
@@ -909,7 +908,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListFromAnnotations
+     * @covers ::\TypeSpec\getDataTypeListFromAnnotations
      */
     public function testMultipleParamsErrors()
     {
@@ -927,7 +926,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\TypeSpec\getInputTypeSpecListFromAnnotations
+     * @covers ::\TypeSpec\getDataTypeListFromAnnotations
      */
     public function test_getParamsFromAnnotations_skips_non_param_annotation()
     {

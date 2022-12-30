@@ -24,7 +24,7 @@ use TypeSpec\Exception\UnknownParamException;
 use function TypeSpec\create;
 use function TypeSpec\createOrError;
 use function TypeSpec\createTypeFromAnnotations;
-use function TypeSpec\processInputTypeList;
+use function TypeSpec\processDataTypeList;
 
 /**
  * This is a general test suite for integration type stuff.
@@ -50,7 +50,7 @@ class ParamsTest extends BaseTestCase
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
 
-        $problems = processInputTypeList(
+        $problems = processDataTypeList(
             $rules,
             $processedValues,
             $dataStorage
@@ -105,7 +105,7 @@ class ParamsTest extends BaseTestCase
 
         $processedValues = new ProcessedValues();
 
-        $validationProblems = processInputTypeList($rules, $processedValues, $dataStorage);
+        $validationProblems = processDataTypeList($rules, $processedValues, $dataStorage);
         $this->assertNoValidationProblems($validationProblems);
 
         $this->assertHasValue($finalValue, 'foo', $processedValues);

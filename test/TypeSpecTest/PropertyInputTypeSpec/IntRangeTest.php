@@ -12,7 +12,7 @@ use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\DataType\IntRange;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputType;
+use function TypeSpec\processDataTypeWithDataStorage;
 
 /**
  * @coversNothing
@@ -46,7 +46,7 @@ class IntRangeTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $typeSpec,
             $processedValues,
             $dataStorage
@@ -84,7 +84,7 @@ class IntRangeTest extends BaseTestCase
             $expected_value
         );
 
-        $validationProblems = processInputType(
+        $validationProblems = processDataTypeWithDataStorage(
             $typeSpec,
             $processedValues,
             $dataStorage

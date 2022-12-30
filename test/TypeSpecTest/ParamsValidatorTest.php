@@ -11,7 +11,7 @@ use TypeSpecTest\BaseTestCase;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\AlwaysEndsRule;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use function TypeSpec\processInputType;
+use function TypeSpec\processDataTypeWithDataStorage;
 
 /**
  * @coversNothing
@@ -63,7 +63,7 @@ class ParamsValidatorTest extends BaseTestCase
 
         $processedValues = new ProcessedValues();
 
-        $errors = processInputType(
+        $errors = processDataTypeWithDataStorage(
             $param,
             $processedValues,
             TestArrayDataStorage::fromArray(['foo' => 5])

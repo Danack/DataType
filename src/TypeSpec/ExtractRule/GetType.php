@@ -11,7 +11,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createObjectFromProcessedValues;
 use function TypeSpec\getDataTypeListForClass;
-use function TypeSpec\processInputTypeList;
+use function TypeSpec\processDataTypeList;
 
 class GetType implements ExtractPropertyRule
 {
@@ -65,7 +65,7 @@ class GetType implements ExtractPropertyRule
         }
 
         $newProcessedValues = new ProcessedValues();
-        $validationProblems = processInputTypeList(
+        $validationProblems = processDataTypeList(
             $this->inputParameterList,
             $newProcessedValues,
             $dataStorage
