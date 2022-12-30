@@ -242,31 +242,4 @@ class ParamsTest extends BaseTestCase
         /** @var $fooParams \TypeSpecTest\Integration\FooParams */
         $this->assertEquals(5, $fooParams->getLimit());
     }
-
-    public function testUnknownInputThrows()
-    {
-        $this->markTestSkipped("Preferred behaviour is not known for this feature.");
-        // Okay, so theoretically, detecting that unknown parameters are present
-        // in the data being parsed/validated is a useful thing to do.
-        //
-        // However it's also really annoying when the source data is not under
-        // direct programmer control, and is coming from something like $_GET
-        // parameters. It's common to add a random parameter to cache-bust, and
-        // then getting an error message of 'time=1231231231231 is unknown param'
-        // is so annoying.
-
-        $data = [
-            'background_color' => 'red',
-            'unknown_color' => 'blue'
-        ];
-
-        [$object, $validationProblems] =  \TwoColors::createOrErrorFromArray($data);
-
-        $this->assertNull($object);
-        $this->assertValidationProblemRegexp(
-            '/',
-            Messages::UNKNOWN_INPUT_PARAMETER,
-            $validationProblems
-        );
-    }
 }

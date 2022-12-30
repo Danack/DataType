@@ -258,43 +258,4 @@ class ParamAnnotationsTest extends BaseTestCase
         createTypeFromAnnotations($varMap, \MultipleParamAnnotations::class);
     }
 
-    public function testCorrectSpellingIsUsed()
-    {
-        $this->markTestSkipped("Preferred behaviour is not known for this feature.");
-        // Okay, so theoretically, detecting that unknown parameters are present
-        // in the data being parsed/validated is a useful thing to do.
-        //
-        // However it's also really annoying when the source data is not under
-        // direct programmer control, and is coming from something like $_GET
-        // parameters. It's common to add a random parameter to cache-bust, and
-        // then getting an error message of 'time=1231231231231 is unknown param'
-        // is so annoying.
-
-        // This is correct - it uses the name as per the annotation
-        $result = \OneColorGetsCorrectSpelling::createFromArray([
-            'backgroundColor' => 'red'
-        ]);
-        $this->assertInstanceOf(\OneColorGetsCorrectSpelling::class, $result);
-
-        // This is incorrect - it uses the name as per the property name
-        [$object, $validationProblems] = \OneColorGetsCorrectSpelling::createOrErrorFromArray([
-            'this_is_invalid' => 'red'
-        ]);
-        $this->assertInstanceOf(\OneColorGetsCorrectSpelling::class, $object);
-        $this->assertSame(
-            \OneColorGetsCorrectSpelling::DEFAULT_COLOR,
-            $object->getBackgroundColor()
-        );
-
-        $this->assertCount(
-            1,
-            $validationProblems,
-            "if zero, unknown param 'this_is_invalid' not being shown as unknown."
-        );
-        $this->assertValidationProblemRegexp(
-            '/',
-            Messages::UNKNOWN_INPUT_PARAMETER,
-            $validationProblems
-        );
-    }
 }

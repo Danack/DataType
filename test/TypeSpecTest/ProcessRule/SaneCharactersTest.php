@@ -115,8 +115,8 @@ class SaneCharactersTest extends BaseTestCase
      */
     public function testDescription()
     {
-        $this->markTestSkipped();
         $rule = new SaneCharacters();
         $description = $this->applyRuleToDescription($rule);
+        // TODO - check result is as expected.
     }
 }
