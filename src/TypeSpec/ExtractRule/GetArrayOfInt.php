@@ -72,6 +72,7 @@ class GetArrayOfInt implements ExtractPropertyRule
             $validationProblems = [...$validationProblems, ...$newValidationProblems];
 
             if (count($newValidationProblems) !== 0) {
+                $index += 1;
                 continue;
             }
 
