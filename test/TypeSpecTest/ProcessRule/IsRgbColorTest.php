@@ -173,6 +173,39 @@ class IsRgbColorTest extends BaseTestCase
         );
     }
 
+    /**
+
+     * @covers \TypeSpec\ProcessRule\IsRgbColor
+     */
+    public function testErrors_cuts_off_input()
+    {
+        // This needs to be the same as the line
+        // $string_start = substr(var_export($value, true), 0, 50);
+        $nine_chars  = "012345678";
+        $testValue = str_repeat($nine_chars, 5);
+        $testValue .= "...?!";
+
+        $rule = new IsRgbColor();
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', $testValue);
+
+        $validationResult = $rule->process(
+            $testValue,
+            $processedValues,
+            $dataStorage
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::BAD_COLOR_STRING,
+            $validationResult->getValidationProblems()
+        );
+
+        $validationProblem = $validationResult->getValidationProblems()[0];
+        $this->assertStringContainsString("?", $validationProblem->getProblemMessage());
+        $this->assertStringNotContainsString("!", $validationProblem->getProblemMessage());
+    }
+
 
     /**
      * @covers \TypeSpec\ProcessRule\IsRgbColor

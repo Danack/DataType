@@ -233,23 +233,6 @@ class FunctionsTest extends BaseTestCase
         );
     }
 
-    /**
-     * @covers ::\TypeSpec\createTypeFromAnnotations
-     * @group deadish
-     */
-    public function test_createTypeFromAnnotations()
-    {
-        $varMap = new ArrayVarMap([
-            'background_color' => 'red',
-            'stroke_color' => 'rgb(255, 0, 255)',
-            'fill_color' => 'white',
-        ]);
-
-        $result = createTypeFromAnnotations($varMap, \ThreeColors::class);
-
-        $this->assertInstanceOf(\ThreeColors::class, $result);
-    }
-
     public function provides_getJsonPointerParts()
     {
         yield ['', []];
@@ -265,33 +248,6 @@ class FunctionsTest extends BaseTestCase
         yield ['/foo/bar', ['foo', 'bar']];
         yield ['/foo/bar[3]', ['foo', 'bar', 3]];
     }
-
-//    /**
-//     * @dataProvider provides_getJsonPointerParts
-//     * @covers ::\TypeSpec\getJsonPointerParts
-//     * @param $input
-//     * @param $expected
-//     */
-//    public function test_getJsonPointerParts($input, $expected)
-//    {
-//        // The current behaviour is probably wrong for json pointer...there is a conflict
-//        // between following that and useful (to PHP developers) error messages.
-//
-//        $actual = \TypeSpec\getJsonPointerParts($input);
-//        $this->assertSame($expected, $actual);
-//    }
-
-
-//    public function test_getJsonPointerParts_errors_correctly()
-//    {
-//        // The current behaviour is probably wrong for json pointer...there is a conflict
-//        // between following that and useful (to PHP developers) error messages.
-//
-//        $this->expectException(InvalidJsonPointerException::class);
-//        $this->expectExceptionMessage(Messages::INVALID_JSON_POINTER_FIRST);
-//
-//        \TypeSpec\getJsonPointerParts("John");
-//    }
 
     /**
      * @covers ::\TypeSpec\getDataTypeListForClass
@@ -939,74 +895,6 @@ class FunctionsTest extends BaseTestCase
         );
     }
 
-
-
-
-//    /**
-//     * @covers ::\TypeSpec\instantiateParam
-//     */
-//    public function test_instantiateParam_works()
-//    {
-//        $rc = new \ReflectionClass(\ReflectionClassOfAttributeObject::class);
-//
-//        $refl_property_no_constructor = $rc->getProperty('attribute_exists_no_constructor');
-//        $attribute = $refl_property_no_constructor->getAttributes()[0];
-//
-//        $refl_of_attribute = new \ReflectionClass($attribute->getName());
-//
-//        $result = instantiateParam(
-//            $refl_of_attribute,
-//            $attribute,
-//            'default_name',
-//        );
-//        $this->assertInstanceOf(\AttributesExistsNoConstructor::class, $result);
-//    }
-
-
-//    /**
-//     * @covers ::\TypeSpec\instantiateParam
-//     */
-//    public function test_instantiateParam_works_param_but_no_name()
-//    {
-//        $rc = new \ReflectionClass(\ReflectionClassOfAttributeObject::class);
-//
-//        $refl_property_no_constructor = $rc->getProperty('attribute_exists_has_constructor');
-//        $attribute = $refl_property_no_constructor->getAttributes()[0];
-//
-//        $refl_of_attribute = new \ReflectionClass($attribute->getName());
-//
-//        $result = instantiateParam(
-//            $refl_of_attribute,
-//            $attribute,
-//            'default_name',
-//        );
-//        $this->assertInstanceOf(\AttributesExistsHasConstructor::class, $result);
-//        $this->assertSame(10, $result->getFoo());
-//    }
-
-//    /**
-//     * @covers ::\TypeSpec\instantiateParam
-//     */
-//    public function test_instantiateParam_works_param_with_name()
-//    {
-//        $rc = new \ReflectionClass(\ReflectionClassOfAttributeObject::class);
-//
-//        $refl_property_no_constructor = $rc->getProperty('attribute_exists_has_constructor_with_name');
-//        $attribute = $refl_property_no_constructor->getAttributes()[0];
-//
-//        $refl_of_attribute = new \ReflectionClass($attribute->getName());
-//
-//        $result = instantiateParam(
-//            $refl_of_attribute,
-//            $attribute,
-//            'default_name'
-//        );
-//        $this->assertInstanceOf(\AttributesExistsHasConstructorWithName::class, $result);
-//        $this->assertSame(10, $result->getFoo());
-//
-//        $this->assertSame('default_name', $result->getName());
-//    }
-
     /**
      * @covers ::\TypeSpec\createSingleValue
      * @throws ValidationException
@@ -1036,7 +924,6 @@ class FunctionsTest extends BaseTestCase
             );
         }
     }
-
 
     /**
      * @covers ::\TypeSpec\createSingleValueOrError

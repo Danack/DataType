@@ -8,6 +8,9 @@
       <directory>../src/TypeSpec/OpenApi</directory>
       <file>../src/TypeSpec/OpenApi/OpenApiV300Description.php</file>
       <file>../src/TypeSpec/OpenApi/ShouldNeverBeCalledParamDescription.php</file>
+      <!-- Currently this is being reported as missing a line of coverage
+           even though it is merely an interface and shouldn't need any coverage -->
+      <file>../src/TypeSpec/ProcessRule/ProcessPropertyRule.php</file>
     </exclude>
     <report>
       <html outputDirectory="../tmp/coverage" lowUpperBound="35" highLowerBound="70"/>
@@ -21,13 +24,8 @@
       <directory>../test/</directory>
     </testsuite>
   </testsuites>
-  <groups>
-    <exclude>
-      <group>needs_fixing</group>
-      <group>deadish</group>
-    </exclude>
-  </groups>
-  <logging>
-    <!-- <log type="coverage-php" target="../tmp/coverage/unittest.cov"/> -->
-  </logging>
+<!--  <groups>-->
+<!--    <exclude>-->
+<!--    </exclude>-->
+<!--  </groups>-->
 </phpunit>

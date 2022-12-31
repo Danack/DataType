@@ -18,7 +18,6 @@ class FunctionsInternalTest extends BaseTestCase
     /**
      * @covers ::\TypeSpec\get_all_constructor_parameters
      * @throws LogicException
-     * @group wip
      */
     public function test_get_all_constructor_parameters_works()
     {

@@ -1,0 +1,63 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "TypeSpec/DataStorage/TestArrayDataStorage.php",
+            "TypeSpec/SafeAccess.php",
+            "TypeSpec/OpenApi/ShouldNeverBeCalledParamDescription.php",
+            "TypeSpec/OpenApi/OpenApiV300ParamDescription.php"
+        ]
+    },
+
+    "phpUnit": {
+        "configDir": "./test"
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "mutators": {
+        "@default": true,
+        "MBString": false,
+        "PublicVisibility": false,
+        "ProtectedVisibility": false,
+        "FalseValue": {
+            "ignore": [
+                "*::updateParamDescription",
+                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "TypeSpec\\ProcessRule\\SaneCharacters::process",
+                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        },
+        "IncrementInteger": {
+            "ignore": [
+                "TypeSpec\\ProcessRule\\SaneCharacters::process"
+            ]
+        },
+        "Identical": {
+            "ignore": [
+                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "TypeSpec\\ProcessRule\\SaneCharacters::process",
+                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        },
+        "MethodCallRemoval": {
+            "ignore": [
+                "*::updateParamDescription",
+            ]
+        },
+        "Throw_": {
+            "ignore": [
+                "TypeSpec\\OpenApi\\OpenApiV300ParamDescription::*",
+                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "TypeSpec\\ProcessRule\\SaneCharacters::process",
+                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        },
+
+
+
+    }
+}
