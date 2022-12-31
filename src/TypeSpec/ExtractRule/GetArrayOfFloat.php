@@ -11,7 +11,7 @@ use TypeSpec\ProcessRule\ProcessPropertyRule;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createArrayOfScalarsFromDataStorage;
 
-class GetArrayOfInt implements ExtractPropertyRule
+class GetArrayOfFloat implements ExtractPropertyRule
 {
     /** @var ProcessPropertyRule[] */
     private array $subsequentRules;
@@ -26,7 +26,7 @@ class GetArrayOfInt implements ExtractPropertyRule
         DataStorage $dataStorage
     ): ValidationResult {
 
-        $extract_rule = new GetInt();
+        $extract_rule = new GetFloat();
 
         return createArrayOfScalarsFromDataStorage(
             $processedValues,

@@ -23,12 +23,12 @@ class GetType implements ExtractPropertyRule
 
     /**
      * @param class-string $className
-     * @param \TypeSpec\DataType[] $inputParameterList
+     * @param \TypeSpec\DataType[] $dataTypeList
      */
-    public function __construct(string $className, $inputParameterList)
+    public function __construct(string $className, $dataTypeList)
     {
         $this->className = $className;
-        $this->inputParameterList = $inputParameterList;
+        $this->inputParameterList = $dataTypeList;
     }
 
     /**
@@ -54,7 +54,6 @@ class GetType implements ExtractPropertyRule
             $inputParameterList
         );
     }
-
 
     public function process(
         ProcessedValues $processedValues,

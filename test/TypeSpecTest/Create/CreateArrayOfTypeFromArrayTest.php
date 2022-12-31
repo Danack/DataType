@@ -40,7 +40,6 @@ class CreateArrayOfTypeFromArrayTest extends BaseTestCase
         }
     }
 
-
     /**
      * @covers \TypeSpec\Create\CreateArrayOfTypeFromArray
      */

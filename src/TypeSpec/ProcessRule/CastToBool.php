@@ -36,6 +36,7 @@ class CastToBool implements ProcessPropertyRule
         }
 
         if (is_string($value) === true) {
+            // TODO - change to true only....
             if ($value === 'true' ||
                 $value === '1') {
                 return ValidationResult::valueResult(true);

@@ -51,6 +51,23 @@ class ValidationResult
         );
     }
 
+    /**
+     * this is for a single value processing.
+     * @param DataStorage $inputStorage
+     * @param string $message
+     * @return ValidationResult
+     */
+    public static function errorButContinueResult(
+        $value,
+        DataStorage $inputStorage,
+        string $message
+    ): ValidationResult {
+        return new self(
+            $value,
+            [new ValidationProblem($inputStorage, $message)],
+            false
+        );
+    }
 
     /**
      * @param \TypeSpec\ValidationProblem[] $validationProblems

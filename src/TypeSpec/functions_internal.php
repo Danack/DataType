@@ -13,7 +13,8 @@ use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\Exception\AnnotationClassDoesNotExistException;
 use TypeSpec\Exception\IncorrectNumberOfParametersException;
 use TypeSpec\Exception\InvalidDatetimeFormatException;
-use TypeSpec\Exception\InvalidJsonPointerException;
+use TypeSpec\ExtractRule;
+use TypeSpec\ExtractRule\ExtractPropertyRule;
 use TypeSpec\Exception\LogicException;
 use TypeSpec\Exception\MissingClassException;
 use TypeSpec\Exception\MissingConstructorParameterNameException;
@@ -379,19 +380,21 @@ function processProcessingRules(
 
 /**
  * @param \TypeSpec\DataType $dataType
- * @param ProcessedValues $paramValues
+ * @param ProcessedValues $processedValues
  * @param DataStorage $dataStorage
  * @return ValidationProblem[]
  */
 function processDataTypeWithDataStorage(
     DataType        $dataType,
-    ProcessedValues $paramValues,
+    ProcessedValues $processedValues,
     DataStorage     $dataStorage
 ) {
+    // TODO - why are we moving here, rather than having it be part
+    // of storage->foo(the params.)
     $dataStorageForItem = $dataStorage->moveKey($dataType->getName());
     $extractRule = $dataType->getExtractRule();
     $validationResult = $extractRule->process(
-        $paramValues,
+        $processedValues,
         $dataStorageForItem
     );
 
@@ -404,7 +407,7 @@ function processDataTypeWithDataStorage(
     // Process has already ended.
     if ($validationResult->isFinalResult() === true) {
         // TODO - modify here
-        $paramValues->setValue($dataType, $value);
+        $processedValues->setValue($dataType, $value);
         return [];
     }
 
@@ -412,7 +415,7 @@ function processDataTypeWithDataStorage(
     [$validationProblems, $value] = processProcessingRules(
         $value,
         $dataStorageForItem,
-        $paramValues,
+        $processedValues,
         ...$dataType->getProcessRules()
     );
 
@@ -420,7 +423,7 @@ function processDataTypeWithDataStorage(
     // so other parameter validators can reference it and it can
     // be used later.
     if (count($validationProblems) === 0) {
-        $paramValues->setValue($dataType, $value);
+        $processedValues->setValue($dataType, $value);
     }
 
     return $validationProblems;
@@ -460,9 +463,9 @@ function processDataTypeList(
 ) {
     $validationProblems = [];
 
-    foreach ($dataTypeList as $inputParameter) {
+    foreach ($dataTypeList as $dataType) {
         $newValidationProblems = processDataTypeWithDataStorage(
-            $inputParameter,
+            $dataType,
             $processedValues,
             $dataStorage
         );
@@ -594,4 +597,61 @@ function getDataTypeListFromAnnotations(string $class): array
     }
 
     return $inputParameters;
+}
+
+
+/**
+ * @param \TypeSpec\ExtractRule\ExtractPropertyRule $extract_rule
+ * @param DataStorage $dataStorage
+ * @param ProcessPropertyRule[] $subsequentRules
+ * @return ValidationResult
+ * @throws \TypeSpec\Exception\LogicException
+ */
+function createArrayOfScalarsFromDataStorage(
+    ProcessedValues $processedValues,
+    DataStorage $dataStorage,
+    ExtractPropertyRule $extract_rule,
+    array $subsequentRules
+) {
+
+    // Check its set
+    if ($dataStorage->isValueAvailable() !== true) {
+        return ValidationResult::errorResult($dataStorage, Messages::ERROR_MESSAGE_NOT_SET);
+    }
+
+    $itemData = $dataStorage->getCurrentValue();
+
+    // Check its an array
+    if (is_array($itemData) !== true) {
+        return ValidationResult::errorResult($dataStorage, Messages::ERROR_MESSAGE_NOT_ARRAY);
+    }
+
+    // Setup stuff
+    $items = [];
+    /** @var \TypeSpec\ValidationProblem[] $validationProblems */
+    $validationProblems = [];
+    $index = 0;
+
+    $new_processed_values = new ProcessedValues();
+
+    // TODO - why do we look over this data like this? rather than
+    // passing something to $datastorage->foo(...params);
+    foreach ($itemData as $itemDatum) {
+        $dataType = new DataType((string)$index, $extract_rule, ...$subsequentRules);
+        $new_validationProblems = processDataTypeWithDataStorage(
+            $dataType,
+            $new_processed_values,
+            $dataStorage
+        );
+
+        $validationProblems = array_merge($validationProblems, $new_validationProblems);
+
+        $index += 1;
+    }
+
+    if (count($validationProblems) !== 0) {
+        return ValidationResult::fromValidationProblems($validationProblems);
+    }
+
+    return ValidationResult::valueResult($new_processed_values->getAllValues());
 }
