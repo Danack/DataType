@@ -111,6 +111,40 @@ class GetArrayOfIntTest extends BaseTestCase
         );
     }
 
+
+    /**
+     * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
+     */
+    public function testErrorsOnTypeTwice()
+    {
+        $data = [5, 6, 7, 'banana', 'sausage'];
+
+        $rule = new GetArrayOfInt();
+        $validator = new ProcessedValues();
+        $result = $rule->process(
+            $validator, TestArrayDataStorage::fromArray($data)
+        );
+
+        $this->assertTrue($result->isFinalResult());
+
+        $validationProblems = $result->getValidationProblems();
+
+        $this->assertCount(2, $validationProblems);
+        $this->assertValidationProblem(
+            '/[3]',
+            'Value must contain only digits.',
+            $validationProblems
+        );
+        $this->assertValidationProblem(
+            '/[4]',
+            'Value must contain only digits.',
+            $validationProblems
+        );
+    }
+
+
+
+
     /**
      * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
      */

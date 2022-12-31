@@ -57,6 +57,7 @@ class GetArrayOfInt implements ExtractPropertyRule
             // If error, add it and attempt next entry in array
             if ($result->anyErrorsFound()) {
                 $validationProblems = [...$validationProblems, ...$result->getValidationProblems()];
+                $index += 1;
                 continue;
             }
 
