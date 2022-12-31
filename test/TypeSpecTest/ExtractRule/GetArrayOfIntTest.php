@@ -150,7 +150,7 @@ class GetArrayOfIntTest extends BaseTestCase
      */
     public function testErrorsOnSubsequentRule()
     {
-        $data = [5, 6, 7, 5001];
+        $data = [5, 6, 7, 5001, 5002];
 
         $rule = new GetArrayOfInt(
             new MaxIntValue(20)
@@ -167,6 +167,12 @@ class GetArrayOfIntTest extends BaseTestCase
 
         $this->assertValidationProblem(
             '/[3]',
+            'Value too large. Max allowed is 20',
+            $problemMessages
+        );
+
+        $this->assertValidationProblem(
+            '/[4]',
             'Value too large. Max allowed is 20',
             $problemMessages
         );
