@@ -10,8 +10,8 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
 /**
- * Convert the value to null if the string is empty, and provides
- * a final result
+ * Convert the value to null if the string is empty or blank, and provides
+ * a final result.
  */
 class NullIfEmpty implements ProcessPropertyRule
 {
