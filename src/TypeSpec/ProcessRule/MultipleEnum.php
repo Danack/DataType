@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace TypeSpec\ProcessRule;
 
 use TypeSpec\DataStorage\DataStorage;
+use TypeSpec\Exception\InvalidRulesException;
 use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
@@ -35,6 +36,9 @@ class MultipleEnum implements ProcessPropertyRule
         $this->allowedValues = $allowedValues;
     }
 
+    /**
+     * @throws InvalidRulesException
+     */
     public function process(
         $value,
         ProcessedValues $processedValues,
@@ -43,11 +47,9 @@ class MultipleEnum implements ProcessPropertyRule
 
         $value = $this->checkString($value);
 
-        $value = trim($value);
         $enumStringParts = explode(',', $value);
         $enumElements = [];
         foreach ($enumStringParts as $enumStringPart) {
-//            $enumStringPart = trim($enumStringPart);
             if (strlen($enumStringPart) === 0) {
                 // TODO - needs unit test.
                 // treat empty segments as no value
