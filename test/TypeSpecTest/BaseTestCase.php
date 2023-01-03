@@ -185,6 +185,8 @@ class BaseTestCase extends TestCase
     ) {
         $expectedProblemRegexp = templateStringToRegExp($expectedProblem);
 
+        $correct_identifier_incorrect_message = false;
+
         foreach ($validationProblems as $validationProblem) {
             if ($validationProblem->getInputStorage()->getPath() !== $identifier) {
                 continue;
@@ -194,7 +196,11 @@ class BaseTestCase extends TestCase
                 // correct problem message found
                 return;
             }
+            // loop over all entries before failing.
+            $correct_identifier_incorrect_message = true;
+        }
 
+        if ($correct_identifier_incorrect_message === true) {
             $incorrectMessageText = sprintf(
                 "Validation problem for identifier '%s' found, but wrong message.\nExpected: '%s'\nActual '%s'\n",
                 $identifier,

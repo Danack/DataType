@@ -4,55 +4,56 @@ declare(strict_types=1);
 
 namespace TypeSpecTest;
 
+use TypeSpec\DataStorage\DataStorage;
+use TypeSpec\DataStorage\TestArrayDataStorage;
+use TypeSpec\DataType;
 use TypeSpec\Exception\AnnotationClassDoesNotExistException;
 use TypeSpec\Exception\IncorrectNumberOfParametersException;
+use TypeSpec\Exception\MissingClassException;
 use TypeSpec\Exception\MissingConstructorParameterNameException;
 use TypeSpec\Exception\PropertyHasMultipleInputTypeSpecAnnotationsException;
-use TypeSpec\ExtractRule\GetStringOrDefault;
-use TypeSpec\DataStorage\TestArrayDataStorage;
-use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\Exception\TypeDefinitionException;
 use TypeSpec\Exception\TypeNotInputParameterListException;
+use TypeSpec\Exception\ValidationException;
 use TypeSpec\ExtractRule\ExtractPropertyRule;
 use TypeSpec\ExtractRule\GetInt;
 use TypeSpec\ExtractRule\GetString;
-use TypeSpec\DataType;
+use TypeSpec\ExtractRule\GetStringOrDefault;
+use TypeSpec\ExtractRule\GetType;
 use TypeSpec\Messages;
-use TypeSpec\HasDataType;
-use TypeSpec\ProcessedValue;
+use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\AlwaysEndsRule;
-use TypeSpec\ProcessRule\ImagickIsRgbColor;
-use TypeSpec\ProcessRule\MinLength;
-use TypeSpec\OpenApi\ParamDescription;
-use TypeSpec\Value\Ordering;
-use TypeSpec\Exception\MissingClassException;
+use TypeSpec\ProcessRule\AlwaysErrorsButDoesntHaltRule;
 use TypeSpec\ProcessRule\AlwaysErrorsRule;
-use TypeSpec\ExtractRule\GetType;
+use TypeSpec\ProcessRule\ImagickIsRgbColor;
+use TypeSpec\ProcessRule\MaxIntValue;
+use TypeSpec\ProcessRule\MinLength;
 use TypeSpec\ValidationResult;
-use TypeSpec\Exception\ValidationException;
-use VarMap\ArrayVarMap;
+use TypeSpec\Value\Ordering;
+use TypeSpecTest\Integration\FooErrorsButContinuesParams;
 use TypeSpecTest\Integration\FooParams;
 use TypeSpecTest\PropertyTypes\Quantity;
 use function TypeSpec\array_value_exists;
 use function TypeSpec\check_only_digits;
-use function TypeSpec\normalise_order_parameter;
-use function TypeSpec\getRawCharacters;
+use function TypeSpec\checkAllowedFormatsAreStrings;
+use function TypeSpec\createArrayOfScalarsFromDataStorage;
+use function TypeSpec\createArrayOfType;
+use function TypeSpec\createArrayOfTypeFromInputStorage;
+use function TypeSpec\createArrayOfTypeOrError;
+use function TypeSpec\createObjectFromProcessedValues;
+use function TypeSpec\createSingleValue;
+use function TypeSpec\createSingleValueOrError;
 use function TypeSpec\getDataTypeListForClass;
+use function TypeSpec\getDataTypeListFromAnnotations;
+use function TypeSpec\getDefaultSupportedTimeFormats;
+use function TypeSpec\getRawCharacters;
+use function TypeSpec\getReflectionClassOfAttribute;
+use function TypeSpec\normalise_order_parameter;
 use function TypeSpec\processDataTypeList;
 use function TypeSpec\processDataTypeWithDataStorage;
 use function TypeSpec\processProcessingRules;
-use function TypeSpec\createArrayOfTypeFromInputStorage;
-use function TypeSpec\createArrayOfType;
-use function TypeSpec\createArrayOfTypeOrError;
-use function TypeSpec\checkAllowedFormatsAreStrings;
-use function TypeSpec\getDataTypeListFromAnnotations;
-use function TypeSpec\getDefaultSupportedTimeFormats;
-use function TypeSpec\getReflectionClassOfAttribute;
-use function TypeSpec\createObjectFromProcessedValues;
 use function TypeSpec\processSingleInputType;
-use function TypeSpec\createSingleValue;
-use function TypeSpec\createSingleValueOrError;
 use function TypeSpec\validate;
 
 /**
@@ -236,17 +237,17 @@ class FunctionsTest extends BaseTestCase
     public function provides_getJsonPointerParts()
     {
         yield ['', []];
-        yield ['/[3]', [3]];
+        yield ['/3', [3]];
         yield ['/', []];
-        yield ['/[0]', [0]];
+        yield ['/0', [0]];
 
-        yield ['/[0]/foo', [0, 'foo']];
-        yield ['/[0]/foo[2]', [0, 'foo', 2]];
+        yield ['/0/foo', [0, 'foo']];
+        yield ['/0/foo/2', [0, 'foo', 2]];
         yield ['/foo', ['foo']];
-        yield ['/foo[2]', ['foo', 2]];
+        yield ['/foo/2', ['foo', 2]];
 
         yield ['/foo/bar', ['foo', 'bar']];
-        yield ['/foo/bar[3]', ['foo', 'bar', 3]];
+        yield ['/foo/bar/3', ['foo', 'bar', 3]];
     }
 
     /**
@@ -467,7 +468,7 @@ class FunctionsTest extends BaseTestCase
         $this->assertTrue($result->anyErrorsFound());
 
         $this->assertValidationProblem(
-            '/[2]/name',
+            '/2/name',
             Messages::VALUE_NOT_SET,
             $result->getValidationProblems()
         );
@@ -700,6 +701,39 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
+     * @covers ::\TypeSpec\createArrayOfTypeOrError
+     */
+    public function testErrors_createArrayOfTypeOrMultipleError()
+    {
+        $data = [
+            ['limit' => 20],
+            ['limit' => -10]
+        ];
+
+        [$values, $validationProblems] = createArrayOfTypeOrError(
+            FooErrorsButContinuesParams::class,
+            $data
+        );
+
+        $this->assertNull($values);
+        $this->assertValidationErrorCount(3, $validationProblems);
+
+        $this->assertValidationProblemRegexp(
+            '/1/limit',
+            Messages::INT_TOO_SMALL,
+            $validationProblems
+        );
+
+        for ($x = 0; $x < 2; $x += 1) {
+            $this->assertValidationProblem(
+                '/' . $x . '/limit',
+                FooErrorsButContinuesParams::MESSAGE,
+                $validationProblems
+            );
+        }
+    }
+
+    /**
      * @covers ::\TypeSpec\createArrayOfType
      */
     public function test_createArrayOfType()
@@ -741,7 +775,7 @@ class FunctionsTest extends BaseTestCase
 
         $this->expectException(ValidationException::class);
         $this->expectExceptionMessage(
-            "Validation problems /[1]/limit Value too small. Min allowed is 0"
+            "Validation problems /1/limit Value too small. Min allowed is 0"
         );
         createArrayOfType(
             FooParams::class,
@@ -959,5 +993,164 @@ class FunctionsTest extends BaseTestCase
         [$object, $validationProblems] = validate($dto);
 
         $this->assertEmpty($validationProblems);
+    }
+
+    /**
+     * @covers ::\TypeSpec\createArrayOfScalarsFromDataStorage
+     */
+    public function test_createArrayOfScalarsFromDataStorage_works()
+    {
+        $expected_array = [5, 2, 3, 4, 5];
+
+        $dataStorage = TestArrayDataStorage::fromArray($expected_array);
+        $extract_rule = new GetInt();
+
+        $result = createArrayOfScalarsFromDataStorage(
+            $dataStorage,
+            $extract_rule,
+            []
+        );
+
+        $this->assertFalse($result->anyErrorsFound());
+        $this->assertEmpty($result->getValidationProblems());
+        $this->assertSame($expected_array, $result->getValue());
+    }
+
+
+    /**
+     * @group wip
+     * @return void
+     * @throws \TypeSpec\Exception\LogicException
+     */
+    public function test_createArrayOfScalarsFromDataStorage_process_error()
+    {
+        $expected_array = [5, 2, 3, 6, 5];
+
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromArray($expected_array);
+        $extract_rule = new GetInt();
+
+        $maxIntRule = new MaxIntValue(5);
+
+
+        $result = createArrayOfScalarsFromDataStorage(
+            $dataStorage,
+            $extract_rule,
+            [$maxIntRule]
+        );
+
+
+        $this->assertTrue($result->anyErrorsFound());
+        $this->assertNull($result->getValue());
+        $this->assertCount(1, $result->getValidationProblems());
+
+        $this->assertValidationProblemRegexp(
+            '/3',
+            Messages::INT_TOO_LARGE,
+            $result->getValidationProblems()
+        );
+    }
+
+
+
+
+    /**
+     * @covers ::\TypeSpec\createArrayOfScalarsFromDataStorage
+     * @group wip
+     * @return void
+     * @throws \TypeSpec\Exception\LogicException
+     */
+    public function test_createArrayOfScalarsFromDataStorage_process_error_twice()
+    {
+        $expected_array = [6, 1, 2, 3, 5];
+
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromArray($expected_array);
+        $extract_rule = new GetInt();
+
+        $error_message = "Why must you always fail me?";
+
+        $maxIntRule = new MaxIntValue(5);
+        $error_without_halting = new AlwaysErrorsButDoesntHaltRule($error_message);
+
+        $result = createArrayOfScalarsFromDataStorage(
+            $dataStorage,
+            $extract_rule,
+            [
+                $error_without_halting,
+                $maxIntRule,
+            ]
+        );
+
+        $this->assertTrue($result->anyErrorsFound());
+        $this->assertNull($result->getValue());
+        $this->assertCount(6, $result->getValidationProblems());
+
+        $validationProblems = $result->getValidationProblems();
+
+        $this->assertValidationProblemRegexp(
+            '/0',
+            Messages::INT_TOO_LARGE,
+            $validationProblems
+        );
+
+        for ($x = 3; $x < 5; $x += 1) {
+            $this->assertValidationProblem(
+                '/' . $x,
+                $error_message,
+                $validationProblems
+            );
+        }
+    }
+
+
+
+
+    /**
+     * @covers ::\TypeSpec\createArrayOfScalarsFromDataStorage
+     */
+    public function test_createArrayOfScalarsFromDataStorage_errors_not_array()
+    {
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition(
+            'foo',
+            'bar'
+        );
+        $extract_rule = new GetInt();
+
+        $result = createArrayOfScalarsFromDataStorage(
+            $dataStorage,
+            $extract_rule,
+            []
+        );
+
+        $this->assertTrue($result->isFinalResult());
+        $validationProblems = $result->getValidationProblems();
+        $this->assertCount(1, $validationProblems);
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::ERROR_MESSAGE_NOT_ARRAY,
+            $validationProblems
+        );
+    }
+
+    /**
+     * @covers ::\TypeSpec\createArrayOfScalarsFromDataStorage
+     */
+    public function testMissingGivesError()
+    {
+        $extract_rule = new GetInt();
+        $dataStorage = TestArrayDataStorage::createMissing('foo');
+
+        $result = createArrayOfScalarsFromDataStorage(
+            $dataStorage,
+            $extract_rule,
+            []
+        );
+
+        $this->assertProblems(
+            $result,
+            ['/foo' => Messages::ERROR_MESSAGE_NOT_SET]
+        );
     }
 }

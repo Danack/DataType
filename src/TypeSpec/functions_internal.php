@@ -13,7 +13,6 @@ use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\Exception\AnnotationClassDoesNotExistException;
 use TypeSpec\Exception\IncorrectNumberOfParametersException;
 use TypeSpec\Exception\InvalidDatetimeFormatException;
-use TypeSpec\ExtractRule;
 use TypeSpec\ExtractRule\ExtractPropertyRule;
 use TypeSpec\Exception\LogicException;
 use TypeSpec\Exception\MissingClassException;
@@ -362,11 +361,14 @@ function processProcessingRules(
     ProcessedValues $processedValues,
     ProcessPropertyRule ...$processRules
 ) {
+    $validation_problems = [];
+
     foreach ($processRules as $processRule) {
         $validationResult = $processRule->process($value, $processedValues, $dataStorage);
-        if ($validationResult->anyErrorsFound()) {
-            return [$validationResult->getValidationProblems(), null];
-        }
+        $validation_problems = array_merge(
+            $validation_problems,
+            $validationResult->getValidationProblems()
+        );
 
         $value = $validationResult->getValue();
         if ($validationResult->isFinalResult() === true) {
@@ -374,7 +376,7 @@ function processProcessingRules(
         }
     }
 
-    return [[], $value];
+    return [$validation_problems, $value];
 }
 
 
@@ -608,7 +610,6 @@ function getDataTypeListFromAnnotations(string $class): array
  * @throws \TypeSpec\Exception\LogicException
  */
 function createArrayOfScalarsFromDataStorage(
-    ProcessedValues $processedValues,
     DataStorage $dataStorage,
     ExtractPropertyRule $extract_rule,
     array $subsequentRules

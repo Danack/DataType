@@ -6,7 +6,6 @@ namespace TypeSpecTest;
 
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use TypeSpec\ValidationProblem;
-use TypeSpecTest\BaseTestCase;
 use TypeSpec\ValidationResult;
 use TypeSpec\Exception\LogicException;
 
@@ -47,6 +46,34 @@ class ValidationResultTest extends BaseTestCase
 
         $this->assertTrue($validationResult->anyErrorsFound());
     }
+
+    public function testErrorButNotFinalValueResult()
+    {
+        $path = 'foo';
+        $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
+        $dataStorageForPath = $dataStorage->moveKey($path);
+
+        $validationMessage = 'Something went wrong';
+
+        $value = 5;
+        $validationResult = ValidationResult::errorButContinueResult(
+            $value,
+            $dataStorageForPath,
+            $validationMessage
+        );
+
+        $this->assertFalse($validationResult->isFinalResult());
+        $this->assertSame($value, $validationResult->getValue());
+
+        $problems = $validationResult->getValidationProblems();
+        $this->assertCount(1, $problems);
+        $firstProblem = $problems[0];
+        $this->assertSame('/foo', $firstProblem->getInputStorage()->getPath());
+        $this->assertEquals($validationMessage, $firstProblem->getProblemMessage());
+
+        $this->assertTrue($validationResult->anyErrorsFound());
+    }
+
 
     public function testFinalValueResult()
     {

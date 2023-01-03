@@ -8,9 +8,7 @@ use TypeSpec\Messages;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ExtractRule\GetArrayOfFloat;
 use TypeSpec\ProcessedValues;
-use TypeSpec\ProcessRule\MaxIntValue;
 use TypeSpec\DataStorage\TestArrayDataStorage;
-use TypeSpec\ProcessRule\AlwaysErrorsButDoesntHaltRule;
 
 /**
  * @coversNothing
@@ -88,7 +86,7 @@ class GetArrayOfFloatTest extends BaseTestCase
 
 
     /**
-     * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
+     * @covers  \TypeSpec\ExtractRule\GetArrayOfFloat
      */
     public function testErrorsOnType()
     {
@@ -106,86 +104,14 @@ class GetArrayOfFloatTest extends BaseTestCase
 
         $this->assertCount(1, $validationProblems);
         $this->assertValidationProblem(
-            '/[3]',
-            'Value must contain only digits.',
+            '/3',
+            Messages::FLOAT_REQUIRED,
             $validationProblems
         );
     }
 
-
-//    /**
-//     * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
-//     */
-//    public function testErrorsOnTypeTwice()
-//    {
-//
-//        $data = [5, 6, 7, 'banana', 'sausage'];
-//
-//        $rule = new GetArrayOfFloat();
-//        $validator = new ProcessedValues();
-//        $result = $rule->process(
-//            $validator, TestArrayDataStorage::fromArray($data)
-//        );
-//
-//        $this->assertTrue($result->isFinalResult());
-//
-//        $validationProblems = $result->getValidationProblems();
-//
-//        $this->assertCount(2, $validationProblems);
-//        $this->assertValidationProblem(
-//            '/[3]',
-//            'Value must contain only digits.',
-//            $validationProblems
-//        );
-//        $this->assertValidationProblem(
-//            '/[4]',
-//            'Value must contain only digits.',
-//            $validationProblems
-//        );
-//    }
-//
-//
-//
-//
-//    /**
-//     * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
-//     */
-//    public function testErrorsOnSubsequentRule()
-//    {
-//        $this->markTestSkipped("not working yet.");
-//        $error_string = "Why must you fail me so often";
-//        $data = [5, 6, 7, 5001, 5002, 5003];
-//
-//        $rule = new GetArrayOfInt(
-//            new AlwaysErrorsButDoesntHaltRule($error_string),
-//            new MaxIntValue(20)
-//        );
-//        $validator = new ProcessedValues();
-//
-//        $result = $rule->process(
-//            $validator, TestArrayDataStorage::fromArray($data)
-//        );
-//
-//        $this->assertTrue($result->isFinalResult());
-//
-//        $problemMessages = $result->getValidationProblems();
-//
-//        for ($x = 3; $x < 6; $x += 1) {
-//            $this->assertValidationProblem(
-//                '/[' . $x . ']',
-//                'Value too large. Max allowed is 20',
-//                $problemMessages
-//            );
-//            $this->assertValidationProblem(
-//                '/[' . $x . ']',
-//                $error_string,
-//                $problemMessages
-//            );
-//        }
-//    }
-
     /**
-     * @covers \TypeSpec\ExtractRule\GetArrayOfInt
+     * @covers \TypeSpec\ExtractRule\GetArrayOfFloat
      */
     public function testDescription()
     {

@@ -6,9 +6,7 @@ namespace TypeSpecTest\ProcessRule;
 
 use TypeSpec\ProcessedValues;
 use TypeSpecTest\BaseTestCase;
-use TypeSpec\ProcessRule\AlwaysErrorsRule;
 use TypeSpec\ProcessRule\AlwaysErrorsButDoesntHaltRule;
-use TypeSpec\OpenApi\OpenApiV300ParamDescription;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 
 /**
@@ -17,16 +15,19 @@ use TypeSpec\DataStorage\TestArrayDataStorage;
 class AlwaysErrorsButDoesntHaltRuleTest extends BaseTestCase
 {
     /**
-     * @covers \TypeSpec\ProcessRule\AlwaysErrorsRule
+     * @covers \TypeSpec\ProcessRule\AlwaysErrorsButDoesntHaltRule
      */
     public function testWorks()
     {
         $message_always_errors = 'Always errors';
-        $rule = new AlwaysErrorsRule($message_always_errors);
+        $rule = new AlwaysErrorsButDoesntHaltRule($message_always_errors);
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', 'bar');
+
+        $input = 5;
+
         $result = $rule->process(
-            $unused_input = 5,
+            $input,
             $processedValues,
             $dataStorage
         );
@@ -38,17 +39,17 @@ class AlwaysErrorsButDoesntHaltRuleTest extends BaseTestCase
             $result->getValidationProblems()
         );
 
-        $this->assertTrue($result->isFinalResult());
-        $this->assertNull($result->getValue());
+        $this->assertFalse($result->isFinalResult());
+        $this->assertSame($input, $result->getValue());
     }
 
     /**
-     * @covers \TypeSpec\ProcessRule\AlwaysErrorsRule
+     * @covers \TypeSpec\ProcessRule\AlwaysErrorsButDoesntHaltRule
      */
     public function testCoverage()
     {
         $message = 'test message';
-        $rule = new AlwaysErrorsRule($message);
-        $description = $this->applyRuleToDescription($rule);
+        $rule = new AlwaysErrorsButDoesntHaltRule($message);
+        $this->applyRuleToDescription($rule);
     }
 }

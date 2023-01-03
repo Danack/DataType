@@ -29,7 +29,6 @@ class GetArrayOfInt implements ExtractPropertyRule
         $extract_rule = new GetInt();
 
         return createArrayOfScalarsFromDataStorage(
-            $processedValues,
             $dataStorage,
             $extract_rule,
             $this->subsequentRules

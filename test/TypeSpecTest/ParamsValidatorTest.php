@@ -18,33 +18,6 @@ use function TypeSpec\processDataTypeWithDataStorage;
  */
 class ParamsValidatorTest extends BaseTestCase
 {
-
-//    public function testMissingRuleThrows()
-//    {
-//        $this->markTestSkipped("does this provide useful info?");
-////        $validator = new ParamsValidator();
-////        $this->expectException(\Params\Exception\ParamsException::class);
-////        $validator->validate('foobar', []);
-//    }
-
-//    public function testInvalidInputThrows()
-//    {
-//        $arrayVarMap = new ArrayVarMap([]);
-//        $validator = new ParamsValuesImpl();
-//
-//        $value = $validator->validateRulesForParam(
-//            'foo',
-//            $arrayVarMap,
-//            new GetInt()
-//        );
-//
-//        $this->assertNull($value);
-//        $errors = $validator->getValidationProblems();
-//
-//        $this->assertEquals(1, count($errors));
-//        $this->assertStringMatchesFormat(GetInt::ERROR_MESSAGE, $errors['/foo']);
-//    }
-
     /**
      * @covers \TypeSpec\ProcessedValues
      */

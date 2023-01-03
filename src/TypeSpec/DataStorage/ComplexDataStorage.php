@@ -121,29 +121,32 @@ class ComplexDataStorage implements DataStorage
      */
     public function getPath(): string
     {
-        $path = '';
+//        $path = '';
 
         if (count($this->currentLocation) === 0) {
             return '/';
         }
 
-        $separator_needed = true;
+        $path = "/" . implode('/', $this->currentLocation);
 
-        foreach ($this->currentLocation as $location) {
-            if (is_int($location) === true) {
-                if ($separator_needed === true) {
-                    $path .= "/";
-                }
 
-                $path .= "[$location]";
-            }
-            if (is_string($location) === true) {
-                $path .= '/';
-                $path .= "$location";
-            }
-
-            $separator_needed = false;
-        }
+//        $separator_needed = true;
+//
+//        foreach ($this->currentLocation as $location) {
+//            if (is_int($location) === true) {
+//                if ($separator_needed === true) {
+//                    $path .= "/";
+//                }
+//
+//                $path .= "$location";
+//            }
+//            if (is_string($location) === true) {
+//                $path .= '/';
+//                $path .= "$location";
+//            }
+//
+//            $separator_needed = false;
+//        }
 
         return $path;
     }

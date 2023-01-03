@@ -29,7 +29,6 @@ class GetArrayOfFloat implements ExtractPropertyRule
         $extract_rule = new GetFloat();
 
         return createArrayOfScalarsFromDataStorage(
-            $processedValues,
             $dataStorage,
             $extract_rule,
             $this->subsequentRules

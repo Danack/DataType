@@ -25,10 +25,6 @@ class MaxIntValue implements ProcessPropertyRule
         DataStorage $inputStorage
     ): ValidationResult {
 
-//        if (is_int($value) !== true) {
-//           // error
-//        }
-        
         $value = intval($value);
         if ($value > $this->maxValue) {
             $message = sprintf(

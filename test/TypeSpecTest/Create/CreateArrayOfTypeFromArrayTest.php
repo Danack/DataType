@@ -57,7 +57,7 @@ class CreateArrayOfTypeFromArrayTest extends BaseTestCase
         ];
 
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage("Validation problems /[1]/comment Value not set.");
+        $this->expectExceptionMessage("Validation problems /1/comment Value not set.");
 
         ReviewScore::createArrayOfTypeFromArray($data);
     }

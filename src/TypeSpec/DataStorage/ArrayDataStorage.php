@@ -95,23 +95,7 @@ class ArrayDataStorage implements DataStorage
             return '/';
         }
 
-        $separator_needed = true;
-
-        foreach ($this->currentLocation as $location) {
-            if (is_int($location) === true) {
-                if ($separator_needed === true) {
-                    $path .= "/";
-                }
-
-                $path .= "[$location]";
-            }
-            if (is_string($location) === true) {
-                $path .= '/';
-                $path .= "$location";
-            }
-
-            $separator_needed = false;
-        }
+        $path = "/" . implode('/', $this->currentLocation);
 
         return $path;
     }

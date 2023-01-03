@@ -203,8 +203,7 @@ class GetArrayOfTypeTest extends BaseTestCase
         $validationProblems = $result->getValidationProblems();
         $this->assertCount(1, $validationProblems);
         $this->assertValidationProblemRegexp(
-            '/[0]',
-            //            Messages::ERROR_MESSAGE_ITEM_NOT_ARRAY,
+            '/0',
             Messages::ERROR_MESSAGE_NOT_ARRAY,
             $validationProblems
         );
@@ -236,7 +235,7 @@ class GetArrayOfTypeTest extends BaseTestCase
         $this->assertCount(1, $result->getValidationProblems());
 
         $this->assertValidationProblemRegexp(
-            '/items[0]/comment',
+            '/items/0/comment',
             Messages::STRING_TOO_SHORT,
             $result->getValidationProblems()
         );
@@ -265,13 +264,13 @@ class GetArrayOfTypeTest extends BaseTestCase
         $this->assertCount(2, $validationProblems);
 
         $this->assertValidationProblemRegexp(
-            '/[0]/comment',
+            '/0/comment',
             Messages::STRING_TOO_SHORT,
             $validationProblems
         );
 
         $this->assertValidationProblem(
-            '/[1]/score',
+            '/1/score',
             "Value too large. Max allowed is 100",
             $validationProblems
         );

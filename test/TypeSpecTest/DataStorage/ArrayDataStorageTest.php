@@ -69,21 +69,22 @@ class ArrayDataStorageTest extends BaseTestCase
 
     public function providesPathsAreCorrect()
     {
-        yield ['/[3]', [3]];
+        yield ['/3', [3]];
         yield ['/', []];
-        yield ['/[0]', [0]];
+        yield ['/0', [0]];
 
-        yield ['/[0]/foo', [0, 'foo']];
-        yield ['/[0]/foo[2]', [0, 'foo', 2]];
+        yield ['/0/foo', [0, 'foo']];
+        yield ['/0/foo/2', [0, 'foo', 2]];
         yield ['/foo', ['foo']];
-        yield ['/foo[2]', ['foo', 2]];
+        yield ['/foo/2', ['foo', 2]];
 
         yield ['/foo/bar', ['foo', 'bar']];
-        yield ['/foo/bar[3]', ['foo', 'bar', 3]];
+        yield ['/foo/bar/3', ['foo', 'bar', 3]];
     }
 
     /**
      * @dataProvider providesPathsAreCorrect
+     * @group wip
      */
     public function testPathsAreCorrect($expected, $pathParts)
     {

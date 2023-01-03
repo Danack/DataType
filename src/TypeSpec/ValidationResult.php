@@ -58,7 +58,7 @@ class ValidationResult
      * @return ValidationResult
      */
     public static function errorButContinueResult(
-        $value,
+        mixed $value,
         DataStorage $inputStorage,
         string $message
     ): ValidationResult {

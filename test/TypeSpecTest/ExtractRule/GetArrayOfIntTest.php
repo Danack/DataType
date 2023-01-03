@@ -106,7 +106,7 @@ class GetArrayOfIntTest extends BaseTestCase
 
         $this->assertCount(1, $validationProblems);
         $this->assertValidationProblem(
-            '/[3]',
+            '/3',
             'Value must contain only digits.',
             $validationProblems
         );
@@ -115,6 +115,7 @@ class GetArrayOfIntTest extends BaseTestCase
 
     /**
      * @covers  \TypeSpec\ExtractRule\GetArrayOfInt
+
      */
     public function testErrorsOnTypeTwice()
     {
@@ -132,16 +133,18 @@ class GetArrayOfIntTest extends BaseTestCase
 
         $this->assertCount(2, $validationProblems);
         $this->assertValidationProblem(
-            '/[3]',
+            '/3',
             'Value must contain only digits.',
             $validationProblems
         );
         $this->assertValidationProblem(
-            '/[4]',
+            '/4',
             'Value must contain only digits.',
             $validationProblems
         );
     }
+
+
 
 
 
@@ -151,7 +154,6 @@ class GetArrayOfIntTest extends BaseTestCase
      */
     public function testErrorsOnSubsequentRule()
     {
-        $this->markTestSkipped("not working yet.");
         $error_string = "Why must you fail me so often";
         $data = [5, 6, 7, 5001, 5002, 5003];
 
@@ -159,26 +161,29 @@ class GetArrayOfIntTest extends BaseTestCase
             new AlwaysErrorsButDoesntHaltRule($error_string),
             new MaxIntValue(20)
         );
-        $validator = new ProcessedValues();
 
+        $validator = new ProcessedValues();
         $result = $rule->process(
             $validator, TestArrayDataStorage::fromArray($data)
         );
 
         $this->assertTrue($result->isFinalResult());
 
-        $problemMessages = $result->getValidationProblems();
+        $validationProblems = $result->getValidationProblems();
 
         for ($x = 3; $x < 6; $x += 1) {
             $this->assertValidationProblem(
-                '/[' . $x . ']',
+                '/' . $x,
                 'Value too large. Max allowed is 20',
-                $problemMessages
+                $validationProblems
             );
+        }
+
+        for ($x = 3; $x < 6; $x += 1) {
             $this->assertValidationProblem(
-                '/[' . $x . ']',
+                '/' . $x,
                 $error_string,
-                $problemMessages
+                $validationProblems
             );
         }
     }

@@ -50,7 +50,7 @@ class CreateFromRequestTest extends BaseTestCase
 //        $this->assertCount(1, $errors);
 //
 //        $this->assertValidationProblem(
-//            '/counts[2]',
+//            '/counts2',
 //            "Value must contain only digits.",
 //            $errors
 //        );
