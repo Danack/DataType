@@ -14,7 +14,7 @@ use TypeSpec\ProcessedValues;
 /**
  * @coversNothing
  */
-class BoolInputTest extends BaseTestCase
+class CastToBoolTest extends BaseTestCase
 {
     public function provideBoolValueWorksCases()
     {

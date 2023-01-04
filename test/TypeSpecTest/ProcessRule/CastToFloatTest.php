@@ -14,11 +14,12 @@ use TypeSpec\ProcessedValues;
 /**
  * @coversNothing
  */
-class FloatInputTest extends BaseTestCase
+class CastToFloatTest extends BaseTestCase
 {
     public function provideWorksCases()
     {
         return [
+            [5.0, 5.0],
             ['5', 5],
             ['555555', 555555],
             ['1000.1', 1000.1],
@@ -30,7 +31,7 @@ class FloatInputTest extends BaseTestCase
      * @dataProvider provideWorksCases
      * @covers \TypeSpec\ProcessRule\CastToFloat
      */
-    public function testValidationWorks(string $inputValue, float $expectedValue)
+    public function testValidationWorks(float|string $inputValue, float $expectedValue)
     {
         $rule = new CastToFloat();
         $processedValues = new ProcessedValues();

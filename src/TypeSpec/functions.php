@@ -93,13 +93,13 @@ function validate(object $dto)
     $class = get_class($dto);
 
     /** @var class-string $class */
-    $inputParameterList = getDataTypeListForClass($class);
+    $dataTypeListForClass = getDataTypeListForClass($class);
 
     $dataStorage = ComplexDataStorage::fromData($dto);
 
     [$object, $validationProblems] = createOrError(
         $class,
-        $inputParameterList,
+        $dataTypeListForClass,
         $dataStorage
     );
 

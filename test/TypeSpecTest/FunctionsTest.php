@@ -988,7 +988,6 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_validate()
     {
-
         $dto = new \TypeSpecExample\DTOTypes\TestDTO('red', 5);
         [$object, $validationProblems] = validate($dto);
 
@@ -1018,7 +1017,6 @@ class FunctionsTest extends BaseTestCase
 
 
     /**
-     * @group wip
      * @return void
      * @throws \TypeSpec\Exception\LogicException
      */
@@ -1056,7 +1054,6 @@ class FunctionsTest extends BaseTestCase
 
     /**
      * @covers ::\TypeSpec\createArrayOfScalarsFromDataStorage
-     * @group wip
      * @return void
      * @throws \TypeSpec\Exception\LogicException
      */

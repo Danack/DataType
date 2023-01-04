@@ -16,7 +16,7 @@ class BasicDTO
         #[KnownColors('color')]
         public string $color,
         #[Quantity('quantity')]
-        public float $quantity,
+        public int $quantity,
     ) {
     }
 }

@@ -10,6 +10,7 @@ use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
+use function JsonSafe\json_decode_safe;
 
 class GetKernelMatrixOrDefault implements ExtractPropertyRule
 {
@@ -54,16 +55,7 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
 
         // TODO - this needs to be replaced with something that gives the
         // precise location of the error....probably.
-        $matrix_value = json_decode($currentValue, $associative = true, 4);
-        $lastError = json_last_error();
-        if ($lastError !== JSON_ERROR_NONE) {
-            $message = sprintf(
-                Messages::INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE,
-                json_last_error_msg()
-            );
-
-            return ValidationResult::errorResult($dataStorage, $message);
-        }
+        $matrix_value = json_decode_safe($currentValue);
 
         if (is_array($matrix_value) !== true) {
             $message = sprintf(

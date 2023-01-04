@@ -49,7 +49,7 @@ class Messages
     public const INTEGER_TOO_LONG = "Value too long, max %s digits";
     public const INT_TOO_SMALL = "Value too small. Min allowed is %s";
     public const INT_TOO_LARGE = "Value too large. Max allowed is %s";
-    public const INT_REQUIRED_UNSUPPORTED_TYPE = "Value must be int, found '%s'";
+    public const INT_REQUIRED_UNSUPPORTED_TYPE = "Int or string representing an int expected, found type '%s'";
     public const INT_REQUIRED_FOUND_EMPTY_STRING = "Value is an empty string - must be an integer.";
     public const INT_OVER_LIMIT = "Value too large. Max allowed is %s";
 
@@ -108,9 +108,6 @@ class Messages
     public const TIME_MUST_BE_AFTER_TIME = "This datetime must be after time %s";
 
     // Kernel/Matrix
-
-    public const INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE = "Invalid json %s";
-
     public const BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE = "Kernel Matrix can only process json strings";
     public const KERNEL_MATRIX_ARRAY_EXPECTED = "Kernel Matrix, array expected but value is %s";
 

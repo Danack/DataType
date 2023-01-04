@@ -76,7 +76,4 @@ class CheckStringTest extends BaseTestCase
         $result = $obj->checkString($someString);
         $this->assertSame($inputString, $result);
     }
-
-
-
 }

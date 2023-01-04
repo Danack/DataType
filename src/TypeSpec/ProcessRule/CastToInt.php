@@ -31,15 +31,18 @@ class CastToInt implements ProcessPropertyRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        if (is_scalar($value) !== true) {
+        if (is_string($value) === false && is_int($value) === false) {
+            $message = sprintf(
+                Messages::INT_REQUIRED_UNSUPPORTED_TYPE,
+                gettype($value)
+            );
             return ValidationResult::errorResult(
                 $inputStorage,
-                Messages::INT_REQUIRED_UNSUPPORTED_TYPE
+                $message
             );
         }
 
-        if (is_int($value) !== true) {
-            $value = (string)$value;
+        if (is_string($value) === true) {
             // check string length is not zero length.
             if (strlen($value) === 0) {
                 return ValidationResult::errorResult(
@@ -68,7 +71,6 @@ class CastToInt implements ProcessPropertyRule
         }
 
         $maxSaneLength = strlen((string)(self::MAX_SANE_VALUE));
-
         if (strlen((string)$value) > $maxSaneLength) {
             $message = sprintf(
                 Messages::INTEGER_TOO_LONG,

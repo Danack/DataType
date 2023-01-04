@@ -58,6 +58,14 @@ class ObjectValidationTest extends BaseTestCase
         );
     }
 
+    /**
+     * @return void
+     * @throws \TypeSpec\Exception\MissingClassException
+     * @throws \TypeSpec\Exception\TypeDefinitionException
+     * @throws \TypeSpec\Exception\TypeNotInputParameterListException
+     * @throws \TypeSpec\Exception\TypeSpecException
+     * @throws \TypeSpec\Exception\ValidationException
+     */
     public function testWorksAdvanced()
     {
         $dto1 = new BasicDTO('red', 5);

@@ -84,7 +84,6 @@ class ArrayDataStorageTest extends BaseTestCase
 
     /**
      * @dataProvider providesPathsAreCorrect
-     * @group wip
      */
     public function testPathsAreCorrect($expected, $pathParts)
     {

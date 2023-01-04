@@ -78,7 +78,6 @@ class GetBoolOrDefaultTest extends BaseTestCase
     /**
      * @covers \TypeSpec\ExtractRule\GetBoolOrDefault
      * @dataProvider provideTestErrorCasesBadTypes
-     * @group wip
      */
     public function testErrors($value)
     {
@@ -104,7 +103,6 @@ class GetBoolOrDefaultTest extends BaseTestCase
     /**
      * @covers \TypeSpec\ExtractRule\GetBoolOrDefault
      * @dataProvider provideTestErrorCasesBadString
-     * @group wip
      */
     public function testErrorsBadStrings($value)
     {

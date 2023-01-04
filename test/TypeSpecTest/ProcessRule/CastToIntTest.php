@@ -14,11 +14,12 @@ use TypeSpec\Messages;
 /**
  * @coversNothing
  */
-class IntegerInputTest extends BaseTestCase
+class CastToIntTest extends BaseTestCase
 {
     public function provideIntValueWorksCases()
     {
         return [
+            [5, 5],
             ['5', 5],
             ['-10', -10],
             ['555555', 555555],
@@ -30,7 +31,7 @@ class IntegerInputTest extends BaseTestCase
      * @dataProvider provideIntValueWorksCases
      * @covers \TypeSpec\ProcessRule\CastToInt
      */
-    public function testValidationWorks(string $inputValue, int $expectedValue)
+    public function testValidationWorks(int|string $inputValue, int $expectedValue)
     {
         $rule = new CastToInt();
         $processedValues = new ProcessedValues();

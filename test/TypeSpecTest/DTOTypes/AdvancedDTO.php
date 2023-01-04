@@ -16,7 +16,7 @@ class AdvancedDTO
         #[MultipleBasicDTO('colors')]
         public array $colors,
         #[Quantity('total')]
-        public float $total,
+        public int $total,
     ) {
     }
 }

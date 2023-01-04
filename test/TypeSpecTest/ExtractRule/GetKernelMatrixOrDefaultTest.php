@@ -173,19 +173,12 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
             "this is not valid json {}{"
         );
 
-        $validationResult = $rule->process(
+        $this->expectException(\JsonSafe\JsonDecodeException::class);
+
+        $rule->process(
             $validator,
             $dataStorage
         );
-
-        $this->assertValidationProblemRegexp(
-            '/foo',
-            Messages::INVALID_JSON_FOR_KERNEL_MATRIX_PROCESS_RULE,
-            $validationResult->getValidationProblems()
-        );
-
-
-        $this->assertNull($validationResult->getValue());
     }
 
     /**
