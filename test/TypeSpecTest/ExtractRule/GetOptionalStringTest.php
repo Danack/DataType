@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeSpecTest\ExtractRule;
 
 use TypeSpec\DataStorage\TestArrayDataStorage;
+use TypeSpec\Messages;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ExtractRule\GetOptionalString;
 use TypeSpec\ProcessedValues;
@@ -35,7 +36,6 @@ class GetOptionalStringTest extends BaseTestCase
      */
     public function testValidation()
     {
-
         $expectedValue = 'bar';
 
         $rule = new GetOptionalString();
@@ -47,6 +47,26 @@ class GetOptionalStringTest extends BaseTestCase
 
         $this->assertNoProblems($validationResult);
         $this->assertEquals($validationResult->getValue(), $expectedValue);
+    }
+
+    /**
+     * @covers \TypeSpec\ExtractRule\GetOptionalString
+     */
+    public function testBadTypeErrors()
+    {
+        $expectedValue = 'bar';
+
+        $rule = new GetOptionalString();
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', 5)
+        );
+
+        $this->assertProblems(
+            $validationResult,
+            ['/foo' => Messages::STRING_EXPECTED]
+        );
     }
 
 

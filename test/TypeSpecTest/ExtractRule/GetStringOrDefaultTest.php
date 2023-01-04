@@ -9,6 +9,7 @@ use VarMap\ArrayVarMap;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\ExtractRule\GetStringOrDefault;
 use TypeSpec\ProcessedValues;
+use TypeSpec\Messages;
 
 /**
  * @coversNothing
@@ -20,9 +21,6 @@ class GetStringOrDefaultTest extends BaseTestCase
         return [
             [new ArrayVarMap(['foo' => 'bar']), 'john', 'bar'],
             [new ArrayVarMap([]), 'john', 'john'],
-
-
-//            [new ArrayVarMap([]), null, null],
         ];
     }
 
@@ -69,6 +67,24 @@ class GetStringOrDefaultTest extends BaseTestCase
         $default = 'bar';
         $rule = new GetStringOrDefault($default);
         $this->assertSame($default, $rule->getDefault());
+    }
+
+    /**
+     * @covers \TypeSpec\ExtractRule\GetOptionalString
+     */
+    public function testBadTypeErrors()
+    {
+        $rule = new GetStringOrDefault('bar');
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', 5)
+        );
+
+        $this->assertProblems(
+            $validationResult,
+            ['/foo' => Messages::STRING_EXPECTED]
+        );
     }
 
 

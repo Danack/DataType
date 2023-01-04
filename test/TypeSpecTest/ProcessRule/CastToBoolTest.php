@@ -44,6 +44,7 @@ class CastToBoolTest extends BaseTestCase
         yield [fopen('php://memory', 'r+'), Messages::UNSUPPORTED_TYPE];
         yield [[1, 2, 3], Messages::UNSUPPORTED_TYPE];
         yield [new \StdClass(), Messages::UNSUPPORTED_TYPE];
+        yield ["John", Messages::ERROR_BOOL_BAD_STRING];
     }
 
     /**
