@@ -47,16 +47,14 @@ class GetDatetime implements ExtractPropertyRule
             return ValidationResult::errorResult($dataStorage, Messages::ERROR_DATETIME_MUST_START_AS_STRING);
         }
 
-        if (is_scalar($value) !== true) {
+        if (is_string($value) !== true) {
             return ValidationResult::errorResult(
                 $dataStorage,
                 Messages::ERROR_DATETIME_MUST_START_AS_STRING,
             );
         }
 
-        // TODO - reject bools/ints?
-        // TODO - needs string input
-        $value = (string)$dataStorage->getCurrentValue();
+        $value = $dataStorage->getCurrentValue();
 
         foreach ($this->allowedFormats as $allowedFormat) {
             $dateTime = \DateTimeImmutable::createFromFormat($allowedFormat, $value);
