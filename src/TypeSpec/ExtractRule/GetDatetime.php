@@ -54,8 +54,6 @@ class GetDatetime implements ExtractPropertyRule
             );
         }
 
-        $value = $dataStorage->getCurrentValue();
-
         foreach ($this->allowedFormats as $allowedFormat) {
             $dateTime = \DateTimeImmutable::createFromFormat($allowedFormat, $value);
 
