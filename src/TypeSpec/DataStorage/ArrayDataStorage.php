@@ -89,8 +89,6 @@ class ArrayDataStorage implements DataStorage
      */
     public function getPath(): string
     {
-        $path = '';
-
         if (count($this->currentLocation) === 0) {
             return '/';
         }
