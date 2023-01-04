@@ -13,6 +13,7 @@ use TypeSpec\ValidationResult;
 
 /**
  * Checks that one parameter represents an earlier time than another parameter
+ * by a set number of minutes.
  */
 class EarlierThanParam implements ProcessPropertyRule
 {
@@ -70,14 +71,15 @@ class EarlierThanParam implements ProcessPropertyRule
         $timeOffset = new \DateInterval('PT'  . $this->minutesEarlier . 'M');
 
         /** @var \DateTimeImmutable|\DateTime $previousValue */
-        $timeToCompare = $previousValue->add($timeOffset);
+        $timeToCompare = $previousValue->sub($timeOffset);
 
-        if ($value > $timeToCompare) {
+        if ($value <= $timeToCompare) {
             return ValidationResult::valueResult($value);
         }
 
         $message = sprintf(
             Messages::TIME_MUST_BE_X_MINUTES_BEFORE_PARAM_ERROR,
+            $value->format(\DateTime::RFC3339),
             $this->minutesEarlier,
             $this->paramToCompare,
             $previousValue->format(\DateTime::RFC3339)

@@ -99,7 +99,10 @@ class Messages
     public const CURRENT_TIME_MUST_BE_DATETIMEINTERFACE = "Current value must be of type DateTimeInterface but instead is of type %s.";
     public const TIME_MUST_BE_X_MINUTES_AFTER_TIME = "This datetime must be %s minutes after param %s which has time %s";
     public const TIME_MUST_BE_X_MINUTES_BEFORE_PARAM = "Time must be at least %d minutes before %s.";
-    public const TIME_MUST_BE_X_MINUTES_BEFORE_PARAM_ERROR = "This datetime must be %s minutes before param %s which has time %s";
+    public const TIME_MUST_BE_X_MINUTES_BEFORE_PARAM_ERROR = "This datetime %s must be %s minutes before param %s which has time %s";
+
+    public const TIME_MUST_BE_X_MINUTES_AFTER_PARAM_ERROR = "This datetime %s must be %s minutes after param %s which has time %s";
+
     public const TIME_MUST_BE_BEFORE_TIME = "This datetime must be before time %s";
     public const TIME_MUST_BE_AFTER_TIME = "This datetime must be after time %s";
 

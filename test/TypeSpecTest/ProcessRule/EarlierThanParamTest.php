@@ -21,9 +21,9 @@ class EarlierThanParamTest extends BaseTestCase
      */
     public function testWorks()
     {
-        $previousTime = \DateTimeImmutable::createFromFormat(
+        $otherTime = \DateTimeImmutable::createFromFormat(
             \DateTime::RFC3339,
-            '2002-10-02T10:00:00-05:00'
+            '2002-10-03T10:10:00-05:00'
         );
 
         $value = \DateTimeImmutable::createFromFormat(
@@ -31,16 +31,50 @@ class EarlierThanParamTest extends BaseTestCase
             '2002-10-03T10:00:00-05:00'
         );
 
-        $processedValues = createProcessedValuesFromArray(['foo' => $previousTime]);
+        $processedValues = createProcessedValuesFromArray(['foo' => $otherTime]);
         $dataStorage = TestArrayDataStorage::fromArray([]);
 
-        $rule = new EarlierThanParam('foo', 0);
+        $rule = new EarlierThanParam('foo', 10);
 
         $validationResult = $rule->process($value, $processedValues, $dataStorage);
         $this->assertNoProblems($validationResult);
 
         $this->assertSame($value, $validationResult->getValue());
         $this->assertFalse($validationResult->isFinalResult());
+    }
+
+
+    /**
+     * @covers \TypeSpec\ProcessRule\EarlierThanParam
+     */
+    public function testErrorsCorrectly()
+    {
+        $otherTime = \DateTimeImmutable::createFromFormat(
+            \DateTime::RFC3339,
+            '2002-10-03T10:00:00-05:00'
+        );
+
+        $value = \DateTimeImmutable::createFromFormat(
+            \DateTime::RFC3339,
+            '2002-10-03T09:51:00-05:00'
+        );
+
+        $processedValues = createProcessedValuesFromArray(['foo' => $otherTime]);
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition(
+            'newtime',
+            $value
+        );
+
+        $rule = new EarlierThanParam('foo', 10);
+
+        $validationResult = $rule->process($value, $processedValues, $dataStorage);
+        $this->assertCount(1, $validationResult->getValidationProblems());
+        $this->assertTrue($validationResult->isFinalResult());
+        $this->assertValidationProblemRegexp(
+            '/newtime',
+            Messages::TIME_MUST_BE_X_MINUTES_BEFORE_PARAM_ERROR,
+            $validationResult->getValidationProblems()
+        );
     }
 
     /**
@@ -91,7 +125,6 @@ class EarlierThanParamTest extends BaseTestCase
             '2002-10-03T10:00:00-05:00'
         );
 
-//        $processedValues = ProcessedValues::fromArray(['foo' => 'John']);
         $processedValues = createProcessedValuesFromArray(['foo' => 'John']);
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);
 
@@ -142,12 +175,12 @@ class EarlierThanParamTest extends BaseTestCase
 
     /**
      * @covers \TypeSpec\ProcessRule\EarlierThanParam
-     */
+         */
     public function testErrorsCorrect()
     {
         $afterTime = \DateTimeImmutable::createFromFormat(
             \DateTime::RFC3339,
-            '2002-10-04T10:00:00-05:00'
+            '2002-10-03T10:09:00-05:00'
         );
 
         $value = \DateTimeImmutable::createFromFormat(
@@ -158,7 +191,7 @@ class EarlierThanParamTest extends BaseTestCase
         $processedValues = createProcessedValuesFromArray(['foo' => $afterTime]);
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);
 
-        $rule = new EarlierThanParam('foo', 0);
+        $rule = new EarlierThanParam('foo', 10);
 
         $validationResult = $rule->process($value, $processedValues, $dataStorage);
 

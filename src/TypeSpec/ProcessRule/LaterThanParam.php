@@ -11,6 +11,10 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Checks that one parameter represents an later time than another parameter
+ * by a set number of minutes.
+ */
 class LaterThanParam implements ProcessPropertyRule
 {
     private string $paramToCompare;
@@ -72,8 +76,10 @@ class LaterThanParam implements ProcessPropertyRule
             return ValidationResult::valueResult($value);
         }
 
+
         $message = sprintf(
-            Messages::TIME_MUST_BE_X_MINUTES_AFTER_TIME,
+            Messages::TIME_MUST_BE_X_MINUTES_AFTER_PARAM_ERROR,
+            $value->format(\DateTime::RFC3339),
             $this->minutesLater,
             $this->paramToCompare,
             $previousValue->format(\DateTime::RFC3339)

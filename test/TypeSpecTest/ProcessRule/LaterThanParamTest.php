@@ -67,7 +67,7 @@ class LaterThanParamTest extends BaseTestCase
 
         $this->assertValidationProblemRegexp(
             '/bar',
-            Messages::TIME_MUST_BE_X_MINUTES_AFTER_TIME,
+            Messages::TIME_MUST_BE_X_MINUTES_AFTER_PARAM_ERROR,
             $validationResult->getValidationProblems()
         );
 
@@ -178,24 +178,24 @@ class LaterThanParamTest extends BaseTestCase
 
         $afterTime = \DateTimeImmutable::createFromFormat(
             \DateTime::RFC3339,
-            '2002-10-04T10:00:00-05:00'
+            '2002-10-03T10:00:00-05:00'
         );
 
         $value = \DateTimeImmutable::createFromFormat(
             \DateTime::RFC3339,
-            '2002-10-03T10:00:00-05:00'
+            '2002-10-03T10:09:00-05:00'
         );
 
         $processedValues = createProcessedValuesFromArray(['foo' => $afterTime]);
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);
 
-        $rule = new LaterThanParam('foo', 0);
+        $rule = new LaterThanParam('foo', 10);
 
         $validationResult = $rule->process($value, $processedValues, $dataStorage);
 
         $this->assertValidationProblemRegexp(
             '/newtime',
-            Messages::TIME_MUST_BE_X_MINUTES_AFTER_TIME,
+            Messages::TIME_MUST_BE_X_MINUTES_AFTER_PARAM_ERROR,
             $validationResult->getValidationProblems()
         );
 
