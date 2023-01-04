@@ -36,6 +36,23 @@ class CheckStringTest extends BaseTestCase
     /**
      * @covers \TypeSpec\ProcessRule\CheckString
      */
+    public function testStringableObjectWorks()
+    {
+        $obj = new class {
+            use CheckString;
+        };
+
+        $this->expectException(InvalidRulesException::class);
+        $this->expectExceptionMessageMatchesTemplateString(
+            Messages::BAD_TYPE_FOR_STRING_PROCESS_RULE
+        );
+
+        $obj->checkString(new \StdClass());
+    }
+
+    /**
+     * @covers \TypeSpec\ProcessRule\CheckString
+     */
     public function testStdClassFails()
     {
         $obj = new class {
@@ -59,4 +76,7 @@ class CheckStringTest extends BaseTestCase
         $result = $obj->checkString($someString);
         $this->assertSame($inputString, $result);
     }
+
+
+
 }
