@@ -92,7 +92,6 @@ function validate(object $dto)
 {
     $class = get_class($dto);
 
-    /** @var class-string $class */
     $dataTypeListForClass = getDataTypeListForClass($class);
 
     $dataStorage = ComplexDataStorage::fromData($dto);

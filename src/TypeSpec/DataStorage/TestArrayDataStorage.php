@@ -78,7 +78,7 @@ class TestArrayDataStorage extends ArrayDataStorage
     {
         $instance = new self($data);
 
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $_value) {
             return $instance->moveKey($key);
         }
 

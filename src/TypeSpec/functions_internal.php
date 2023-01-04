@@ -628,16 +628,15 @@ function createArrayOfScalarsFromDataStorage(
     }
 
     // Setup stuff
-    $items = [];
     /** @var \TypeSpec\ValidationProblem[] $validationProblems */
     $validationProblems = [];
     $index = 0;
-
     $new_processed_values = new ProcessedValues();
 
     // TODO - why do we look over this data like this? rather than
     // passing something to $datastorage->foo(...params);
-    foreach ($itemData as $itemDatum) {
+    // Also, why don't we check the keys are ints?
+    foreach ($itemData as $_itemDatum) {
         $dataType = new DataType((string)$index, $extract_rule, ...$subsequentRules);
         $new_validationProblems = processDataTypeWithDataStorage(
             $dataType,
