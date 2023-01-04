@@ -17,10 +17,7 @@ use TypeSpec\ValidationResult;
  * bool(true) - true
  * bool(false) - false
  * string(true) - true
- * string(1) - true
- * any other string - false
- * int(0) - false
- * any other non-zero int - true
+ * string(false) - false
  * any other input - error
  *
  */
