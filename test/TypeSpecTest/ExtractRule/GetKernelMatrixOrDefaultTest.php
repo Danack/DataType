@@ -267,7 +267,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
         $data_second_row_invalid = [
             [1, 1, 1],
             [1, 1, 1],
-            [1, 'john', 2],
+            [1, 2, 'john'],
         ];
 
         $rule = new GetKernelMatrixOrDefault($default);
@@ -289,7 +289,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
         );
         $validationProblem = $validationResult->getValidationProblems()[0];
         $this->assertStringContainsString(
-            "Row 2 column 1",
+            "Row 2 column 2",
             $validationProblem->getProblemMessage()
         );
 

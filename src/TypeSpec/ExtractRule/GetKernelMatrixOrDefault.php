@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypeSpec\ExtractRule;
 
+use JsonSafe\JsonDecodeException;
 use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\Exception\LogicException;
 use TypeSpec\Messages;
@@ -36,6 +37,10 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
         $this->default = $default;
     }
 
+    /**
+     * @throws JsonDecodeException
+     * @throws LogicException
+     */
     public function process(
         ProcessedValues $processedValues,
         DataStorage $dataStorage
@@ -47,9 +52,6 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
         $currentValue = $dataStorage->getCurrentValue();
 
         if (is_string($currentValue) !== true) {
-            // TODO - this represent a programmer error - should it
-            // be an exception?
-
             throw new LogicException(Messages::BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE);
         }
 
@@ -65,9 +67,7 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
             return ValidationResult::errorResult($dataStorage, $message);
         }
 
-//        $validationProblems = [];
         $row_count = 0;
-//        $floatRule = new CastToFloat();
 
         foreach ($matrix_value as $row) {
             if (is_array($row) !== true) {
@@ -94,29 +94,8 @@ class GetKernelMatrixOrDefault implements ExtractPropertyRule
                 $column_count += 1;
             }
 
-// I think this code is dead, but leaving commented out for now.
-// The code above should force all values to be numbers, so theoretically
-// they should always pass the casting to float.
-//            foreach ($row as $value) {
-//                $floatRuleResult = $floatRule->process(
-//                    $value,
-//                    $processedValues,
-//                    $dataStorage
-//                );
-//
-//                if ($floatRuleResult->anyErrorsFound()) {
-//                    foreach ($floatRuleResult->getValidationProblems() as $validationProblem) {
-//                        $validationProblems[] = $validationProblem;
-//                    }
-//                }
-//            }
-
             $row_count += 1;
         }
-
-//        if (count($validationProblems) !== 0) {
-//            return ValidationResult::fromValidationProblems($validationProblems);
-//        }
 
         return ValidationResult::valueResult($matrix_value);
     }

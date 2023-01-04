@@ -11,7 +11,8 @@
             "TypeSpec/OpenApi/OpenApiV300ParamDescription.php"
         ]
     },
-
+    "minMsi": 100,
+    "minCoveredMsi": 100,
     "phpUnit": {
         "configDir": "./test"
     },
@@ -54,16 +55,10 @@
             // There are parts of the code that merge multiple validation problems into
             // one list. But currently the validation stops on first error, so testing it
             // is hard.
-
             "ignore": [
-
                 "TypeSpec\\ExtractRule\'GetArrayOfInt::process",
-
             ]
         },
-
-
-
         "Throw_": {
             "ignore": [
                 "TypeSpec\\OpenApi\\OpenApiV300ParamDescription::*",
@@ -72,8 +67,5 @@
                 "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
         },
-
-
-
     }
 }
