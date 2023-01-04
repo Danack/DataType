@@ -1,19 +1,19 @@
 {
 
   "name": "danack/typespec",
-  "description": "A library that makes programatic types easier",
+  "description": "A library that makes data types easier",
   "license": "MIT",
   "require": {
     "php" : ">8.0",
     "ext-mbstring": "*",
     "danack/var-map": "^0.6.1",
-    "danack/json-safe":  "^0.1.0",
-    "laminas/laminas-diactoros": "^2.6"
+    "danack/json-safe":  "^0.1.0"
   },
   "require-dev": {
     "danack/coding-standard": "0.3.0",
     "danack/php-unit-helper": "dev-main#11ce2b5025d1e964a820bd6360b2f5ed2085d316 as 0.4.0",
     "infection/infection": "^0.26.16",
+    "laminas/laminas-diactoros": "^2.6",
     "phpunit/phpunit": "9.5.6",
     "phpstan/phpstan-strict-rules": "^1.1.0",
     "psr/http-message": "^1.0",
