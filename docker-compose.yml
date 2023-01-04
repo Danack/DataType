@@ -6,6 +6,12 @@ services:
       - PHP_IDE_CONFIG=serverName=typespecdebug
     volumes:
       - .:/var/app
+  developing_8_2:
+    build: containers/developing_8_2
+    environment:
+      - PHP_IDE_CONFIG=serverName=typespecdebug
+    volumes:
+      - .:/var/app
   php_test:
     build: containers/run_php_tests
     volumes:
