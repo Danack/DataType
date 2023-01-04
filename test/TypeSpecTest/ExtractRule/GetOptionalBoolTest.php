@@ -17,18 +17,7 @@ class GetOptionalBoolTest extends BaseTestCase
 {
     public function provideTestCases()
     {
-        // Test sane juggling works
-        yield ['true', true];
-        yield ['truuue', false];
-        yield [null, false];
-        yield [0, false];
-        yield [1, true];
-        yield [2, true];
-        yield [-5000, true];
-
-        // Test missing param is null
-        // TODO test missing
-//        yield [new ArrayVarMap([]), null];
+        yield from getBoolTestWorks();
     }
 
     /**

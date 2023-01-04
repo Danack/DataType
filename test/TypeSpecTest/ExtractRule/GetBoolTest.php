@@ -35,14 +35,7 @@ class GetBoolTest extends BaseTestCase
 
     public function provideTestWorksCases()
     {
-        yield ['true', true];
-        yield ['truuue', false];
-        yield [null, false];
-
-        yield [0, false];
-        yield [1, true];
-        yield [2, true];
-        yield [-5000, true];
+        yield from getBoolTestWorks();
     }
 
     /**
@@ -51,7 +44,6 @@ class GetBoolTest extends BaseTestCase
      */
     public function testWorks($input, $expectedValue)
     {
-
         $validator = new ProcessedValues();
         $rule = new GetBool();
         $validationResult = $rule->process(
@@ -89,6 +81,31 @@ class GetBoolTest extends BaseTestCase
         $this->assertValidationProblemRegexp(
             '/foo',
             Messages::UNSUPPORTED_TYPE,
+            $validationResult->getValidationProblems()
+        );
+    }
+
+    public function provideTestErrorCasesForBadStrings()
+    {
+        yield from getBoolBadStrings();
+    }
+
+    /**
+     * @covers \TypeSpec\ExtractRule\GetBool
+     * @dataProvider provideTestErrorCasesForBadStrings
+     */
+    public function testErrorsWithBadStrings($value)
+    {
+        $rule = new GetBool();
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromArraySetFirstValue(['foo' => $value])
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::ERROR_BOOL_BAD_STRING,
             $validationResult->getValidationProblems()
         );
     }

@@ -18,19 +18,7 @@ class BoolInputTest extends BaseTestCase
 {
     public function provideBoolValueWorksCases()
     {
-        return [
-
-            [true, true],
-            [false, false],
-            [null, false],
-            ['true', true],
-            ['truuue', false],
-
-            [0, false],
-            [1, true],
-            [2, true],
-            [-5000, true],
-        ];
+        yield from getBoolTestWorks();
     }
 
     /**

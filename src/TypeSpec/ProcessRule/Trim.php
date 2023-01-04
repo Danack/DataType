@@ -21,7 +21,6 @@ class Trim implements ProcessPropertyRule
 
         $value = $this->checkString($value);
 
-
         return ValidationResult::valueResult(trim($value));
     }
 

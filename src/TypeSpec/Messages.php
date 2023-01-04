@@ -21,6 +21,7 @@ class Messages
     public const ERROR_WRONG_TYPE_VARIANT_1 = "Maximum count can only be applied to an array but tried to operate on %s.";
 
     // Bool
+    public const ERROR_BOOL_BAD_STRING = "Boolean values must be either 'true' or 'false' but found '%s'.";
 
     // DateTime
     public const ERROR_INVALID_DATETIME = 'Value was not a valid RFC3339 date time apparently';
@@ -43,7 +44,6 @@ class Messages
     public const UNSUPPORTED_TYPE = "Unsupported input type of '%s'";
 
     // Int
-
     public const INT_REQUIRED_FOUND_NON_DIGITS = "Must contain only digits. Non-digit found at position %d.";
     public const INT_REQUIRED_FOUND_NON_DIGITS2 = "Value must contain only digits.";
     public const INTEGER_TOO_LONG = "Value too long, max %s digits";

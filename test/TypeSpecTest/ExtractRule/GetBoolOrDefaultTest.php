@@ -39,14 +39,7 @@ class GetBoolOrDefaultTest extends BaseTestCase
 
     public function provideTestWorksCases()
     {
-        yield ['true', true];
-        yield ['truuue', false];
-        yield [null, false];
-
-        yield [0, false];
-        yield [1, true];
-        yield [2, true];
-        yield [-5000, true];
+        yield from getBoolTestWorks();
     }
 
     /**
@@ -55,7 +48,6 @@ class GetBoolOrDefaultTest extends BaseTestCase
      */
     public function testWorks($input, $expectedValue)
     {
-
         $validator = new ProcessedValues();
         $rule = new GetBoolOrDefault(false);
         $validationResult = $rule->process(
@@ -67,19 +59,26 @@ class GetBoolOrDefaultTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public function provideTestErrorCasesBadTypes()
     {
-        return [
-            // todo - we should test the exact error.
-            [fopen('php://memory', 'r+')],
-            [[1, 2, 3]],
-            [new \StdClass()]
-        ];
+        // todo - we should test the exact error.
+        yield [fopen('php://memory', 'r+')];
+        yield [[1, 2, 3]];
+        yield [new \StdClass()];
+        yield [null];
+        yield [0];
+        yield [1];
+        yield [2];
+        yield [-5000];
     }
+
+
+
 
     /**
      * @covers \TypeSpec\ExtractRule\GetBoolOrDefault
-     * @dataProvider provideTestErrorCases
+     * @dataProvider provideTestErrorCasesBadTypes
+     * @group wip
      */
     public function testErrors($value)
     {
@@ -96,6 +95,33 @@ class GetBoolOrDefaultTest extends BaseTestCase
             $validationResult->getValidationProblems()
         );
     }
+
+    public function provideTestErrorCasesBadString()
+    {
+        yield from getBoolBadStrings();
+    }
+
+    /**
+     * @covers \TypeSpec\ExtractRule\GetBoolOrDefault
+     * @dataProvider provideTestErrorCasesBadString
+     * @group wip
+     */
+    public function testErrorsBadStrings($value)
+    {
+        $rule = new GetBoolOrDefault(false);
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromArraySetFirstValue(['foo' => $value])
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::ERROR_BOOL_BAD_STRING,
+            $validationResult->getValidationProblems()
+        );
+    }
+
 
     /**
      * @covers \TypeSpec\ExtractRule\GetBoolOrDefault

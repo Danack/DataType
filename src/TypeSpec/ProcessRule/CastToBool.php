@@ -36,24 +36,18 @@ class CastToBool implements ProcessPropertyRule
         }
 
         if (is_string($value) === true) {
-            // TODO - change to true only....
-            if ($value === 'true' ||
-                $value === '1') {
+            if ($value === 'true') {
                 return ValidationResult::valueResult(true);
             }
-
-            return ValidationResult::valueResult(false);
-        }
-
-        if (is_integer($value) === true) {
-            if ($value === 0) {
+            else if ($value === 'false') {
                 return ValidationResult::valueResult(false);
             }
-            return ValidationResult::valueResult(true);
-        }
 
-        if ($value === null) {
-            return ValidationResult::valueResult(false);
+            $message = sprintf(
+                Messages::ERROR_BOOL_BAD_STRING,
+                gettype($value)
+            );
+            return ValidationResult::errorResult($inputStorage, $message);
         }
 
         $message = sprintf(

@@ -20,3 +20,18 @@ function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 
     return ProcessedValues::fromArray($processedValues);
 }
+
+function getBoolTestWorks()
+{
+    yield ['true', true];
+    yield ['false', false];
+
+    yield [true, true];
+    yield [false, false];
+}
+
+function getBoolBadStrings()
+{
+    yield ['flase'];
+    yield ['truuue'];
+}
