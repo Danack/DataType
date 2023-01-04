@@ -9,14 +9,25 @@ namespace TypeSpec\Exception;
  */
 class InvalidLocationException extends TypeSpecException
 {
+    /**
+     * @var string[]
+     */
     private array $location;
 
+    /**
+     * @param string[] $location
+     * @param string $message
+     */
     private function __construct(array $location, string $message)
     {
         $this->location = $location;
         parent::__construct($message);
     }
 
+    /**
+     * @param string[] $location
+     * @return self
+     */
     public static function badArrayDataStorage(array $location): self
     {
         $message = sprintf(
@@ -30,6 +41,10 @@ class InvalidLocationException extends TypeSpecException
         );
     }
 
+    /**
+     * @param string[] $location
+     * @return self
+     */
     public static function badComplexDataStorage(array $location): self
     {
         $message = sprintf(
@@ -43,21 +58,25 @@ class InvalidLocationException extends TypeSpecException
         );
     }
 
-    public static function intNotAllowedComplexDataStorage(array $location): self
-    {
-        $message = sprintf(
-            "Tried to use int as key to object in ComplexDataStorage. This shouldn't happen and is likely a bug in the TypeSpec library. Location was %s",
-            implode(", ", $location)
-        );
-
-        return new self(
-            $location,
-            $message
-        );
-    }
+//    /**
+//     * @param string[] $location
+//     * @return static
+//     */
+//    public static function intNotAllowedComplexDataStorage(array $location): self
+//    {
+//        $message = sprintf(
+//            "Tried to use int as key to object in ComplexDataStorage. This shouldn't happen and is likely a bug in the TypeSpec library. Location was %s",
+//            implode(", ", $location)
+//        );
+//
+//        return new self(
+//            $location,
+//            $message
+//        );
+//    }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getLocation(): array
     {

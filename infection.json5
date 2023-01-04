@@ -24,6 +24,11 @@
         "MBString": false,
         "PublicVisibility": false,
         "ProtectedVisibility": false,
+        "CastString": {
+            "ignore": [
+                "TypeSpec\\DataStorage\\ArrayDataStorage::moveKey",
+            ],
+        },
         "FalseValue": {
             "ignore": [
                 "*::updateParamDescription",
@@ -32,7 +37,6 @@
                 "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
         },
-
         "IncrementInteger": {
             "ignore": [
                 "TypeSpec\\ProcessRule\\SaneCharacters::process"
@@ -50,7 +54,6 @@
                 "*::updateParamDescription",
             ]
         },
-
         "SpreadOneItem": {
             // There are parts of the code that merge multiple validation problems into
             // one list. But currently the validation stops on first error, so testing it

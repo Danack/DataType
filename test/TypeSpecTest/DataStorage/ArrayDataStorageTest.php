@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace TypeSpecTest\DataStorage;
 
 use TypeSpec\DataStorage\ArrayDataStorage;
+use TypeSpec\DataStorage\DataStorage;
 use TypeSpec\DataStorage\TestArrayDataStorage;
 use TypeSpecTest\BaseTestCase;
 use TypeSpec\Exception\InvalidLocationException;

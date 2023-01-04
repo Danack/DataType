@@ -16,13 +16,13 @@ use TypeSpec\ValidationResult;
 class Enum implements ProcessPropertyRule
 {
     /**
-     * @var array<mixed>
+     * @var array<string>
      */
     private array $allowedValues;
 
     /**
      *
-     * @param array<mixed> $allowedValues
+     * @param array<string> $allowedValues
      */
     public function __construct(array $allowedValues)
     {

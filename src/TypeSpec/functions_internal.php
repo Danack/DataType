@@ -97,7 +97,7 @@ function createArrayOfTypeFromInputStorage(
         return ValidationResult::errorResult($dataStorage, Messages::ERROR_MESSAGE_NOT_ARRAY_VARIANT_1);
     }
 
-    foreach ($itemData as $key => $value) {
+    foreach ($itemData as $key => $_value) {
         $dataStorageForItem = $dataStorage->moveKey($key);
 
         $result = $typeExtractor->process(
@@ -106,7 +106,10 @@ function createArrayOfTypeFromInputStorage(
         );
 
         if ($result->anyErrorsFound() === true) {
-            $allValidationProblems = [...$allValidationProblems, ...$result->getValidationProblems()];
+            $allValidationProblems = array_merge(
+                $allValidationProblems,
+                $result->getValidationProblems()
+            );
         }
         else {
             $items[$index] = $result->getValue();
@@ -473,7 +476,7 @@ function processDataTypeList(
         );
 
         if (count($newValidationProblems) !== 0) {
-            $validationProblems = [...$validationProblems, ...$newValidationProblems];
+            $validationProblems = array_merge($validationProblems, $newValidationProblems);
         }
     }
 

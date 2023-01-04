@@ -18,7 +18,7 @@ class ArrayDataStorage implements DataStorage
     private array $data;
 
     /**
-     * @var array<string|int>
+     * @var array<string>
      */
     private array $currentLocation = [];
 
@@ -79,7 +79,7 @@ class ArrayDataStorage implements DataStorage
     public function moveKey(string|int $name): DataStorage
     {
         $clone = clone $this;
-        $clone->currentLocation[] = $name;
+        $clone->currentLocation[] = (string)$name;
 
         return $clone;
     }

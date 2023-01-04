@@ -30,7 +30,6 @@ class InvalidLocationExceptionTest extends BaseTestCase
         $this->assertStringContainsString(implode(", ", $location), $exception->getMessage());
     }
 
-
     /**
      * @covers \TypeSpec\Exception\InvalidLocationException
      */
@@ -39,25 +38,6 @@ class InvalidLocationExceptionTest extends BaseTestCase
         $location = ['foo', 'bar'];
 
         $exception = InvalidLocationException::badComplexDataStorage(
-            $location
-        );
-
-        $this->assertSame(
-            $location,
-            $exception->getLocation()
-        );
-        $this->assertStringContainsString(implode(", ", $location), $exception->getMessage());
-    }
-
-
-    /**
-     * @covers \TypeSpec\Exception\InvalidLocationException
-     */
-    public function testWorksBadInPositionOnObject()
-    {
-        $location = ['foo', 0];
-
-        $exception = InvalidLocationException::intNotAllowedComplexDataStorage(
             $location
         );
 

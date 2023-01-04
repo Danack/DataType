@@ -14,7 +14,7 @@ class ComplexDataStorage implements DataStorage
 {
     private array|object $dto;
 
-    /** @var array<string|int> */
+    /** @var array<string> */
     private array $currentLocation = [];
 
     protected function __construct(array|object $data)
@@ -29,7 +29,6 @@ class ComplexDataStorage implements DataStorage
         return $instance;
     }
 
-
     /**
      * @return mixed
      */
@@ -39,9 +38,6 @@ class ComplexDataStorage implements DataStorage
 
         foreach ($this->currentLocation as $key) {
             if (is_object($dto) === true) {
-                if (is_int($key) === true) {
-                    throw InvalidLocationException::intNotAllowedComplexDataStorage($this->currentLocation);
-                }
                 if (property_exists($dto, $key) === false) {
                     // This would only happen if this was called
                     // when the data had been move to a 'wrong' place.
@@ -78,9 +74,6 @@ class ComplexDataStorage implements DataStorage
         $dto = $this->dto;
         foreach ($this->currentLocation as $location) {
             if (is_object($dto) === true) {
-                if (is_int($location) === true) {
-                    throw InvalidLocationException::intNotAllowedComplexDataStorage($this->currentLocation);
-                }
                 if (property_exists($dto, $location) === false) {
                     return false;
                 }
@@ -111,7 +104,7 @@ class ComplexDataStorage implements DataStorage
     public function moveKey(string|int $name): DataStorage
     {
         $clone = clone $this;
-        $clone->currentLocation[] = $name;
+        $clone->currentLocation[] = (string)$name;
 
         return $clone;
     }
@@ -121,32 +114,11 @@ class ComplexDataStorage implements DataStorage
      */
     public function getPath(): string
     {
-//        $path = '';
-
         if (count($this->currentLocation) === 0) {
             return '/';
         }
 
         $path = "/" . implode('/', $this->currentLocation);
-
-
-//        $separator_needed = true;
-//
-//        foreach ($this->currentLocation as $location) {
-//            if (is_int($location) === true) {
-//                if ($separator_needed === true) {
-//                    $path .= "/";
-//                }
-//
-//                $path .= "$location";
-//            }
-//            if (is_string($location) === true) {
-//                $path .= '/';
-//                $path .= "$location";
-//            }
-//
-//            $separator_needed = false;
-//        }
 
         return $path;
     }

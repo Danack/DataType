@@ -48,16 +48,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $dataStorageAtBadPosition->isValueAvailable();
     }
 
-
-    public function testErrorIntPositionOnObject_isValueAvailable()
-    {
-        $dataStorage = ComplexDataStorage::fromData(new \StdClass());
-        $dataStorageAtFoo = $dataStorage->moveKey(0);
-
-        $this->expectException(InvalidLocationException::class);
-        $dataStorageAtFoo->isValueAvailable();
-    }
-
     public function testErrorIntPositionOnObject_getCurrentValue()
     {
         $dataStorage = ComplexDataStorage::fromData(new \StdClass());
@@ -80,7 +70,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $dataStorageAtBadPosition->getCurrentValue();
     }
 
-
     public function testMovingSeparatesPosition()
     {
         $dataStorage = ComplexDataStorage::fromData([]);
@@ -101,7 +90,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $this->assertSame('bar', $dataStorageAtFoo->getCurrentValue());
     }
 
-
     public function testValueCorrectAsObject()
     {
         $data = new \StdClass();
@@ -115,7 +103,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $this->assertSame('bar', $dataStorageAtFoo->getCurrentValue());
     }
 
-
     public function testValueCorrectlyNotAvailableAsObject()
     {
         $data = new \StdClass();
@@ -126,8 +113,6 @@ class ComplexDataStorageTest extends BaseTestCase
 
         $this->assertFalse($dataStorageAtFoo->isValueAvailable());
     }
-
-
 
     public function testValueCorrect_advanced1()
     {
@@ -159,9 +144,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $this->assertSame($objColors, $dataStorageAtValues_3->getCurrentValue());
     }
 
-
-
-
     public function testInvalidLocation()
     {
         $dataStorage = ComplexDataStorage::fromData(['foo' => 'bar']);
@@ -180,8 +162,6 @@ class ComplexDataStorageTest extends BaseTestCase
         $dataStorage = TestArrayDataStorage::createMissing('foo');
         $this->assertFalse($dataStorage->isValueAvailable());
     }
-
-
 
     public function providesPathsAreCorrect()
     {
