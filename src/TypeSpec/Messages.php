@@ -65,6 +65,7 @@ class Messages
     public const ORDER_VALUE_UNKNOWN = "Cannot order by [%s], as not known for this operation. Known are [%s]";
 
     // String
+    public const STRING_EXPECTED = "String expected, but have type %s.";
     public const STRING_TOO_SHORT = "String too short, min characters is %d";
     public const STRING_TOO_LONG = "String too long, max characters is %d.";
     public const STRING_INVALID_COMBINING_CHARACTERS = "Invalid combining characters found at position %s";

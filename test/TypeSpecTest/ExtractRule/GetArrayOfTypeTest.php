@@ -219,7 +219,7 @@ class GetArrayOfTypeTest extends BaseTestCase
     {
         $data = [
             'items' => [
-                ['score' => 5, 'comment' => false]
+                ['score' => 5, 'comment' => 'no']
             ],
         ];
 

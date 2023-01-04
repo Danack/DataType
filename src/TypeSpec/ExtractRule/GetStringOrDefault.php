@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TypeSpec\ExtractRule;
 
 use TypeSpec\DataStorage\DataStorage;
+use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
@@ -35,7 +36,15 @@ class GetStringOrDefault implements ExtractPropertyRule
             return ValidationResult::valueResult($this->default);
         }
 
-        $value = (string)$dataStorage->getCurrentValue();
+        $value = $dataStorage->getCurrentValue();
+
+        if (is_string($value) !== true) {
+            $message = sprintf(
+                Messages::STRING_EXPECTED,
+                gettype($value)
+            );
+            return ValidationResult::errorResult($dataStorage, $message);
+        }
 
         return ValidationResult::valueResult($value);
     }

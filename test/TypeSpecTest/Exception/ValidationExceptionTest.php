@@ -28,9 +28,10 @@ class ValidationExceptionTest extends BaseTestCase
             new ValidationProblem($dataStorage, $message1),
             new ValidationProblem($dataStorage, $message2)
         ];
+        $initialString = 'unit test';
 
         $exception = new ValidationException(
-            'unit test',
+            $initialString,
             $validationMessages
         );
 
@@ -47,6 +48,7 @@ class ValidationExceptionTest extends BaseTestCase
             '/ ' . $message2
         ];
         $this->assertSame($actualStrings, $strings);
+        $this->assertSame("$initialString / $message1, / $message2", $exception->getMessage());
     }
 
     public function testMessageIsCorrect()

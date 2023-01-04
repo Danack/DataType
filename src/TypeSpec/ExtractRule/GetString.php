@@ -36,9 +36,15 @@ class GetString implements ExtractPropertyRule
             );
         }
 
-        // TODO - reject bools/ints?
-        // TODO - needs string input
-        $value = (string)$dataStorage->getCurrentValue();
+        $value = $dataStorage->getCurrentValue();
+
+        if (is_string($value) !== true) {
+            $message = sprintf(
+                Messages::STRING_EXPECTED,
+                gettype($value)
+            );
+            return ValidationResult::errorResult($dataStorage, $message);
+        }
 
         return ValidationResult::valueResult($value);
     }
