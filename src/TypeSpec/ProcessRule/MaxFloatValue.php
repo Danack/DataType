@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates the input value is equal to or less than a particular float value.
+ */
 class MaxFloatValue implements ProcessPropertyRule
 {
     public function __construct(private float $maxValue)

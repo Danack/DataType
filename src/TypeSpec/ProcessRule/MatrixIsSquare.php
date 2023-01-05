@@ -10,10 +10,12 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that a matrix is square, i.e. has the same number of rows
+ * and columns.
+ */
 class MatrixIsSquare implements ProcessPropertyRule
 {
-
-
     public function process(
         $value,
         ProcessedValues $processedValues,

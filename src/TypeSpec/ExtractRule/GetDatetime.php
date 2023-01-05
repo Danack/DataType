@@ -12,6 +12,26 @@ use TypeSpec\ValidationResult;
 use function TypeSpec\checkAllowedFormatsAreStrings;
 use function TypeSpec\getDefaultSupportedTimeFormats;
 
+/**
+ * Extracts a DateTime value.
+ *
+ * The list of formats allowed can be passed in. The default list of formats is:
+ *
+ * DateTime::ATOM,
+ * DateTime::COOKIE,
+ * DateTime::ISO8601,
+ * DateTime::RFC822,
+ * DateTime::RFC850,
+ * DateTime::RFC1036,
+ * DateTime::RFC1123,
+ * DateTime::RFC2822,
+ * DateTime::RFC3339,
+ * DateTime::RFC3339_EXTENDED,
+ * DateTime::RFC7231,
+ * DateTime::RSS,
+ * DateTime::W3C,
+ *
+ */
 class GetDatetime implements ExtractPropertyRule
 {
     /**

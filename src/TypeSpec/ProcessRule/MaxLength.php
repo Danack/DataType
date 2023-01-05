@@ -5,11 +5,15 @@ declare(strict_types = 1);
 namespace TypeSpec\ProcessRule;
 
 use TypeSpec\DataStorage\DataStorage;
+use TypeSpec\Exception\InvalidRulesException;
 use TypeSpec\Messages;
 use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Checks that the length of a string is at most a certain number of characters.
+ */
 class MaxLength implements ProcessPropertyRule
 {
     use CheckString;
@@ -25,12 +29,14 @@ class MaxLength implements ProcessPropertyRule
         $this->maxLength = $maxLength;
     }
 
+    /**
+     * @throws InvalidRulesException
+     */
     public function process(
         $value,
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        // TODO - handle to string conversion better.
 
         $value = $this->checkString($value);
 

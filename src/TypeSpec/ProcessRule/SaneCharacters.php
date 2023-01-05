@@ -11,6 +11,10 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ *
+ * // Any 3 or more combining things.
+ */
 class SaneCharacters implements ProcessPropertyRule
 {
     use CheckString;
@@ -62,7 +66,6 @@ class SaneCharacters implements ProcessPropertyRule
 
     // Emoji blocks are taken from
     // https://apps.timwhitlock.info/emoji/tables/unicode
-
 
     // \p{xx} a character with the xx property
     // \P{xx} a character without the xx property

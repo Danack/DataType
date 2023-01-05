@@ -12,6 +12,9 @@ use TypeSpec\ValidationResult;
 use function TypeSpec\createArrayOfTypeFromInputStorage;
 use function TypeSpec\getDataTypeListForClass;
 
+/**
+ * Extracts an array of a DataType.
+ */
 class GetArrayOfType implements ExtractPropertyRule
 {
     /** @var class-string */

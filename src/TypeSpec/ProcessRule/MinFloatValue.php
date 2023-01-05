@@ -10,10 +10,11 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates the input value is equal to or greater than a particular float value.
+ */
 class MinFloatValue implements ProcessPropertyRule
 {
-
-
     public function __construct(private float $minValue)
     {
     }

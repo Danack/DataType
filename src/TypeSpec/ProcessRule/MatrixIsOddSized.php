@@ -10,6 +10,10 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Check Matrix is odd sized. This is useful as some operation require
+ * a matrix that has a clearly defined centre value.
+ */
 class MatrixIsOddSized implements ProcessPropertyRule
 {
     public function process(

@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that a int value is between a range of int values inclusive.
+ */
 class RangeIntValue implements ProcessPropertyRule
 {
     private int $minValue;

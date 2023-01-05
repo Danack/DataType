@@ -9,6 +9,10 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Ends processing if a value is null. This is useful to 'short-circuit' nullable
+ * values, e.g. to avoid checking they are between a minimum and maximum value.
+ */
 class SkipIfNull implements ProcessPropertyRule
 {
     public function process(

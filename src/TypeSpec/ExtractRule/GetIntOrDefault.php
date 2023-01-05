@@ -10,6 +10,9 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\CastToInt;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a int value or a default value if not.
+ */
 class GetIntOrDefault implements ExtractPropertyRule
 {
     private ?int $default;

@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that a float value is between a range of float values inclusive.
+ */
 class RangeFloatValue implements ProcessPropertyRule
 {
     /**

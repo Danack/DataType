@@ -10,11 +10,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
 /**
- * Class GetOptionalInt
- *
- * If a parameter is not set, then the value is null, otherwise
- * it must a valid set of data for that type
- *
+ * Extracts a DataType value or null if the parameter is not available.
  */
 class GetOptionalType implements ExtractPropertyRule
 {

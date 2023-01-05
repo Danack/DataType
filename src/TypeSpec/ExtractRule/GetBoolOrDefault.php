@@ -11,7 +11,14 @@ use TypeSpec\ProcessRule\CastToBool;
 use TypeSpec\ValidationResult;
 
 /**
- * If a parameter is not set, then the value is the default value.
+ * Extracts a boolean value, or a default value if the paramter is not set.
+ *
+ * bool(true) - true
+ * bool(false) - false
+ * string(true) - true
+ * string(false) - false
+ * any other input - error
+ *
  */
 class GetBoolOrDefault implements ExtractPropertyRule
 {

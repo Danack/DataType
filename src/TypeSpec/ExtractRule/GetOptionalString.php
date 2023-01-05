@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a string value or null if the parameter is not available.
+ */
 class GetOptionalString implements ExtractPropertyRule
 {
     public function process(

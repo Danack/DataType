@@ -13,6 +13,9 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 use function JsonSafe\json_decode_safe;
 
+/**
+ * Extracts a 2d matrix (aka array of arrays) of floating point values.
+ */
 class GetKernelMatrixOrDefault implements ExtractPropertyRule
 {
     private ?array $default;

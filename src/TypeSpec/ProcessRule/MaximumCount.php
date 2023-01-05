@@ -11,6 +11,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that there are at most a known count of entries.
+ */
 class MaximumCount implements ProcessPropertyRule
 {
     private int $maximumCount;

@@ -340,11 +340,11 @@ function check_only_digits(string|int $value)
  */
 function normalise_order_parameter(string $part)
 {
-    if (substr($part, 0, 1) === "+") {
+    if (str_starts_with($part, "+") === true) {
         return [substr($part, 1), Ordering::ASC];
     }
 
-    if (substr($part, 0, 1) === "-") {
+    if (str_starts_with($part, "-") === true) {
         return [substr($part, 1), Ordering::DESC];
     }
 

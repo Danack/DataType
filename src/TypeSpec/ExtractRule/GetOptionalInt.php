@@ -11,11 +11,7 @@ use TypeSpec\ProcessRule\CastToInt;
 use TypeSpec\ValidationResult;
 
 /**
- * Class GetOptionalInt
- *
- * If a parameter is not set, then the value is null, otherwise
- * it must be a valid integer.
- *
+ * Extracts a int point value or null if the parameter is not available.
  */
 class GetOptionalInt implements ExtractPropertyRule
 {

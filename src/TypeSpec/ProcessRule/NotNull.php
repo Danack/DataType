@@ -11,7 +11,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
 /**
- * @TODO - is there any point to this rule?
+ * Validates that an input or processed value is not null.
  */
 class NotNull implements ProcessPropertyRule
 {

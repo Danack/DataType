@@ -10,6 +10,10 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Checks that input is a valid datetime of the format \DateTime::RFC3339
+ *
+ */
 class ValidDatetime implements ProcessPropertyRule
 {
     use CheckString;

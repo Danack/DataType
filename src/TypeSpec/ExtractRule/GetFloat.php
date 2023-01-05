@@ -11,6 +11,9 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\CastToFloat;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a floating point value.
+ */
 class GetFloat implements ExtractPropertyRule
 {
     public function process(

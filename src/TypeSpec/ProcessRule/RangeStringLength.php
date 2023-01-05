@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that the length of a string is between a minimum and maximum.
+ */
 class RangeStringLength implements ProcessPropertyRule
 {
     use CheckString;

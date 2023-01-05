@@ -10,6 +10,9 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\CastToFloat;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a floating point value or a default value if not set.
+ */
 class GetFloatOrDefault implements ExtractPropertyRule
 {
     private ?float $default;

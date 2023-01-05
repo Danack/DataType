@@ -11,6 +11,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates that there are at least a set count of entries.
+ */
 class MinimumCount implements ProcessPropertyRule
 {
     private int $minimumCount;

@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ *  Validates the input value is equal to or less than a particular int value.
+ */
 class MaxIntValue implements ProcessPropertyRule
 {
     private int $maxValue;

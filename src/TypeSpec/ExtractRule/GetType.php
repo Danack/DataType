@@ -13,6 +13,9 @@ use function TypeSpec\createObjectFromProcessedValues;
 use function TypeSpec\getDataTypeListForClass;
 use function TypeSpec\processDataTypeList;
 
+/**
+ * Extracts a DataType value.
+ */
 class GetType implements ExtractPropertyRule
 {
     /** @var class-string */
@@ -41,7 +44,6 @@ class GetType implements ExtractPropertyRule
             getDataTypeListForClass($classname)
         );
     }
-
 
     /**
      * @param class-string $className

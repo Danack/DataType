@@ -9,6 +9,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Trims whitespace off the start and end of strings.
+ */
 class Trim implements ProcessPropertyRule
 {
     use CheckString;

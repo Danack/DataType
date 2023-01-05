@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Checks that the length of a string is at least a certain number of characters.
+ */
 class MinLength implements ProcessPropertyRule
 {
     use CheckString;

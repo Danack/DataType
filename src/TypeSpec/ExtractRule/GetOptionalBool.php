@@ -11,10 +11,13 @@ use TypeSpec\ProcessRule\CastToBool;
 use TypeSpec\ValidationResult;
 
 /**
+ * Extracts a boolean. If a parameter is not set, then the value is null.
  *
- * If a parameter is not set, then the value is null, otherwise
- * it must be a valid integer.
- *
+ * bool(true) - true
+ * bool(false) - false
+ * string(true) - true
+ * string(false) - false
+ * any other input - error
  */
 class GetOptionalBool implements ExtractPropertyRule
 {

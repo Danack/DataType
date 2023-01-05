@@ -11,6 +11,15 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\CastToBool;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a boolean value.
+ *
+ * bool(true) - true
+ * bool(false) - false
+ * string(true) - true
+ * string(false) - false
+ * any other input - error
+ */
 class GetBool implements ExtractPropertyRule
 {
     public function process(
@@ -21,9 +30,9 @@ class GetBool implements ExtractPropertyRule
             return ValidationResult::errorResult($dataStorage, Messages::VALUE_NOT_SET);
         }
 
-        $intRule = new CastToBool();
+        $rule = new CastToBool();
 
-        return $intRule->process(
+        return $rule->process(
             $dataStorage->getCurrentValue(),
             $processedValues,
             $dataStorage

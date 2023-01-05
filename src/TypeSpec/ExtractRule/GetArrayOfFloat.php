@@ -11,6 +11,10 @@ use TypeSpec\ProcessRule\ProcessPropertyRule;
 use TypeSpec\ValidationResult;
 use function TypeSpec\createArrayOfScalarsFromDataStorage;
 
+/**
+ * Extracts an array of float values, and then applies a list of ProcessPropertyRules
+ * to them.
+ */
 class GetArrayOfFloat implements ExtractPropertyRule
 {
     /** @var ProcessPropertyRule[] */

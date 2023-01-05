@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Check Matrix size for either or both rows and column size.
+ */
 class MatrixIsSize implements ProcessPropertyRule
 {
     public function __construct(

@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Checks that input is a valid date of the format 'Y-m-d'.
+ */
 class ValidDate implements ProcessPropertyRule
 {
     use CheckString;

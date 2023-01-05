@@ -11,8 +11,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
 /**
- * Convert the value to null if the string is empty, and provides
- * a final result
+ * Check that a string starts with a particular prefix.
  */
 class StartsWithString implements ProcessPropertyRule
 {

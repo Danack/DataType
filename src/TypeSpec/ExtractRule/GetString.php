@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a string value.
+ */
 class GetString implements ExtractPropertyRule
 {
     public function process(

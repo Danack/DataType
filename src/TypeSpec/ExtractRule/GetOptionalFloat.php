@@ -11,10 +11,7 @@ use TypeSpec\ProcessRule\CastToFloat;
 use TypeSpec\ValidationResult;
 
 /**
- *
- * If a parameter is not set, then the value is null, otherwise
- * it must be a valid integer.
- *
+ * Extracts a floating point value or null if the parameter is not available.
  */
 class GetOptionalFloat implements ExtractPropertyRule
 {

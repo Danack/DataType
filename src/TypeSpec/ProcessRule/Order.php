@@ -15,11 +15,16 @@ use function TypeSpec\array_value_exists;
 use function TypeSpec\normalise_order_parameter;
 
 /**
- * Class Order
  *
  * Supports a parameter to specify ordering of results
  * For example "+name,-date" would be equivalent to ordering
  * by name ascending, then date descending.
+ *
+ * Final value is an array, each element of which contains an array
+ * with the string, and ordering e.g.
+ * [
+ *     ['name', Ordering::DESC]
+ * ]
  */
 class Order implements ProcessPropertyRule
 {

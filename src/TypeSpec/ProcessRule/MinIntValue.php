@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ *  Validates the input value is equal to or greater than a particular int value.
+ */
 class MinIntValue implements ProcessPropertyRule
 {
     private int $minValue;

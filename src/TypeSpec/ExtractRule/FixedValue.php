@@ -9,6 +9,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a fixed value. Useful for testing.
+ */
 class FixedValue implements ExtractPropertyRule
 {
     private mixed $value;

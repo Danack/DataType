@@ -11,6 +11,9 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ProcessRule\CastToInt;
 use TypeSpec\ValidationResult;
 
+/**
+ * Extracts a int value.
+ */
 class GetInt implements ExtractPropertyRule
 {
     public function process(

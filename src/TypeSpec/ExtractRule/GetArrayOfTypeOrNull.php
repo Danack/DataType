@@ -10,8 +10,7 @@ use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
 /**
- * This is a useless class - edit 23rd July - why did I write that?
- * Is it because you should do arrayOfTypeOrDefault or Optional?
+ * Extracts an array of a <DataType|null>.
  */
 class GetArrayOfTypeOrNull extends GetArrayOfType implements ExtractPropertyRule
 {
