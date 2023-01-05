@@ -10,6 +10,9 @@ use TypeSpec\OpenApi\ParamDescription;
 use TypeSpec\ProcessedValues;
 use TypeSpec\ValidationResult;
 
+/**
+ * Validates an RGB or RGBA color string or one of the ImagickIsRgbColor color constant names
+ */
 class ImagickIsRgbColor extends IsRgbColor
 {
     use CheckString;
