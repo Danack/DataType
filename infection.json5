@@ -5,10 +5,10 @@
             "src"
         ],
         "excludes": [
-            "TypeSpec/DataStorage/TestArrayDataStorage.php",
-            "TypeSpec/SafeAccess.php",
-            "TypeSpec/OpenApi/ShouldNeverBeCalledParamDescription.php",
-            "TypeSpec/OpenApi/OpenApiV300ParamDescription.php"
+            "DataType/DataStorage/TestArrayDataStorage.php",
+            "DataType/SafeAccess.php",
+            "DataType/OpenApi/ShouldNeverBeCalledParamDescription.php",
+            "DataType/OpenApi/OpenApiV300ParamDescription.php"
         ]
     },
     "minMsi": 100,
@@ -26,27 +26,27 @@
         "ProtectedVisibility": false,
         "CastString": {
             "ignore": [
-                "TypeSpec\\DataStorage\\ArrayDataStorage::moveKey",
+                "DataType\\DataStorage\\ArrayDataStorage::moveKey",
             ],
         },
         "FalseValue": {
             "ignore": [
                 "*::updateParamDescription",
-                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
-                "TypeSpec\\ProcessRule\\SaneCharacters::process",
-                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
         },
         "IncrementInteger": {
             "ignore": [
-                "TypeSpec\\ProcessRule\\SaneCharacters::process"
+                "DataType\\ProcessRule\\SaneCharacters::process"
             ]
         },
         "Identical": {
             "ignore": [
-                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
-                "TypeSpec\\ProcessRule\\SaneCharacters::process",
-                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
         },
         "MethodCallRemoval": {
@@ -59,15 +59,15 @@
             // one list. But currently the validation stops on first error, so testing it
             // is hard.
             "ignore": [
-                "TypeSpec\\ExtractRule\'GetArrayOfInt::process",
+                "DataType\\ExtractRule\'GetArrayOfInt::process",
             ]
         },
         "Throw_": {
             "ignore": [
-                "TypeSpec\\OpenApi\\OpenApiV300ParamDescription::*",
-                "TypeSpec\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
-                "TypeSpec\\ProcessRule\\SaneCharacters::process",
-                "TypeSpec\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+                "DataType\\OpenApi\\OpenApiV300ParamDescription::*",
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
         },
     }
