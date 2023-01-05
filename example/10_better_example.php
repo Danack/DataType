@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use TypeSpecExample\Parameters\SearchParameters;
+use DataTypeExample\Parameters\SearchParameters;
 use VarMap\ArrayVarMap;
-use function TypeSpec\validate;
+use function DataType\validate;
 
 require __DIR__ . "/../vendor/autoload.php";
 

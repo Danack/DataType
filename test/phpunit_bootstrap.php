@@ -1,9 +1,9 @@
 <?php
 
-use TypeSpec\ExtractRule\GetInt;
-use TypeSpec\DataType;
-use TypeSpec\ProcessedValue;
-use TypeSpec\ProcessedValues;
+use DataType\ExtractRule\GetInt;
+use DataType\InputType;
+use DataType\ProcessedValue;
+use DataType\ProcessedValues;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/fixtures.php";
@@ -14,7 +14,7 @@ function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 
     foreach ($keyValues as $key => $value) {
         $extractRule = new GetInt();
-        $inputParameter = new DataType($key, $extractRule);
+        $inputParameter = new InputType($key, $extractRule);
         $processedValues[] = new ProcessedValue($inputParameter, $value);
     }
 

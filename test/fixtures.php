@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-use TypeSpec\ExtractRule\GetString;
-use TypeSpec\ExtractRule\GetStringOrDefault;
-use TypeSpec\HasDataTypeList;
-use TypeSpec\DataType;
-use TypeSpec\HasDataType;
-use TypeSpec\ProcessRule\AlwaysErrorsRule;
-use TypeSpec\ProcessRule\ImagickIsRgbColor;
-use TypeSpec\SafeAccess;
-use TypeSpecTest\ImagickColorHasDataType;
-use TypeSpec\Create\CreateFromArray;
-use TypeSpec\Create\CreateOrErrorFromArray;
-use TypeSpec\Create\CreateFromVarMap;
-use TypeSpec\GetDataTypeListFromAttributes;
+use DataType\ExtractRule\GetString;
+use DataType\ExtractRule\GetStringOrDefault;
+use DataType\DataType;
+use DataType\HasInputType;
+use DataType\InputType;
+use DataType\ProcessRule\AlwaysErrorsRule;
+use DataType\ProcessRule\ImagickIsRgbColor;
+use DataType\SafeAccess;
+use DataTypeTest\ImagickColorHasInputType;
+use DataType\Create\CreateFromArray;
+use DataType\Create\CreateOrErrorFromArray;
+use DataType\Create\CreateFromVarMap;
+use DataType\GetInputTypesFromAttributes;
 
 class TestObject
 {
@@ -45,9 +45,9 @@ class DoesNotImplementInputParameterList
 }
 
 
-class ReturnsBadHasDataTypeList implements HasDataTypeList
+class ReturnsBadDataType implements DataType
 {
-    public static function getDataTypeList(): array
+    public static function getInputTypes(): array
     {
         return [
             // Wrong type
@@ -56,7 +56,7 @@ class ReturnsBadHasDataTypeList implements HasDataTypeList
     }
 }
 
-class TestParams implements HasDataTypeList
+class TestParams implements DataType
 {
     private string $name;
 
@@ -69,10 +69,10 @@ class TestParams implements HasDataTypeList
         $this->name = $name;
     }
 
-    public static function getDataTypeList(): array
+    public static function getInputTypes(): array
     {
         return [
-            new DataType(
+            new InputType(
                 'name',
                 new GetString(),
             )
@@ -89,18 +89,18 @@ class TestParams implements HasDataTypeList
 }
 
 
-class AlwaysErrorsParams implements HasDataTypeList
+class AlwaysErrorsParams implements DataType
 {
     public const ERROR_MESSAGE = 'Forced error';
 
-    public static function getDataTypeList(): array
+    public static function getInputTypes(): array
     {
         return [
-            new DataType(
+            new InputType(
                 'foo',
                 new GetString(),
             ),
-            new DataType(
+            new InputType(
                 'bar',
                 new GetString(),
                 new AlwaysErrorsRule(self::ERROR_MESSAGE)
@@ -109,18 +109,18 @@ class AlwaysErrorsParams implements HasDataTypeList
     }
 }
 
-class ThreeColors implements HasDataTypeList
+class ThreeColors implements DataType
 {
     use SafeAccess;
     use CreateFromVarMap;
-    use GetDataTypeListFromAttributes;
+    use GetInputTypesFromAttributes;
 
     public function __construct(
-        #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+        #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
         private string $background_color,
-        #[ImagickColorHasDataType('rgb(0, 0, 0)', 'stroke_color')]
+        #[ImagickColorHasInputType('rgb(0, 0, 0)', 'stroke_color')]
         private string $stroke_color,
-        #[ImagickColorHasDataType('DodgerBlue2', 'fill_color')]
+        #[ImagickColorHasInputType('DodgerBlue2', 'fill_color')]
         private string $fill_color
     ) {
     }
@@ -162,7 +162,7 @@ class OneColor
     use SafeAccess;
     use CreateFromArray;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
     public function __construct(string $stroke_color, string $background_color)
@@ -183,13 +183,13 @@ class TwoColors
     use SafeAccess;
     use CreateOrErrorFromArray;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
     #[NotActuallyAParam('fill_color', 'rgb(0, 0, 0)')]
     private string $fill_color;
 
-    #[ImagickColorHasDataType('rgb(0, 0, 0)', 'stroke_color')]
+    #[ImagickColorHasInputType('rgb(0, 0, 0)', 'stroke_color')]
     private string $stroke_color;
 
     #[NotAParameter()]
@@ -222,7 +222,7 @@ class OneColorWithOtherAnnotationThatIsNotAParam
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
     #[NotActuallyAParam('stroke_color', 'rgb(0, 0, 0)')]
@@ -255,7 +255,7 @@ class OneColorWithOtherAnnotationThatDoesNotExist
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
     #[ThisClassDoesNotExistParam('stroke_color', 'rgb(0, 0, 0)')]
@@ -277,13 +277,13 @@ class ThreeColorsMissingConstructorParam
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
-    #[ImagickColorHasDataType('rgb(0, 0, 0)', 'stroke_color')]
+    #[ImagickColorHasInputType('rgb(0, 0, 0)', 'stroke_color')]
     private string $stroke_color;
 
-    #[ImagickColorHasDataType('DodgerBlue2', 'fill_color')]
+    #[ImagickColorHasInputType('DodgerBlue2', 'fill_color')]
     private string $fill_color;
 
     public function __construct(string $background_color, string $stroke_color)
@@ -300,10 +300,10 @@ class ThreeColorsMissingPropertyParam
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
-    #[ImagickColorHasDataType('rgb(0, 0, 0)', 'stroke_color')]
+    #[ImagickColorHasInputType('rgb(0, 0, 0)', 'stroke_color')]
     private string $stroke_color;
 
     private string $fill_color;
@@ -321,7 +321,7 @@ class OneColorNoConstructor
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 }
 
@@ -329,7 +329,7 @@ class ThreeColorsPrivateConstructor
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
     /**
@@ -348,13 +348,13 @@ class ThreeColorsIncorrectParamName
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
-    #[ImagickColorHasDataType('rgb(0, 0, 0)', 'stroke_color')]
+    #[ImagickColorHasInputType('rgb(0, 0, 0)', 'stroke_color')]
     private string $stroke_color;
 
-    #[ImagickColorHasDataType('rgb(0, 0, 255)', 'fill_color')]
+    #[ImagickColorHasInputType('rgb(0, 0, 255)', 'fill_color')]
     private string $fill_color;
 
     public function __construct(string $background_color, string $stroke_color, string $solid_color)
@@ -371,8 +371,8 @@ class MultipleParamAnnotations
 {
     use SafeAccess;
 
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'background_color')]
-    #[ImagickColorHasDataType('rgb(225, 225, 225)', 'fill_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
+    #[ImagickColorHasInputType('rgb(225, 225, 225)', 'fill_color')]
     private string $background_color;
 
     /**
@@ -463,7 +463,7 @@ class OneColorGetsCorrectSpelling
 
     const DEFAULT_COLOR = "rgb(225, 225, 225)";
 
-    #[ImagickColorHasDataType(self::DEFAULT_COLOR, 'backgroundColor')] //this is input name
+    #[ImagickColorHasInputType(self::DEFAULT_COLOR, 'backgroundColor')] //this is input name
     private string $background_color; // this is target name
 
     public function __construct(string $background_color)

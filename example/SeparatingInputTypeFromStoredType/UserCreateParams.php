@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace SeparatingInputTypeFromStoredType;
 
-use TypeSpec\Create\CreateFromRequest;
-use TypeSpec\HasDataTypeList;
-use TypeSpec\DataType;
+use DataType\Create\CreateFromRequest;
+use DataType\DataType;
+use DataType\InputType;
 
 /**
  * This represents the input data
  */
-class UserCreateParams implements HasDataTypeList
+class UserCreateParams implements DataType
 {
     use ToArray;
     use CreateFromRequest;
@@ -32,18 +32,18 @@ class UserCreateParams implements HasDataTypeList
     }
 
     /**
-     * @return \TypeSpec\DataType[]
+     * @return \DataType\InputType[]
      */
-    public static function getDataTypeList(): array
+    public static function getInputTypes(): array
     {
         return [
-            new DataType(
+            new InputType(
                 'username',
                 new GetString(),
                 new MinLength(4),
                 new MaxLength(2048)
             ),
-            new DataType(
+            new InputType(
                 'password',
                 new GetString(),
                 new MinLength(4),

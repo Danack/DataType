@@ -1,7 +1,7 @@
 {
 
-  "name": "danack/typespec",
-  "description": "A library that makes data types easier",
+  "name": "danack/datatype",
+  "description": "A library that makes using data types easier",
   "license": "MIT",
   "require": {
     "php" : ">8.0",
@@ -24,17 +24,17 @@
   },
   "autoload": {
     "files": [
-      "src/TypeSpec/functions.php",
-      "src/TypeSpec/functions_internal.php"
+      "src/DataType/functions.php",
+      "src/DataType/functions_internal.php"
     ],
     "psr-0": {
-      "TypeSpec\\": "src/"
+      "DataType\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-0": {
-      "TypeSpecTest\\": "test/",
-      "TypeSpecExample\\": "example/"
+      "DataTypeTest\\": "test/",
+      "DataTypeExample\\": "example/"
     }
   },
   "config": {

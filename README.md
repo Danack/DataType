@@ -31,11 +31,11 @@ class SearchController
 
 ```php
 
-class SearchParameters implements HasDataTypeList
+class SearchParameters implements DataType
 {
     use CreateFromRequest;
     use CreateFromVarMap;
-    use GetDataTypeListFromAttributes;
+    use GetInputTypesFromAttributes;
 
     public function __construct(
         #[SearchTerm('search')]
@@ -51,6 +51,51 @@ class SearchParameters implements HasDataTypeList
 }
 ```
 
+
+```php
+
+
+
+#[\Attribute]
+class SearchTerm implements HasInputType
+{
+    public function __construct(
+        private string $name
+    ) {
+    }
+
+    public function getInputType(): InputType
+    {
+        return new InputType(
+            $this->name,
+            new GetString(),
+            new MinLength(3),
+            new MaxLength(200),
+        );
+    }
+}
+
+
+#[\Attribute]
+class MaxItems implements HasInputType
+{
+    public function __construct(
+        private string $name
+    ) {
+    }
+
+    public function getInputType(): InputType
+    {
+        return new InputType(
+            $this->name,
+            new GetIntOrDefault(20),
+            new MinIntValue(1),
+            new MaxIntValue(200),
+        );
+    }
+}
+
+```
 
 
 

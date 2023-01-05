@@ -21,7 +21,7 @@
         <!-- TODO - this needs to be re-enabled -->
         <MixedArgument>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
+                <file name="src/DataType/functions.php"/>
             </errorLevel>
         </MixedArgument>
 
@@ -29,8 +29,8 @@
         <!-- TODO - find a better way of handling this. Or rewrite PHP preg functions. -->
         <MixedArrayAccess>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/ProcessRule/SaneCharacters.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/ProcessRule/SaneCharacters.php"/>
             </errorLevel>
         </MixedArrayAccess>
 
@@ -38,38 +38,38 @@
         <!-- TODO - this needs to be re-enabled -->
         <InvalidReturnStatement>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/OpenApi/OpenApiV300ParamDescription.php" />
+                <file name="src/DataType/OpenApi/OpenApiV300ParamDescription.php" />
             </errorLevel>
         </InvalidReturnStatement>
 
         <!-- TODO - this needs to be re-enabled -->
         <InvalidReturnType>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/OpenApi/OpenApiV300ParamDescription.php" />
+                <file name="src/DataType/OpenApi/OpenApiV300ParamDescription.php" />
             </errorLevel>
         </InvalidReturnType>
 
         <!-- TODO - this needs to be re-enabled -->
         <MixedArgumentTypeCoercion>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/ProcessRule/CheckOnlyAllowedCharacters.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/ProcessRule/CheckOnlyAllowedCharacters.php"/>
             </errorLevel>
         </MixedArgumentTypeCoercion>
 
         <!-- TODO - this needs to be re-enabled -->
         <MixedReturnStatement>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/Value/Ordering.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/Value/Ordering.php"/>
             </errorLevel>
         </MixedReturnStatement>
 
         <!-- TODO - this needs to be re-enabled -->
         <MixedInferredReturnType>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/Value/Ordering.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/Value/Ordering.php"/>
             </errorLevel>
         </MixedInferredReturnType>
 
@@ -77,46 +77,46 @@
         <!-- TODO - this needs to be re-enabled -->
         <MixedOperand>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
+                <file name="src/DataType/functions.php"/>
             </errorLevel>
         </MixedOperand>
 
         <MixedArgument>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/DataStorage/ArrayDataStorage.php"/>
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/ProcessRule/SaneCharacters.php"/>
-                <file name="src/TypeSpec/ProcessRule/CheckOnlyAllowedCharacters.php"/>
+                <file name="src/DataType/DataStorage/ArrayDataStorage.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/ProcessRule/SaneCharacters.php"/>
+                <file name="src/DataType/ProcessRule/CheckOnlyAllowedCharacters.php"/>
             </errorLevel>
         </MixedArgument>
 
         <MixedArrayAccess>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/functions.php"/>
-                <file name="src/TypeSpec/ProcessRule/SaneCharacters.php"/>
-                <file name="src/TypeSpec/ProcessRule/CheckOnlyAllowedCharacters.php"/>
+                <file name="src/DataType/functions.php"/>
+                <file name="src/DataType/ProcessRule/SaneCharacters.php"/>
+                <file name="src/DataType/ProcessRule/CheckOnlyAllowedCharacters.php"/>
             </errorLevel>
         </MixedArrayAccess>
 
         <UndefinedInterfaceMethod>
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/ProcessRule/EarlierThanParam.php"/>
-                <file name="src/TypeSpec/ProcessRule/LaterThanParam.php"/>
+                <file name="src/DataType/ProcessRule/EarlierThanParam.php"/>
+                <file name="src/DataType/ProcessRule/LaterThanParam.php"/>
             </errorLevel>
         </UndefinedInterfaceMethod>
 
         <RedundantConditionGivenDocblockType>
             <!-- psalm I have no idea why this is a problem -->
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/ExtractRule/GetDatetime.php"/>
+                <file name="src/DataType/ExtractRule/GetDatetime.php"/>
             </errorLevel>
         </RedundantConditionGivenDocblockType>
 
         <DocblockTypeContradiction>
             <!-- psalm I have no idea why this is a problem -->
             <errorLevel type="suppress">
-                <file name="src/TypeSpec/ExtractRule/GetDatetime.php"/>
-                <file name="src/TypeSpec/ValidationResult.php"/>
+                <file name="src/DataType/ExtractRule/GetDatetime.php"/>
+                <file name="src/DataType/ValidationResult.php"/>
             </errorLevel>
         </DocblockTypeContradiction>
     </issueHandlers>

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TypeSpecExample;
+namespace DataTypeExample;
 
-use TypeSpec\ExtractRule\GetArrayOfType;
+use DataType\ExtractRule\GetArrayOfType;
 use VarMap\ArrayVarMap;
-use TypeSpecTest\Integration\ReviewScore;
-use TypeSpecTest\Integration\ItemListParams;
+use DataTypeTest\Integration\ReviewScore;
+use DataTypeTest\Integration\ItemParams;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -21,7 +21,7 @@ $varMap = new ArrayVarMap([
     'description' => 'This is some test data.'
 ]);
 
-$itemList = ItemListParams::createFromVarMap($varMap);
+$itemList = ItemParams::createFromVarMap($varMap);
 
 echo "Description: " . $itemList->getDescription() . "\n";
 

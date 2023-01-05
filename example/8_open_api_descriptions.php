@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace TypeSpecExample;
+namespace DataTypeExample;
 
-use TypeSpec\OpenApi\OpenApiV300ParamDescription;
+use DataType\OpenApi\OpenApiV300ParamDescription;
 
 require __DIR__ . "/../vendor/autoload.php";
 
-$inputToParamRuleList = GetArticlesParameters::getDataTypeList();
+$inputToParamRuleList = GetArticlesParameters::getInputTypes();
 
-$descriptions = OpenApiV300ParamDescription::createFromInputTypeSpecList($inputToParamRuleList);
+$descriptions = OpenApiV300ParamDescription::createFromInputTypes($inputToParamRuleList);
 
 echo json_encode($descriptions, JSON_PRETTY_PRINT);
 

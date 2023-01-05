@@ -54,11 +54,11 @@ function get_class_docblocks($classnames, $namespace)
 }
 
 $extract_classnames = get_classnames(
-    __DIR__ . "/src/TypeSpec/ExtractRule",
+    __DIR__ . "/src/DataType/ExtractRule",
     ["ExtractPropertyRule"]
 );
 $process_classnames = get_classnames(
-    __DIR__ . "/src/TypeSpec/ProcessRule",
+    __DIR__ . "/src/DataType/ProcessRule",
     ["CheckString"]
 );
 

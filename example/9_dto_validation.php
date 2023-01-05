@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use TypeSpecExample\DTOTypes\TestDTO;
-use function TypeSpec\validate;
+use DataTypeExample\DTOTypes\TestDTO;
+use function DataType\validate;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -19,7 +19,7 @@ $dto = new TestDTO('purple', -15);
 echo "2 - there were " . count($validationProblems) . " validation problems.\n";
 
 foreach ($validationProblems as $validationProblem) {
-    /** @var \TypeSpec\ValidationProblem $validationProblem */
+    /** @var \DataType\ValidationProblem $validationProblem */
     echo $validationProblem->getProblemMessage() . "\n";
 }
 
