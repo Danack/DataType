@@ -141,22 +141,22 @@ function getDataTypeListForClass(string $className): array
     }
 
     // TODO - fold into single function
-    $inputParameterList = getDataTypeListFromAnnotations($className);
+//    $inputParameterList = getDataTypeListFromAnnotations($className);
 
-    if (count($inputParameterList) === 0) {
+//    if (count($inputParameterList) === 0) {
         $implementsInterface = is_subclass_of(
             $className,
             HasDataTypeList::class,
             $allow_string = true
         );
 
-        if ($implementsInterface !== true) {
-            throw TypeNotInputParameterListException::fromClassname($className);
-        }
+    if ($implementsInterface !== true) {
+        throw TypeNotInputParameterListException::fromClassname($className);
+    }
 
         // Type is okay, get data and validate
         $inputParameterList = call_user_func([$className, 'getDataTypeList']);
-    }
+//    }
     // TODO - end fold into single function
 
     // Validate all entries are InputParameters

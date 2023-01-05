@@ -9,13 +9,10 @@ A library for validating input and creating types.
 ```composer require danack/typespec```
 
 
-# TL:DR - Using in an application
+# 
 
+In your controller, you would have some code to create the type. e.g. for Symfony you would have something like:
 
-
-
-
-Symfony
 ```php
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +28,28 @@ class SearchController
 }
 ```
 
+
+```php
+
+class SearchParameters implements HasDataTypeList
+{
+    use CreateFromRequest;
+    use CreateFromVarMap;
+    use GetDataTypeListFromAttributes;
+
+    public function __construct(
+        #[SearchTerm('search')]
+        public string $phrase,
+
+        #[MaxItems('limit')]
+        public int $limit,
+
+        #[ArticleSearchOrdering('order')]
+        public Ordering $ordering,
+    ) {
+    }
+}
+```
 
 
 

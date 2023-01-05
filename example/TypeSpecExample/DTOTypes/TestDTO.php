@@ -7,8 +7,9 @@ namespace TypeSpecExample\DTOTypes;
 use TypeSpecExample\PropertyTypes\KnownColors;
 use TypeSpecExample\PropertyTypes\Quantity;
 use TypeSpec\GetDataTypeListFromAttributes;
+use TypeSpec\HasDataTypeList;
 
-class TestDTO
+class TestDTO implements HasDataTypeList
 {
     use GetDataTypeListFromAttributes;
 

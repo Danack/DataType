@@ -6,6 +6,9 @@ namespace TypeSpec;
 
 trait GetDataTypeListFromAttributes
 {
+    // If PHP would allow traits to implement interfaces
+    // this would implement \TypeSpec\HasDataTypeList
+
     /**
      * @return \TypeSpec\DataType[]
      * @throws \ReflectionException

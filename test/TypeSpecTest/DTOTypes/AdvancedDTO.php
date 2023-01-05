@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace TypeSpecTest\DTOTypes;
 
+use TypeSpec\HasDataTypeList;
 use TypeSpecTest\PropertyTypes\MultipleBasicDTO;
 use TypeSpecTest\PropertyTypes\Quantity;
 use TypeSpec\GetDataTypeListFromAttributes;
 
-class AdvancedDTO
+class AdvancedDTO implements HasDataTypeList
 {
     use GetDataTypeListFromAttributes;
 

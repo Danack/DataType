@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace TypeSpecTest\DTOTypes;
 
+use TypeSpec\HasDataTypeList;
 use TypeSpecTest\PropertyTypes\KnownColors;
 use TypeSpecTest\PropertyTypes\Quantity;
 use TypeSpec\GetDataTypeListFromAttributes;
 
-class BasicDTO
+class BasicDTO implements HasDataTypeList
 {
     use GetDataTypeListFromAttributes;
 
