@@ -28,6 +28,8 @@ class Messages
     public const ERROR_DATETIME_MUST_START_AS_STRING = 'Input for datetime must be string';
     public const ERROR_DATE_FORMAT_MUST_BE_STRING = 'Datetime format must be array of strings. Found type %s at position %d';
 
+    public const ERROR_EMAIL_NO_AT_CHARACTER = "Email addresses must contain an '@' character.";
+    public const ERROR_EMAIL_INVALID = "Not a valid email address.";
 
     // Enum
     // TODO - this message looks wrong.
