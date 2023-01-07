@@ -13,8 +13,9 @@ use DataType\DataStorage\DataStorage;
 use DataType\Exception\MissingClassExceptionData;
 use DataType\Exception\DataTypeDefinitionException;
 use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
+use DataType\OpenApi\OpenApiV300ParamDescription;
 
 /**
  * @template T
@@ -22,7 +23,7 @@ use DataType\ExtractRule\GetType;
  * @param \DataType\InputType[] $inputTypeList
  * @param DataStorage $dataStorage
  * @return T of object
- * @throws ValidationExceptionData
+ * @throws ValidationException
  * @throws \ReflectionException
  */
 function create(
@@ -39,7 +40,7 @@ function create(
     );
 
     if (count($validationProblems) !== 0) {
-        throw new ValidationExceptionData("Validation problems", $validationProblems);
+        throw new ValidationException("Validation problems", $validationProblems);
     }
     $object = createObjectFromProcessedValues($classname, $processedValues);
 
@@ -54,7 +55,7 @@ function create(
  * @param DataStorage $dataStorage
  * @return array{0:?object, 1:\DataType\ValidationProblem[]}
  * @throws Exception\DataTypeException
- * @throws ValidationExceptionData
+ * @throws ValidationException
  *
  * The rules are passed separately to the classname so that we can
  * support rules coming both from static info and from factory objects.
@@ -86,13 +87,13 @@ function createOrError($classname, $inputTypes, DataStorage $dataStorage)
  * @throws DataTypeDefinitionException
  * @throws MissingClassExceptionData
  * @throws DataTypeNotImplementedException
- * @throws ValidationExceptionData
+ * @throws ValidationException
  */
 function validate(object $dto)
 {
     $class = get_class($dto);
 
-    $dataTypeListForClass = getDataTypeListForClass($class);
+    $dataTypeListForClass = getInputTypeListForClass($class);
 
     $dataStorage = ComplexDataStorage::fromData($dto);
 
@@ -114,7 +115,7 @@ function validate(object $dto)
  * @psalm-param class-string<T> $type
  * @param array $data
  * @return T[]
- * @throws ValidationExceptionData
+ * @throws ValidationException
  */
 function createArrayOfType(string $type, array $data): array
 {
@@ -123,7 +124,7 @@ function createArrayOfType(string $type, array $data): array
     $validationResult = createArrayOfTypeFromInputStorage($dataStorage, $getType);
 
     if ($validationResult->anyErrorsFound()) {
-        throw new ValidationExceptionData(
+        throw new ValidationException(
             "Validation problems",
             $validationResult->getValidationProblems()
         );
@@ -154,4 +155,22 @@ function createArrayOfTypeOrError(string $type, array $data): array
     /** @var T[] $finalValue */
 
     return [$finalValue, null];
+}
+
+function generateOpenApiV300DescriptionForDataType(string $classname)
+{
+    $implementsInterface = is_subclass_of(
+        $classname,
+        DataType::class,
+        $allow_string = true
+    );
+
+    if ($implementsInterface !== true) {
+        throw DataTypeNotImplementedException::fromClassname($classname);
+    }
+
+    // Type is okay, get data
+    $inputTypes = call_user_func([$classname, 'getInputTypes']);
+
+    return OpenApiV300ParamDescription::createFromInputTypes($inputTypes);
 }

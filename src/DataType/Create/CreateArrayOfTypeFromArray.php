@@ -5,21 +5,23 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
 use VarMap\VarMap;
 use function DataType\createArrayOfTypeFromInputStorage;
 
 /**
- * Use this trait when the parameters arrive as named parameters e.g
- * either as query string parameters, form elements, or other form body.
+ * Creates an array of DataType from a plain array or throws a ValidationException if there is a
+ * a problem validating the data.
+ *
+ * Using this avoid needing to create a 'collection type' to hold other DataTypes.
  */
 trait CreateArrayOfTypeFromArray
 {
     /**
      * @param VarMap $variableMap
      * @return self[]
-     * @throws \DataType\Exception\ValidationExceptionData
+     * @throws \DataType\Exception\ValidationException
      */
     public static function createArrayOfTypeFromArray(array $data)
     {
@@ -32,7 +34,7 @@ trait CreateArrayOfTypeFromArray
         );
 
         if ($validationResult->anyErrorsFound() === true) {
-            throw new ValidationExceptionData(
+            throw new ValidationException(
                 "Validation problems",
                 $validationResult->getValidationProblems()
             );

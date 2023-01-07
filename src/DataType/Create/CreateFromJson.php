@@ -8,28 +8,28 @@ use DataType\DataStorage\ArrayDataStorage;
 use VarMap\ArrayVarMap;
 use function JsonSafe\json_decode_safe;
 use function DataType\create;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 
 /**
- * Use this trait when the parameters arrive as named parameters e.g
- * either as query string parameters, form elements, or other form body.
+ * Creates a DataType from JSON or throws a ValidationException if there is a
+ * a problem validating the data.
  */
 trait CreateFromJson
 {
     /**
      * @param string $json
      * @return self
-     * @throws \DataType\Exception\ValidationExceptionData
+     * @throws \DataType\Exception\ValidationException
      */
     public static function createFromJson($json)
     {
-        $rules = getDataTypeListForClass(self::class);
+        $inputTypeList = getInputTypeListForClass(self::class);
         $data = json_decode_safe($json);
         $dataStorage = ArrayDataStorage::fromArray($data);
 
         $object = create(
             static::class,
-            $rules,
+            $inputTypeList,
             $dataStorage
         );
 

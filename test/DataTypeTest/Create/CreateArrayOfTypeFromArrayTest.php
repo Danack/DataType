@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Create;
 
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataTypeTest\BaseTestCase;
 use DataTypeTest\Integration\ReviewScore;
 
@@ -56,7 +56,7 @@ class CreateArrayOfTypeFromArrayTest extends BaseTestCase
             ['score' => $scores[1], ]
         ];
 
-        $this->expectException(ValidationExceptionData::class);
+        $this->expectException(ValidationException::class);
         $this->expectExceptionMessage("Validation problems /1/comment Value not set.");
 
         ReviewScore::createArrayOfTypeFromArray($data);

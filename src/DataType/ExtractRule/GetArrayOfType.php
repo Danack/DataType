@@ -10,10 +10,10 @@ use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
 use function DataType\createArrayOfTypeFromInputStorage;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 
 /**
- * Extracts an array of a DataType.
+ * Extracts an array of a InputType.
  */
 class GetArrayOfType implements ExtractRule
 {
@@ -31,7 +31,7 @@ class GetArrayOfType implements ExtractRule
     public function __construct(string $className)
     {
         $this->className = $className;
-        $this->inputTypes = getDataTypeListForClass($this->className);
+        $this->inputTypes = getInputTypeListForClass($this->className);
 
         $this->typeExtractor = GetType::fromClassAndInputTypes(
             $this->className,

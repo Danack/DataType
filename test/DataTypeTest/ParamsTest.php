@@ -6,7 +6,7 @@ namespace DataTypeTest;
 
 use DataType\DataStorage\DataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;
 use DataTypeTest\BaseTestCase;
@@ -76,7 +76,7 @@ class ParamsTest extends BaseTestCase
             )
         ];
 
-        $this->expectException(\DataType\Exception\ValidationExceptionData::class);
+        $this->expectException(\DataType\Exception\ValidationException::class);
         // TODO - we should output the keys as well.
         $this->expectExceptionMessage("Value not set.");
         create('Foo', $rules, $dataStorage);
@@ -154,7 +154,7 @@ class ParamsTest extends BaseTestCase
 
             $this->fail("This shouldn't be reached, as an exception should have been thrown.");
         }
-        catch (ValidationExceptionData $validationException) {
+        catch (ValidationException $validationException) {
             $this->assertValidationProblem(
                 '/foo',
                 $errorMessage,

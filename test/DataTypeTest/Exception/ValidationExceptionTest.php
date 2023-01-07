@@ -6,7 +6,7 @@ namespace DataTypeTest\Exception;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ValidationProblem;
 
 /**
@@ -15,7 +15,7 @@ use DataType\ValidationProblem;
 class ValidationExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\ValidationExceptionData
+     * @covers \DataType\Exception\ValidationException
      */
     public function testGetting()
     {
@@ -30,7 +30,7 @@ class ValidationExceptionTest extends BaseTestCase
         ];
         $initialString = 'unit test';
 
-        $exception = new ValidationExceptionData(
+        $exception = new ValidationException(
             $initialString,
             $validationMessages
         );
@@ -61,7 +61,7 @@ class ValidationExceptionTest extends BaseTestCase
 
         $validationProblem = new ValidationProblem($dataStorageAtFoo, $detail_of_problem);
 
-        $exception = new ValidationExceptionData(
+        $exception = new ValidationException(
             $general_description,
             [$validationProblem]
         );

@@ -21,7 +21,7 @@ use DataType\Exception\NoConstructorExceptionData;
 use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
 use DataType\Exception\DataTypeDefinitionException;
 use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
 use DataType\ProcessRule\ProcessRule;
 use DataType\Value\Ordering;
@@ -134,7 +134,7 @@ function createArrayOfTypeFromInputStorage(
  * @throws MissingClassExceptionData
  * @throws DataTypeNotImplementedException
  */
-function getDataTypeListForClass(string $className): array
+function getInputTypeListForClass(string $className): array
 {
     if (class_exists($className) !== true) {
         throw MissingClassExceptionData::fromClassname($className);
@@ -205,7 +205,7 @@ function get_all_constructor_parameters(
  * @param mixed $inputValue
  * @return mixed
  * @throws Exception\DataTypeException
- * @throws ValidationExceptionData
+ * @throws ValidationException
  *
  * Validates and creates a single value according to the HasInputType
  * rules.
@@ -230,7 +230,7 @@ function createSingleValue(HasInputType $hasDataType, mixed $inputValue)
     );
 
     if (count($validationProblems) !== 0) {
-        throw new ValidationExceptionData(
+        throw new ValidationException(
             "Validation problems",
             $validationProblems
         );
@@ -247,7 +247,7 @@ function createSingleValue(HasInputType $hasDataType, mixed $inputValue)
  * @param mixed $inputValue
  * @return array{0:mixed, 1:\DataType\ValidationProblem[]}
  * @throws Exception\DataTypeException
- * @throws ValidationExceptionData
+ * @throws ValidationException
  *
  * Validates and creates a single value according to the HasInputType
  * rules.

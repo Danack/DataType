@@ -7,26 +7,24 @@ namespace DataType\Create;
 use DataType\DataStorage\ArrayDataStorage;
 use VarMap\VarMap;
 use function DataType\create;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 
 /**
- * Use this trait when the parameters arrive as named parameters e.g
- * either as query string parameters, form elements, or other form body.
+ * Creates a DataType from a VarMap or throws a ValidationException if there is a
+ * a problem validating the data.
  */
 trait CreateFromVarMap
 {
     /**
      * @param VarMap $variableMap
      * @return self
-     * @throws \DataType\Exception\ValidationExceptionData
+     * @throws \DataType\Exception\ValidationException
      */
     public static function createFromVarMap(VarMap $variableMap)
     {
-        $rules = getDataTypeListForClass(self::class);
-
+        $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
-
-        $object = create(static::class, $rules, $dataStorage);
+        $object = create(static::class, $inputTypeList, $dataStorage);
         /** @var $object self */
         return $object;
     }

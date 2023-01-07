@@ -7,20 +7,25 @@ namespace DataType\Create;
 use DataType\DataStorage\ArrayDataStorage;
 use VarMap\VarMap;
 use function DataType\createOrError;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 
+/**
+ * Creates a DataType from a VarMap.
+ *
+ * Returns two values, the DataType created or null and an array of ValidationProblems if there were any.
+ */
 trait CreateOrErrorFromVarMap
 {
     /**
      * @param VarMap $variableMap
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
-     * @throws \DataType\Exception\ValidationExceptionData
+     * @throws \DataType\Exception\ValidationException
      */
     public static function createOrErrorFromVarMap(VarMap $variableMap)
     {
-        $rules = getDataTypeListForClass(self::class);
+        $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 
-        return createOrError(static::class, $rules, $dataStorage);
+        return createOrError(static::class, $inputTypeList, $dataStorage);
     }
 }

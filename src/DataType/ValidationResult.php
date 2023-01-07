@@ -86,9 +86,6 @@ class ValidationResult
             }
         }
 
-        // TODO - check that arrays are not string indexed, as this
-        // breaks the combining code.
-
         return new self(null, $validationProblems, true);
     }
 

@@ -10,7 +10,7 @@ use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
 use function DataType\createObjectFromProcessedValues;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 use function DataType\processInputTypesFromStorage;
 
 /**
@@ -41,7 +41,7 @@ class GetType implements ExtractRule
     {
         return new self(
             $classname,
-            getDataTypeListForClass($classname)
+            getInputTypeListForClass($classname)
         );
     }
 

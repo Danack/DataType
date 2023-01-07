@@ -8,11 +8,9 @@ A library for validating input and creating types.
 
 ```composer require danack/typespec```
 
-
 # Example usage
 
 The full documentation is in DOCS.md, but here is an example usage.
-
 
 In your controller, you would have some code to create the type. e.g. for Symfony you would have something like:
 
@@ -33,6 +31,8 @@ class SearchController
 }
 ```
 
+
+In your code you would have a data type that represents a particular concept, e.g. the parameters 
 
 ```php
 
@@ -65,7 +65,6 @@ use DataType\InputType;
 use DataType\HasInputType;
 use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\MinLength;
-
 
 #[\Attribute]
 class SearchTerm implements HasInputType
@@ -117,6 +116,61 @@ class MaxItems implements HasInputType
     }
 }
 ```
+
+## OpenAPI descriptions
+
+```php
+<?php
+
+$openapi_descriptions = generateOpenApiV300DescriptionForDataType(SearchParameters::class);
+
+echo json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
+```
+
+
+```json
+[
+    {
+        "name": "search",
+        "required": true,
+        "schema": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 200
+        }
+    },
+    {
+        "name": "limit",
+        "required": false,
+        "schema": {
+            "minimum": 1,
+            "maximum": 200,
+            "default": 20,
+            "type": "integer",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false
+        }
+    },
+    {
+        "name": "order",
+        "required": false,
+        "schema": {
+            "default": "article_id",
+            "type": "array"
+        }
+    }
+]
+```
+
+
+
+
+
+
+
+
+
+
 
 
 

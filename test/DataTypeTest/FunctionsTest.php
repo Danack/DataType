@@ -14,7 +14,7 @@ use DataType\Exception\MissingConstructorParameterNameExceptionData;
 use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
 use DataType\Exception\DataTypeDefinitionException;
 use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 use DataType\ExtractRule\ExtractRule;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetString;
@@ -44,7 +44,7 @@ use function DataType\createArrayOfTypeOrError;
 use function DataType\createObjectFromProcessedValues;
 use function DataType\createSingleValue;
 use function DataType\createSingleValueOrError;
-use function DataType\getDataTypeListForClass;
+use function DataType\getInputTypeListForClass;
 use function DataType\getInputTypesFromAnnotations;
 use function DataType\getDefaultSupportedTimeFormats;
 use function DataType\getRawCharacters;
@@ -255,7 +255,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_getInputParameterListForClass()
     {
-        $inputParameters = getDataTypeListForClass(\TestParams::class);
+        $inputParameters = getInputTypeListForClass(\TestParams::class);
         $this->assertCount(1, $inputParameters);
     }
 
@@ -265,7 +265,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_missing_class()
     {
         $this->expectException(MissingClassExceptionData::class);
-        $inputParameters = getDataTypeListForClass("does_not_exist");
+        $inputParameters = getInputTypeListForClass("does_not_exist");
     }
 
     /**
@@ -274,7 +274,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_missing_implements()
     {
         $this->expectException(DataTypeNotImplementedException::class);
-        $inputParameters = getDataTypeListForClass(
+        $inputParameters = getInputTypeListForClass(
             \DoesNotImplementInputParameterList::class
         );
     }
@@ -285,7 +285,7 @@ class FunctionsTest extends BaseTestCase
     public function test_getInputParameterListForClass_non_inputparameter()
     {
         $this->expectException(DataTypeDefinitionException::class);
-        $inputParameters = getDataTypeListForClass(
+        $inputParameters = getInputTypeListForClass(
             \ReturnsBadDataType::class
         );
     }
@@ -773,7 +773,7 @@ class FunctionsTest extends BaseTestCase
             ['limit' => -30]
         ];
 
-        $this->expectException(ValidationExceptionData::class);
+        $this->expectException(ValidationException::class);
         $this->expectExceptionMessage(
             "Validation problems /1/limit Value too small. Min allowed is 0"
         );
@@ -931,7 +931,7 @@ class FunctionsTest extends BaseTestCase
 
     /**
      * @covers ::\DataType\createSingleValue
-     * @throws ValidationExceptionData
+     * @throws ValidationException
      * @throws \DataType\Exception\DataTypeException
      */
     public function testCreateSingleValue()
@@ -949,7 +949,7 @@ class FunctionsTest extends BaseTestCase
         try {
             $value = createSingleValue($colorInputTypeSpec, $errorInputString);
         }
-        catch (\DataType\Exception\ValidationExceptionData $ve) {
+        catch (\DataType\Exception\ValidationException $ve) {
             $this->assertCount(1, $ve->getValidationProblems());
             $this->assertValidationProblemRegexp(
                 '/background_color',
@@ -961,7 +961,7 @@ class FunctionsTest extends BaseTestCase
 
     /**
      * @covers ::\DataType\createSingleValueOrError
-     * @throws ValidationExceptionData
+     * @throws ValidationException
      * @throws \DataType\Exception\DataTypeException
      */
     public function testCreateSingleValueOrError()

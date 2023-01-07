@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataType\Exception;
 
-class ValidationExceptionData extends DataTypeException
+class ValidationException extends DataTypeException
 {
     /**
      * @var \DataType\ValidationProblem[]

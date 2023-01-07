@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use DataTypeExample\GetArticlesParameters;
 use VarMap\ArrayVarMap;
-use DataType\Exception\ValidationExceptionData;
+use DataType\Exception\ValidationException;
 
 require __DIR__ . "/../vendor/autoload.php";
 
@@ -17,7 +17,7 @@ try {
     echo "shouldn't reach here.";
     exit(-1);
 }
-catch (ValidationExceptionData $ve) {
+catch (ValidationException $ve) {
     echo "There were validation problems parsing the input:\n  ";
     echo implode("\n  ", $ve->getValidationProblemsAsStrings());
 
