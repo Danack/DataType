@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace DataTypeTest\ExtractRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\JsonDecodeException;
 use DataType\ExtractRule\GetKernelMatrixOrDefault;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -74,9 +75,6 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
         $this->assertNoProblems($validationResult);
         $this->assertEquals($validationResult->getValue(), $default);
     }
-
-
-
 
     /**
      * * @covers \DataType\ExtractRule\GetKernelMatrixOrDefault
@@ -172,7 +170,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
             "this is not valid json {}{"
         );
 
-        $this->expectException(\DataType\JsonSafe\JsonDecodeException::class);
+        $this->expectException(JsonDecodeException::class);
 
         $rule->process(
             $validator,
@@ -293,46 +291,5 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
         );
 
         $this->assertNull($validationResult->getValue());
-    }
-
-    public function testErrors_5()
-    {
-        /*
-         * oreach ($row as $value) {
-94
-                $floatRuleResult = $floatRule->process(
-95
-                    $value,
-96
-                    $processedValues,
-97
-                    $dataStorage
-98
-                );
-99
-100
-                if ($floatRuleResult->anyErrorsFound()) {
-101
-                    foreach ($floatRuleResult->getValidationProblems() as $validationProblem) {
-102
-                        $validationProblems[] = $validationProblem;
-103
-                    }
-104
-                }
-105
-            }
-                */
-    }
-
-    public function testErrors_6()
-    {
-        /*
-         * if (count($validationProblems) !== 0) {
-111
-            return ValidationResult::fromValidationProblems($validationProblems);
-112
-
-                */
     }
 }

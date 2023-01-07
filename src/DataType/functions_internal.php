@@ -23,8 +23,8 @@ use DataType\Exception\DataTypeDefinitionException;
 use DataType\Exception\DataTypeNotImplementedException;
 use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
-use DataType\JsonSafe\JsonDecodeException;
-use DataType\JsonSafe\JsonEncodeException;
+use DataType\Exception\JsonDecodeException;
+use DataType\Exception\JsonEncodeException;
 use DataType\ProcessRule\ProcessRule;
 use DataType\Value\Ordering;
 

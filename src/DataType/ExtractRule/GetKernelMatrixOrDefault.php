@@ -6,7 +6,7 @@ namespace DataType\ExtractRule;
 
 use DataType\DataStorage\DataStorage;
 use DataType\Exception\LogicExceptionData;
-use DataType\JsonSafe\JsonDecodeException;
+use DataType\Exception\JsonDecodeException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -107,7 +107,5 @@ class GetKernelMatrixOrDefault implements ExtractRule
     {
         $paramDescription->setType(ParamDescription::TYPE_ARRAY);
         $paramDescription->setFormat('kernel_matrix');
-//        $paramDescription->setDefault($this->default);
-//        $paramDescription->setRequired(false);
     }
 }

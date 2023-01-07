@@ -5,8 +5,8 @@ namespace DataTypeTest;
 use DataType\Exception\LogicExceptionData;
 use DataType\Exception\MissingConstructorParameterNameExceptionData;
 use DataType\ExtractRule\GetInt;
-use DataType\JsonSafe\JsonEncodeException;
-use DataType\JsonSafe\JsonDecodeException;
+use DataType\Exception\JsonEncodeException;
+use DataType\Exception\JsonDecodeException;
 use DataType\Messages;
 use DataType\ProcessedValue;
 use DataTypeTest\Fixtures\ClassThatHasSingleConstructorParameter;
@@ -98,9 +98,6 @@ class FunctionsInternalTest extends BaseTestCase
         $this->expectException(JsonEncodeException::class);
         json_encode_safe($data);
     }
-
-
-
 
     /**
      * @covers ::\DataType\json_decode_safe
