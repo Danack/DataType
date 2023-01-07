@@ -6,7 +6,7 @@ namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
 use VarMap\ArrayVarMap;
-use function JsonSafe\json_decode_safe;
+use function DataType\json_decode_safe;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;
 

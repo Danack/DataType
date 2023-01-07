@@ -5,13 +5,16 @@ namespace DataTypeTest;
 use DataType\Exception\LogicExceptionData;
 use DataType\Exception\MissingConstructorParameterNameExceptionData;
 use DataType\ExtractRule\GetInt;
+use DataType\JsonSafe\JsonEncodeException;
+use DataType\JsonSafe\JsonDecodeException;
 use DataType\Messages;
 use DataType\ProcessedValue;
 use DataTypeTest\Fixtures\ClassThatHasSingleConstructorParameter;
-use DataType\Exception\NoConstructorExceptionData;
 use DataType\ProcessedValues;
 use function Danack\PHPUnitHelper\templateStringToRegExp;
 use function DataType\get_all_constructor_parameters;
+use function DataType\json_decode_safe;
+use function DataType\json_encode_safe;
 
 class FunctionsInternalTest extends BaseTestCase
 {
@@ -68,5 +71,62 @@ class FunctionsInternalTest extends BaseTestCase
             $constructor_parameters,
             $processedValues
         );
+    }
+
+
+    /**
+     * @covers ::\DataType\json_encode_safe
+     * @covers ::\DataType\json_decode_safe
+     */
+    public function test_json_encode_safe()
+    {
+        $data = [1, 2, 3];
+
+        $json = json_encode_safe($data);
+
+        $outputData = json_decode_safe($json);
+        $this->assertSame($data, $outputData);
+    }
+
+    /**
+     * @covers ::\DataType\json_encode_safe
+     */
+    public function test_json_encode_safe_errors()
+    {
+        $data = [1, 2, fopen("php://input", "r")];
+
+        $this->expectException(JsonEncodeException::class);
+        json_encode_safe($data);
+    }
+
+
+
+
+    /**
+     * @covers ::\DataType\json_decode_safe
+     */
+    public function test_json_decode_safe_errors_with_null()
+    {
+        $this->expectException(JsonDecodeException::class);
+        json_decode_safe(null);
+    }
+
+    /**
+     * @covers ::\DataType\json_decode_safe
+     */
+    public function test_json_decode_safe_errors_with_null_data()
+    {
+        $this->expectException(JsonDecodeException::class);
+        $data = json_encode(null);
+        json_decode_safe($data);
+    }
+
+    /**
+     * @covers ::\DataType\json_decode_safe
+     */
+    public function test_json_decode_safe_errors_with_bad_data()
+    {
+        $this->expectException(JsonDecodeException::class);
+        json_decode_safe("{ foo");
     }
 }

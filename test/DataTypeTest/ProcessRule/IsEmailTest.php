@@ -8,6 +8,7 @@ use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\IsEmail;
+use DataType\ProcessRule\IsRgbColor;
 use DataTypeTest\BaseTestCase;
 use DataType\OpenApi\OpenApiV300ParamDescription;
 use DataType\Exception\InvalidRulesExceptionData;
@@ -97,5 +98,16 @@ class IsEmailTest extends BaseTestCase
             $expected_error,
             $validationResult->getValidationProblems()
         );
+    }
+
+
+    /**
+     * @covers \DataType\ProcessRule\IsEmail
+     */
+    public function testDescription()
+    {
+        $rule = new IsEmail();
+        $description = $this->applyRuleToDescription($rule);
+        $this->assertSame('email', $description->getFormat());
     }
 }

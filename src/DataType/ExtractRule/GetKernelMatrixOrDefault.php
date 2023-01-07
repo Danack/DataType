@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace DataType\ExtractRule;
 
-use JsonSafe\JsonDecodeException;
 use DataType\DataStorage\DataStorage;
 use DataType\Exception\LogicExceptionData;
+use DataType\JsonSafe\JsonDecodeException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
-use function JsonSafe\json_decode_safe;
+use function DataType\json_decode_safe;
 
 /**
  * Extracts a 2d matrix (aka array of arrays) of floating point values.

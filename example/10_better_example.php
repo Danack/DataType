@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use DataTypeExample\Parameters\SearchParameters;
 use VarMap\ArrayVarMap;
-use function DataType\validate;
 use function DataType\generateOpenApiV300DescriptionForDataType;
 
 require __DIR__ . "/../vendor/autoload.php";

@@ -23,6 +23,8 @@ use DataType\Exception\DataTypeDefinitionException;
 use DataType\Exception\DataTypeNotImplementedException;
 use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
+use DataType\JsonSafe\JsonDecodeException;
+use DataType\JsonSafe\JsonEncodeException;
 use DataType\ProcessRule\ProcessRule;
 use DataType\Value\Ordering;
 
@@ -650,4 +652,66 @@ function createArrayOfScalarsFromDataStorage(
     }
 
     return ValidationResult::valueResult($new_processed_values->getAllValues());
+}
+
+
+
+/**
+ * Decode JSON with actual error detection
+ *
+ * @param string|null $json
+ * @return mixed
+ * @throws JsonDecodeException
+ *
+ * null is allowed, as a type, so that a meaningful error can be thrown.
+ *
+ */
+function json_decode_safe(?string $json)
+{
+    if ($json === null) {
+        throw new JsonDecodeException("Error decoding JSON: cannot decode null.");
+    }
+
+    $data = json_decode($json, true);
+
+    if (json_last_error() === JSON_ERROR_NONE) {
+        if ($data === null) {
+            throw new JsonDecodeException("Error decoding JSON: null returned.");
+        }
+        return $data;
+    }
+
+    $parser = new \Seld\JsonLint\JsonParser();
+    $parsingException = $parser->lint($json);
+
+    if ($parsingException !== null) {
+        throw new JsonDecodeException(
+            $parsingException->getMessage(),
+            $parsingException->getCode(),
+            $parsingException
+        );
+    }
+
+    // This should never be reached.
+    // @codeCoverageIgnoreStart
+    throw new JsonDecodeException("Error decoding JSON: " . json_last_error_msg());
+    // @codeCoverageIgnoreEnd
+}
+
+
+/**
+ * @param mixed $data
+ * @param int $options
+ * @return string
+ * @throws JsonEncodeException
+ */
+function json_encode_safe($data, $options = 0): string
+{
+    $result = json_encode($data, $options);
+
+    if ($result === false) {
+        throw new JsonEncodeException("Failed to encode data as json: " . json_last_error_msg());
+    }
+
+    return $result;
 }

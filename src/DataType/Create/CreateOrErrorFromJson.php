@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use function JsonSafe\json_decode_safe;
+use function DataType\json_decode_safe;
 use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;
 

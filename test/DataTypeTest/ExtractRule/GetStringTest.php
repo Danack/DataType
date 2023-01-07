@@ -103,6 +103,24 @@ class GetStringTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetString
      */
+    public function testBadTypeErrors()
+    {
+        $rule = new GetString('bar');
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', 5)
+        );
+
+        $this->assertProblems(
+            $validationResult,
+            ['/foo' => Messages::STRING_EXPECTED]
+        );
+    }
+
+    /**
+     * @covers \DataType\ExtractRule\GetString
+     */
     public function testDescription()
     {
         $rule = new GetString();

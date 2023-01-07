@@ -70,7 +70,7 @@ class GetStringOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\ExtractRule\GetOptionalString
+     * @covers \DataType\ExtractRule\GetStringOrDefault
      */
     public function testBadTypeErrors()
     {

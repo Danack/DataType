@@ -34,6 +34,7 @@ use DataType\Value\Ordering;
 use DataTypeTest\Integration\FooErrorsButContinuesParams;
 use DataTypeTest\Integration\FooParams;
 use DataTypeTest\InputType\Quantity;
+use DataTypeTest\DTOTypes\BasicDTO;
 use function DataType\array_value_exists;
 use function DataType\check_only_digits;
 use function DataType\checkAllowedFormatsAreStrings;
@@ -55,6 +56,7 @@ use function DataType\processInputTypeWithDataStorage;
 use function DataType\processProcessingRules;
 use function DataType\processSingleInputType;
 use function DataType\validate;
+use function DataType\generateOpenApiV300DescriptionForDataType;
 
 /**
  * @coversNothing
@@ -251,7 +253,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\DataType\getDataTypeListForClass
+     * @covers ::\DataType\getInputTypeListForClass
      */
     public function test_getInputParameterListForClass()
     {
@@ -260,7 +262,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\DataType\getDataTypeListForClass
+     * @covers ::\DataType\getInputTypeListForClass
      */
     public function test_getInputParameterListForClass_missing_class()
     {
@@ -269,7 +271,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\DataType\getDataTypeListForClass
+     * @covers ::\DataType\getInputTypeListForClass
      */
     public function test_getInputParameterListForClass_missing_implements()
     {
@@ -280,7 +282,7 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @covers ::\DataType\getDataTypeListForClass
+     * @covers ::\DataType\getInputTypeListForClass
      */
     public function test_getInputParameterListForClass_non_inputparameter()
     {
@@ -1149,5 +1151,57 @@ class FunctionsTest extends BaseTestCase
             $result,
             ['/foo' => Messages::ERROR_MESSAGE_NOT_SET]
         );
+    }
+
+
+    /**
+     * @covers ::\DataType\generateOpenApiV300DescriptionForDataType
+     */
+    public function test_generateOpenApiV300DescriptionForDataType()
+    {
+        $result = generateOpenApiV300DescriptionForDataType(BasicDTO::class);
+
+        $expected = array (
+            0 =>
+                array (
+                    'name' => 'color',
+                    'required' => false,
+                    'schema' =>
+                        array (
+                            'default' => 'blue',
+                            'type' => 'string',
+                            'enum' =>
+                                array (
+                                    0 => 'red',
+                                    1 => 'green',
+                                    2 => 'blue',
+                                ),
+                        ),
+                ),
+            1 =>
+                array (
+                    'name' => 'quantity',
+                    'required' => true,
+                    'schema' =>
+                        array (
+                            'minimum' => 1,
+                            'maximum' => 20,
+                            'type' => 'integer',
+                            'exclusiveMaximum' => false,
+                            'exclusiveMinimum' => false,
+                        ),
+                ),
+        );
+
+        $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @covers ::\DataType\generateOpenApiV300DescriptionForDataType
+     */
+    public function test_generateOpenApiV300DescriptionForDataType_errors()
+    {
+        $this->expectException(\DataType\Exception\DataTypeNotImplementedException::class);
+        generateOpenApiV300DescriptionForDataType(\StdClass::class);
     }
 }

@@ -1,16 +1,16 @@
-# TypeSpec
+# DataType
 
 A library for validating input and creating types.
 
-[![Actions Status](https://github.com/Danack/TypeSpec/workflows/Tests/badge.svg)](https://github.com/Danack/TypeSpec/actions)
+[![Actions Status](https://github.com/Danack/DataType/workflows/Tests/badge.svg)](https://github.com/Danack/DataType/actions)
 
 # Installation
 
-```composer require danack/typespec```
+```composer require danack/datatype```
 
 # Example usage
 
-The full documentation is in DOCS.md, but here is an example usage.
+The full documentation is in [DOCS.md](DOCS.md), but here is an example usage.
 
 In your controller, you would have some code to create the type. e.g. for Symfony you would have something like:
 
@@ -161,17 +161,6 @@ echo json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
     }
 ]
 ```
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Contributing

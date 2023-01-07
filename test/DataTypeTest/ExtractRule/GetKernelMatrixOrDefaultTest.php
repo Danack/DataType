@@ -5,11 +5,10 @@ declare(strict_types = 1);
 namespace DataTypeTest\ExtractRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ExtractRule\GetInt;
-use DataType\ProcessedValues;
 use DataType\ExtractRule\GetKernelMatrixOrDefault;
+use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing
@@ -173,7 +172,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
             "this is not valid json {}{"
         );
 
-        $this->expectException(\JsonSafe\JsonDecodeException::class);
+        $this->expectException(\DataType\JsonSafe\JsonDecodeException::class);
 
         $rule->process(
             $validator,

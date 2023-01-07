@@ -6,7 +6,7 @@ namespace DataTypeTest\Create;
 
 use DataTypeTest\BaseTestCase;
 use DataTypeTest\Integration\IntArrayParams;
-use function JsonSafe\json_encode_safe;
+use function DataType\json_encode_safe;
 
 /**
  * @coversNothing
