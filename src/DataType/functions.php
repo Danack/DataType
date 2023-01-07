@@ -157,6 +157,12 @@ function createArrayOfTypeOrError(string $type, array $data): array
     return [$finalValue, null];
 }
 
+/**
+ * @param string $classname
+ * @return array
+ * @throws DataTypeNotImplementedException
+ * @throws Exception\OpenApiExceptionData
+ */
 function generateOpenApiV300DescriptionForDataType(string $classname)
 {
     $implementsInterface = is_subclass_of(
