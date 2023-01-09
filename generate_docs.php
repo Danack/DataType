@@ -68,6 +68,59 @@ function get_class_docblocks($classnames, $namespace)
     return $doc_comments;
 }
 
+
+function find_example_in_file(string $example_name, string $example_filename)
+{
+    $example_start = "// $example_name start";
+    $example_end = "// $example_name end";
+
+    $file_lines = file($example_filename);
+    if ($file_lines === false) {
+        return null;
+    }
+
+
+    echo "Checking $example_filename for $example_start \n";
+
+    var_dump($file_lines);
+
+    $example_lines = [];
+    $example_started = false;
+    foreach ($file_lines as $file_line) {
+        if ($example_started === true) {
+            if (strpos($example_end, $file_line) === 0) {
+                return $example_lines;
+            }
+            $example_lines[] = $file_line;
+        }
+        if (strpos($file_line, $example_start) === 0) {
+            $example_started = true;
+        }
+    }
+
+    if ($example_started === true) {
+        echo "Example $example_name started, but not ended ";
+        exit(-1);
+    }
+
+    return null;
+}
+
+function getExampleCode(string $example_name)
+{
+    $example_files = glob(__DIR__ . "/example/11*.php");
+
+    foreach ($example_files as $example_file) {
+        $lines = find_example_in_file($example_name, $example_file);
+        if ($lines !== null) {
+            return $lines;
+        }
+    }
+
+    echo "Failed to find example '$example_name'\n";
+    exit(-1);
+}
+
 $extract_classnames = get_classnames(
     __DIR__ . "/src/DataType/ExtractRule",
     ["ExtractRule"]
@@ -159,14 +212,13 @@ foreach ($doc_comments_for_create_traits as $name => $comment) {
 $readme .= file_get_contents(__DIR__ . "/DOCS_stub_end.md");
 
 $example_list = [
-    'Example_basic_usage',
+//    'Example_basic_usage',
     'Example_without_annotations',
-    'Example_OpenApi_generation',
+//    'Example_OpenApi_generation',
 ];
 
 
 foreach ($example_list as $example) {
-
     $example_to_replace = "<!-- " . $example . " -->";
 
     if (str_contains($readme, $example_to_replace) !== true) {
@@ -174,9 +226,13 @@ foreach ($example_list as $example) {
         exit(-1);
     }
 
+//    $example_code = "Example code for $example goes here.";
+
+    $example_code = getExampleCode($example);
+
     $readme = str_replace(
         $example_to_replace,
-        "Example code goes here.",
+        $example_code,
         $readme
     );
 }
