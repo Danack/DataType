@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   tests:
-    name: "Test on PHP ${{ matrix.php-version }} for commit ${GITHUB_SHA}"
+    name: "Test on PHP ${{ matrix.php-version }} for commit ${{ GITHUB_SHA }}"
 
     runs-on: 'ubuntu-latest'
 
