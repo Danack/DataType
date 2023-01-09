@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: "Start"
-        run: echo "Commit is ${{ GITHUB_SHA }}"
+        run: echo "Commit is $GITHUB_SHA"
 
       - name: "Checkout code"
         uses: actions/checkout@v2
