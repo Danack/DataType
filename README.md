@@ -32,7 +32,7 @@ class SearchController
 ```
 
 
-In your code you would have a data type that represents a particular concept, e.g. the parameters 
+In your code you would have a data type that represents a particular concept, e.g. the search parameter used in the API: 
 
 ```php
 
@@ -56,6 +56,7 @@ class SearchParameters implements DataType
 }
 ```
 
+And each of the elements in the 'search parameters' would have their own rule based based details:
 
 ```php
 <?php
@@ -117,7 +118,10 @@ class MaxItems implements HasInputType
 }
 ```
 
+
 ## OpenAPI descriptions
+
+The OpenAPI/Swagger specification for individual DataTypes can be generated directly from each DataType. e.g. This code:
 
 ```php
 <?php
@@ -127,6 +131,7 @@ $openapi_descriptions = generateOpenApiV300DescriptionForDataType(SearchParamete
 echo json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
 ```
 
+Would generate:
 
 ```json
 [
@@ -161,7 +166,9 @@ echo json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
     }
 ]
 ```
+which would be consumed by the front-end, either dynamically or statically through being converted to code.
 
+To note, the OpenAPI generation is one of the less tested part of the code.
 
 ## Contributing
 
