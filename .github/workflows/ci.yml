@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   tests:
-    name: "Test on PHP ${{ matrix.php-version }} for commit ${{ GITHUB_SHA }}"
+    name: "Test on PHP ${{ matrix.php-version }}"
 
     runs-on: 'ubuntu-latest'
 
@@ -23,6 +23,9 @@ jobs:
           - '8.2'
 
     steps:
+      - name: "Start"
+        run: echo "Commit is ${{ GITHUB_SHA }}"
+
       - name: "Checkout code"
         uses: actions/checkout@v2
 
