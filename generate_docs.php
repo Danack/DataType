@@ -2,6 +2,9 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
+use DataTypeExample\Parameters\SearchParameters;
+use function DataType\generateOpenApiV300DescriptionForDataType;
+
 function get_classnames($directory, $excluded)
 {
     $classnames = [];
@@ -79,16 +82,11 @@ function find_example_in_file(string $example_name, string $example_filename)
         return null;
     }
 
-
-    echo "Checking $example_filename for $example_start \n";
-
-    var_dump($file_lines);
-
     $example_lines = [];
     $example_started = false;
     foreach ($file_lines as $file_line) {
         if ($example_started === true) {
-            if (strpos($example_end, $file_line) === 0) {
+            if (strpos($file_line, $example_end ) === 0) {
                 return $example_lines;
             }
             $example_lines[] = $file_line;
@@ -108,7 +106,7 @@ function find_example_in_file(string $example_name, string $example_filename)
 
 function getExampleCode(string $example_name)
 {
-    $example_files = glob(__DIR__ . "/example/11*.php");
+    $example_files = glob(__DIR__ . "/example/*.php");
 
     foreach ($example_files as $example_file) {
         $lines = find_example_in_file($example_name, $example_file);
@@ -214,7 +212,7 @@ $readme .= file_get_contents(__DIR__ . "/DOCS_stub_end.md");
 $example_list = [
 //    'Example_basic_usage',
     'Example_without_annotations',
-//    'Example_OpenApi_generation',
+    'Example_OpenApi_generation',
 ];
 
 
@@ -226,9 +224,8 @@ foreach ($example_list as $example) {
         exit(-1);
     }
 
-//    $example_code = "Example code for $example goes here.";
-
     $example_code = getExampleCode($example);
+    $example_code = implode("", $example_code);
 
     $readme = str_replace(
         $example_to_replace,
@@ -236,6 +233,17 @@ foreach ($example_list as $example) {
         $readme
     );
 }
+
+$example_to_replace = "<!-- Example_OpenApi_generation_output -->";
+
+$openapi_descriptions = generateOpenApiV300DescriptionForDataType(SearchParameters::class);
+$example_output = json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
+$readme = str_replace(
+    $example_to_replace,
+    $example_output,
+    $readme
+);
+
 
 
 file_put_contents(__DIR__ . "/DOCS.md", $readme);

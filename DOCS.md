@@ -15,7 +15,7 @@ DataType is a library that makes working with named types of data easier. It fea
 
 ## Example usage
 
-Example code goes here.
+<!-- Example_basic_usage -->
 
 ## Using without annotations
 
@@ -23,8 +23,62 @@ Although annotations work nicely with this library, some people have strong feel
 
 It is possible to use this library without them, it just requires a bit more wiring up:  
 
-Example code goes here.
+```php
+class SearchParameters implements DataType
+{
+    use CreateFromRequest;
+    use CreateFromArray;
 
+    public function __construct(
+        public string $phrase,
+        public int $limit,
+        public Ordering $ordering,
+    ) {
+    }
+
+    /**
+     * @return InputType[]
+     */
+    public static function getInputTypes(): array
+    {
+        $limit_input_type = new InputType(
+            // Limit is both the name of the data in the API, and
+            // the name of the property in the SearchParameters class.
+            'limit',
+            new GetIntOrDefault(20),
+            new MinIntValue(1),
+            new MaxIntValue(200),
+        );
+
+        $search_input_type = new InputType(
+            // This is the name that is used in the API
+            'search',
+            new GetString(),
+            new MinLength(3),
+            new MaxLength(200),
+        );
+
+        // Set the target name for the constructor. So the API expects
+        // "search", but the internal class uses "phrase".
+        $search_input_type->setTargetParameterName('phrase');
+
+        $order_input_type = new InputType(
+            'order',
+            new GetStringOrDefault('article_id'),
+            new Order(['date', 'article_id'])
+        );
+        $order_input_type->setTargetParameterName('ordering');
+
+        return [
+            $limit_input_type,
+            $search_input_type,
+            $order_input_type
+        ];
+    }
+}
+
+
+```
 
 
 ## Extract rules
@@ -133,5 +187,49 @@ ValidationResult::errorButContinueResult
 
 # OpenAPI / Swagger specification generation
 
+You can generate OpenAPI/Swagger specifications from any DataType with code like:
 
-Example code goes here.
+```php
+$openapi_descriptions = generateOpenApiV300DescriptionForDataType(SearchParameters::class);
+
+echo json_encode($openapi_descriptions, JSON_PRETTY_PRINT);
+
+```
+
+Which will output something like:
+
+```json
+[
+    {
+        "name": "search",
+        "required": true,
+        "schema": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 200
+        }
+    },
+    {
+        "name": "limit",
+        "required": false,
+        "schema": {
+            "minimum": 1,
+            "maximum": 200,
+            "default": 20,
+            "type": "integer",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false
+        }
+    },
+    {
+        "name": "order",
+        "required": false,
+        "schema": {
+            "default": "article_id",
+            "type": "array"
+        }
+    }
+]
+```
+
+The exact details of how that is passed to your front-end, or whoever is consuming the parameter specification, it outside the scope of this library.

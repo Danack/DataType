@@ -4,7 +4,7 @@
   "description": "A library that makes using data types easier",
   "license": "MIT",
   "require": {
-    "php" : ">8.0",
+    "php" : ">=8.0",
     "ext-mbstring": "*",
     "danack/var-map": "^0.6.1",
     "seld/jsonlint": "^1.9.0"

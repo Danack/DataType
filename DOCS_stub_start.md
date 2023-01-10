@@ -23,7 +23,8 @@ Although annotations work nicely with this library, some people have strong feel
 
 It is possible to use this library without them, it just requires a bit more wiring up:  
 
+```php
 <!-- Example_without_annotations -->
-
+```
 
 
