@@ -14,7 +14,8 @@ use function DataType\getInputTypeListForClass;
 use function DataType\processInputTypesFromStorage;
 
 /**
- * Extracts a DataType value.
+ * Extracts a DataType value. This is used internally by the library
+ * to be able to process an array of DataType.
  */
 class GetType implements ExtractRule
 {

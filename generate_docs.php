@@ -142,9 +142,15 @@ $doc_comments_for_process_rules = get_class_docblocks(
 
 $readme = file_get_contents(__DIR__ . "/DOCS_stub_start.md");
 
-$readme .= "## Extract rules\n";
 
 $readme .= <<< EXTRACT_MD
+
+## Creating your own input types
+
+Each input type must have at least one ExtractRule, and any number of ProcessRules.
+
+
+### Extract rules
 
 The extract rules determine how values are extracted from the source data. As the source data is often composed of just strings, they can convert the value to a int, float, boolean or other type. 
 
@@ -160,10 +166,17 @@ foreach ($doc_comments_for_extract_rules as $name => $comment) {
 
 $readme .= <<< PROCESS_MD
 
+## Process rules
+
+The process rules govern how the values are processed after they are extracted. Each of them will produce one of four validation results:
+
+
+* valueResult - processing continues with the new value. 
+* finalValueResult - processing ends and the value is considered to be a final result.
+* errorResult - processing stops, the value is set to null, and a validation error is also set.
+* errorButContinueResult - processing continue with the updated value, but a validation error is also set. 
 
 PROCESS_MD;
-
-$readme .= "\n## Process rules \n";
 
 
 $readme .= "\n";
@@ -210,11 +223,10 @@ foreach ($doc_comments_for_create_traits as $name => $comment) {
 $readme .= file_get_contents(__DIR__ . "/DOCS_stub_end.md");
 
 $example_list = [
-//    'Example_basic_usage',
+    'Example_basic_usage',
     'Example_without_annotations',
     'Example_OpenApi_generation',
 ];
-
 
 foreach ($example_list as $example) {
     $example_to_replace = "<!-- " . $example . " -->";

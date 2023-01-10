@@ -15,7 +15,98 @@ DataType is a library that makes working with named types of data easier. It fea
 
 ## Example usage
 
-<!-- Example_basic_usage -->
+Imagine we have a "GreetingController" as an API end-point. This end-point takes two parameters, a 'name' and an 'excitement' level, for how excited you want the greeting to be.
+
+
+```php
+
+
+/**
+ * This class defines the 'username' type, so that it can be used as
+ * an attribute in the GreetingParameters DataType.
+ */
+#[\Attribute]
+class Username implements HasInputType
+{
+    public function __construct(
+        private string $name
+    ) {
+    }
+
+    public function getInputType(): InputType
+    {
+        return new InputType(
+            $this->name,
+            new GetString(),
+            new MinLength(2),
+            new MaxLength(200),
+        );
+    }
+}
+
+/**
+ * This class defines the 'excitement' type, so that it can be used as
+ * an attribute in the GreetingParameters DataType.
+ */
+#[\Attribute]
+class Excitement implements HasInputType
+{
+    public function __construct(
+        private string $name
+    ) {
+    }
+
+    public function getInputType(): InputType
+    {
+        return new InputType(
+            $this->name,
+            new GetIntOrDefault(2),
+            new MinIntValue(0),
+            new MaxIntValue(200),
+        );
+    }
+}
+
+
+/**
+ * This is the class that defines our customer DataType. It has two properties,
+ * each of which was just defined.
+ */
+class GreetingParameters implements DataType
+{
+    use CreateFromRequest;
+    use GetInputTypesFromAttributes;
+
+    public function __construct(
+        #[Username('name')]
+        public string $subject,
+
+        #[Excitement('excitement')]
+        public int $excitement,
+    ) {
+    }
+}
+
+/**
+ * This is the class that uses the GreetingParameters
+ */
+class GreetingController
+{
+    public function index(Request $request)
+    {
+        $greeting_data = GreetingParameters::createFromRequest($request);
+
+        $message = sprintf(
+            "Greeting there %s %s.",
+            $greeting_data->subject,
+            str_repeat("!", $greeting_data->excitement)
+        );
+
+        echo $message;
+    }
+}
+
+```
 
 ## Using without annotations
 
@@ -81,7 +172,13 @@ class SearchParameters implements DataType
 ```
 
 
-## Extract rules
+
+## Creating your own input types
+
+Each input type must have at least one ExtractRule, and any number of ProcessRules.
+
+
+### Extract rules
 
 The extract rules determine how values are extracted from the source data. As the source data is often composed of just strings, they can convert the value to a int, float, boolean or other type. 
 
@@ -105,12 +202,19 @@ The extract rules determine how values are extracted from the source data. As th
 | GetOptionalInt | Extracts a int point value or null if the parameter is not available. |
 | GetOptionalString | Extracts a string value or null if the parameter is not available. |
 | GetOptionalType | Extracts a DataType value or null if the parameter is not available. |
-| GetString | Extracts a string value. |
+| GetString | Extracts a string value. Results in an error if a source value is not available. |
 | GetStringOrDefault | Extracts a string value or a default value if the parameter is not available. |
-| GetType | Extracts a DataType value. |
+| GetType | Extracts a DataType value. This is used internally by the library<br/>to be able to process an array of DataType. |
+
+## Process rules
+
+The process rules govern how the values are processed after they are extracted. Each of them will produce one of four validation results:
 
 
-## Process rules 
+* valueResult - processing continues with the new value. 
+* finalValueResult - processing ends and the value is considered to be a final result.
+* errorResult - processing stops, the value is set to null, and a validation error is also set.
+* errorButContinueResult - processing continue with the updated value, but a validation error is also set. 
 
 | Type        | Description |
 | :---------  | :---------- |
@@ -121,13 +225,13 @@ The extract rules determine how values are extracted from the source data. As th
 | CastToFloat | Takes user input and converts it to an float value, or<br/>generates appropriate validationProblems. |
 | CastToInt | Takes user input and converts it to an int value, or<br/>generates appropriate validationProblems. |
 | CheckOnlyAllowedCharacters | Class CheckOnlyAllowedCharacters<br/><br/>Checks that an input string contains only allowed characters.<br/>Flags used for preg_match are xu<br/> |
-| DuplicatesParam |  |
+| DuplicatesParam | Checks that one input parameter is identical to another one. This can be useful<br/>for updating passwords. |
 | EarlierThanParam | Checks that one parameter represents an earlier time than another parameter<br/>by a set number of minutes. |
 | EarlierThanTime | Checks that one parameter represents an earlier time than<br/>the given time |
 | Enum | Checks that the value is one of a known set of values |
 | EnumMap | Checks that the value is one of a known set of input values and<br/>then maps it to a different.<br/><br/>e.g. for the enum map of:<br/><br/>[<br/>'rgb' => Imagick::COLORSPACE_RGB,<br/>'hsl' => Imagick::COLORSPACE_HSL,<br/>]<br/><br/>The user could pass in 'hsl' and the resulting value would be whatever the<br/>Imagick::COLORSPACE_HSL constant is.<br/> |
 | ImagickIsRgbColor | Validates an RGB or RGBA color string or one of the ImagickIsRgbColor color constant names |
-| IsEmail | Class IsEmail |
+| IsEmail | Checks that a string looks like a valid email address. Does not validate<br/>that the domain name is live. |
 | IsRgbColor | Class RgbColorRule<br/>Validates an RGB or RGBA color string |
 | LaterThanParam | Checks that one parameter represents an later time than another parameter<br/>by a set number of minutes. |
 | LaterThanTime | Checks that one parameter represents an earlier time than<br/>the given time |
@@ -145,8 +249,8 @@ The extract rules determine how values are extracted from the source data. As th
 | MultipleEnum | Checks whether a string represent a valid multiple enum string e.g.<br/><br/>Say we have an endpoint for downloading information about content. The users can select<br/>from video, audio, pdf, excel<br/><br/>The string "video,audio" would indicate the user wanted to see content of type video or audio |
 | NotNull | Validates that an input or processed value is not null. |
 | NullIfEmpty | Convert the value to null if the string is empty or blank, and provides<br/>a final result. |
-| Order | <br/>Supports a parameter to specify ordering of results<br/>For example "+name,-date" would be equivalent to ordering<br/>by name ascending, then date descending.<br/><br/>Final value is an array, each element of which contains an array<br/>with the string, and ordering e.g.<br/>[<br/>['name', Ordering::DESC]<br/>] |
-| PositiveInt | Class PositiveIntValidator<br/><br/>Checks an input is above zero and a sane int. |
+| Order | Supports a parameter to specify ordering of results<br/>For example "+name,-date" would be equivalent to ordering<br/>by name ascending, then date descending.<br/><br/>Final value is an array, each element of which contains an array<br/>with the string, and ordering e.g.<br/>```php<br/>[<br/>['name', Ordering::ASC] // Ordering::ASC is the string 'asc'<br/>['date', Ordering::DESC] // Ordering::DESC is the string 'desc'<br/>]<br/>``` |
+| PositiveInt | Checks an input is above zero and a sane int for a web application. i.e. less than a trillion. |
 | RangeFloatValue | Validates that a float value is between a range of float values inclusive. |
 | RangeIntValue | Validates that a int value is between a range of int values inclusive. |
 | RangeStringLength | Validates that the length of a string is between a minimum and maximum. |
@@ -178,6 +282,10 @@ The library includes several traits to make DataTypes easier to use. The traits 
 
 
 # Writing your own processing rules
+
+\DataType\ExtractRule\ExtractRule
+\DataType\ProcessRule\ProcessRule
+
 
 ValidationResult::valueResult
 ValidationResult::finalValueResult

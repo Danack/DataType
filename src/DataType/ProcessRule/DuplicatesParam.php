@@ -11,7 +11,8 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- *
+ * Checks that one input parameter is identical to another one. This can be useful
+ * for updating passwords.
  */
 class DuplicatesParam implements ProcessRule
 {

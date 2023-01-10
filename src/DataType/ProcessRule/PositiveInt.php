@@ -12,9 +12,7 @@ use DataType\ValidationResult;
 use function DataType\check_only_digits;
 
 /**
- * Class PositiveIntValidator
- *
- * Checks an input is above zero and a sane int.
+ * Checks an input is above zero and a sane int for a web application. i.e. less than a trillion.
  */
 class PositiveInt implements ProcessRule
 {

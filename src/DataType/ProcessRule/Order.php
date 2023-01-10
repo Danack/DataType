@@ -15,16 +15,18 @@ use function DataType\array_value_exists;
 use function DataType\normalise_order_parameter;
 
 /**
- *
  * Supports a parameter to specify ordering of results
  * For example "+name,-date" would be equivalent to ordering
  * by name ascending, then date descending.
  *
  * Final value is an array, each element of which contains an array
  * with the string, and ordering e.g.
+ * ```php
  * [
- *     ['name', Ordering::DESC]
+ *     ['name', Ordering::ASC] // Ordering::ASC is the string 'asc'
+ *     ['date', Ordering::DESC] // Ordering::DESC is the string 'desc'
  * ]
+ * ```
  */
 class Order implements ProcessRule
 {

@@ -15,7 +15,12 @@ DataType is a library that makes working with named types of data easier. It fea
 
 ## Example usage
 
+Imagine we have a "GreetingController" as an API end-point. This end-point takes two parameters, a 'name' and an 'excitement' level, for how excited you want the greeting to be.
+
+
+```php
 <!-- Example_basic_usage -->
+```
 
 ## Using without annotations
 

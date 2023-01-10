@@ -12,12 +12,12 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- * Class IsEmail
+ * Checks that a string looks like a valid email address. Does not validate
+ * that the domain name is live.
  */
 class IsEmail implements ProcessRule
 {
     use CheckString;
-
 
     public function process(
         $value,
