@@ -17,6 +17,7 @@ use VarMap\ArrayVarMap;
 use VarMap\VarMap;
 use VarMap\VarMap as Request;
 use function DataType\create;
+use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;
 
 require __DIR__ . "/../vendor/autoload.php";
@@ -42,10 +43,31 @@ trait CreateFromRequest
 }
 
 
+/**
+ * Creates a DataType from a VarMap.
+ *
+ * Returns two values, the DataType created or null and an array of ValidationProblems if there were any.
+ */
+trait CreateOrErrorFromRequest
+{
+    /**
+     * @param VarMap $variableMap
+     * @return array{0:?object, 1:\DataType\ValidationProblem[]}
+     * @throws \DataType\Exception\ValidationException
+     */
+    public static function createOrErrorFromRequest(VarMap $variableMap)
+    {
+        $inputTypeList = getInputTypeListForClass(self::class);
+        $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
+
+        return createOrError(static::class, $inputTypeList, $dataStorage);
+    }
+}
+
+
+
 
 // Example_basic_usage start
-
-
 /**
  * This class defines the 'username' type, so that it can be used as
  * an attribute in the GreetingParameters DataType.
@@ -100,6 +122,7 @@ class Excitement implements HasInputType
 class GreetingParameters implements DataType
 {
     use CreateFromRequest;
+    use CreateOrErrorFromRequest;
     use GetInputTypesFromAttributes;
 
     public function __construct(
@@ -133,6 +156,38 @@ class GreetingController
 // Example_basic_usage end
 
 
+
+// Example_basic_usage_no_exception start
+/**
+ * This is the class that uses the GreetingParameters
+ */
+class GreetingControllerNoException
+{
+    public function index(Request $request)
+    {
+        [$greeting_data, $validationProblems] = GreetingParameters::createOrErrorFromRequest($request);
+
+        if (count($validationProblems) !== 0) {
+            echo "Ooh, something went wrong!\n";
+            foreach ($validationProblems as $validationProblem) {
+                echo $validationProblem->toString() . "\n";
+            }
+            return;
+        }
+
+        $message = sprintf(
+            "Greeting there %s %s.",
+            $greeting_data->subject,
+            str_repeat("!", $greeting_data->excitement)
+        );
+
+        echo $message;
+    }
+}
+// Example_basic_usage_no_exception end
+
+
+
 $varMap = new ArrayVarMap([
     'name' => 'John',
     'excitement' => 5,
@@ -140,3 +195,13 @@ $varMap = new ArrayVarMap([
 
 $controller = new GreetingController();
 $controller->index($varMap);
+
+echo "\n";
+
+$errorVarMap = new ArrayVarMap([
+    'naem' => 'John',
+    'excitement' => 5,
+]);
+
+$controller = new GreetingControllerNoException();
+$controller->index($errorVarMap);

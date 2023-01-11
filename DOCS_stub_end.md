@@ -1,16 +1,15 @@
 
+# Using with frameworks
+
+Support is built into the library for creating DataTypes from PSR7 requests, and VarMap objects. For other frameworks, please look at:
+
+* Laravel - todo
+* Symfony - https://packagist.org/packages/danack/data-type-for-symfony
+* WordPress - todo
 
 # Writing your own processing rules
 
-\DataType\ExtractRule\ExtractRule
-\DataType\ProcessRule\ProcessRule
-
-
-ValidationResult::valueResult
-ValidationResult::finalValueResult
-ValidationResult::errorResult
-ValidationResult::errorButContinueResult
-
+TODO - write some words. For now, look at the classes in the directory 'DataType\ProcessRule\ProcessRule', and see how they are implemented.
 
 # OpenAPI / Swagger specification generation
 

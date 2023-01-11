@@ -226,6 +226,7 @@ $example_list = [
     'Example_basic_usage',
     'Example_without_annotations',
     'Example_OpenApi_generation',
+    'Example_basic_usage_no_exception'
 ];
 
 foreach ($example_list as $example) {

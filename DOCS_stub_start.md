@@ -22,6 +22,13 @@ Imagine we have a "GreetingController" as an API end-point. This end-point takes
 <!-- Example_basic_usage -->
 ```
 
+
+Example_basic_usage_no_exception
+```php
+<!-- Example_basic_usage_no_exception -->
+```
+
+
 ## Using without annotations
 
 Although annotations work nicely with this library, some people have strong feelings against using them.

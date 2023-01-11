@@ -19,8 +19,6 @@ Imagine we have a "GreetingController" as an API end-point. This end-point takes
 
 
 ```php
-
-
 /**
  * This class defines the 'username' type, so that it can be used as
  * an attribute in the GreetingParameters DataType.
@@ -75,6 +73,7 @@ class Excitement implements HasInputType
 class GreetingParameters implements DataType
 {
     use CreateFromRequest;
+    use CreateOrErrorFromRequest;
     use GetInputTypesFromAttributes;
 
     public function __construct(
@@ -107,6 +106,39 @@ class GreetingController
 }
 
 ```
+
+
+Example_basic_usage_no_exception
+```php
+/**
+ * This is the class that uses the GreetingParameters
+ */
+class GreetingControllerNoException
+{
+    public function index(Request $request)
+    {
+        [$greeting_data, $validationProblems] = GreetingParameters::createOrErrorFromRequest($request);
+
+        if (count($validationProblems) !== 0) {
+            echo "Ooh, something went wrong!\n";
+            foreach ($validationProblems as $validationProblem) {
+                echo $validationProblem->toString() . "\n";
+            }
+            return;
+        }
+
+        $message = sprintf(
+            "Greeting there %s %s.",
+            $greeting_data->subject,
+            str_repeat("!", $greeting_data->excitement)
+        );
+
+        echo $message;
+    }
+}
+
+```
+
 
 ## Using without annotations
 
@@ -280,18 +312,17 @@ The library includes several traits to make DataTypes easier to use. The traits 
 | CreateOrErrorFromRequest | Creates a DataType from a PSR7 ServerRequest.<br/><br/>Returns two values, the DataType created or null and an array of ValidationProblems if there were any. |
 | CreateOrErrorFromVarMap | Creates a DataType from a VarMap.<br/><br/>Returns two values, the DataType created or null and an array of ValidationProblems if there were any. |
 
+# Using with frameworks
+
+Support is built into the library for creating DataTypes from PSR7 requests, and VarMap objects. For other frameworks, please look at:
+
+* Laravel - todo
+* Symfony - https://packagist.org/packages/danack/data-type-for-symfony
+* WordPress - todo
 
 # Writing your own processing rules
 
-\DataType\ExtractRule\ExtractRule
-\DataType\ProcessRule\ProcessRule
-
-
-ValidationResult::valueResult
-ValidationResult::finalValueResult
-ValidationResult::errorResult
-ValidationResult::errorButContinueResult
-
+TODO - write some words. For now, look at the classes in the directory 'DataType\ProcessRule\ProcessRule', and see how they are implemented.
 
 # OpenAPI / Swagger specification generation
 
