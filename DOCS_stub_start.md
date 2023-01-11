@@ -22,12 +22,14 @@ Imagine we have a "GreetingController" as an API end-point. This end-point takes
 <!-- Example_basic_usage -->
 ```
 
+The above example would throw a ValidationException if there were any validation problems. If you prefer to have errors just returned, you can use the `CreateOrErrorFromRequest` trait:
 
 Example_basic_usage_no_exception
 ```php
 <!-- Example_basic_usage_no_exception -->
 ```
 
+Now errors will be returned rather than an exception being thrown.
 
 ## Using without annotations
 

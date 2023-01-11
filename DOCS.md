@@ -107,6 +107,7 @@ class GreetingController
 
 ```
 
+The above example would throw a ValidationException if there were any validation problems. If you prefer to have errors just returned, you can use the `CreateOrErrorFromRequest` trait:
 
 Example_basic_usage_no_exception
 ```php
@@ -139,6 +140,7 @@ class GreetingControllerNoException
 
 ```
 
+Now errors will be returned rather than an exception being thrown.
 
 ## Using without annotations
 
