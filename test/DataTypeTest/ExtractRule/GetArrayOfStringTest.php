@@ -12,7 +12,6 @@ use DataType\ProcessRule\MaxLength;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ProcessRule\AlwaysErrorsButDoesntHaltRule;
 
-
 /**
  * @coversNothing
  */
