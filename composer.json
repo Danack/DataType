@@ -11,7 +11,7 @@
   },
   "require-dev": {
     "danack/coding-standard": "0.3.0",
-    "danack/php-unit-helper": "dev-main#11ce2b5025d1e964a820bd6360b2f5ed2085d316 as 0.4.0",
+    "danack/php-unit-helper": "dev-master#7e50284d762b816acde56919f82f3431a6bad4c5 as 0.5.0",
     "infection/infection": "^0.26.16",
     "laminas/laminas-diactoros": "^2.6",
     "phpunit/phpunit": "9.5.6",
@@ -40,8 +40,13 @@
   "config": {
     "preferred-install": {
       "*": "dist"
+    },
+    "allow-plugins": {
+      "infection/extension-installer": false,
+      "dealerdirect/phpcodesniffer-composer-installer": false
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "allow-plugins": false
 }
