@@ -18,7 +18,7 @@ use DataType\ProcessRule\AlwaysErrorsButDoesntHaltRule;
 class GetArrayOfStringTest extends BaseTestCase
 {
     /**
-     * @covers  \DataType\ExtractRule\GetArrayOfInt
+     * @covers  \DataType\ExtractRule\GetArrayOfString
      */
     public function testWorks()
     {
@@ -42,7 +42,7 @@ class GetArrayOfStringTest extends BaseTestCase
 
 
     /**
-     * @covers \DataType\ExtractRule\GetArrayOfInt
+     * @covers \DataType\ExtractRule\GetArrayOfString
      */
     public function testMissingGivesError()
     {
@@ -61,7 +61,7 @@ class GetArrayOfStringTest extends BaseTestCase
 
 
     /**
-     * @covers \DataType\ExtractRule\GetArrayOfInt
+     * @covers \DataType\ExtractRule\GetArrayOfString
      */
     public function testNotAnArrayErrors()
     {
@@ -81,13 +81,8 @@ class GetArrayOfStringTest extends BaseTestCase
         );
     }
 
-
-
-
-
-
     /**
-     * @covers  \DataType\ExtractRule\GetArrayOfInt
+     * @covers  \DataType\ExtractRule\GetArrayOfString
      */
     public function testErrorsOnType()
     {
@@ -112,7 +107,7 @@ class GetArrayOfStringTest extends BaseTestCase
     }
 
     /**
-     * @covers  \DataType\ExtractRule\GetArrayOfInt
+     * @covers  \DataType\ExtractRule\GetArrayOfString
  */
     public function testErrorsOnTypeTwice()
     {
@@ -141,13 +136,8 @@ class GetArrayOfStringTest extends BaseTestCase
         );
     }
 
-
-
-
-
-
     /**
-     * @covers  \DataType\ExtractRule\GetArrayOfInt
+     * @covers  \DataType\ExtractRule\GetArrayOfString
      */
     public function testErrorsOnSubsequentRule()
     {
@@ -191,7 +181,7 @@ class GetArrayOfStringTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\ExtractRule\GetArrayOfInt
+     * @covers \DataType\ExtractRule\GetArrayOfString
      */
     public function testDescription()
     {
