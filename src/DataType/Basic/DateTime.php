@@ -15,7 +15,7 @@ class DateTime implements HasInputType
 {
     /**
      * @param string $name
-     * @param array|null $supportedFormats e.g. ["Y-m-d H:i:s"] see `getDefaultSupportedTimeFormats` for
+     * @param string[]|null $supportedFormats e.g. ["Y-m-d H:i:s"] see `getDefaultSupportedTimeFormats` for
      * default list of formats.
      */
     public function __construct(
