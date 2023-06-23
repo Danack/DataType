@@ -28,7 +28,7 @@ class NullIfEmptyStringTest extends BaseTestCase
 
     /**
      * @dataProvider provideTestWorksCases
-     * @covers \DataType\ProcessRule\NullIfEmpty
+     * @covers \DataType\ProcessRule\NullIfEmptyString
      */
     public function testValidationWorks($testValue, $shouldBeNull)
     {
@@ -47,5 +47,16 @@ class NullIfEmptyStringTest extends BaseTestCase
         else {
             $this->assertSame($testValue, $validationResult->getValue());
         }
+    }
+
+
+    /**
+     * @covers \DataType\ProcessRule\NullIfEmptyString
+     */
+    public function testDescription()
+    {
+        $rule = new NullIfEmptyString();
+        $description = $this->applyRuleToDescription($rule);
+        // nothing to assert.
     }
 }
