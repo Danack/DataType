@@ -32,6 +32,13 @@ class GetString implements ExtractRule
             );
         }
 
+        if (is_null($value) === true) {
+            return ValidationResult::errorResult(
+                $dataStorage,
+                Messages::STRING_REQUIRED_FOUND_NULL,
+            );
+        }
+
         if (is_scalar($value) !== true) {
             return ValidationResult::errorResult(
                 $dataStorage,

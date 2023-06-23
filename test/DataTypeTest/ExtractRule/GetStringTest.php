@@ -52,6 +52,37 @@ class GetStringTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
+    public function providesErrors()
+    {
+        yield [[1, 2, 3], Messages::STRING_REQUIRED_FOUND_NON_SCALAR];
+        yield [null, Messages::STRING_REQUIRED_FOUND_NULL];
+    }
+
+    /**
+     * @covers \DataType\ExtractRule\GetString
+     * @dataProvider providesErrors
+     */
+    public function testErrors($input, $expected_error)
+    {
+        $index = 'foo';
+
+        $data = [$index => $input];
+
+        $rule = new GetString();
+        $validator = new ProcessedValues();
+        $validationResult = $rule->process(
+            $validator,
+            TestArrayDataStorage::fromArraySetFirstValue($data)
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/' . $index,
+            $expected_error,
+            $validationResult->getValidationProblems()
+        );
+    }
+
+
     /**
      * @covers \DataType\ExtractRule\GetString
      */

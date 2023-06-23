@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Create;
 
+use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use DataTypeTest\Integration\IntArrayParams;
 
@@ -50,7 +51,7 @@ class CreateFromArrayTest extends BaseTestCase
 
         $this->assertValidationProblem(
             '/counts/2',
-            "Value must contain only digits.",
+            Messages::INT_REQUIRED_FOUND_NON_DIGITS2,
             $errors
         );
     }

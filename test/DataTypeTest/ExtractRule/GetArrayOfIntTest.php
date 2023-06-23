@@ -107,7 +107,7 @@ class GetArrayOfIntTest extends BaseTestCase
         $this->assertCount(1, $validationProblems);
         $this->assertValidationProblem(
             '/3',
-            'Value must contain only digits.',
+            Messages::INT_REQUIRED_FOUND_NON_DIGITS2,
             $validationProblems
         );
     }
@@ -133,12 +133,12 @@ class GetArrayOfIntTest extends BaseTestCase
         $this->assertCount(2, $validationProblems);
         $this->assertValidationProblem(
             '/3',
-            'Value must contain only digits.',
+            Messages::INT_REQUIRED_FOUND_NON_DIGITS2,
             $validationProblems
         );
         $this->assertValidationProblem(
             '/4',
-            'Value must contain only digits.',
+            Messages::INT_REQUIRED_FOUND_NON_DIGITS2,
             $validationProblems
         );
     }

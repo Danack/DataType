@@ -36,6 +36,9 @@ class Messages
     public const ENUM_MAP_UNRECOGNISED_VALUE_MULTIPLE = "Value [%s] is not known. Please use any of %s.";
     public const ENUM_MAP_UNRECOGNISED_VALUE_SINGLE = "Value [%s] is not known. Please use one of %s";
 
+    // URL
+    public const ERROR_INVALID_URL = 'Value was not a valid URL apparently';
+
     // General errors
     public const VALUE_NOT_SET = 'Value not set.';
     public const ERROR_MESSAGE_NOT_SET = "Value not set.";
@@ -47,7 +50,7 @@ class Messages
 
     // Int
     public const INT_REQUIRED_FOUND_NON_DIGITS = "Must contain only digits. Non-digit found at position %d.";
-    public const INT_REQUIRED_FOUND_NON_DIGITS2 = "Value must contain only digits.";
+    public const INT_REQUIRED_FOUND_NON_DIGITS2 = "Integer required, must contain only digits.";
     public const INTEGER_TOO_LONG = "Value too long, max %s digits";
     public const INT_TOO_SMALL = "Value too small. Min allowed is %s";
     public const INT_TOO_LARGE = "Value too large. Max allowed is %s";
@@ -72,6 +75,7 @@ class Messages
     public const STRING_TOO_LONG = "String too long, max characters is %d.";
     public const STRING_INVALID_COMBINING_CHARACTERS = "Invalid combining characters found at position %s";
     public const STRING_REQUIRED_FOUND_NON_SCALAR = "String expected but found non-scalar.";
+    public const STRING_REQUIRED_FOUND_NULL = "String expected but found null.";
     public const STRING_REQUIRES_PREFIX = "The string must start with [%s].";
     public const STRING_FOUND_INVALID_CHAR = "Invalid character at position %d. Allowed characters are %s";
 
