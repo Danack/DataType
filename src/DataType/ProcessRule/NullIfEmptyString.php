@@ -12,9 +12,8 @@ use DataType\ValidationResult;
 /**
  * Convert the value to null if the string is empty or blank, and provides
  * a final result.
- * @deprecated Use NullIfEmptyString instead.
  */
-class NullIfEmpty implements ProcessRule
+class NullIfEmptyString implements ProcessRule
 {
     use CheckString;
 
