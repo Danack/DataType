@@ -1,0 +1,72 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "DataType/DataStorage/TestArrayDataStorage.php",
+            "DataType/SafeAccess.php",
+            "DataType/OpenApi/ShouldNeverBeCalledParamDescription.php",
+            "DataType/OpenApi/OpenApiV300ParamDescription.php"
+        ]
+    },
+    "minMsi": 100,
+    "minCoveredMsi": 100,
+    "phpUnit": {
+        "configDir": "./test"
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "mutators": {
+        "@default": true,
+        "MBString": false,
+        "PublicVisibility": false,
+        "ProtectedVisibility": false,
+        "CastString": {
+            "ignore": [
+                "DataType\\DataStorage\\ArrayDataStorage::moveKey"
+            ]
+        },
+        "FalseValue": {
+            "ignore": [
+                "*::updateParamDescription",
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        },
+        "IncrementInteger": {
+            "ignore": [
+                "DataType\\ProcessRule\\SaneCharacters::process"
+            ]
+        },
+        "Identical": {
+            "ignore": [
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        },
+        "MethodCallRemoval": {
+            "ignore": [
+                "*::updateParamDescription"
+            ]
+        },
+        "SpreadOneItem": {
+
+            "ignore": [
+                "DataType\\ExtractRule\\GetArrayOfInt::process"
+            ]
+        },
+        "Throw_": {
+            "ignore": [
+                "DataType\\OpenApi\\OpenApiV300ParamDescription::*",
+                "DataType\\OpenApi\\ShouldNeverBeCalledParamDescription::*",
+                "DataType\\ProcessRule\\SaneCharacters::process",
+                "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
+            ]
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 rm infection.log
 
-php vendor/bin/infection
+php infection.phar
 
 
 infection_exit_code=$?
