@@ -37,6 +37,7 @@ class GetIntOrNullTest extends BaseTestCase
         return [
             ['5', 5],
             [5, 5],
+            [null, null]
         ];
     }
 
@@ -61,7 +62,6 @@ class GetIntOrNullTest extends BaseTestCase
 
     public function provideTestErrorCases()
     {
-        yield [null, Messages::INT_REQUIRED_UNSUPPORTED_TYPE];
         yield ['', Messages::INT_REQUIRED_FOUND_EMPTY_STRING];
         yield ['6 apples', Messages::INT_REQUIRED_FOUND_NON_DIGITS2];
         yield ['banana', Messages::INT_REQUIRED_FOUND_NON_DIGITS2];
