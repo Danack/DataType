@@ -179,5 +179,6 @@ class GetStringOrNullTest extends BaseTestCase
         $rule->updateParamDescription($description);
         $this->assertSame('string', $description->getType());
         $this->assertTrue($description->getRequired());
+        $this->assertTrue($description->getNullAllowed());
     }
 }

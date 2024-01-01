@@ -21,15 +21,31 @@ class UrlTest extends BaseTestCase
      */
     public function testWorks()
     {
-        $textString = new Url('john');
+        $textString = new Url('a_data_type');
         $input = 'http://www.google.com';
+        $result = createSingleValue($textString, $input);
+        $this->assertSame($input, $result);
+
+        $textString = new Url('a_data_type');
+        $input = 'http://t.ly/';
+        $result = createSingleValue($textString, $input);
+        $this->assertSame($input, $result);
+
+
+        $textString = new Url('a_data_type');
+        $input = 'http://www.google.com/';
+        $input = str_pad($input, 2048, 'a');
         $result = createSingleValue($textString, $input);
         $this->assertSame($input, $result);
     }
 
     public function providesErrors()
     {
-        yield ['John', Messages::ERROR_INVALID_URL];
+        $input = str_pad('http://www.google.com/', 2049, 'a');
+
+        yield ['Too_short__', Messages::STRING_TOO_SHORT];
+        yield [$input, Messages::STRING_TOO_LONG];
+        yield ['Some_string_that_is_longer_than_12_chars', Messages::ERROR_INVALID_URL];
         yield [null, Messages::STRING_REQUIRED_FOUND_NULL];
         yield [123, Messages::STRING_EXPECTED];
     }

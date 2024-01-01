@@ -22,7 +22,7 @@ class Url implements HasInputType
         return new InputType(
             $this->name,
             new GetString(),
-            new MinLength(1),
+            new MinLength(12),
             new MaxLength(2048),
             new ValidUrl(),
         );

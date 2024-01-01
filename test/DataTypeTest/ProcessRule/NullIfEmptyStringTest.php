@@ -57,6 +57,6 @@ class NullIfEmptyStringTest extends BaseTestCase
     {
         $rule = new NullIfEmptyString();
         $description = $this->applyRuleToDescription($rule);
-        // nothing to assert.
+        $this->assertTrue($description->getNullAllowed());
     }
 }

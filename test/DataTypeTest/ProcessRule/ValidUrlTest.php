@@ -18,6 +18,9 @@ class ValidUrlTest extends BaseTestCase
     public function provideTestWorksCases()
     {
         yield ["https://www.google.com"];
+        yield ["http://t.ly/"];
+//        yield ["https://t.ly/"];
+
     }
 
     /**

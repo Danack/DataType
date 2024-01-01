@@ -100,5 +100,6 @@ class GetIntOrNullTest extends BaseTestCase
         $rule->updateParamDescription($description);
         $this->assertSame('integer', $description->getType());
         $this->assertTrue($description->getRequired());
+        $this->assertTrue($description->getNullAllowed());
     }
 }
