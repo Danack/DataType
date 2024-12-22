@@ -19,7 +19,6 @@ class ValidUrlTest extends BaseTestCase
     {
         yield ["https://www.google.com"];
         yield ["http://t.ly/"];
-//        yield ["https://t.ly/"];
     }
 
     /**
@@ -28,7 +27,7 @@ class ValidUrlTest extends BaseTestCase
      */
     public function testValidationWorks($input)
     {
-        $rule = new ValidUrl();
+        $rule = new ValidUrl(true);
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
         $validationResult = $rule->process(
@@ -44,6 +43,7 @@ class ValidUrlTest extends BaseTestCase
     {
         yield ['John', Messages::ERROR_INVALID_URL];
         yield ['https://www.', Messages::ERROR_INVALID_URL];
+        yield ["www.google.com", Messages::ERROR_INVALID_URL];
     }
 
     /**
@@ -52,7 +52,61 @@ class ValidUrlTest extends BaseTestCase
      */
     public function testValidationErrors($input, $expected_error)
     {
-        $rule = new ValidUrl();
+        $rule = new ValidUrl(true);
+        $processedValues = new ProcessedValues();
+        $validationResult = $rule->process(
+            $input,
+            $processedValues,
+            TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', $input)
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            $expected_error,
+            $validationResult->getValidationProblems()
+        );
+    }
+
+
+    public function provideTestWorksCases_scheme_optional()
+    {
+        yield ["https://www.google.com"];
+        yield ["http://t.ly/"];
+        yield ["www.google.com"];
+        yield ["t.ly/"];
+    }
+
+    /**
+     * @dataProvider provideTestWorksCases_scheme_optional
+     * @covers \DataType\ProcessRule\ValidUrl
+     */
+    public function testValidationWorks_scheme_optional($input)
+    {
+        $rule = new ValidUrl(false);
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
+        $validationResult = $rule->process(
+            $input, $processedValues, $dataStorage
+        );
+
+        $this->assertNoProblems($validationResult);
+        $this->assertEquals($validationResult->getValue(), $input);
+    }
+
+
+    public function provideTestErrorsCases_scheme_optional()
+    {
+        yield ['John', Messages::ERROR_INVALID_URL];
+        yield ['https://www.', Messages::ERROR_INVALID_URL];
+    }
+
+    /**
+     * @dataProvider provideTestErrorsCases_scheme_optional
+     * @covers \DataType\ProcessRule\ValidUrl
+     */
+    public function testValidationErrors_scheme_optional($input, $expected_error)
+    {
+        $rule = new ValidUrl(true);
         $processedValues = new ProcessedValues();
         $validationResult = $rule->process(
             $input,
@@ -72,7 +126,7 @@ class ValidUrlTest extends BaseTestCase
      */
     public function testDescription()
     {
-        $rule = new ValidUrl();
+        $rule = new ValidUrl(true);
         $description = $this->applyRuleToDescription($rule);
     }
 }

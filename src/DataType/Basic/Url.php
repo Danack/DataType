@@ -24,7 +24,7 @@ class Url implements HasInputType
             new GetString(),
             new MinLength(12),
             new MaxLength(2048),
-            new ValidUrl(),
+            new ValidUrl(true),
         );
     }
 }
