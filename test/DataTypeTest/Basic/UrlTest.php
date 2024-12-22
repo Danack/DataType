@@ -48,6 +48,9 @@ class UrlTest extends BaseTestCase
         yield ['Some_string_that_is_longer_than_12_chars', Messages::ERROR_INVALID_URL];
         yield [null, Messages::STRING_REQUIRED_FOUND_NULL];
         yield [123, Messages::STRING_EXPECTED];
+
+        // Missing scheme
+        yield ['www.google.com', Messages::ERROR_INVALID_URL];
     }
 
     /**
