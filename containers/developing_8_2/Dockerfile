@@ -18,7 +18,7 @@ RUN  apt-get update -qq \
     php8.2-curl php8.2-xml php8.2-mbstring \
     php8.2-intl php8.2-zip php8.2-xdebug
 
-COPY xdebug.ini /etc/php/8.2/fpm/conf.d/20-xdebug.ini
+COPY xdebug.ini /etc/php/8.2/cli/conf.d/20-xdebug.ini
 
 # RUN echo "xdebug.mode=coverage,debug" >> /etc/php/8.2/cli/conf.d/20-xdebug.ini
 
