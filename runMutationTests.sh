@@ -15,9 +15,9 @@ if [ ! -f infection.log ]; then
     exit -1;
 fi
 
-if [ "$infection_exit_code" -ne "0" ]; then echo "Infection failed"; exit "$infection_exit_code"; fi
-
 cat infection.log
+
+if [ "$infection_exit_code" -ne "0" ]; then echo "Infection failed"; exit "$infection_exit_code"; fi
 
 # This is here as the output of mutation tests can be confused
 # with the output of the unit tests. This cost me 3 hours when I learnt that.
