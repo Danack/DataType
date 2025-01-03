@@ -20,7 +20,7 @@ trait CreateArrayOfTypeFromArray
 {
     /**
      * @param VarMap $variableMap
-     * @return self[]
+     * @return static[]
      * @throws \DataType\Exception\ValidationException
      */
     public static function createArrayOfTypeFromArray(array $data)
@@ -42,7 +42,7 @@ trait CreateArrayOfTypeFromArray
 
         $objects = $validationResult->getValue();
 
-        /** @var self[] self */
+        /** @var static[] $objects */
         return $objects;
     }
 }

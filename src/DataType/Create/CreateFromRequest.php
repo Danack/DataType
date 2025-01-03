@@ -21,7 +21,7 @@ trait CreateFromRequest
      * @return self
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createFromRequest(ServerRequestInterface $request)
+    public static function createFromRequest(ServerRequestInterface $request): static
     {
         $variableMap = new Psr7VarMap($request);
         $inputTypeList = getInputTypeListForClass(self::class);

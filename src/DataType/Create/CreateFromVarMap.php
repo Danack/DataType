@@ -17,15 +17,15 @@ trait CreateFromVarMap
 {
     /**
      * @param VarMap $variableMap
-     * @return self
+     * @return static
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createFromVarMap(VarMap $variableMap)
+    public static function createFromVarMap(VarMap $variableMap): static
     {
         $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
         $object = create(static::class, $inputTypeList, $dataStorage);
-        /** @var $object self */
+        /** @var $object static */
         return $object;
     }
 }

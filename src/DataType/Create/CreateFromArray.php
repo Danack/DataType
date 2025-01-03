@@ -20,7 +20,7 @@ trait CreateFromArray
      * @return self
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createFromArray($data)
+    public static function createFromArray($data): static
     {
         $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($data);
@@ -31,7 +31,7 @@ trait CreateFromArray
             $dataStorage
         );
 
-        /** @var $object self */
+        /** @var $object static */
         return $object;
     }
 }
