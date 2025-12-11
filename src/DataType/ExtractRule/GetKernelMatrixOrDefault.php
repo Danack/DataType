@@ -18,10 +18,13 @@ use function DataType\json_decode_safe;
  */
 class GetKernelMatrixOrDefault implements ExtractRule
 {
-    private ?array $default;
+    /**
+     * @var array<int, array<int, float|int>>
+     */
+    private array $default;
 
     /**
-     * @param array $default
+     * @param array<int, array<int, float|int>> $default
      */
     public function __construct(array $default)
     {
@@ -37,6 +40,7 @@ class GetKernelMatrixOrDefault implements ExtractRule
             }
         }
 
+        /** @var array<int, array<int, float|int>> $default */
         $this->default = $default;
     }
 

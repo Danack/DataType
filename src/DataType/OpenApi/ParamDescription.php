@@ -177,10 +177,13 @@ interface ParamDescription
     //
     // Elements in the array MAY be of any type, including null.
     /**
-     * @param array<mixed> $enumValues
+     * @param array<int, mixed> $enumValues
      */
     public function setEnum(array $enumValues): void;
 
+    /**
+     * @return array<int, mixed>|null
+     */
     public function getEnum(): ?array;
 
     // number See https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.1.1.

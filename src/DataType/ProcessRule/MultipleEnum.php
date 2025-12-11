@@ -75,6 +75,8 @@ class MultipleEnum implements ProcessRule
     {
         $paramDescription->setType(ParamDescription::TYPE_ARRAY);
         $paramDescription->setCollectionFormat(ParamDescription::COLLECTION_CSV);
-        $paramDescription->setEnum($this->allowedValues);
+        $allowedValues = array_values($this->allowedValues);
+        /** @var array<int, mixed> $allowedValues */
+        $paramDescription->setEnum($allowedValues);
     }
 }

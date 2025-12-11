@@ -58,6 +58,8 @@ class Enum implements ProcessRule
 
     public function updateParamDescription(ParamDescription $paramDescription): void
     {
-        $paramDescription->setEnum($this->allowedValues);
+        $allowedValues = array_values($this->allowedValues);
+        /** @var array<int, mixed> $allowedValues */
+        $paramDescription->setEnum($allowedValues);
     }
 }

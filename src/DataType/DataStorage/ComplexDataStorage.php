@@ -12,16 +12,25 @@ use DataType\Exception\InvalidLocationExceptionData;
  */
 class ComplexDataStorage implements DataStorage
 {
+    /**
+     * @var array<string|int, mixed>|object
+     */
     private array|object $dto;
 
     /** @var array<string> */
     private array $currentLocation = [];
 
+    /**
+     * @param array<string|int, mixed>|object $data
+     */
     protected function __construct(array|object $data)
     {
         $this->dto = $data;
     }
 
+    /**
+     * @param array<string|int, mixed>|object $data
+     */
     public static function fromData(array|object $data): DataStorage
     {
         $instance = new self($data);
@@ -43,9 +52,7 @@ class ComplexDataStorage implements DataStorage
                     // when the data had been move to a 'wrong' place.
                     throw InvalidLocationExceptionData::badComplexDataStorage($this->currentLocation);
                 }
-                /** @phpstan-ignore-next-line
-                 * @psalm-suppress TypeDoesNotContainType
-                 */
+                /** @phpstan-ignore-next-line */
                 $dto = $dto->{$key};
             }
             else if (is_array($dto) === true) {
@@ -78,9 +85,7 @@ class ComplexDataStorage implements DataStorage
                     return false;
                 }
 
-                /** @phpstan-ignore-next-line
-                 * @psalm-suppress TypeDoesNotContainType
-                 */
+                /** @phpstan-ignore-next-line */
                 $dto = $dto->{$location};
             }
             else if (is_array($dto) === true) {

@@ -70,7 +70,7 @@ function createObjectFromProcessedValues(string $classname, ProcessedValues $pro
     /**  @psalm-suppress MixedArgumentTypeCoercion */
     $object = $reflection_class->newInstanceArgs($built_parameters);
 
-    /** @var T $object */
+    /** @var T&object $object */
     return $object;
 }
 
@@ -535,6 +535,11 @@ function checkAllowedFormatsAreStrings(array $allowedFormats): array
 }
 
 
+/**
+ * @template T of object
+ * @param class-string<T> $attributeClassname
+ * @return \ReflectionClass<T>
+ */
 function getReflectionClassOfAttribute(
     string $class,
     string $attributeClassname,
@@ -567,9 +572,11 @@ function getInputTypesFromAnnotations(string $class): array
         $attributes = $property->getAttributes();
         $current_property_has_inputtype = false;
         foreach ($attributes as $attribute) {
+            $attributeName = $attribute->getName();
+            /** @var class-string<object> $attributeName */
             $rc_of_attribute = getReflectionClassOfAttribute(
                 $class,
-                $attribute->getName(),
+                $attributeName,
                 $property
             );
             $is_a_param = $rc_of_attribute->implementsInterface(HasInputType::class);
@@ -578,7 +585,7 @@ function getInputTypesFromAnnotations(string $class): array
                 continue;
             }
 
-            if ($current_property_has_inputtype == true) {
+            if ($current_property_has_inputtype === true) {
                 throw PropertyHasMultipleInputTypeAnnotationsException::create(
                     $class,
                     $property->getName()

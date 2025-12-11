@@ -1,9 +1,10 @@
 includes:
   - vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
-  checkGenericClassInNonGenericObjectType: false
-  checkMissingIterableValueType: false
   treatPhpDocTypesAsCertain: false
   excludePaths:
     - *GetArticlesParams*
     - *CreateFromVarMap*
+  ignoreErrors:
+    - '#Trait .* is used zero times and is not analysed#'
+    - '#PHPDoc tag @var with type array<int, mixed> is not subtype of type list<string>#'

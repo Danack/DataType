@@ -15,6 +15,9 @@ use DataType\Exception\InvalidLocationExceptionData;
  */
 class ArrayDataStorage implements DataStorage
 {
+    /**
+     * @var array<string|int, mixed>
+     */
     private array $data;
 
     /**
@@ -22,11 +25,17 @@ class ArrayDataStorage implements DataStorage
      */
     private array $currentLocation = [];
 
+    /**
+     * @param array<string|int, mixed> $data
+     */
     protected function __construct(array $data)
     {
         $this->data = $data;
     }
 
+    /**
+     * @param array<string|int, mixed> $data
+     */
     public static function fromArray(array $data): DataStorage
     {
         $instance = new self($data);

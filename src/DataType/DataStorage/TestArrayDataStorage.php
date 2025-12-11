@@ -73,6 +73,7 @@ class TestArrayDataStorage extends ArrayDataStorage
 
     /**
      * @todo - is this needed?
+     * @param array<string|int, mixed> $data
      */
     public static function fromArraySetFirstValue(array $data): DataStorage
     {

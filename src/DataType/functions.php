@@ -113,7 +113,7 @@ function validate(object $dto)
  * @template T
  * @param string $type
  * @psalm-param class-string<T> $type
- * @param array $data
+ * @param array<int|string, mixed> $data
  * @return T[]
  * @throws ValidationException
  */
@@ -138,7 +138,7 @@ function createArrayOfType(string $type, array $data): array
  * @template T
  * @param string $type
  * @psalm-param class-string<T> $type
- * @param array $data
+ * @param array<int|string, mixed> $data
  * @return array{0:null, 1:\DataType\ValidationProblem[]}|array{0:T[], 1:null}
  */
 function createArrayOfTypeOrError(string $type, array $data): array
@@ -159,7 +159,7 @@ function createArrayOfTypeOrError(string $type, array $data): array
 
 /**
  * @param string $classname
- * @return array
+ * @return array<int, array<string, mixed>>
  * @throws DataTypeNotImplementedException
  * @throws Exception\OpenApiExceptionData
  */

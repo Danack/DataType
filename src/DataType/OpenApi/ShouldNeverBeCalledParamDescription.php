@@ -142,7 +142,7 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
     }
 
     /**
-     * @param array<mixed> $enumValues
+     * @param array<int, mixed> $enumValues
      * @throws \Exception
      */
     public function setEnum(array $enumValues): void
@@ -160,6 +160,9 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
         throw new \Exception("getDescription should not be called.");
     }
 
+    /**
+     * @return array<int, mixed>|null
+     */
     public function getEnum(): ?array
     {
         throw new \Exception("getEnum should not be called.");

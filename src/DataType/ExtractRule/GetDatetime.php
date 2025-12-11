@@ -41,9 +41,9 @@ class GetDatetime implements ExtractRule
 
     /**
      *
-     * @param string[] $allowedFormats
+     * @param string[]|null $allowedFormats
      */
-    public function __construct(array $allowedFormats = null)
+    public function __construct(?array $allowedFormats = null)
     {
         if ($allowedFormats === null) {
             $this->allowedFormats = getDefaultSupportedTimeFormats();

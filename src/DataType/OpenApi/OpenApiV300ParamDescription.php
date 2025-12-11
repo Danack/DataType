@@ -21,7 +21,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     private ?string $description = null;
 
     /**
-     * @var ?array<mixed>
+     * @var ?array<int, mixed>
      */
     private $enumValues = null;
 
@@ -68,7 +68,7 @@ class OpenApiV300ParamDescription implements ParamDescription
      *
      * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md
      * @param \DataType\InputType[] $inputTypes
-     * @return array
+     * @return array<int, array<string, mixed>>
      * @throws OpenApiExceptionData
      */
     public static function createFromInputTypes($inputTypes)
@@ -91,6 +91,9 @@ class OpenApiV300ParamDescription implements ParamDescription
         return $ruleDescriptions;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         $array = [];
@@ -110,7 +113,9 @@ class OpenApiV300ParamDescription implements ParamDescription
         return $array;
     }
 
-
+    /**
+     * @return array<string, mixed>
+     */
     private function generateSchema(): array
     {
         $schema = [];
@@ -407,7 +412,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     }
 
     /**
-     * @param array<mixed> $enumValues
+     * @param array<int, mixed> $enumValues
      * @throws OpenApiExceptionData
      */
     public function setEnum(array $enumValues): void
@@ -424,6 +429,9 @@ class OpenApiV300ParamDescription implements ParamDescription
         $this->enumValues = $enumValues;
     }
 
+    /**
+     * @return array<int, mixed>|null
+     */
     public function getEnum(): ?array
     {
         return $this->enumValues;

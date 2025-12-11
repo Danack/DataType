@@ -17,7 +17,7 @@ class ValidationException extends DataTypeException
      * @param \DataType\ValidationProblem[] $validationProblems
      * @param \Exception|null $previous
      */
-    public function __construct(string $message, array $validationProblems, \Exception $previous = null)
+    public function __construct(string $message, array $validationProblems, ?\Exception $previous = null)
     {
         $actualMessage = $message . " ";
 
