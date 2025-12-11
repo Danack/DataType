@@ -74,6 +74,7 @@ class ValidUrlTest extends BaseTestCase
         yield ["http://t.ly/"];
         yield ["www.google.com"];
         yield ["t.ly/"];
+        yield ["https://opencouncil.network/"];
     }
 
     /**
