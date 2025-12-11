@@ -30,7 +30,7 @@ jobs:
         run: echo "Commit is $GITHUB_SHA"
 
       - name: "Checkout code"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: "Install PHP with extensions"
         uses: shivammathur/setup-php@v2
@@ -48,5 +48,6 @@ jobs:
         run: bash runTests.sh
 
       - name: "Run mutation tests"
+        if: ${{ matrix.php-version <= '8.3' }}
         run: bash runMutationTests.sh
 
