@@ -21,7 +21,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     private ?string $description = null;
 
     /**
-     * @var ?array<int, mixed>
+     * @var ?list<mixed>
      */
     private $enumValues = null;
 
@@ -412,7 +412,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     }
 
     /**
-     * @param array<int, mixed> $enumValues
+     * @param list<mixed> $enumValues
      * @throws OpenApiExceptionData
      */
     public function setEnum(array $enumValues): void
@@ -423,8 +423,6 @@ class OpenApiV300ParamDescription implements ParamDescription
                 throw new OpenApiExceptionData("All enum values must be strings or ints.");
             }
         }
-
-        
 
         $this->enumValues = $enumValues;
     }

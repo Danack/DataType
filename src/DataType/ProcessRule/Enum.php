@@ -16,13 +16,13 @@ use DataType\ValidationResult;
 class Enum implements ProcessRule
 {
     /**
-     * @var array<string>
+     * @var list<string>
      */
     private array $allowedValues;
 
     /**
      *
-     * @param array<string> $allowedValues
+     * @param list<string> $allowedValues
      */
     public function __construct(array $allowedValues)
     {
@@ -58,8 +58,6 @@ class Enum implements ProcessRule
 
     public function updateParamDescription(ParamDescription $paramDescription): void
     {
-        $allowedValues = array_values($this->allowedValues);
-        /** @var array<int, mixed> $allowedValues */
-        $paramDescription->setEnum($allowedValues);
+        $paramDescription->setEnum($this->allowedValues);
     }
 }

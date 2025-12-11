@@ -142,7 +142,7 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
     }
 
     /**
-     * @param array<int, mixed> $enumValues
+     * @param list<mixed> $enumValues
      * @throws \Exception
      */
     public function setEnum(array $enumValues): void

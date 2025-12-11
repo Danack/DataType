@@ -25,11 +25,11 @@ class MultipleEnum implements ProcessRule
 {
     use CheckString;
 
-    /** @var string[] */
+    /** @var list<string> */
     private array $allowedValues;
 
     /**
-     * @param string[] $allowedValues
+     * @param list<string> $allowedValues
      */
     public function __construct(array $allowedValues)
     {
@@ -75,8 +75,7 @@ class MultipleEnum implements ProcessRule
     {
         $paramDescription->setType(ParamDescription::TYPE_ARRAY);
         $paramDescription->setCollectionFormat(ParamDescription::COLLECTION_CSV);
-        $allowedValues = array_values($this->allowedValues);
-        /** @var array<int, mixed> $allowedValues */
-        $paramDescription->setEnum($allowedValues);
+
+        $paramDescription->setEnum($this->allowedValues);
     }
 }

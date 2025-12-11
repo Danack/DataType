@@ -7,5 +7,4 @@ parameters:
     - *CreateFromVarMap*
   ignoreErrors:
     - '#Trait .* is used zero times and is not analysed#'
-    - '#PHPDoc tag @var with type array<int, mixed> is not subtype of type list<string>#'
     - '#PHPDoc tag @var with type class-string is not subtype of type class-string<object>#'

@@ -177,7 +177,7 @@ interface ParamDescription
     //
     // Elements in the array MAY be of any type, including null.
     /**
-     * @param array<int, mixed> $enumValues
+     * @param list<mixed> $enumValues
      */
     public function setEnum(array $enumValues): void;
 
