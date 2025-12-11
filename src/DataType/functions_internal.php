@@ -573,7 +573,8 @@ function getInputTypesFromAnnotations(string $class): array
         $current_property_has_inputtype = false;
         foreach ($attributes as $attribute) {
             $attributeName = $attribute->getName();
-            /** @var class-string<object> $attributeName */
+            /** @psalm-var class-string $attributeName */
+            /** @psalm-suppress ArgumentTypeCoercion */
             $rc_of_attribute = getReflectionClassOfAttribute(
                 $class,
                 $attributeName,

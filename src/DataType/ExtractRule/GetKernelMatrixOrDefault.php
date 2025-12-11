@@ -28,12 +28,16 @@ class GetKernelMatrixOrDefault implements ExtractRule
      */
     public function __construct(array $default)
     {
+        /** @psalm-suppress DocblockTypeContradiction */
         foreach ($default as $row) {
+            /** @psalm-suppress RedundantConditionGivenDocblockType */
             if (is_array($row) !== true) {
                 throw new LogicExceptionData(Messages::MATRIX_INVALID_BAD_ROW);
             }
 
+            /** @psalm-suppress DocblockTypeContradiction */
             foreach ($row as $value) {
+                /** @psalm-suppress RedundantConditionGivenDocblockType */
                 if (is_float($value) === false && is_int($value) === false) {
                     throw new LogicExceptionData(Messages::MATRIX_INVALID_BAD_CELL);
                 }
