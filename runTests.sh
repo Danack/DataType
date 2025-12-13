@@ -25,8 +25,10 @@ echo "Version check result: ", ($shouldRunPsalm ? "RUN" : "SKIP"), PHP_EOL;
 exit($shouldRunPsalm ? 0 : 1);
 '
 
-set -e
 php_exit_code=$?
+
+set -e
+
 
 echo "Version check exit code: $php_exit_code"
 
