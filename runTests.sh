@@ -12,14 +12,12 @@ echo "Running PHPStan"
 php vendor/bin/phpstan analyze -c ./phpstan.neon -l 8 src
 
 echo "Running Psalm"
-php ./psalm.phar
-
-# Exclude mutation tests for now.
-# They are disabled as they are very slow to run, and not
-# providing much value. I'm open to most pull requests that fix any of them
-# or disabling ones that aren't that great.
-# bash runMutationTests.sh
-
+# The version of psalm we are using only works on below PHP 8.3
+if php -r 'exit(!(PHP_MAJOR_VERSION === 8 && (PHP_MINOR_VERSION === 1 || PHP_MINOR_VERSION === 2)));'; then
+    php ./psalm.phar
+else
+    echo "Skipping Psalm (requires PHP 8.1 or 8.2)"
+fi
 bash runExamples.sh
 
 echo ""
