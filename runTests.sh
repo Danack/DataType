@@ -19,10 +19,10 @@ php -r '
 echo "PHP_MAJOR_VERSION=", PHP_MAJOR_VERSION, PHP_EOL;
 echo "PHP_MINOR_VERSION=", PHP_MINOR_VERSION, PHP_EOL;
 
-$ok = (PHP_MAJOR_VERSION === 8 && (PHP_MINOR_VERSION === 1 || PHP_MINOR_VERSION === 2));
-echo "Version check result: ", ($ok ? "PASS" : "FAIL"), PHP_EOL;
+$shouldRunPsalm = (PHP_MAJOR_VERSION === 8 && (PHP_MINOR_VERSION === 1 || PHP_MINOR_VERSION === 2));
+echo "Version check result: ", ($shouldRunPsalm ? "RUN" : "SKIP"), PHP_EOL;
 
-exit($ok ? 0 : 1);
+exit($shouldRunPsalm ? 0 : 1);
 '
 
 set -e
