@@ -13,6 +13,8 @@ php vendor/bin/phpstan analyze -c ./phpstan.neon -l 8 src
 
 echo "Running Psalm (debug enabled)"
 
+# The next command will exit with non-zero code
+set +e
 php -r '
 echo "PHP_MAJOR_VERSION=", PHP_MAJOR_VERSION, PHP_EOL;
 echo "PHP_MINOR_VERSION=", PHP_MINOR_VERSION, PHP_EOL;
@@ -22,6 +24,8 @@ echo "Version check result: ", ($ok ? "PASS" : "FAIL"), PHP_EOL;
 
 exit($ok ? 0 : 1);
 '
+
+set -e
 php_exit_code=$?
 
 echo "Version check exit code: $php_exit_code"
