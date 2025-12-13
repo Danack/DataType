@@ -20,7 +20,7 @@ echo "PHP_MINOR_VERSION=", PHP_MINOR_VERSION, PHP_EOL;
 $ok = (PHP_MAJOR_VERSION === 8 && (PHP_MINOR_VERSION === 1 || PHP_MINOR_VERSION === 2));
 echo "Version check result: ", ($ok ? "PASS" : "FAIL"), PHP_EOL;
 
-exit(!$ok);
+exit($ok ? 0 : 1);
 '
 php_exit_code=$?
 
