@@ -180,3 +180,52 @@ function generateOpenApiV300DescriptionForDataType(string $classname)
 
     return OpenApiV300ParamDescription::createFromInputTypes($inputTypes);
 }
+
+
+/**
+ * @param class-string<\BackedEnum> $typeString
+ * @return array<\BackedEnum>
+ */
+function getEnumCases(string $typeString): array
+{
+    // Check if the class exists
+    if (!class_exists($typeString)) {
+        throw new \InvalidArgumentException("Class '$typeString' does not exist.");
+    }
+
+    // Use Reflection to inspect the class
+    $reflection = new \ReflectionClass($typeString);
+
+    // Check if it's an enum
+    if (!$reflection->isEnum()) {
+        throw new \InvalidArgumentException("Class '$typeString' is not an enum.");
+    }
+
+    // Get enum cases
+    return $cases = $typeString::cases();
+}
+/**
+ * @param class-string<\BackedEnum> $typeString
+ * @return list<int|string>
+ */
+function getEnumCaseValues(string $typeString): array
+{
+    // Check if the class exists
+    if (!class_exists($typeString)) {
+        throw new \InvalidArgumentException("Class '$typeString' does not exist.");
+    }
+
+    // Use Reflection to inspect the class
+    $reflection = new \ReflectionClass($typeString);
+
+    // Check if it's an enum
+    if (!$reflection->isEnum()) {
+        throw new \InvalidArgumentException("Class '$typeString' is not an enum.");
+    }
+
+    // Get enum cases
+    $cases = $typeString::cases();
+
+    // Convert cases to array of names (or values, depending on your needs)
+    return array_map(fn($case) => $case->value, $cases);
+}
