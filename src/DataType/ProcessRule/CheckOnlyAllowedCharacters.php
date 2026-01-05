@@ -18,6 +18,27 @@ use DataType\ValidationResult;
  * Checks that an input string contains only allowed characters.
  * Flags used for preg_match are xu
  *
+ * Example usage:
+ * ```php
+ * use DataType\InputType;
+ * use DataType\ExtractRule\GetString;
+ * use DataType\ProcessRule\CheckOnlyAllowedCharacters;
+ *
+ * // Allow only alphanumeric characters
+ * $inputType = new InputType(
+ *     'username',
+ *     new GetString(),
+ *     new CheckOnlyAllowedCharacters('a-zA-Z0-9')
+ * );
+ *
+ * // Allow only letters
+ * $inputType = new InputType(
+ *     'name',
+ *     new GetString(),
+ *     new CheckOnlyAllowedCharacters('a-zA-Z')
+ * );
+ * ```
+ *
  */
 class CheckOnlyAllowedCharacters implements ProcessRule
 {
