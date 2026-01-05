@@ -46,6 +46,5 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true,
-  "allow-plugins": false
+  "prefer-stable": true
 }
