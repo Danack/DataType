@@ -49,7 +49,7 @@ class ValidDatetimeTest extends BaseTestCase
      * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\ValidDatetime
      */
-    public function testValidationWorks($input, $expectedTime)
+    public function testValidationWorks(string $input, \DateTimeInterface $expectedTime)
     {
         $rule = new ValidDatetime();
         $processedValues = new ProcessedValues();
@@ -74,7 +74,7 @@ class ValidDatetimeTest extends BaseTestCase
      * @dataProvider provideTestErrorsCases
      * @covers \DataType\ProcessRule\ValidDatetime
      */
-    public function testValidationErrors($input)
+    public function testValidationErrors(string $input)
     {
         $rule = new ValidDatetime();
         $processedValues = new ProcessedValues();

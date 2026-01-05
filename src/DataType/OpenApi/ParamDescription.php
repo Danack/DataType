@@ -192,4 +192,12 @@ interface ParamDescription
      * @param int|float $multiple
      */
     public function setMultipleOf($multiple): void;
+
+    public function isExclusiveMaximum(): ?bool;
+
+    public function isExclusiveMinimum(): ?bool;
+
+    public function getExclusiveMinimum(): ?bool;
+
+    public function getType(): ?string;
 }

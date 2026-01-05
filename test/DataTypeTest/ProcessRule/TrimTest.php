@@ -26,7 +26,7 @@ class TrimTest extends BaseTestCase
             ' bar ', $processedValues, TestArrayDataStorage::fromArraySetFirstValue([' bar '])
         );
         $this->assertNoProblems($validationResult);
-        $this->assertEquals($validationResult->getValue(), 'bar');
+        self::assertEquals($validationResult->getValue(), 'bar');
     }
 
 

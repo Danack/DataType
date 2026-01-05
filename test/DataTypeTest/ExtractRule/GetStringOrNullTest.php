@@ -133,7 +133,7 @@ class GetStringOrNullTest extends BaseTestCase
     {
         $index = 'foo';
 
-        $data = [$index => new \StdClass()];
+        $data = [$index => new \stdClass()];
 
         $rule = new GetStringOrNull();
         $validator = new ProcessedValues();

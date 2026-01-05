@@ -103,6 +103,6 @@ class MaxIntValueTest extends BaseTestCase
         $description = $this->applyRuleToDescription($rule);
 
         $this->assertSame($maxValue, $description->getMaximum());
-        $this->assertFalse($description->isExclusiveMaximum());
+            $this->assertFalse($description->isExclusiveMaximum());
     }
 }

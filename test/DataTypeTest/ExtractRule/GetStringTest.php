@@ -62,7 +62,7 @@ class GetStringTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetString
      * @dataProvider providesErrors
      */
-    public function testErrors($input, $expected_error)
+    public function testErrors(mixed $input, string $expected_error)
     {
         $index = 'foo';
 
@@ -114,7 +114,7 @@ class GetStringTest extends BaseTestCase
     {
         $index = 'foo';
 
-        $data = [$index => new \StdClass()];
+        $data = [$index => new \stdClass()];
 
         $rule = new GetString();
         $validator = new ProcessedValues();

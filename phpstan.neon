@@ -1,10 +1,30 @@
 includes:
   - vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
+  editorUrl: 'phpstorm://open?file=/Users/danack/projects/github/DataType/%%relFile%%&line=%%line%%'
   treatPhpDocTypesAsCertain: false
   excludePaths:
     - *GetArticlesParams*
     - *CreateFromVarMap*
   ignoreErrors:
-    - '#Trait .* is used zero times and is not analysed#'
-    - '#PHPDoc tag @var with type class-string is not subtype of type class-string<object>#'
+    -
+      identifier: missingType.return
+      paths:
+        - test/*
+    -
+      identifier: staticMethod.dynamicCall
+      paths:
+        - test/*
+    -
+      identifier: property.unused
+      paths:
+        - test/*
+    -
+      identifier: property.onlyWritten
+      paths:
+        - test/*
+    -
+      identifier: missingType.property
+      paths:
+        - test/*
+

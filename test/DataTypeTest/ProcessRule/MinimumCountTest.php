@@ -31,7 +31,7 @@ class MinimumCountTest extends BaseTestCase
      * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MinimumCount
      */
-    public function testWorks(int $minimumCount, $values)
+    public function testWorks(int $minimumCount, array $values)
     {
         $rule = new MinimumCount($minimumCount);
         $processedValues = new ProcessedValues();
@@ -48,8 +48,8 @@ class MinimumCountTest extends BaseTestCase
     {
         return [
             [1, []], // 3 > 0
-            [3, [1, 2]], // 4 > 3
-            [50, [1, 2]], // 4 > 3
+            [3, [1, 2]], // 3 > 2
+            [50, [1, 2]], // 50 > 3
         ];
     }
 
@@ -57,7 +57,7 @@ class MinimumCountTest extends BaseTestCase
      * @dataProvider provideFailsCases
      * @covers \DataType\ProcessRule\MinimumCount
      */
-    public function testFails(int $minimumCount, $values)
+    public function testFails(int $minimumCount, array $values)
     {
         $rule = new MinimumCount($minimumCount);
         $processedValues = new ProcessedValues();

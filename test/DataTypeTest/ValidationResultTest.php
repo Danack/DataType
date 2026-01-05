@@ -121,6 +121,6 @@ class ValidationResultTest extends BaseTestCase
     {
         $this->expectExceptionMessageMatchesTemplateString(LogicExceptionData::NOT_VALIDATION_PROBLEM);
         $this->expectException(LogicExceptionData::class);
-        $validationResult = ValidationResult::fromValidationProblems([new \StdClass()]);
+        $validationResult = ValidationResult::fromValidationProblems([new \stdClass()]);
     }
 }

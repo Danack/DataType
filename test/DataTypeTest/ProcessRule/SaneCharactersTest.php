@@ -50,7 +50,7 @@ class SaneCharactersTest extends BaseTestCase
      * @dataProvider provideSuccessCases
      * @covers \DataType\ProcessRule\SaneCharacters
      */
-    public function testValidationSuccess($testValue)
+    public function testValidationSuccess(string $testValue)
     {
         $rule = new SaneCharacters();
         $processedValues = new ProcessedValues();
@@ -65,7 +65,7 @@ class SaneCharactersTest extends BaseTestCase
      * @dataProvider provideFailureCases
      * @covers \DataType\ProcessRule\SaneCharacters
      */
-    public function testValidationErrors($testValue)
+    public function testValidationErrors(string $testValue)
     {
         $rule = new SaneCharacters();
         $processedValues = new ProcessedValues();

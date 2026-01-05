@@ -30,7 +30,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
      * @covers \DataType\InputType\StringRangeLengthOrDefault
      * @dataProvider provideTestWorks
      */
-    public function testWorks(int $minimum, int $maximum, $expected_value)
+    public function testWorks(int $minimum, int $maximum, string $test_string)
     {
         $intRange = new StringRangeLengthOrDefault(
             $minimum,
@@ -42,7 +42,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueButRoot(
             'foo',
-            $expected_value
+            $test_string
         );
 
         $validationProblems = processInputTypeWithDataStorage(
@@ -54,7 +54,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
         $this->assertCount(0, $validationProblems);
         [$result_value, $was_found] = $processedValues->getValueForTargetProperty('foo');
         $this->assertSame(true, $was_found);
-        $this->assertSame($expected_value, $result_value);
+        $this->assertSame($test_string, $result_value);
     }
 
     /**

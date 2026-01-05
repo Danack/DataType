@@ -15,21 +15,21 @@ use DataType\ProcessedValues;
  */
 class PositiveIntTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public function provideTestCasesWorks()
     {
         return [
-            ['5', 5, false],
-            ['0', 0, false], // close enough
-            [PositiveInt::MAX_SANE_VALUE, PositiveInt::MAX_SANE_VALUE, false],
-            [PositiveInt::MAX_SANE_VALUE - 1, PositiveInt::MAX_SANE_VALUE - 1, false],
+            ['5', 5,],
+            ['0', 0,], // close enough
+            [PositiveInt::MAX_SANE_VALUE, PositiveInt::MAX_SANE_VALUE],
+            [PositiveInt::MAX_SANE_VALUE - 1, PositiveInt::MAX_SANE_VALUE - 1],
         ];
     }
 
     /**
-     * @dataProvider provideTestCases
+     * @dataProvider provideTestCasesWorks
      * @covers \DataType\ProcessRule\PositiveInt
      */
-    public function testValidation($testValue, $expectedResult, $expectError)
+    public function testValidationWorks(int|string $testValue, int $expectedResult)
     {
         $rule = new PositiveInt();
         $processedValues = new ProcessedValues();
@@ -56,7 +56,7 @@ class PositiveIntTest extends BaseTestCase
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\PositiveInt
      */
-    public function testErrors($testValue, $message)
+    public function testErrors(string|int$testValue, string $message)
     {
         $rule = new PositiveInt();
         $processedValues = new ProcessedValues();

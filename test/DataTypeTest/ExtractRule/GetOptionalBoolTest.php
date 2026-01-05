@@ -57,7 +57,7 @@ class GetOptionalBoolTest extends BaseTestCase
     {
         yield [fopen('php://memory', 'r+'), Messages::UNSUPPORTED_TYPE]; // a stream is not a bool
         yield [[1, 2, 3], Messages::UNSUPPORTED_TYPE];  // an array is not a bool
-        yield [new \StdClass(), Messages::UNSUPPORTED_TYPE]; // A stdClass is not a bool
+        yield [new \stdClass(), Messages::UNSUPPORTED_TYPE]; // A stdClass is not a bool
     }
 
     /**

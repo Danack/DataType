@@ -51,7 +51,7 @@ class ReturnsBadDataType implements DataType
     {
         return [
             // Wrong type
-            new StdClass()
+            new stdClass()
         ];
     }
 }
@@ -258,6 +258,7 @@ class OneColorWithOtherAnnotationThatDoesNotExist
     #[ImagickColorHasInputType('rgb(225, 225, 225)', 'background_color')]
     private string $background_color;
 
+    // @phpstan-ignore attribute.notFound
     #[ThisClassDoesNotExistParam('stroke_color', 'rgb(0, 0, 0)')]
     private string $stroke_color;
 

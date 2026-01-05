@@ -64,7 +64,7 @@ class GetBoolOrDefaultTest extends BaseTestCase
         // todo - we should test the exact error.
         yield [fopen('php://memory', 'r+')];
         yield [[1, 2, 3]];
-        yield [new \StdClass()];
+        yield [new \stdClass()];
         yield [null];
         yield [0];
         yield [1];

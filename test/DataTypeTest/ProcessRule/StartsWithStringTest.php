@@ -30,7 +30,7 @@ class StartsWithStringTest extends BaseTestCase
      * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\StartsWithString
      */
-    public function testValidationWorks(string $prefix, $testValue)
+    public function testValidationWorks(string $prefix, string $testValue)
     {
         $rule = new StartsWithString($prefix);
         $dataStorage = TestArrayDataStorage::fromArraySetFirstValue([]);
@@ -47,7 +47,7 @@ class StartsWithStringTest extends BaseTestCase
     {
         return [
             ['pk_', 'dk_foobar'],
-            ['_', 'f_oobar', true],
+            ['_', 'f_oobar'],
         ];
     }
 
@@ -55,7 +55,7 @@ class StartsWithStringTest extends BaseTestCase
      * @dataProvider provideTestFailsCases
      * @covers \DataType\ProcessRule\StartsWithString
      */
-    public function testValidationErrors(string $prefix, $testValue)
+    public function testValidationErrors(string $prefix, string $testValue)
     {
         $rule = new StartsWithString($prefix);
         $processedValues = new ProcessedValues();

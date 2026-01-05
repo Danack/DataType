@@ -30,7 +30,7 @@ class MaximumCountTest extends BaseTestCase
      * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MaximumCount
      */
-    public function testWorks(int $maximumCount, $values)
+    public function testWorks(int $maximumCount, array $values)
     {
         $rule = new MaximumCount($maximumCount);
         $processedValues = new ProcessedValues();

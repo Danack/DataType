@@ -30,7 +30,7 @@ class IntRangeTest extends BaseTestCase
      * @covers \DataType\InputType\IntRange
      * @dataProvider provideTestWorks
      */
-    public function testWorks(int $minimum, int $maximum, $expected_value)
+    public function testWorks(int $minimum, int $maximum, int $expected_value)
     {
         $intRange = new IntRange(
             $minimum,
@@ -68,7 +68,7 @@ class IntRangeTest extends BaseTestCase
      * @covers \DataType\InputType\IntRange
      * @dataProvider provideTestErrors
      */
-    public function testErrors(int $minimum, int $maximum, $expected_value, $expected_message)
+    public function testErrors(int $minimum, int $maximum, int $expected_value, string $expected_message)
     {
         $intRange = new IntRange(
             $minimum,

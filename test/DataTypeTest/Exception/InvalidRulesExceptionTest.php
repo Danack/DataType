@@ -16,7 +16,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
 
     public function providesInvalidRulesException()
     {
-        yield [new \StdClass(), 'object'];
+        yield [new \stdClass(), 'object'];
         yield [[], 'array'];
         yield [4.3, 'double'];
     }

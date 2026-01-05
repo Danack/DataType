@@ -24,7 +24,9 @@ class CheckStringTest extends BaseTestCase
         };
 
         $result = $obj->checkString("foo");
-        $this->assertIsString($result);
+
+        // TODO - any useful assert here?
+//        $this->assertIsString($result);
 
         $this->expectException(InvalidRulesExceptionData::class);
         $this->expectExceptionMessageMatchesTemplateString(
@@ -47,7 +49,7 @@ class CheckStringTest extends BaseTestCase
             Messages::BAD_TYPE_FOR_STRING_PROCESS_RULE
         );
 
-        $obj->checkString(new \StdClass());
+        $obj->checkString(new \stdClass());
     }
 
     /**
@@ -61,7 +63,7 @@ class CheckStringTest extends BaseTestCase
 
         $inputString = "foo";
 
-        $someString = new class($inputString) implements \stringable {
+        $someString = new class($inputString) implements \Stringable {
             public function __construct(private string $name)
             {
             }

@@ -43,7 +43,7 @@ class CastToBoolTest extends BaseTestCase
     {
         yield [fopen('php://memory', 'r+'), Messages::UNSUPPORTED_TYPE];
         yield [[1, 2, 3], Messages::UNSUPPORTED_TYPE];
-        yield [new \StdClass(), Messages::UNSUPPORTED_TYPE];
+        yield [new \stdClass(), Messages::UNSUPPORTED_TYPE];
         yield ["John", Messages::ERROR_BOOL_BAD_STRING];
     }
 
@@ -51,7 +51,7 @@ class CastToBoolTest extends BaseTestCase
      * @dataProvider provideBoolValueErrorsCases
      * @covers \DataType\ProcessRule\CastToBool
      */
-    public function testValidationErrors($inputValue, $message)
+    public function testValidationErrors(mixed $inputValue, string $message)
     {
         $rule = new CastToBool();
         $processedValues = new ProcessedValues();

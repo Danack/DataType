@@ -74,7 +74,7 @@ class EarlierThanTimeTest extends BaseTestCase
      */
     public function testPreviousTimeWrongType()
     {
-        $value = new \StdClass();
+        $value = new \stdClass();
 
         $processedValues = createProcessedValuesFromArray([]);
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);

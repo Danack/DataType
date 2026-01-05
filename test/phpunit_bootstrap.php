@@ -8,6 +8,11 @@ use DataType\ProcessedValues;
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/fixtures.php";
 
+/**
+ * @param array $keyValues
+ * @return ProcessedValues
+ * @throws \DataType\Exception\LogicExceptionData
+ */
 function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 {
     $processedValues = [];
@@ -20,6 +25,7 @@ function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 
     return ProcessedValues::fromArray($processedValues);
 }
+
 
 function getBoolTestWorks()
 {

@@ -61,7 +61,7 @@ class GetBoolTest extends BaseTestCase
             // todo - we should test the exact error.
             [fopen('php://memory', 'r+')],
             [[1, 2, 3]],
-            [new \StdClass()]
+            [new \stdClass()]
         ];
     }
 

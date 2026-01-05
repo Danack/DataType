@@ -21,7 +21,7 @@ class OrderTest extends BaseTestCase
     public function provideTestCases()
     {
         return [
-            ['time', ['time' => Ordering::ASC], false],
+            ['time', ['time' => Ordering::ASC]],
         ];
     }
 
@@ -29,7 +29,7 @@ class OrderTest extends BaseTestCase
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\Order
      */
-    public function testValidation($testValue, $expectedOrdering, $expectError)
+    public function testValidation(string $testValue, array $expectedOrdering)
     {
         $orderParams = ['time', 'distance'];
 
@@ -49,16 +49,14 @@ class OrderTest extends BaseTestCase
 
     public function provideTestErrors()
     {
-        return [
-            ['bar', null, true],
-        ];
+        yield ['bar'];
     }
 
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\Order
      */
-    public function testErrors($testValue, $expectedOrdering, $expectError)
+    public function testErrors(string $testValue)
     {
         $orderParams = ['time', 'distance'];
 

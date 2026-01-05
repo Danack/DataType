@@ -22,11 +22,13 @@ class ValidDateTest extends BaseTestCase
         return [
             [
                 '2002-10-02',
-                \DateTime::createFromFormat('Y-m-d', '2002-10-02')->setTime(0, 0, 0, 0)
+                // @phpstan-ignore method.nonObject
+                (\DateTime::createFromFormat('Y-m-d', '2002-10-02'))->setTime(0, 0, 0, 0)
             ],
             [
                 '2002-10-02',
-                \DateTime::createFromFormat('Y-m-d', '2002-10-02')->setTime(0, 0, 0, 0)
+                // @phpstan-ignore method.nonObject
+                (\DateTime::createFromFormat('Y-m-d', '2002-10-02'))->setTime(0, 0, 0, 0)
             ],
         ];
     }
@@ -36,7 +38,7 @@ class ValidDateTest extends BaseTestCase
      * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\ValidDate
      */
-    public function testValidationWorks($input, $expectedTime)
+    public function testValidationWorks(string $input, \DateTimeInterface $expectedTime)
     {
         $rule = new ValidDate();
         $processedValues = new ProcessedValues();
@@ -61,7 +63,7 @@ class ValidDateTest extends BaseTestCase
      * @dataProvider provideTestErrorsCases
      * @covers \DataType\ProcessRule\ValidDate
      */
-    public function testValidationErrors($input)
+    public function testValidationErrors(string $input)
     {
         $rule = new ValidDate();
         $processedValues = new ProcessedValues();

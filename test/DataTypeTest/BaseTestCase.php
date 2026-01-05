@@ -226,9 +226,10 @@ class BaseTestCase extends TestCase
         $this->fail($missingIndentifierText);
     }
 
-
     /**
-     * @param array<array{string, string}> $identifiersAndProblems
+     * @param array<array{0:string, 1:string}> $identifiersAndProblems
+     * @param \DataType\ValidationProblem[] $validationProblems
+     * @return void
      */
     public function assertValidationProblems($identifiersAndProblems, $validationProblems)
     {

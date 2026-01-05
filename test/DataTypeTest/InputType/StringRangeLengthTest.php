@@ -29,7 +29,7 @@ class StringRangeLengthTest extends BaseTestCase
      * @covers \DataType\InputType\StringRangeLength
      * @dataProvider provideTestWorks
      */
-    public function testWorks(int $minimum, int $maximum, $expected_value)
+    public function testWorks(int $minimum, int $maximum, string $expected_value)
     {
         $intRange = new StringRangeLength(
             $minimum,
@@ -68,7 +68,7 @@ class StringRangeLengthTest extends BaseTestCase
      * @covers \DataType\InputType\StringRangeLength
      * @dataProvider provideTestErrors
      */
-    public function testErrors(int $minimum, int $maximum, $input_value, $expected_message)
+    public function testErrors(int $minimum, int $maximum, string $input_value, string $expected_message)
     {
         $intRange = new StringRangeLength(
             $minimum,

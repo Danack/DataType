@@ -154,7 +154,7 @@ class IsRgbColorTest extends BaseTestCase
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsRgbColor
      */
-    public function testErrors($testValue)
+    public function testErrors(string $testValue)
     {
         $rule = new IsRgbColor();
         $processedValues = new ProcessedValues();

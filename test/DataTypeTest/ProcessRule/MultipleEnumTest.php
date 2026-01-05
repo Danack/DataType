@@ -31,7 +31,7 @@ class MultipleEnumTest extends BaseTestCase
      * @dataProvider providesMultipleEnumWorks
      * @covers \DataType\ProcessRule\MultipleEnum
      */
-    public function testMultipleEnumWorks($inputString, $expectedResult)
+    public function testMultipleEnumWorks(string $inputString, array $expectedResult)
     {
         $rule = new MultipleEnum(['foo', 'bar']);
         $processedValues = new ProcessedValues();
@@ -82,7 +82,7 @@ class MultipleEnumTest extends BaseTestCase
      * @dataProvider provideMultipleEnumCases
      * @covers \DataType\ProcessRule\MultipleEnum
      */
-    public function testMultipleEnum_emptySegments($input, $expectedOutput)
+    public function testMultipleEnum_emptySegments(string $input, array $expectedOutput)
     {
         $enumRule = new MultipleEnum(['foo', 'bar']);
         $processedValues = new ProcessedValues();
@@ -101,7 +101,7 @@ class MultipleEnumTest extends BaseTestCase
     public function provideTestCases()
     {
         return [
-            ['time', ['time'], false],
+            ['time', ['time']],
         ];
     }
 
@@ -109,7 +109,7 @@ class MultipleEnumTest extends BaseTestCase
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MultipleEnum
      */
-    public function testValidation($testValue, $expectedMultipleEnumValues, $expectError)
+    public function testValidation(string $testValue, array $expectedMultipleEnumValues)
     {
         $rule = new MultipleEnum(['time', 'distance']);
         $processedValues = new ProcessedValues();
@@ -135,7 +135,7 @@ class MultipleEnumTest extends BaseTestCase
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MultipleEnum
      */
-    public function testErrors($testValue)
+    public function testErrors(string $testValue)
     {
         $values = ['time', 'distance'];
 

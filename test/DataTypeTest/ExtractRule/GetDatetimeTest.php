@@ -148,7 +148,7 @@ class GetDatetimeTest extends BaseTestCase
     {
         $index = 'foo';
 
-        $data = [$index => new \StdClass()];
+        $data = [$index => new \stdClass()];
 
         $rule = new GetDatetime();
         $validator = new ProcessedValues();

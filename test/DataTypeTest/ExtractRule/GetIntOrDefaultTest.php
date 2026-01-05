@@ -39,7 +39,7 @@ class GetIntOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetIntOrDefault
      * @dataProvider provideTestCases
      */
-    public function testValidation($data, $default, $expectedValue)
+    public function testValidation(array $data, int $default, int $expectedValue)
     {
         $rule = new GetIntOrDefault($default);
         $validator = new ProcessedValues();
@@ -69,7 +69,7 @@ class GetIntOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetIntOrDefault
      * @dataProvider provideTestErrorCases
      */
-    public function testErrors($inputValue, $message)
+    public function testErrors(string|null $inputValue, string $message)
     {
         $default = 5;
 

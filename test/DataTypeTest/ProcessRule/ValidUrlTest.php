@@ -25,7 +25,7 @@ class ValidUrlTest extends BaseTestCase
      * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\ValidUrl
      */
-    public function testValidationWorks($input)
+    public function testValidationWorks(string $input)
     {
         $rule = new ValidUrl(true);
         $processedValues = new ProcessedValues();
@@ -50,7 +50,7 @@ class ValidUrlTest extends BaseTestCase
      * @dataProvider provideTestErrorsCases
      * @covers \DataType\ProcessRule\ValidUrl
      */
-    public function testValidationErrors($input, $expected_error)
+    public function testValidationErrors(string $input, string $expected_error)
     {
         $rule = new ValidUrl(true);
         $processedValues = new ProcessedValues();
@@ -81,7 +81,7 @@ class ValidUrlTest extends BaseTestCase
      * @dataProvider provideTestWorksCases_scheme_optional
      * @covers \DataType\ProcessRule\ValidUrl
      */
-    public function testValidationWorks_scheme_optional($input)
+    public function testValidationWorks_scheme_optional(string $input)
     {
         $rule = new ValidUrl(false);
         $processedValues = new ProcessedValues();
@@ -105,7 +105,7 @@ class ValidUrlTest extends BaseTestCase
      * @dataProvider provideTestErrorsCases_scheme_optional
      * @covers \DataType\ProcessRule\ValidUrl
      */
-    public function testValidationErrors_scheme_optional($input, $expected_error)
+    public function testValidationErrors_scheme_optional(string $input, string $expected_error)
     {
         $rule = new ValidUrl(true);
         $processedValues = new ProcessedValues();

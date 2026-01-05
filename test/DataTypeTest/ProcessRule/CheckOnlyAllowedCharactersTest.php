@@ -31,8 +31,11 @@ class CheckOnlyAllowedCharactersTest extends BaseTestCase
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\CheckOnlyAllowedCharacters
      */
-    public function testValidation($validCharactersPattern, $testValue, $expectedErrorPosition)
-    {
+    public function testValidation(
+        string $validCharactersPattern,
+        string $testValue,
+        int|null $expectedErrorPosition
+    ) {
         $rule = new CheckOnlyAllowedCharacters($validCharactersPattern);
         $processedValues = new ProcessedValues();
         $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', $testValue);

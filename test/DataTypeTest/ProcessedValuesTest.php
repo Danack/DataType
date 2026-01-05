@@ -52,6 +52,8 @@ class ProcessedValuesTest extends BaseTestCase
     {
         $this->expectException(LogicExceptionData::class);
         $this->expectExceptionMessageMatchesTemplateString(LogicExceptionData::ONLY_PROCESSED_VALUES);
+
+        // @phpstan-ignore argument.type
         $processedValues = ProcessedValues::fromArray(['foo']);
     }
 

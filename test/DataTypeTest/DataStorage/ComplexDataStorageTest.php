@@ -26,7 +26,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testValueNotAvailableGettingErrors()
     {
-        $data = new \StdClass();
+        $data = new \stdClass();
 
         $dataStorage = ComplexDataStorage::fromData($data);
         $dataStorageAtFoo = $dataStorage->moveKey('foo');
@@ -37,7 +37,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testValueNotAvailableAsScalar()
     {
-        $data = new \StdClass();
+        $data = new \stdClass();
         $data->color = 'red';
 
         $dataStorage = ComplexDataStorage::fromData($data);
@@ -50,7 +50,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testErrorIntPositionOnObject_getCurrentValue()
     {
-        $dataStorage = ComplexDataStorage::fromData(new \StdClass());
+        $dataStorage = ComplexDataStorage::fromData(new \stdClass());
         $dataStorageAtFoo = $dataStorage->moveKey(0);
 
         $this->expectException(InvalidLocationExceptionData::class);
@@ -59,7 +59,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testGettingValueNotAvailableAsScalar()
     {
-        $data = new \StdClass();
+        $data = new \stdClass();
         $data->color = 'red';
 
         $dataStorage = ComplexDataStorage::fromData($data);
@@ -92,7 +92,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testValueCorrectAsObject()
     {
-        $data = new \StdClass();
+        $data = new \stdClass();
         $data->foo = 'bar';
 
         $dataStorage = ComplexDataStorage::fromData($data);
@@ -105,7 +105,7 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testValueCorrectlyNotAvailableAsObject()
     {
-        $data = new \StdClass();
+        $data = new \stdClass();
         $data->foo = 'bar';
 
         $dataStorage = ComplexDataStorage::fromData($data);
@@ -116,12 +116,12 @@ class ComplexDataStorageTest extends BaseTestCase
 
     public function testValueCorrect_advanced1()
     {
-        $obj = new \StdClass();
+        $obj = new \stdClass();
 
-        $obj1 = new \StdClass();
+        $obj1 = new \stdClass();
         $obj1->color = 'red';
 
-        $obj2 = new \StdClass();
+        $obj2 = new \stdClass();
         $obj2->color = 'blue';
 
         $objColors = [$obj1, $obj2];

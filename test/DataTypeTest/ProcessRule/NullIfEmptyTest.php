@@ -30,7 +30,7 @@ class NullIfEmptyTest extends BaseTestCase
      * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\NullIfEmpty
      */
-    public function testValidationWorks($testValue, $shouldBeNull)
+    public function testValidationWorks(string|null $testValue, bool $shouldBeNull)
     {
         $rule = new NullIfEmpty();
         $processedValues = new ProcessedValues();
