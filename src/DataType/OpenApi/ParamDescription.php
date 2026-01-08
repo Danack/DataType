@@ -211,5 +211,8 @@ interface ParamDescription
      */
     public function getEnumValues(): ?array;
 
+
+
+
     public function getType(): ?string;
 }

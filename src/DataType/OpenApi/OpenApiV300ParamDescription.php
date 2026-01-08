@@ -461,9 +461,9 @@ class OpenApiV300ParamDescription implements ParamDescription
     }
 
     /**
-     * @return ?array<mixed>
+     * @return array<int, mixed>|null
      */
-    public function getEnumValues()
+    public function getEnumValues():array|null
     {
         return $this->enumValues;
     }
