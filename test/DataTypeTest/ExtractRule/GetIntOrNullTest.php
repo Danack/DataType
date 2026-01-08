@@ -44,6 +44,8 @@ class GetIntOrNullTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetIntOrNull
      * @dataProvider provideTestWorksCases
+     * @param int|string|null $input
+     * @param int|null $expectedValue
      */
     public function testWorks($input, $expectedValue)
     {
@@ -70,6 +72,8 @@ class GetIntOrNullTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetIntOrNull
      * @dataProvider provideTestErrorCases
+     * @param string $input
+     * @param string $message
      */
     public function testErrors($input, $message)
     {

@@ -28,6 +28,7 @@ class OrderTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\Order
+     * @param array<int, string> $expectedOrdering
      */
     public function testValidation(string $testValue, array $expectedOrdering)
     {

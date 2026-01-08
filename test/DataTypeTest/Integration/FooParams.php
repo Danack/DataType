@@ -25,7 +25,7 @@ class FooParams implements DataType
     }
 
     /**
-     * @return array
+     * @return array<int, \DataType\InputType>
      */
     public static function getInputTypes(): array
     {

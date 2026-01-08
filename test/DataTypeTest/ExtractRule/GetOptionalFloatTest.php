@@ -36,6 +36,8 @@ class GetOptionalFloatTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetOptionalFloat
      * @dataProvider provideTestCases
+     * @param int|string $input
+     * @param float|int $expectedValue
      */
     public function testValidation($input, $expectedValue)
     {
@@ -62,8 +64,10 @@ class GetOptionalFloatTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\ExtractRule\GetOptionalInt
+     * @covers \DataType\ExtractRule\GetOptionalFloat
      * @dataProvider provideTestErrorCases
+     * @param mixed $inputValue
+     * @param string $message
      */
     public function testErrors($inputValue, $message)
     {

@@ -97,6 +97,8 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\InputType\StringRangeLengthOrDefault
      * @dataProvider provideTestErrors
+     * @param mixed $input_value
+     * @param string $expected_message
      */
     public function testErrors(int $minimum, int $maximum, $input_value, $expected_message)
     {

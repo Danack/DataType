@@ -80,6 +80,8 @@ class GetStringOrNullTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetStringOrNull
      * @dataProvider providesErrors
+     * @param mixed $input
+     * @param string $expected_error
      */
     public function testErrors($input, $expected_error)
     {

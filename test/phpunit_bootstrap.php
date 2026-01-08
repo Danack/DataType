@@ -9,7 +9,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/fixtures.php";
 
 /**
- * @param array $keyValues
+ * @param array<string, mixed> $keyValues
  * @return ProcessedValues
  * @throws \DataType\Exception\LogicExceptionData
  */

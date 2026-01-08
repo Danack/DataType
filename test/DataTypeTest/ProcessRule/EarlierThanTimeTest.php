@@ -46,6 +46,8 @@ class EarlierThanTimeTest extends BaseTestCase
     /**
      * @covers \DataType\ProcessRule\EarlierThanTime
      * @dataProvider providesErrorsCorrectly
+     * @param string $input_time
+     * @param string $boundary_time
      */
     public function testErrorsCorrectly($input_time, $boundary_time)
     {

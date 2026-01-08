@@ -23,6 +23,8 @@ class GetOptionalBoolTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetOptionalBool
      * @dataProvider provideTestCases
+     * @param mixed $input
+     * @param bool $expectedValue
      */
     public function testValidation($input, $expectedValue)
     {
@@ -63,6 +65,8 @@ class GetOptionalBoolTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetOptionalBool
      * @dataProvider provideTestErrorCases
+     * @param mixed $inputValue
+     * @param string $message
      */
     public function testBadInputErrors($inputValue, $message)
     {

@@ -76,7 +76,7 @@ class FunctionsTest extends BaseTestCase
      * @dataProvider providesNormaliseOrderParameter
      * @covers ::DataType\normalise_order_parameter
      */
-    public function testNormaliseOrderParameter($input, $expectedName, $expectedOrder)
+    public function testNormaliseOrderParameter(string $input, string $expectedName, string $expectedOrder)
     {
         list($name, $order) = normalise_order_parameter($input);
 
@@ -133,7 +133,7 @@ class FunctionsTest extends BaseTestCase
      * @dataProvider provides_getRawCharacters
      * @covers ::\DataType\getRawCharacters
      * @param string $inputString
-     * @param $expectedOutput
+     * @param string $expectedOutput
      */
     public function test_getRawCharacters(string $inputString, $expectedOutput)
     {
@@ -569,6 +569,9 @@ class FunctionsTest extends BaseTestCase
 
             private $value;
 
+            /**
+             * @param mixed $value
+             */
             public function __construct($value)
             {
                 $this->value = $value;

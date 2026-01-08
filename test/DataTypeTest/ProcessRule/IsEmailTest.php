@@ -78,6 +78,8 @@ class IsEmailTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsEmail
+     * @param string $testValue
+     * @param string $expected_error
      */
     public function testErrors($testValue, $expected_error)
     {

@@ -86,6 +86,8 @@ class MatrixIsSizeTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsSize
+     * @param array<int, array<int, mixed>> $testValue
+     * @param string $expectedErrorMessage
      */
     public function testErrors($testValue, ?int $row, ?int $columns, $expectedErrorMessage)
     {

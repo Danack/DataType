@@ -30,6 +30,7 @@ class MultipleEnumTest extends BaseTestCase
     /**
      * @dataProvider providesMultipleEnumWorks
      * @covers \DataType\ProcessRule\MultipleEnum
+     * @param array<int, string> $expectedResult
      */
     public function testMultipleEnumWorks(string $inputString, array $expectedResult)
     {
@@ -81,6 +82,7 @@ class MultipleEnumTest extends BaseTestCase
     /**
      * @dataProvider provideMultipleEnumCases
      * @covers \DataType\ProcessRule\MultipleEnum
+     * @param array<int, string> $expectedOutput
      */
     public function testMultipleEnum_emptySegments(string $input, array $expectedOutput)
     {
@@ -108,6 +110,7 @@ class MultipleEnumTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MultipleEnum
+     * @param array<int, string> $expectedMultipleEnumValues
      */
     public function testValidation(string $testValue, array $expectedMultipleEnumValues)
     {

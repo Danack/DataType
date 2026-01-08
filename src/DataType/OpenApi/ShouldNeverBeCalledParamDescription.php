@@ -208,4 +208,45 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
     {
         throw new \Exception("getMinLength should not be called.");
     }
+
+    public function isExclusiveMaximum(): ?bool
+    {
+        throw new \Exception("isExclusiveMaximum should not be called.");
+    }
+
+    public function isExclusiveMinimum(): ?bool
+    {
+        throw new \Exception("isExclusiveMinimum should not be called.");
+    }
+
+    public function getExclusiveMinimum(): ?bool
+    {
+        throw new \Exception("getExclusiveMinimum should not be called.");
+    }
+
+    public function getExclusiveMaximum(): ?bool
+    {
+        throw new \Exception("getExclusiveMaximum should not be called.");
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefault()
+    {
+        throw new \Exception("getDefault should not be called.");
+    }
+
+    /**
+     * @return array<int, mixed>|null
+     */
+    public function getEnumValues(): ?array
+    {
+        throw new \Exception("getEnumValues should not be called.");
+    }
+
+    public function getType(): ?string
+    {
+        throw new \Exception("getType should not be called.");
+    }
 }

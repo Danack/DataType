@@ -29,6 +29,7 @@ class MaximumCountTest extends BaseTestCase
     /**
      * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MaximumCount
+     * @param array<int, mixed> $values
      */
     public function testWorks(int $maximumCount, array $values)
     {
@@ -53,6 +54,7 @@ class MaximumCountTest extends BaseTestCase
     /**
      * @dataProvider provideFailsCases
      * @covers \DataType\ProcessRule\MaximumCount
+     * @param array<int, mixed> $values
      */
     public function testFails(int $maximumCount, $values)
     {

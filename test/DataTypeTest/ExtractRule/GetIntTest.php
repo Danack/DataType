@@ -43,6 +43,8 @@ class GetIntTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetInt
      * @dataProvider provideTestWorksCases
+     * @param int|string $input
+     * @param int $expectedValue
      */
     public function testWorks($input, $expectedValue)
     {
@@ -70,6 +72,8 @@ class GetIntTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetInt
      * @dataProvider provideTestErrorCases
+     * @param mixed $input
+     * @param string $message
      */
     public function testErrors($input, $message)
     {

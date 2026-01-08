@@ -136,7 +136,7 @@ class GetStringTest extends BaseTestCase
      */
     public function testBadTypeErrors()
     {
-        $rule = new GetString('bar');
+        $rule = new GetString();
         $validator = new ProcessedValues();
         $validationResult = $rule->process(
             $validator,

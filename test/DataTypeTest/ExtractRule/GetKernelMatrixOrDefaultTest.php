@@ -31,6 +31,9 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetKernelMatrixOrDefault
      * @dataProvider provideTestWorks
+     * @param string $input
+     * @param array<int, array<int, float|int>> $expected
+     * @param array<int, array<int, float|int>> $default
      */
     public function testWorks($input, $expected, $default)
     {

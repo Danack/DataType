@@ -37,6 +37,7 @@ class MatrixIsSquareTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MatrixIsSquare
+     * @param array<int, array<int, mixed>> $testValue
      */
     public function testValidation($testValue)
     {
@@ -78,6 +79,10 @@ class MatrixIsSquareTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsSquare
+     * @param array<int, array<int, mixed>> $testValue
+     * @param string $expectedErrorMessage
+     * @param int $rows
+     * @param int $columns
      */
     public function testErrors($testValue, $expectedErrorMessage, $rows, $columns)
     {

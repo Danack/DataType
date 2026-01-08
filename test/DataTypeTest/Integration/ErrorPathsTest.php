@@ -25,6 +25,10 @@ class ErrorPathsTest extends BaseTestCase
     }
 
 
+    /**
+     * @param array<string, mixed> $data
+     * @param array<string, string> $expectedErrors
+     */
     private function executeTest($data, $expectedErrors)
     {
         [$intArrayParams, $errors] = IntArrayParams::createOrErrorFromArray($data);

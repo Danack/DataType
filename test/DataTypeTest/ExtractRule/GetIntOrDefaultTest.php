@@ -38,8 +38,11 @@ class GetIntOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetIntOrDefault
      * @dataProvider provideTestCases
+     * @param array<string, int> $data
+     * @param int|null $default
+     * @param int|null $expectedValue
      */
-    public function testValidation(array $data, int $default, int $expectedValue)
+    public function testValidation(array $data, $default, $expectedValue)
     {
         $rule = new GetIntOrDefault($default);
         $validator = new ProcessedValues();

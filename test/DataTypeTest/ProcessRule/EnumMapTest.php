@@ -59,6 +59,8 @@ class EnumMapTest extends BaseTestCase
     /**
      * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\EnumMap
+     * @param mixed $testValue
+     * @param mixed $expectedValue
      */
     public function testWorks($testValue, $expectedValue)
     {
@@ -94,6 +96,7 @@ class EnumMapTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\EnumMap
+     * @param mixed $testValue
      */
     public function testErrors($testValue)
     {

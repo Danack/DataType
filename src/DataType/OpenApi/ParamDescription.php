@@ -199,5 +199,17 @@ interface ParamDescription
 
     public function getExclusiveMinimum(): ?bool;
 
+    public function getExclusiveMaximum(): ?bool;
+
+    /**
+     * @return mixed
+     */
+    public function getDefault();
+
+    /**
+     * @return array<int, mixed>|null
+     */
+    public function getEnumValues(): ?array;
+
     public function getType(): ?string;
 }

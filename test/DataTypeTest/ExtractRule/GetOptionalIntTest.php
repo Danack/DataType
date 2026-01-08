@@ -32,6 +32,8 @@ class GetOptionalIntTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetOptionalInt
      * @dataProvider provideTestCases
+     * @param int|string $input
+     * @param int $expectedValue
      */
     public function testValidation($input, $expectedValue)
     {
@@ -58,6 +60,8 @@ class GetOptionalIntTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetOptionalInt
      * @dataProvider provideTestErrorCases
+     * @param mixed $inputValue
+     * @param string $message
      */
     public function testErrors($inputValue, $message)
     {

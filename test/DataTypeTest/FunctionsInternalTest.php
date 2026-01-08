@@ -36,6 +36,9 @@ class FunctionsInternalTest extends BaseTestCase
 
         $reflection_class = new \ReflectionClass($classname);
         $r_constructor = $reflection_class->getConstructor();
+        if ($r_constructor === null) {
+            $this->fail("Test should never fail, we are using a known good class.");
+        }
         $constructor_parameters = $r_constructor->getParameters();
 
         $built_parameters = get_all_constructor_parameters(
@@ -59,6 +62,9 @@ class FunctionsInternalTest extends BaseTestCase
 
         $reflection_class = new \ReflectionClass($classname);
         $r_constructor = $reflection_class->getConstructor();
+        if ($r_constructor === null) {
+            $this->fail("Test should never fail, we are using a known good class.");
+        }
         $constructor_parameters = $r_constructor->getParameters();
 
         $this->expectException(MissingConstructorParameterNameExceptionData::class);
@@ -115,6 +121,9 @@ class FunctionsInternalTest extends BaseTestCase
     {
         $this->expectException(JsonDecodeException::class);
         $data = json_encode(null);
+        if ($data === false) {
+            throw new \Exception("json_encode failed");
+        }
         json_decode_safe($data);
     }
 

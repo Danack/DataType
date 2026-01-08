@@ -46,6 +46,8 @@ class GetFloatTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetFloat
      * @dataProvider provideTestWorksCases
+     * @param int|string $input
+     * @param float|int $expectedValue
      */
     public function testWorks($input, $expectedValue)
     {
@@ -69,6 +71,7 @@ class GetFloatTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetFloat
      * @dataProvider provideTestErrorCases
+     * @param string $value
      */
     public function testErrors($value)
     {

@@ -30,8 +30,9 @@ class SkipIfNullTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\SkipIfNull
+     * @param array<int, mixed>|int|string|null $testValue
      */
-    public function testValidation(int|array|string|null $testValue, bool $expectIsFinalResult)
+    public function testValidation($testValue, bool $expectIsFinalResult)
     {
         $rule = new SkipIfNull();
         $processedValues = new ProcessedValues();

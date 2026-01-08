@@ -40,6 +40,7 @@ class MatrixIsOddSizedTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MatrixIsOddSized
+     * @param array<int, array<int, mixed>> $testValue
      */
     public function testValidation($testValue)
     {
@@ -76,6 +77,8 @@ class MatrixIsOddSizedTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsOddSized
+     * @param array<int, array<int, mixed>> $testValue
+     * @param string $expectedErrorMessage
      */
     public function testErrors($testValue, $expectedErrorMessage)
     {

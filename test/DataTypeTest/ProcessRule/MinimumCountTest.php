@@ -30,6 +30,7 @@ class MinimumCountTest extends BaseTestCase
     /**
      * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MinimumCount
+     * @param array<int, mixed> $values
      */
     public function testWorks(int $minimumCount, array $values)
     {
@@ -56,6 +57,7 @@ class MinimumCountTest extends BaseTestCase
     /**
      * @dataProvider provideFailsCases
      * @covers \DataType\ProcessRule\MinimumCount
+     * @param array<int, mixed> $values
      */
     public function testFails(int $minimumCount, array $values)
     {

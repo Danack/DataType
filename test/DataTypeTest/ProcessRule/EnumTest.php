@@ -30,6 +30,8 @@ class EnumTest extends BaseTestCase
     /**
      * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\Enum
+     * @param mixed $testValue
+     * @param mixed $expectedValue
      */
     public function testWorks($testValue, $expectedValue)
     {
@@ -55,6 +57,7 @@ class EnumTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\Enum
+     * @param mixed $testValue
      */
     public function testValidationErrors($testValue)
     {
