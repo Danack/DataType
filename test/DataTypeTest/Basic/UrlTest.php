@@ -56,6 +56,8 @@ class UrlTest extends BaseTestCase
     /**
      * @covers \DataType\Basic\Url
      * @dataProvider providesErrors
+     * @param mixed $invalid_input
+     * @param string $expected_problem
      */
     public function testErrors($invalid_input, $expected_problem)
     {

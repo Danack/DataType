@@ -32,6 +32,8 @@ class DateTimeTest extends BaseTestCase
     /**
      * @covers \DataType\Basic\DateTime
      * @dataProvider provideTestWorksCases
+     * @param string $input
+     * @param string $expected_output
      */
     public function testWorks($input, $expected_output)
     {

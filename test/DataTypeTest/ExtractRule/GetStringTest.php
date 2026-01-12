@@ -61,6 +61,8 @@ class GetStringTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetString
      * @dataProvider providesErrors
+     * @param mixed $input
+     * @param string $expected_error
      */
     public function testErrors($input, $expected_error)
     {

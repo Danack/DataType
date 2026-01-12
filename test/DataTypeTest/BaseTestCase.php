@@ -277,7 +277,7 @@ class BaseTestCase extends TestCase
         }
     }
 
-    public function assertHasValue($expectedValue, $key, ProcessedValues $processedValues)
+    public function assertHasValue(string|int|float|bool $expectedValue, string|int $key, ProcessedValues $processedValues)
     {
         if ($processedValues->hasValue($key) !== true) {
             $this->fail("ProcessedValues does not contain a value for [$key]");
