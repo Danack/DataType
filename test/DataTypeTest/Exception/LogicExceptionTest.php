@@ -42,7 +42,7 @@ class LogicExceptionTest extends BaseTestCase
             $exception->getMessage()
         );
 
-        $exception = LogicExceptionData::onlyProcessedValues('foo');
+        $exception = LogicExceptionData::onlyProcessedValues();
         $this->assertStringMatchesTemplateString(
             LogicExceptionData::ONLY_PROCESSED_VALUES,
             $exception->getMessage()

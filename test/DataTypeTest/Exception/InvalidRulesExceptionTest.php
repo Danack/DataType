@@ -25,7 +25,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
      * @covers \DataType\Exception\InvalidRulesExceptionData
      * @dataProvider providesInvalidRulesException
      */
-    public function testInvalidRulesException($badValue, $badTypeString)
+    public function testInvalidRulesException(mixed $badValue, string $badTypeString)
     {
         $exception = InvalidRulesExceptionData::badTypeForArrayAccess($badValue);
         $this->assertStringMatchesTemplateString(

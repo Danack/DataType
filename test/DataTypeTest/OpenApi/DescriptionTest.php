@@ -226,6 +226,7 @@ class DescriptionTest extends BaseTestCase
 
     /**
      * @dataProvider providesValidMinimumLength
+     * @param int $minLength
      */
     public function testMininumLength($minLength)
     {
@@ -250,7 +251,7 @@ class DescriptionTest extends BaseTestCase
     }
 
     /**
-     * @param $minLength
+     * @param int $minLength
      * @dataProvider providesInvalidMininumLength
      */
     public function testInvalidMininumLength($minLength)
@@ -274,7 +275,7 @@ class DescriptionTest extends BaseTestCase
     }
 
     /**
-     * @param $maxLength
+     * @param int $maxLength
      * @dataProvider providesInvalidMaximumLength
      */
     public function testInvalidMaximumLength($maxLength)
@@ -297,7 +298,7 @@ class DescriptionTest extends BaseTestCase
     }
 
     /**
-     * @param $maxLength
+     * @param int $maxLength
      * @dataProvider providesValidMaximumLength
      */
     public function testValidMaximumLength($maxLength)
@@ -416,10 +417,10 @@ class DescriptionTest extends BaseTestCase
 
 
     /**
-     * @param $schemaExpectations
-     * @param InputType[] $rules
+     * @param array<string, mixed> $schemaExpectations
+     * @param array<int, InputType> $rules
      * @throws OpenApiExceptionData
- */
+     */
     private function performSchemaTest($schemaExpectations, $rules)
     {
         $paramDescription = OpenApiV300ParamDescription::createFromInputTypes($rules);
@@ -441,6 +442,11 @@ class DescriptionTest extends BaseTestCase
     }
 
 
+    /**
+     * @param array<string, mixed> $schemaExpectations
+     * @param array<string, mixed> $paramExpectations
+     * @param array<int, InputType> $rules
+     */
     private function performFullTest($schemaExpectations, $paramExpectations, $rules)
     {
         $paramDescription = OpenApiV300ParamDescription::createFromInputTypes($rules);

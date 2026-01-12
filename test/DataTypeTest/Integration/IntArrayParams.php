@@ -40,7 +40,7 @@ class IntArrayParams implements DataType
     /**
      *
      * @param string $name
-     * @param int[] $values
+     * @param array<int, int> $counts
      */
     public function __construct(string $name, array $counts)
     {

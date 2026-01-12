@@ -63,7 +63,7 @@ class CastToFloatTest extends BaseTestCase
      * @dataProvider provideErrorCases
      * @covers \DataType\ProcessRule\CastToFloat
      */
-    public function testValidationErrors($inputValue, $message)
+    public function testValidationErrors(string|array|null $inputValue, $message)
     {
         $rule = new CastToFloat();
         $processedValues = new ProcessedValues();

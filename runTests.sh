@@ -8,8 +8,13 @@ bash runUnitTests.sh --no-coverage
 
 bash runCodeSniffer.sh
 
-echo "Running PHPStan"
+echo "Running PHPStan on src"
 php vendor/bin/phpstan analyze -c ./phpstan.neon -l 8 src
+
+
+echo "Running PHPStan on tests"
+php vendor/bin/phpstan analyze -c ./phpstan.neon -l 8 src,test
+
 
 echo "Running Psalm (debug enabled)"
 

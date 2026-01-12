@@ -28,7 +28,7 @@ class ColorTest extends BaseTestCase
      * @dataProvider provideRgbColorWorks
      * @covers \DataType\ProcessRule\IsRgbColor
      */
-    public function testValidation($inputString)
+    public function testValidation(string $inputString)
     {
         $rule = new IsRgbColor();
         $processedValues = new ProcessedValues();
@@ -52,7 +52,7 @@ class ColorTest extends BaseTestCase
      * @dataProvider provideRgbColorErrors
      * @covers \DataType\ProcessRule\IsRgbColor
      */
-    public function testErrors($testValue, $message)
+    public function testErrors(string $testValue, string $message)
     {
         $rule = new IsRgbColor();
         $processedValues = new ProcessedValues();

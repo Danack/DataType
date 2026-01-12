@@ -24,19 +24,23 @@ class BaseTestCase extends TestCase
 
     private $startLevel = null;
 
-    public function setup(): void
+    public function setUp(): void
     {
         $this->startLevel = ob_get_level();
         ob_start();
     }
 
-    public function teardown(): void
+    public function tearDown(): void
     {
         if ($this->startLevel === null) {
             $this->assertEquals(0, 1, "startLevel was not set, cannot complete teardown");
         }
         $contents = ob_get_contents();
         ob_end_clean();
+
+        if ($contents === false) {
+            $this->fail("Failed to get contents of buffer.");
+        }
 
         $endLevel = ob_get_level();
         $this->assertEquals($endLevel, $this->startLevel, "Mismatched ob_start/ob_end calls....somewhere");

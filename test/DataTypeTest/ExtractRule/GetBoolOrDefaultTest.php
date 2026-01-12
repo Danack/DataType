@@ -46,7 +46,7 @@ class GetBoolOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetBoolOrDefault
      * @dataProvider provideTestWorksCases
      */
-    public function testWorks($input, $expectedValue)
+    public function testWorks(string|bool $input, bool $expectedValue)
     {
         $validator = new ProcessedValues();
         $rule = new GetBoolOrDefault(false);
@@ -79,7 +79,7 @@ class GetBoolOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetBoolOrDefault
      * @dataProvider provideTestErrorCasesBadTypes
      */
-    public function testErrors($value)
+    public function testErrors(mixed $value)
     {
         $rule = new GetBoolOrDefault(false);
         $validator = new ProcessedValues();

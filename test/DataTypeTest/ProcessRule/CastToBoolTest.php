@@ -25,7 +25,7 @@ class CastToBoolTest extends BaseTestCase
      * @dataProvider provideBoolValueWorksCases
      * @covers \DataType\ProcessRule\CastToBool
      */
-    public function testValidationWorks($inputValue, bool $expectedValue)
+    public function testValidationWorks(string|bool $inputValue, bool $expectedValue)
     {
         $rule = new CastToBool();
         $processedValues = new ProcessedValues();

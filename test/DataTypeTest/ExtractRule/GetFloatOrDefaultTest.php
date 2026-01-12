@@ -42,7 +42,7 @@ class GetFloatOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetFloatOrDefault
      * @dataProvider provideTestCases
      */
-    public function testValidation($data, $default, $expectedValue)
+    public function testValidation(array $data, float|null $default, float|null $expectedValue)
     {
         $rule = new GetFloatOrDefault($default);
         $validator = new ProcessedValues();
@@ -72,7 +72,7 @@ class GetFloatOrDefaultTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetFloatOrDefault
      * @dataProvider provideTestErrorCases
      */
-    public function testErrors($inputValue, $message)
+    public function testErrors(string|null $inputValue, string $message)
     {
         $default = 5.0;
 

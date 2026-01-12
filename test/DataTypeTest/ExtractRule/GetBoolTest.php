@@ -42,7 +42,7 @@ class GetBoolTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetBool
      * @dataProvider provideTestWorksCases
      */
-    public function testWorks($input, $expectedValue)
+    public function testWorks(string $input, bool $expectedValue)
     {
         $validator = new ProcessedValues();
         $rule = new GetBool();
@@ -94,7 +94,7 @@ class GetBoolTest extends BaseTestCase
      * @covers \DataType\ExtractRule\GetBool
      * @dataProvider provideTestErrorCasesForBadStrings
      */
-    public function testErrorsWithBadStrings($value)
+    public function testErrorsWithBadStrings(string $value)
     {
         $rule = new GetBool();
         $validator = new ProcessedValues();

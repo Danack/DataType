@@ -121,6 +121,7 @@ class EarlierThanTimeTest extends BaseTestCase
         $rule = new EarlierThanTime($compareTime);
         $description = $this->applyRuleToDescription($rule);
 
+        $this->assertNotNull($description->getDescription());
         $this->assertStringMatchesTemplateString(
             Messages::TIME_MUST_BE_BEFORE_TIME,
             $description->getDescription()

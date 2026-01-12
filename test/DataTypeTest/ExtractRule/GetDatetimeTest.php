@@ -66,7 +66,7 @@ class GetDatetimeTest extends BaseTestCase
      * @dataProvider providesValidationWorks
      * @covers \DataType\ExtractRule\GetDatetime
      */
-    public function testValidationWorks($inputValue, $expectedValue)
+    public function testValidationWorks(string $inputValue, \DateTimeImmutable $expectedValue)
     {
         $rule = new GetDatetime();
         $validator = new ProcessedValues();

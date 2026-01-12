@@ -33,7 +33,7 @@ class DateTimeTest extends BaseTestCase
      * @covers \DataType\Basic\DateTime
      * @dataProvider provideTestWorksCases
      */
-    public function testWorks($input, $expected_output)
+    public function testWorks(string $input, \DateTimeInterface $expected_output)
     {
         $integer = new DateTimeProcess('john');
 

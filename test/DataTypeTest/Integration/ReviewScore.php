@@ -26,8 +26,8 @@ class ReviewScore implements DataType
 
     /**
      *
-     * @param int $foo
-     * @param string $bar
+     * @param int $score
+     * @param string $comment
      */
     public function __construct(int $score, string $comment)
     {

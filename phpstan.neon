@@ -28,3 +28,8 @@ parameters:
       paths:
         - test/*
 
+
+    -
+      identifier: class.notFound
+      paths:
+        - *DataTypeTest/InputType/MultipleBasicArray.php

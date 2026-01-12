@@ -215,6 +215,7 @@ class LaterThanParamTest extends BaseTestCase
         $rule = new LaterThanParam($parameterName, 5);
         $description = $this->applyRuleToDescription($rule);
 
+        $this->assertNotNull($description->getDescription());
         $this->assertStringMatchesTemplateString(
             Messages::TIME_MUST_BE_X_MINUTES_AFTER_PREVIOUS_VALUE,
             $description->getDescription()

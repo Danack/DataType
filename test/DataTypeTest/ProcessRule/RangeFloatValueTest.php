@@ -99,7 +99,7 @@ class RangeFloatValueTest extends BaseTestCase
      * @dataProvider provideRangeFloatErrorCases
      * @covers \DataType\ProcessRule\RangeFloatValue
      */
-    public function testErrors(int|float $minValue, int|float $maxValue, int|float $inputValue, string $message)
+    public function testErrors(int|float $minValue, int|float $maxValue, string $inputValue, string $message)
     {
         $rule = new RangeFloatValue($minValue, $maxValue);
         $processedValues = new ProcessedValues();
