@@ -46,7 +46,7 @@ class UrlTest extends BaseTestCase
         yield ['Too_short__', Messages::STRING_TOO_SHORT];
         yield [$input, Messages::STRING_TOO_LONG];
         yield ['Some_string_that_is_longer_than_12_chars', Messages::ERROR_INVALID_URL];
-        yield [null, Messages::STRING_REQUIRED_FOUND_NULL];
+        yield [null, Messages::STRING_EXPECTED];
         yield [123, Messages::STRING_EXPECTED];
 
         // Missing scheme

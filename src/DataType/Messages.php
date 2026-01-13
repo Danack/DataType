@@ -74,8 +74,6 @@ class Messages
     public const STRING_TOO_SHORT = "String too short, min characters is %d";
     public const STRING_TOO_LONG = "String too long, max characters is %d.";
     public const STRING_INVALID_COMBINING_CHARACTERS = "Invalid combining characters found at position %s";
-    public const STRING_REQUIRED_FOUND_NON_SCALAR = "String expected but found non-scalar.";
-    public const STRING_REQUIRED_FOUND_NULL = "String expected but found null.";
     public const STRING_REQUIRES_PREFIX = "The string must start with [%s].";
     public const STRING_FOUND_INVALID_CHAR = "Invalid character at position %d. Allowed characters are %s";
 

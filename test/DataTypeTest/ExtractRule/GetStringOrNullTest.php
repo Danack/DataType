@@ -74,7 +74,7 @@ class GetStringOrNullTest extends BaseTestCase
 
     public function providesErrors()
     {
-        yield [[1, 2, 3], Messages::STRING_REQUIRED_FOUND_NON_SCALAR];
+        yield [[1, 2, 3], Messages::STRING_EXPECTED];
     }
 
     /**
@@ -122,7 +122,7 @@ class GetStringOrNullTest extends BaseTestCase
 
         $this->assertValidationProblemRegexp(
             '/' . $index,
-            Messages::STRING_REQUIRED_FOUND_NON_SCALAR,
+            Messages::STRING_EXPECTED,
             $validationResult->getValidationProblems()
         );
     }
@@ -146,7 +146,7 @@ class GetStringOrNullTest extends BaseTestCase
 
         $this->assertValidationProblemRegexp(
             '/' . $index,
-            Messages::STRING_REQUIRED_FOUND_NON_SCALAR,
+            Messages::STRING_EXPECTED,
             $validationResult->getValidationProblems()
         );
     }

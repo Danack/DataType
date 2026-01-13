@@ -224,8 +224,12 @@ function getEnumCaseValues(string $typeString): array
     }
 
     // Get enum cases
+    /** @var \BackedEnum[] $cases */
     $cases = $typeString::cases();
 
-    // Convert cases to array of names (or values, depending on your needs)
-    return array_map(fn($case) => $case->value, $cases);
+    // Convert cases to array of values
+    /** @var list<int|string> $values */
+    $values = array_map(fn(\BackedEnum $case): int|string => $case->value, $cases);
+
+    return $values;
 }

@@ -29,25 +29,9 @@ class GetStringOrNull implements ExtractRule
 
         $value = $dataStorage->getCurrentValue();
 
-        if (is_array($value) === true) {
-            return ValidationResult::errorResult(
-                $dataStorage,
-                Messages::STRING_REQUIRED_FOUND_NON_SCALAR
-            );
-        }
-
         if (is_null($value) === true) {
             return ValidationResult::valueResult($value);
         }
-
-        if (is_scalar($value) !== true) {
-            return ValidationResult::errorResult(
-                $dataStorage,
-                Messages::STRING_REQUIRED_FOUND_NON_SCALAR,
-            );
-        }
-
-        $value = $dataStorage->getCurrentValue();
 
         if (is_string($value) !== true) {
             $message = sprintf(

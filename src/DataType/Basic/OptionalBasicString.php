@@ -1,6 +1,6 @@
 <?php
 
-namespace DataType\ExtractRule;
+namespace DataType\Basic;
 
 use DataType\ExtractRule\GetOptionalString;
 use DataType\HasInputType;
@@ -11,7 +11,7 @@ use DataType\ProcessRule\SkipIfNull;
 class OptionalBasicString implements HasInputType
 {
     public function __construct(
-        private string $name
+        private string|null $name
     ) {
     }
 
