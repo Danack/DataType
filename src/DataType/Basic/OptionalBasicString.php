@@ -11,7 +11,7 @@ use DataType\ProcessRule\SkipIfNull;
 class OptionalBasicString implements HasInputType
 {
     public function __construct(
-        private string|null $name
+        private string $name
     ) {
     }
 

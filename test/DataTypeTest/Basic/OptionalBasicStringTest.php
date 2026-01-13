@@ -2,7 +2,6 @@
 
 namespace DataTypeTest\Basic;
 
-
 use DataTypeTest\BaseTestCase;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;

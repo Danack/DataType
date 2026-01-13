@@ -20,6 +20,8 @@ All scripts should be run from the project root directory:
 | `sh runExamples.sh` | Run example files |
 | `sh runTests.sh` | Run all tests (unit, codesniffer, phpstan, examples, mutation) |
 
+**Important**: `runUnitTests.sh` only runs PHPUnit unit tests. It does **not** run code quality checks (PHPStan, CodeSniffer), mutation tests, or examples. To run the complete test suite including all quality checks, use `sh runTests.sh`.
+
 The scripts support passing command line options through to the underlying tools. For example:
 
 ```bash
@@ -61,6 +63,14 @@ Use the regexp variants when testing message templates that contain `%s` placeho
 
 # Finishing a piece of work
 
-When you think a piece of work has been finished, please run all the individual code quality tools, and then run `sh runTests.sh` which is a final sanity check run.
+When you think a piece of work has been finished, **always run `sh runTests.sh`** which executes the complete test suite:
+
+1. Unit tests (PHPUnit)
+2. Code style checks (CodeSniffer)
+3. Static analysis (PHPStan)
+4. Example files
+5. Mutation tests (Infection)
+
+**Do not rely solely on `runUnitTests.sh`** - it only runs PHPUnit tests and will not catch code quality issues, static analysis errors, or verify that examples still work correctly.
 
 **CODE COVERAGE SHOULD ALWAYS BE AT 100% WHEN A PIECE OF WORK IS FINISHED.**
