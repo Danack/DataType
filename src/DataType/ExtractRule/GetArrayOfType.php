@@ -13,7 +13,7 @@ use function DataType\createArrayOfTypeFromInputStorage;
 use function DataType\getInputTypeListForClass;
 
 /**
- * Extracts an array of a InputType.
+ * Extracts an array of DataType values.
  */
 class GetArrayOfType implements ExtractRule
 {

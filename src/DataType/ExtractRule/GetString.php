@@ -11,7 +11,7 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- * Extracts a string value. Results in an error if a source value is not available.
+ * Extracts a string value. Results in an error if the parameter is not available.
  */
 class GetString implements ExtractRule
 {

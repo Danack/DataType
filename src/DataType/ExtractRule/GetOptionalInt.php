@@ -11,7 +11,7 @@ use DataType\ProcessRule\CastToInt;
 use DataType\ValidationResult;
 
 /**
- * Extracts a int point value or null if the parameter is not available.
+ * Extracts an integer value or null if the parameter is not available.
  */
 class GetOptionalInt implements ExtractRule
 {

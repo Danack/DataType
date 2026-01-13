@@ -11,7 +11,7 @@ use DataType\ProcessRule\CastToInt;
 use DataType\ValidationResult;
 
 /**
- * Extracts a int value or a default value if not.
+ * Extracts an integer value or a default value if the parameter is not available.
  */
 class GetIntOrDefault implements ExtractRule
 {

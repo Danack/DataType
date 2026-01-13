@@ -11,22 +11,20 @@ use DataType\ProcessRule\CastToBool;
 use DataType\ValidationResult;
 
 /**
- * Extracts a boolean value, or a default value if the paramter is not set.
+ * Extracts a boolean value or a default value if the parameter is not available.
  *
  * bool(true) - true
  * bool(false) - false
  * string(true) - true
  * string(false) - false
  * any other input - error
- *
  */
 class GetBoolOrDefault implements ExtractRule
 {
     private ?bool $default;
 
     /**
-     * setOrDefaultValidator constructor.
-     * @param bool $default The default value to use.
+     * @param ?bool $default The default value to use.
      */
     public function __construct(?bool $default)
     {

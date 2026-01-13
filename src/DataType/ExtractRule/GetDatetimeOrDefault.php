@@ -10,7 +10,7 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- * Extracts a DateTime value or a default value if not set.
+ * Extracts a DateTime value or a default value if the parameter is not available.
  */
 class GetDatetimeOrDefault implements ExtractRule
 {

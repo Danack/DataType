@@ -12,8 +12,7 @@ use DataType\ValidationResult;
 use function DataType\createArrayOfScalarsFromDataStorage;
 
 /**
- * Extracts an array of DateTime values, and then applies a list of ProcessPropertyRules
- * to them.
+ * Extracts an array of DateTime values, and then applies a list of ProcessRules to them.
  */
 class GetArrayOfDatetime implements ExtractRule
 {

@@ -11,7 +11,7 @@ use DataType\ProcessRule\CastToFloat;
 use DataType\ValidationResult;
 
 /**
- * Extracts a floating point value or a default value if not set.
+ * Extracts a floating point value or a default value if the parameter is not available.
  */
 class GetFloatOrDefault implements ExtractRule
 {

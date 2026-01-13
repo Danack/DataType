@@ -12,7 +12,8 @@ use DataType\ValidationResult;
 use DataType\ExtractRule\ExtractRule;
 
 /**
- * Extracts a string value or null. Results in an error if a source value is not available.
+ * Extracts a string value or null. The parameter key must exist, but the value may be null.
+ * Results in an error if the parameter is not available.
  *
  * This pattern is probably 'not best practice' for an API, and just not including the key/value
  * is possibly better to indicate a lack of an optional value.

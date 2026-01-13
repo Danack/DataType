@@ -11,7 +11,7 @@ use DataType\ProcessRule\CastToBool;
 use DataType\ValidationResult;
 
 /**
- * Extracts a boolean. If a parameter is not set, then the value is null.
+ * Extracts a boolean value or null if the parameter is not available.
  *
  * bool(true) - true
  * bool(false) - false

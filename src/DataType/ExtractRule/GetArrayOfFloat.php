@@ -12,8 +12,7 @@ use DataType\ValidationResult;
 use function DataType\createArrayOfScalarsFromDataStorage;
 
 /**
- * Extracts an array of float values, and then applies a list of ProcessPropertyRules
- * to them.
+ * Extracts an array of float values, and then applies a list of ProcessRules to them.
  */
 class GetArrayOfFloat implements ExtractRule
 {

@@ -10,7 +10,7 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- * Extracts an array of a <DataType|null>.
+ * Extracts an array of DataType values or null if the parameter is not available.
  */
 class GetArrayOfTypeOrNull extends GetArrayOfType implements ExtractRule
 {

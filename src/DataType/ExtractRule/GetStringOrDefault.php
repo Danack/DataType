@@ -18,7 +18,6 @@ class GetStringOrDefault implements ExtractRule
     private ?string $default;
 
     /**
-     * setOrDefaultValidator constructor.
      * @param ?string $default
      */
     public function __construct(?string $default)
