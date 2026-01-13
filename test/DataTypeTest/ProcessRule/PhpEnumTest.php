@@ -40,8 +40,8 @@ class PhpEnumTest extends BaseTestCase
         );
 
         $this->assertValidationProblems(
-            $validationResult->getValidationProblems(),
-            ['/' => Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]
+            [['/', Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]],
+            $validationResult->getValidationProblems()
         );
 
         $this->assertValidationProblemContains(

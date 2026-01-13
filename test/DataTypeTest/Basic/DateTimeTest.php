@@ -15,16 +15,26 @@ use DataType\Exception\ValidationException;
  */
 class DateTimeTest extends BaseTestCase
 {
-    public function provideTestWorksCases()
+    /**
+     * @return \Generator<array{0: string, 1: string}>
+     */
+    public function provideTestWorksCases(): \Generator
     {
+        $date1 = \DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T10:00:00-05:00');
+        $date2 = \DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T15:00:00Z');
+
+        if ($date1 === false || $date2 === false) {
+            throw new \RuntimeException('Failed to create DateTime from format');
+        }
+
         yield [
             '2002-10-02T10:00:00-05:00',
-            (\DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T10:00:00-05:00'))->format("Y-m-d H:i:s")
+            $date1->format("Y-m-d H:i:s")
         ];
 
         yield [
             '2002-10-02T15:00:00Z',
-            (\DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T15:00:00Z'))->format("Y-m-d H:i:s")
+            $date2->format("Y-m-d H:i:s")
         ];
     }
 
@@ -35,7 +45,7 @@ class DateTimeTest extends BaseTestCase
      * @param string $input
      * @param string $expected_output
      */
-    public function testWorks(string $input, \DateTimeInterface $expected_output)
+    public function testWorks(string $input, string $expected_output)
     {
         $integer = new DateTimeProcess('john');
 

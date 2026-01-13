@@ -10,7 +10,7 @@ use DataType\DataStorage\TestArrayDataStorage;
 use DataTypeTest\BaseTestCase;
 use DataType\Exception\InvalidLocationExceptionData;
 //use function TypeSpec\getJsonPointerParts;
-use function JsonSafe\json_decode_safe;
+use function DataType\json_decode_safe;
 
 /**
  * @covers \DataType\DataStorage\ArrayDataStorage
@@ -85,8 +85,10 @@ class ArrayDataStorageTest extends BaseTestCase
 
     /**
      * @dataProvider providesPathsAreCorrect
+     * @param string $expected
+     * @param array<int, string|int> $pathParts
      */
-    public function testPathsAreCorrect($expected, $pathParts)
+    public function testPathsAreCorrect(string $expected, array $pathParts)
     {
         $dataStorage = ArrayDataStorage::fromArray([]);
 

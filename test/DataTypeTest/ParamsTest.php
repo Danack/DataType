@@ -78,6 +78,7 @@ class ParamsTest extends BaseTestCase
         $this->expectException(\DataType\Exception\ValidationException::class);
         // TODO - we should output the keys as well.
         $this->expectExceptionMessage("Value not set.");
+        // @phpstan-ignore argument.type (testing error path with arbitrary class name)
         create('Foo', $rules, $dataStorage);
     }
 
@@ -149,6 +150,7 @@ class ParamsTest extends BaseTestCase
         ];
 
         try {
+            // @phpstan-ignore argument.type (testing error path with arbitrary class name)
             create('Foo', $inputParameters, $dataStorage);
 
             $this->fail("This shouldn't be reached, as an exception should have been thrown.");
@@ -212,9 +214,6 @@ class ParamsTest extends BaseTestCase
         $this->assertNull($params);
 
         $this->assertCount(1, $validationProblems);
-        /** @var \DataType\ValidationProblem $firstProblem */
-
-        $this->assertCount(1, $validationProblems);
 
         $this->assertValidationProblem(
             '/limit',
@@ -238,7 +237,7 @@ class ParamsTest extends BaseTestCase
         );
 
         $this->assertNoValidationProblems($errors);
-        /** @var $fooParams \DataTypeTest\Integration\FooParams */
+        $this->assertInstanceOf(\DataTypeTest\Integration\FooParams::class, $fooParams);
         $this->assertEquals(5, $fooParams->getLimit());
     }
 }

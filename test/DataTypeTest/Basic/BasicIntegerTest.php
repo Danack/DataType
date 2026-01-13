@@ -43,8 +43,8 @@ class BasicIntegerTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/integer_input' => Messages::VALUE_NOT_SET]
+                [['/integer_input', Messages::VALUE_NOT_SET]],
+                $ve->getValidationProblems()
             );
         }
     }
@@ -59,8 +59,8 @@ class BasicIntegerTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/integer_input' => Messages::INT_REQUIRED_FOUND_NON_DIGITS2]
+                [['/integer_input', Messages::INT_REQUIRED_FOUND_NON_DIGITS2]],
+                $ve->getValidationProblems()
             );
         }
     }
@@ -75,8 +75,8 @@ class BasicIntegerTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/integer_input' => Messages::INT_REQUIRED_UNSUPPORTED_TYPE]
+                [['/integer_input', Messages::INT_REQUIRED_UNSUPPORTED_TYPE]],
+                $ve->getValidationProblems()
             );
         }
     }

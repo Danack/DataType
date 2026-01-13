@@ -106,8 +106,9 @@ class GetBoolOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetBoolOrDefault
      * @dataProvider provideTestErrorCasesBadString
+     * @param mixed $value
      */
-    public function testErrorsBadStrings($value)
+    public function testErrorsBadStrings(mixed $value)
     {
         $rule = new GetBoolOrDefault(false);
         $validator = new ProcessedValues();

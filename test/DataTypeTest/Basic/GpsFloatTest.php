@@ -34,8 +34,8 @@ class GpsFloatTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/gps_input' => Messages::FLOAT_REQUIRED_WRONG_TYPE]
+                [['/gps_input', Messages::FLOAT_REQUIRED_WRONG_TYPE]],
+                $ve->getValidationProblems()
             );
         }
     }

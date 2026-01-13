@@ -63,6 +63,9 @@ class BaseTestCase extends TestCase
     }
 
 
+    /**
+     * @param array<string, string> $messagesByIdentifier
+     */
     protected function assertProblems(
         ValidationResult $validationResult,
         array $messagesByIdentifier
@@ -76,15 +79,15 @@ class BaseTestCase extends TestCase
 
     /**
      * @param string $identifier
-     * @param string $problem
+     * @param string $expectedProblem
      * @param \DataType\ValidationProblem[] $validationProblems
      */
     protected function assertValidationProblem(
         string $identifier,
         string $expectedProblem,
-        $validationProblems
+        array $validationProblems
     ) {
-        $correct_identifier_incorrect_message = false;
+        $matchingProblem = null;
 
         foreach ($validationProblems as $validationProblem) {
             if ($validationProblem->getInputStorage()->getPath() !== $identifier) {
@@ -97,15 +100,15 @@ class BaseTestCase extends TestCase
             }
 
             // loop over all entries before failing.
-            $correct_identifier_incorrect_message = true;
+            $matchingProblem = $validationProblem;
         }
 
-        if ($correct_identifier_incorrect_message === true) {
+        if ($matchingProblem !== null) {
             $incorrectMessageText = sprintf(
                 "Validation problem for identifier '%s' found, but wrong message.\nExpected: '%s'\nActual '%s'\n",
                 $identifier,
                 $expectedProblem,
-                $validationProblem->getProblemMessage()
+                $matchingProblem->getProblemMessage()
             );
 
             $this->fail($incorrectMessageText);
@@ -152,7 +155,7 @@ class BaseTestCase extends TestCase
                 continue;
             }
 
-            if (strpos($validationProblem->getProblemMessage(), $needle) !== false) {
+            if (strpos($validationProblem->getProblemMessage(), (string)$needle) !== false) {
                 // Needle was found
                 return;
             }
@@ -187,31 +190,31 @@ class BaseTestCase extends TestCase
     protected function assertValidationProblemRegexp(
         string $identifier,
         string $expectedProblem,
-        $validationProblems
+        array $validationProblems
     ) {
         $expectedProblemRegexp = templateStringToRegExp($expectedProblem);
 
-        $correct_identifier_incorrect_message = false;
+        $matchingProblem = null;
 
         foreach ($validationProblems as $validationProblem) {
             if ($validationProblem->getInputStorage()->getPath() !== $identifier) {
                 continue;
             }
 
-            if (preg_match($expectedProblemRegexp, $validationProblem->getProblemMessage())) {
+            if (preg_match($expectedProblemRegexp, $validationProblem->getProblemMessage()) === 1) {
                 // correct problem message found
                 return;
             }
             // loop over all entries before failing.
-            $correct_identifier_incorrect_message = true;
+            $matchingProblem = $validationProblem;
         }
 
-        if ($correct_identifier_incorrect_message === true) {
+        if ($matchingProblem !== null) {
             $incorrectMessageText = sprintf(
                 "Validation problem for identifier '%s' found, but wrong message.\nExpected: '%s'\nActual '%s'\n",
                 $identifier,
                 $expectedProblem,
-                $validationProblem->getProblemMessage()
+                $matchingProblem->getProblemMessage()
             );
 
             $this->fail($incorrectMessageText);
@@ -286,11 +289,12 @@ class BaseTestCase extends TestCase
 
     public function assertHasValue(string|int|float|bool $expectedValue, string|int $key, ProcessedValues $processedValues)
     {
-        if ($processedValues->hasValue($key) !== true) {
+        $keyString = (string)$key;
+        if ($processedValues->hasValue($keyString) !== true) {
             $this->fail("ProcessedValues does not contain a value for [$key]");
         }
 
-        $actualValue = $processedValues->getValue($key);
+        $actualValue = $processedValues->getValue($keyString);
 
         $this->assertSame(
             $expectedValue,

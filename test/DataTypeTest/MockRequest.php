@@ -9,22 +9,24 @@ use Psr\Http\Message\UriInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Stream;
 use Laminas\Diactoros\Uri;
-use function _HumbugBox1aa671719151\RingCentral\Psr7\build_query;
 
+/**
+ * Mock implementation of ServerRequestInterface for testing.
+ * This is a simplified mock that doesn't implement all mutation methods.
+ * @phpstan-consistent-constructor
+ */
 class MockRequest implements ServerRequestInterface
 {
-    private $path;
-    private $serverName;
-    private $method;
-    private $isSecure;
-    
-    private $overridingProtocolVersion;
+    private string $path;
+    private string $serverName;
+    private string $method;
+    private bool $isSecure;
 
     public function __construct(
-        $path,
-        $serverName,
-        $method = 'GET',
-        $isSecure = false
+        string $path,
+        string $serverName,
+        string $method = 'GET',
+        bool $isSecure = false
     ) {
         $this->path = $path;
         $this->serverName = $serverName;
@@ -32,7 +34,10 @@ class MockRequest implements ServerRequestInterface
         $this->isSecure = $isSecure;
     }
 
-    public static function createfromQueryParams(array $params)
+    /**
+     * @param array<string, mixed> $params
+     */
+    public static function createfromQueryParams(array $params): self
     {
         $queryString = http_build_query($params);
 
@@ -65,11 +70,11 @@ class MockRequest implements ServerRequestInterface
      * new protocol version.
      *
      * @param string $version HTTP protocol version
-     * @return self
+     * @return static
      */
-    public function withProtocolVersion($version): self
+    public function withProtocolVersion($version): static
     {
-        // TODO: Implement withProtocolVersion() method.
+        return clone $this;
     }
 
     /**
@@ -93,11 +98,11 @@ class MockRequest implements ServerRequestInterface
      * While header names are not case-sensitive, getHeaders() will preserve the
      * exact case in which headers were originally specified.
      *
-     * @return array Returns an associative array of the message's headers. Each
+     * @return array<string, array<string>> Returns an associative array of the message's headers. Each
      *     key MUST be a header name, and each value MUST be an array of strings
      *     for that header.
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return [];
     }
@@ -170,12 +175,12 @@ class MockRequest implements ServerRequestInterface
      *
      * @param string $name Case-insensitive header field name.
      * @param string|string[] $value Header value(s).
-     * @return self
+     * @return static
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    public function withHeader($name, $value)
+    public function withHeader($name, $value): static
     {
-        // TODO: Implement withHeader() method.
+        return clone $this;
     }
 
     /**
@@ -191,12 +196,12 @@ class MockRequest implements ServerRequestInterface
      *
      * @param string $name Case-insensitive header field name to add.
      * @param string|string[] $value Header value(s).
-     * @return self
+     * @return static
      * @throws \InvalidArgumentException for invalid header names or values.
      */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader($name, $value): static
     {
-        // TODO: Implement withAddedHeader() method.
+        return clone $this;
     }
 
     /**
@@ -209,11 +214,11 @@ class MockRequest implements ServerRequestInterface
      * the named header.
      *
      * @param string $name Case-insensitive header field name to remove.
-     * @return self
+     * @return static
      */
-    public function withoutHeader($name)
+    public function withoutHeader($name): static
     {
-        // TODO: Implement withoutHeader() method.
+        return clone $this;
     }
 
     /**
@@ -237,12 +242,12 @@ class MockRequest implements ServerRequestInterface
      * new body stream.
      *
      * @param StreamInterface $body Body.
-     * @return self
+     * @return static
      * @throws \InvalidArgumentException When the body is not valid.
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): static
     {
-        // TODO: Implement withBody() method.
+        return clone $this;
     }
 
     /**
@@ -281,11 +286,11 @@ class MockRequest implements ServerRequestInterface
      * @link http://tools.ietf.org/html/rfc7230#section-2.7 (for the various
      *     request-target forms allowed in request messages)
      * @param mixed $requestTarget
-     * @return self
+     * @return static
      */
-    public function withRequestTarget($requestTarget)
+    public function withRequestTarget($requestTarget): static
     {
-        // TODO: Implement withRequestTarget() method.
+        return clone $this;
     }
 
     /**
@@ -310,12 +315,12 @@ class MockRequest implements ServerRequestInterface
      * changed request method.
      *
      * @param string $method Case-sensitive method.
-     * @return self
+     * @return static
      * @throws \InvalidArgumentException for invalid HTTP methods.
      */
-    public function withMethod($method)
+    public function withMethod($method): static
     {
-        // TODO: Implement withMethod() method.
+        return clone $this;
     }
 
     /**
@@ -373,11 +378,11 @@ class MockRequest implements ServerRequestInterface
      * @link http://tools.ietf.org/html/rfc3986#section-4.3
      * @param UriInterface $uri New request URI to use.
      * @param bool $preserveHost Preserve the original state of the Host header.
-     * @return self
+     * @return static
      */
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    public function withUri(UriInterface $uri, $preserveHost = false): static
     {
-        // TODO: Implement withUri() method.
+        return clone $this;
     }
 
     /**
@@ -387,11 +392,10 @@ class MockRequest implements ServerRequestInterface
      * typically derived from PHP's $_SERVER superglobal. The data IS NOT
      * REQUIRED to originate from $_SERVER.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function getServerParams()
+    public function getServerParams(): array
     {
-        // TODO: Implement getServerParams() method.
         return [];
     }
 
@@ -403,9 +407,9 @@ class MockRequest implements ServerRequestInterface
      * The data MUST be compatible with the structure of the $_COOKIE
      * superglobal.
      *
-     * @return array
+     * @return array<string, string>
      */
-    public function getCookieParams()
+    public function getCookieParams(): array
     {
         //Cli does not support cookies.
         return [];
@@ -425,10 +429,11 @@ class MockRequest implements ServerRequestInterface
      * immutability of the message, and MUST return an instance that has the
      * updated cookie values.
      *
-     * @param array $cookies Array of key/value pairs representing cookies.
-     * @return self
+     * @param array<string, string> $cookies Array of key/value pairs representing cookies.
+     * @return static
+     * @phpstan-ignore method.childParameterType
      */
-    public function withCookieParams(array $cookies)
+    public function withCookieParams(array $cookies): static
     {
         return clone $this;
     }
@@ -443,9 +448,9 @@ class MockRequest implements ServerRequestInterface
      * values, you may need to parse the query string from `getUri()->getQuery()`
      * or from the `QUERY_STRING` server param.
      *
-     * @return array
+     * @return array<int|string, mixed>
      */
-    public function getQueryParams()
+    public function getQueryParams(): array
     {
         $params = [];
         parse_str($this->getUri()->getQuery(), $params);
@@ -470,13 +475,14 @@ class MockRequest implements ServerRequestInterface
      * immutability of the message, and MUST return an instance that has the
      * updated query string arguments.
      *
-     * @param array $query Array of query string arguments, typically from
+     * @param array<string, mixed> $query Array of query string arguments, typically from
      *     $_GET.
-     * @return self
+     * @return static
+     * @phpstan-ignore method.childParameterType
      */
-    public function withQueryParams(array $query)
+    public function withQueryParams(array $query): static
     {
-        // TODO: Implement withQueryParams() method.
+        return clone $this;
     }
 
     /**
@@ -488,10 +494,10 @@ class MockRequest implements ServerRequestInterface
      * These values MAY be prepared from $_FILES or the message body during
      * instantiation, or MAY be injected via withUploadedFiles().
      *
-     * @return array An array tree of UploadedFileInterface instances; an empty
+     * @return array<\Psr\Http\Message\UploadedFileInterface> An array tree of UploadedFileInterface instances; an empty
      *     array MUST be returned if no data is present.
      */
-    public function getUploadedFiles()
+    public function getUploadedFiles(): array
     {
         return [];
     }
@@ -503,11 +509,12 @@ class MockRequest implements ServerRequestInterface
      * immutability of the message, and MUST return an instance that has the
      * updated body parameters.
      *
-     * @param array An array tree of UploadedFileInterface instances.
-     * @return self
+     * @param array<\Psr\Http\Message\UploadedFileInterface> $uploadedFiles An array tree of UploadedFileInterface instances.
+     * @return static
      * @throws \InvalidArgumentException if an invalid structure is provided.
+     * @phpstan-ignore method.childParameterType
      */
-    public function withUploadedFiles(array $uploadedFiles)
+    public function withUploadedFiles(array $uploadedFiles): static
     {
         return clone $this;
     }
@@ -524,10 +531,10 @@ class MockRequest implements ServerRequestInterface
      * potential types MUST be arrays or objects only. A null value indicates
      * the absence of body content.
      *
-     * @return null|array|object The deserialized body parameters, if any.
+     * @return null|array<mixed>|object The deserialized body parameters, if any.
      *     These will typically be an array or object.
      */
-    public function getParsedBody()
+    public function getParsedBody(): null|array|object
     {
         return null;
     }
@@ -554,15 +561,15 @@ class MockRequest implements ServerRequestInterface
      * immutability of the message, and MUST return an instance that has the
      * updated body parameters.
      *
-     * @param null|array|object $data The deserialized body data. This will
+     * @param null|array<mixed>|object $data The deserialized body data. This will
      *     typically be in an array or object.
-     * @return self
+     * @return static
      * @throws \InvalidArgumentException if an unsupported argument type is
      *     provided.
      */
-    public function withParsedBody($data)
+    public function withParsedBody($data): static
     {
-        // TODO: Implement withParsedBody() method.
+        return clone $this;
     }
 
     /**
@@ -574,9 +581,9 @@ class MockRequest implements ServerRequestInterface
      * deserializing non-form-encoded message bodies; etc. Attributes
      * will be application and request specific, and CAN be mutable.
      *
-     * @return array Attributes derived from the request.
+     * @return array<string, mixed> Attributes derived from the request.
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         //CliRequest does not support attributes
         return [];
@@ -616,9 +623,9 @@ class MockRequest implements ServerRequestInterface
      * @see getAttributes()
      * @param string $name The attribute name.
      * @param mixed $value The value of the attribute.
-     * @return self
+     * @return static
      */
-    public function withAttribute($name, $value)
+    public function withAttribute($name, $value): static
     {
         return clone $this;
     }
@@ -635,9 +642,9 @@ class MockRequest implements ServerRequestInterface
      *
      * @see getAttributes()
      * @param string $name The attribute name.
-     * @return self
+     * @return static
      */
-    public function withoutAttribute($name)
+    public function withoutAttribute($name): static
     {
         return clone $this;
     }

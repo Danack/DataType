@@ -99,6 +99,7 @@ class FunctionsTest extends BaseTestCase
 
         // Incorrect string passes through
         $errorMsg = check_only_digits('123X45');
+        $this->assertNotNull($errorMsg);
 
         // TODO - update string matching.
         $this->assertStringMatchesFormat("%sposition 3%s", $errorMsg);
@@ -662,17 +663,18 @@ class FunctionsTest extends BaseTestCase
         );
 
         $this->assertEmpty($errors);
+        $this->assertNotNull($values);
 
         $this->assertCount(2, $values);
 
         $this->assertInstanceOf(FooParams::class, $values[0]);
         $this->assertInstanceOf(FooParams::class, $values[1]);
 
-        /** @var $fooParam1 FooParams */
+        /** @var FooParams $fooParam1 */
         $fooParam1 = $values[0];
         $this->assertSame(20, $fooParam1->getLimit());
 
-        /** @var $fooParam2 FooParams */
+        /** @var FooParams $fooParam2 */
         $fooParam2 = $values[1];
         $this->assertSame(30, $fooParam2->getLimit());
     }
@@ -693,6 +695,7 @@ class FunctionsTest extends BaseTestCase
         );
 
         $this->assertNull($values);
+        $this->assertNotNull($validationProblems);
         $this->assertValidationErrorCount(1, $validationProblems);
 
         /** @var \DataType\ValidationProblem[] $validationProblems */
@@ -721,6 +724,7 @@ class FunctionsTest extends BaseTestCase
         );
 
         $this->assertNull($values);
+        $this->assertNotNull($validationProblems);
         $this->assertValidationErrorCount(3, $validationProblems);
 
         $this->assertValidationProblemRegexp(
@@ -758,11 +762,11 @@ class FunctionsTest extends BaseTestCase
         $this->assertInstanceOf(FooParams::class, $values[0]);
         $this->assertInstanceOf(FooParams::class, $values[1]);
 
-        /** @var $fooParam1 FooParams */
+        /** @var FooParams $fooParam1 */
         $fooParam1 = $values[0];
         $this->assertSame(20, $fooParam1->getLimit());
 
-        /** @var $fooParam2 FooParams */
+        /** @var FooParams $fooParam2 */
         $fooParam2 = $values[1];
         $this->assertSame(30, $fooParam2->getLimit());
     }
@@ -811,6 +815,7 @@ class FunctionsTest extends BaseTestCase
             Messages::ERROR_DATE_FORMAT_MUST_BE_STRING
         );
 
+        // @phpstan-ignore argument.type (intentionally passing bad data to test error handling)
         checkAllowedFormatsAreStrings($bad_formats);
     }
 
@@ -842,6 +847,7 @@ class FunctionsTest extends BaseTestCase
                 \OneColorWithOtherAnnotationThatDoesNotExist::class
             );
         }
+        // @phpstan-ignore catch.neverThrown (exception thrown depends on fixture class)
         catch (AnnotationClassDoesNotExistExceptionData $acdnee) {
             $this->assertStringContainsString(
                 'ThisClassDoesNotExistParam', $acdnee->getMessage()
@@ -859,6 +865,7 @@ class FunctionsTest extends BaseTestCase
                 \MultipleParamAnnotations::class
             );
         }
+        // @phpstan-ignore catch.neverThrown (exception thrown depends on fixture class)
         catch (PropertyHasMultipleInputTypeAnnotationsException $acdnee) {
             $this->assertStringContainsString(
                 'background_color',

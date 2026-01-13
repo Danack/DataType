@@ -34,8 +34,8 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/enum_input' => Messages::STRING_EXPECTED]
+                [['/enum_input', Messages::STRING_EXPECTED]],
+                $ve->getValidationProblems()
             );
         }
     }
@@ -58,8 +58,8 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/enum_input' => Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]
+                [['/enum_input', Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]],
+                $ve->getValidationProblems()
             );
         }
     }

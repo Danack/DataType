@@ -35,8 +35,8 @@ class BasicDateTimeTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/datetime_input' => Messages::VALUE_NOT_SET]
+                [['/datetime_input', Messages::VALUE_NOT_SET]],
+                $ve->getValidationProblems()
             );
         }
     }
@@ -51,8 +51,8 @@ class BasicDateTimeTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/datetime_input' => Messages::ERROR_INVALID_DATETIME]
+                [['/datetime_input', Messages::ERROR_INVALID_DATETIME]],
+                $ve->getValidationProblems()
             );
         }
     }
@@ -67,8 +67,8 @@ class BasicDateTimeTest extends BaseTestCase
         }
         catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblems(
-                $ve->getValidationProblems(),
-                ['/datetime_input' => Messages::ERROR_DATETIME_MUST_START_AS_STRING]
+                [['/datetime_input', Messages::ERROR_DATETIME_MUST_START_AS_STRING]],
+                $ve->getValidationProblems()
             );
         }
     }

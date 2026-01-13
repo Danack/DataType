@@ -45,8 +45,9 @@ class MatrixIsSizeTest extends BaseTestCase
     /**
      * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\MatrixIsSize
+     * @param array<int, array<int, int|float>> $testValue
      */
-    public function testWorks($testValue, ?int $row, ?int $columns)
+    public function testWorks(array $testValue, ?int $row, ?int $columns)
     {
         $rule = new MatrixIsSize($row, $columns);
         $processedValues = new ProcessedValues();
