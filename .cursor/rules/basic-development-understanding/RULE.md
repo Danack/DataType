@@ -8,4 +8,5 @@ alwaysApply: true
 - Never create mocks or expect mocks to be used in this project. Use real objects and dependencies instead of mock objects in tests.
 - If you need to invoke a tool please read the files in @docs.
 - If you are doing any development work, read the document @docs/development-environment.md.
+- When I say "all tests" I am including PHP Unit, PhpStan, code sniffer and others. There should be a script to run them all.
 - If you are doing any coding, read the document @docs/testing.md to learn how to run the tests.
