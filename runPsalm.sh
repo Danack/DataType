@@ -25,7 +25,7 @@ echo "Version check exit code: $php_exit_code"
 
 if [ $php_exit_code -eq 0 ]; then
 echo "Executing Psalm"
-php ./psalm.phar
+php ./psalm.phar "$@"
 else
 echo "Skipping Psalm (requires PHP 8.1 or 8.2)"
 fi

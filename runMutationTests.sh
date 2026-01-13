@@ -2,7 +2,7 @@
 
 rm infection.log
 
-php infection.phar
+php infection.phar "$@"
 
 
 infection_exit_code=$?
