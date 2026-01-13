@@ -76,6 +76,11 @@ class Messages
     public const STRING_INVALID_COMBINING_CHARACTERS = "Invalid combining characters found at position %s";
     public const STRING_REQUIRES_PREFIX = "The string must start with [%s].";
     public const STRING_FOUND_INVALID_CHAR = "Invalid character at position %d. Allowed characters are %s";
+    public const ERROR_PATTERN_MISMATCH = "String does not match required pattern.";
+    public const ERROR_NOT_ALPHA = "String must contain only letters.";
+    public const ERROR_NOT_ALPHANUMERIC = "String must contain only letters and numbers.";
+    public const ERROR_NOT_DIGIT = "String must contain only digits.";
+    public const ERROR_INVALID_IP_ADDRESS = "Value is not a valid IP address.";
 
     // Miscellaneous
     public const MUST_RETURN_ARRAY_OF_PROPERTY_DEFINITION ='Function %s::getPropertyDefinitionList must return array of %s. Item at index %d is wrong type.';
