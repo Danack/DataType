@@ -54,8 +54,19 @@
                 "*::updateParamDescription"
             ]
         },
+        "PregMatchRemoveCaret": {
+            "ignore": [
+                "DataType\\ProcessRule\\MatchesRegex::process",
+                "DataType\\ProcessRule\\MatchesRegex::updateParamDescription"
+            ]
+        },
+        "PregMatchRemoveDollar": {
+            "ignore": [
+                "DataType\\ProcessRule\\MatchesRegex::process",
+                "DataType\\ProcessRule\\MatchesRegex::updateParamDescription"
+            ]
+        },
         "SpreadOneItem": {
-
             "ignore": [
                 "DataType\\ExtractRule\\GetArrayOfInt::process"
             ]
