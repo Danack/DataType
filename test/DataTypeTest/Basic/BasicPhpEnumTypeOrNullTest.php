@@ -33,8 +33,9 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
             $this->fail("Expected ValidationException was not thrown.");
         }
         catch (\DataType\Exception\ValidationException $ve) {
-            $this->assertValidationProblems(
-                [['/enum_input', Messages::STRING_EXPECTED]],
+            $this->assertValidationProblemRegexp(
+                '/enum_input',
+                Messages::STRING_EXPECTED,
                 $ve->getValidationProblems()
             );
         }
@@ -57,8 +58,9 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
             $this->fail("Expected ValidationException was not thrown.");
         }
         catch (\DataType\Exception\ValidationException $ve) {
-            $this->assertValidationProblems(
-                [['/enum_input', Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]],
+            $this->assertValidationProblemRegexp(
+                '/enum_input',
+                Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE,
                 $ve->getValidationProblems()
             );
         }

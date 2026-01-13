@@ -16,11 +16,11 @@ use function DataType\getInputTypeListForClass;
 trait CreateFromArray
 {
     /**
-     * @param VarMap $variableMap
-     * @return self
+     * @param array<mixed> $data
+     * @return static
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createFromArray($data): static
+    public static function createFromArray(array $data): static
     {
         $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($data);
@@ -31,7 +31,6 @@ trait CreateFromArray
             $dataStorage
         );
 
-        /** @var $object static */
         return $object;
     }
 }

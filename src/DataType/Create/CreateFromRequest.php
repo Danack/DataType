@@ -18,7 +18,7 @@ trait CreateFromRequest
 {
     /**
      * @param ServerRequestInterface $request
-     * @return self
+     * @return static
      * @throws \DataType\Exception\ValidationException
      */
     public static function createFromRequest(ServerRequestInterface $request): static
@@ -28,7 +28,7 @@ trait CreateFromRequest
         $dataStorage = ArrayDataStorage::fromArray($variableMap->toArray());
 
         $object = create(static::class, $inputTypeList, $dataStorage);
-        /** @var $object self */
+
         return $object;
     }
 }

@@ -8,6 +8,10 @@ parameters:
     - *CreateFromVarMap*
   ignoreErrors:
     -
+      identifier: trait.unused
+      paths:
+        - src/*
+    -
       identifier: missingType.return
       paths:
         - test/*
@@ -16,19 +20,12 @@ parameters:
       paths:
         - test/*
     -
-      identifier: property.unused
-      paths:
-        - test/*
-    -
-      identifier: property.onlyWritten
-      paths:
-        - test/*
-    -
       identifier: missingType.property
       paths:
         - test/*
+    # Ignore all errors in fixtures.php - it contains intentional errors for testing
     -
-      identifier: class.notFound
+      message: '#.*#'
       paths:
-        - *DataTypeTest/InputType/MultipleBasicArray.php
+        - test/fixtures.php
     

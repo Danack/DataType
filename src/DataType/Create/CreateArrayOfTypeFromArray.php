@@ -19,7 +19,7 @@ use function DataType\createArrayOfTypeFromInputStorage;
 trait CreateArrayOfTypeFromArray
 {
     /**
-     * @param VarMap $variableMap
+     * @param array<mixed> $data
      * @return static[]
      * @throws \DataType\Exception\ValidationException
      */

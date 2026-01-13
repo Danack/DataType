@@ -39,9 +39,9 @@ class PhpEnumTest extends BaseTestCase
             $invalid_case, $processedValues, $dataStorage
         );
 
-        $this->assertValidationProblems(
-            [['/', Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]],
-            $validationResult->getValidationProblems()
+        $this->assertProblems(
+            $validationResult,
+            ['/' => Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE]
         );
 
         $this->assertValidationProblemContains(

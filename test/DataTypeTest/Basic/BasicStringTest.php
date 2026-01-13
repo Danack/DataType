@@ -49,8 +49,9 @@ class BasicStringTest extends BaseTestCase
             $this->fail("Expected ValidationException was not thrown.");
         }
         catch (\DataType\Exception\ValidationException $ve) {
-            $this->assertValidationProblems(
-                [['/string_input', Messages::STRING_EXPECTED]],
+            $this->assertValidationProblemRegexp(
+                '/string_input',
+                Messages::STRING_EXPECTED,
                 $ve->getValidationProblems()
             );
         }

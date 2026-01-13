@@ -93,6 +93,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
             Messages::MATRIX_INVALID_BAD_ROW
         );
 
+        // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         new GetKernelMatrixOrDefault($default);
     }
 
@@ -110,6 +111,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
             Messages::MATRIX_INVALID_BAD_CELL
         );
 
+        // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         new GetKernelMatrixOrDefault($default);
     }
 

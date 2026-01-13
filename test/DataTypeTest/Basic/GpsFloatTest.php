@@ -33,8 +33,9 @@ class GpsFloatTest extends BaseTestCase
             $this->fail("Expected ValidationException was not thrown.");
         }
         catch (\DataType\Exception\ValidationException $ve) {
-            $this->assertValidationProblems(
-                [['/gps_input', Messages::FLOAT_REQUIRED_WRONG_TYPE]],
+            $this->assertValidationProblemRegexp(
+                '/gps_input',
+                Messages::FLOAT_REQUIRED_WRONG_TYPE,
                 $ve->getValidationProblems()
             );
         }

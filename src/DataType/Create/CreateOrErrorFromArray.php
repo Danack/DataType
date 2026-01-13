@@ -16,7 +16,7 @@ use function DataType\getInputTypeListForClass;
 trait CreateOrErrorFromArray
 {
     /**
-     * @param array $data
+     * @param array<mixed> $data
      * TODO - ValidationErrors is incorrect.
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
      * @throws \DataType\Exception\ValidationException

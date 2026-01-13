@@ -74,8 +74,9 @@ class BasicIntegerTest extends BaseTestCase
             $this->fail("Expected ValidationException was not thrown.");
         }
         catch (\DataType\Exception\ValidationException $ve) {
-            $this->assertValidationProblems(
-                [['/integer_input', Messages::INT_REQUIRED_UNSUPPORTED_TYPE]],
+            $this->assertValidationProblemRegexp(
+                '/integer_input',
+                Messages::INT_REQUIRED_UNSUPPORTED_TYPE,
                 $ve->getValidationProblems()
             );
         }

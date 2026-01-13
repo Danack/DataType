@@ -121,6 +121,7 @@ class ValidationResultTest extends BaseTestCase
     {
         $this->expectExceptionMessageMatchesTemplateString(LogicExceptionData::NOT_VALIDATION_PROBLEM);
         $this->expectException(LogicExceptionData::class);
+        // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         $validationResult = ValidationResult::fromValidationProblems([new \stdClass()]);
     }
 }

@@ -17,12 +17,12 @@ use function DataType\getInputTypeListForClass;
 trait CreateOrErrorFromJson
 {
     /**
-     * @param array $data
+     * @param string $json
      * TODO - ValidationErrors is incorrect.
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createOrErrorFromJson($json)
+    public static function createOrErrorFromJson(string $json)
     {
         $data = json_decode_safe($json);
         $inputTypeList = getInputTypeListForClass(self::class);

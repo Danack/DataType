@@ -157,7 +157,7 @@ class GetStringOrNullTest extends BaseTestCase
      */
     public function testBadTypeErrors()
     {
-        $rule = new GetStringOrNull('bar');
+        $rule = new GetStringOrNull();
         $validator = new ProcessedValues();
         $validationResult = $rule->process(
             $validator,

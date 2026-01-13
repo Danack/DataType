@@ -21,7 +21,7 @@ trait CreateFromJson
      * @return static
      * @throws \DataType\Exception\ValidationException
      */
-    public static function createFromJson($json): static
+    public static function createFromJson(string $json): static
     {
         $inputTypeList = getInputTypeListForClass(self::class);
         $data = json_decode_safe($json);
@@ -33,7 +33,6 @@ trait CreateFromJson
             $dataStorage
         );
 
-        /** @var $object static */
         return $object;
     }
 }

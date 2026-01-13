@@ -47,6 +47,7 @@ class GetDatetimeTest extends BaseTestCase
         );
 
         $this->expectExceptionMessage($message);
+        // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         $rule = new GetDatetime([
             \DateTime::COOKIE,
             null
@@ -94,6 +95,7 @@ class GetDatetimeTest extends BaseTestCase
         $this->expectException(InvalidDatetimeFormatExceptionData::class);
         $this->expectExceptionMessageMatchesTemplateString(Messages::ERROR_DATE_FORMAT_MUST_BE_STRING);
 
+        // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         $rule = new GetDatetime($allowedFormats);
     }
 
