@@ -67,7 +67,7 @@ class MockRequest implements ServerRequestInterface
      * @param string $version HTTP protocol version
      * @return self
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion($version): self
     {
         // TODO: Implement withProtocolVersion() method.
     }

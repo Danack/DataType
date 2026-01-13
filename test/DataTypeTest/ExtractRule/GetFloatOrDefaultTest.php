@@ -41,6 +41,9 @@ class GetFloatOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetFloatOrDefault
      * @dataProvider provideTestCases
+     * @param array<string, mixed> $data
+     * @param float|null $default
+     * @param float|null $expectedValue
      */
     public function testValidation(array $data, float|null $default, float|null $expectedValue)
     {
@@ -71,6 +74,8 @@ class GetFloatOrDefaultTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetFloatOrDefault
      * @dataProvider provideTestErrorCases
+     * @param string|null $inputValue
+     * @param string $message
      */
     public function testErrors(string|null $inputValue, string $message)
     {

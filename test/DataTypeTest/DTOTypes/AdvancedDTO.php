@@ -13,6 +13,9 @@ class AdvancedDTO implements DataType
 {
     use GetInputTypesFromAttributes;
 
+    /**
+     * @param array<int, BasicDTO> $colors
+     */
     public function __construct(
         #[MultipleBasicDTO('colors')]
         public array $colors,

@@ -57,6 +57,8 @@ class BaseTestCase extends TestCase
         //<exclude>*/BaseTestCase.php</exclude>
         //in the phpunit.xml file it still thinks this file is a test class.
         //and then complains about it not having any tests.
+
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertTrue(true);
     }
 
@@ -282,7 +284,7 @@ class BaseTestCase extends TestCase
         }
     }
 
-    public function assertHasValue($expectedValue, $key, ProcessedValues $processedValues)
+    public function assertHasValue(string|int|float|bool $expectedValue, string|int $key, ProcessedValues $processedValues)
     {
         if ($processedValues->hasValue($key) !== true) {
             $this->fail("ProcessedValues does not contain a value for [$key]");

@@ -23,7 +23,6 @@ use DataType\InputType;
 use DataType\Exception\UnknownParamException;
 use function DataType\create;
 use function DataType\createOrError;
-use function DataType\createTypeFromAnnotations;
 use function DataType\processInputTypesFromStorage;
 
 /**

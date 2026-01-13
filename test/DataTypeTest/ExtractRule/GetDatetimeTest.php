@@ -65,6 +65,8 @@ class GetDatetimeTest extends BaseTestCase
     /**
      * @dataProvider providesValidationWorks
      * @covers \DataType\ExtractRule\GetDatetime
+     * @param string $inputValue
+     * @param \DateTimeImmutable $expectedValue
      */
     public function testValidationWorks(string $inputValue, \DateTimeImmutable $expectedValue)
     {

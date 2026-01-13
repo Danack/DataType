@@ -61,8 +61,9 @@ class CastToIntTest extends BaseTestCase
     /**
      * @dataProvider providesDetectsErrorsCorrectly
      * @covers \DataType\ProcessRule\CastToInt
+     * @param array<int, mixed>|string $inputValue
      */
-    public function testDetectsErrorsCorrectly(string|array $inputValue, string $message)
+    public function testDetectsErrorsCorrectly($inputValue, string $message)
     {
         $rule = new CastToInt();
         $processedValues = new ProcessedValues();
