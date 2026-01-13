@@ -94,6 +94,9 @@ class BasicPhpEnumTypeOrNullFixture implements DataType
     }
 }
 
+/**
+ * Used for testing. Update the tests if you change the number of entries.
+ */
 enum TestEnum: string
 {
     case VALUE1 = 'VALUE1';

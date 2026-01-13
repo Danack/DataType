@@ -16,6 +16,9 @@ use function DataType\get_all_constructor_parameters;
 use function DataType\json_decode_safe;
 use function DataType\json_encode_safe;
 
+use function DataType\getEnumCases;
+use function DataType\getEnumCaseValues;
+
 class FunctionsInternalTest extends BaseTestCase
 {
     /**
@@ -134,5 +137,81 @@ class FunctionsInternalTest extends BaseTestCase
     {
         $this->expectException(JsonDecodeException::class);
         json_decode_safe("{ foo");
+    }
+
+
+
+    /**
+     * @covers ::\DataType\getEnumCases
+     */
+    public function test_getEnumCases()
+    {
+        $cases = getEnumCases(\TestEnum::class);
+
+        $this->assertCount(3, $cases);
+        $this->assertSame(\TestEnum::APPLES, $cases[0]);
+        $this->assertSame(\TestEnum::ORANGES, $cases[1]);
+        $this->assertSame(\TestEnum::BANANAS, $cases[2]);
+    }
+
+    /**
+     * @covers ::\DataType\getEnumCases
+     */
+    public function test_getEnumCases_errors_for_non_existent_class()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("does not exist");
+
+        /** @phpstan-ignore-next-line */
+        getEnumCases('NonExistentClass');
+    }
+
+    /**
+     * @covers ::\DataType\getEnumCases
+     */
+    public function test_getEnumCases_errors_for_non_enum_class()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("is not an enum");
+
+        /** @phpstan-ignore-next-line */
+        getEnumCases(\stdClass::class);
+    }
+
+    /**
+     * @covers ::\DataType\getEnumCaseValues
+     */
+    public function test_getEnumCaseValues()
+    {
+        $values = getEnumCaseValues(\TestEnum::class);
+
+        $this->assertCount(3, $values);
+        $this->assertSame('apples', $values[0]);
+        $this->assertSame('oranges', $values[1]);
+        $this->assertSame('bananas', $values[2]);
+    }
+
+    /**
+     * @covers ::\DataType\getEnumCaseValues
+     */
+    public function test_getEnumCaseValues_errors_for_non_existent_class()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("does not exist");
+
+        /** @phpstan-ignore-next-line */
+        getEnumCaseValues('NonExistentClass');
+    }
+
+    /**
+     * @covers ::\DataType\getEnumCaseValues
+     */
+    public function test_getEnumCaseValues_errors_for_non_enum_class()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("is not an enum");
+
+        /** @phpstan-ignore-next-line */
+        getEnumCaseValues(\stdClass::class);
     }
 }

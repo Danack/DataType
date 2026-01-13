@@ -477,3 +477,13 @@ class OneColorGetsCorrectSpelling
         return $this->background_color;
     }
 }
+
+/**
+ * Enum used for testing. Update the tests if you change the entries.
+ */
+enum TestEnum: string
+{
+    case APPLES = 'apples';
+    case ORANGES = 'oranges';
+    case BANANAS = 'bananas';
+}
