@@ -41,7 +41,7 @@ jobs:
       - name: "Add PHPUnit matcher"
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - run: composer update
+      - run: composer update --no-audit
 
       - name: "Install PHPUnit"
         run: bash runTests.sh
