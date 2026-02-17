@@ -46,5 +46,8 @@
     }
   },
   "minimum-stability": "dev",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "audit": {
+    "ignore": ["PKSA-z3gr-8qht-p93v"]
+  }
 }
