@@ -15,17 +15,17 @@ use DataType\ValidationResult;
  */
 class GetStringOrDefault implements ExtractRule
 {
-    private ?string $default;
+    private string|null $default;
 
     /**
-     * @param ?string $default
+     * @param string|null $default
      */
-    public function __construct(?string $default)
+    public function __construct(string|null $default)
     {
         $this->default = $default;
     }
 
-    public function getDefault(): ?string
+    public function getDefault(): string|null
     {
         return $this->default;
     }

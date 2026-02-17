@@ -15,12 +15,12 @@ use DataType\ValidationResult;
  */
 class GetIntOrDefault implements ExtractRule
 {
-    private ?int $default;
+    private int|null $default;
 
     /**
-     * @param ?int $default
+     * @param int|null $default
      */
-    public function __construct(?int $default)
+    public function __construct(int|null $default)
     {
         $this->default = $default;
     }

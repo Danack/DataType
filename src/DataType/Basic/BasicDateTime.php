@@ -6,6 +6,9 @@ use DataType\ExtractRule\GetDatetime;
 use DataType\HasInputType;
 use DataType\InputType;
 
+/**
+ * Required datetime input. Uses format "Y-m-d H:i:s" by default.
+ */
 #[\Attribute]
 class BasicDateTime implements HasInputType
 {

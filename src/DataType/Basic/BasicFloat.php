@@ -6,6 +6,9 @@ use DataType\ExtractRule\GetFloat;
 use DataType\HasInputType;
 use DataType\InputType;
 
+/**
+ * Required float input.
+ */
 #[\Attribute]
 class BasicFloat implements HasInputType
 {

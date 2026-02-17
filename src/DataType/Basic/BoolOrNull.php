@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DataType\Basic;
 
-use DataType\ExtractRule\GetOptionalString;
+use DataType\ExtractRule\GetBoolOrNull;
 use DataType\HasInputType;
 use DataType\InputType;
-use DataType\ProcessRule\SkipIfNull;
 
 /**
- * Optional string input. When the parameter is missing, the property receives null.
+ * Required parameter that may be null. When the value is present it must be a boolean; when null, the property receives null.
  */
 #[\Attribute]
-class OptionalBasicString implements HasInputType
+class BoolOrNull implements HasInputType
 {
     public function __construct(
         private string $name
@@ -22,8 +23,7 @@ class OptionalBasicString implements HasInputType
     {
         return new InputType(
             $this->name,
-            new GetOptionalString(),
-            new SkipIfNull(),
+            new GetBoolOrNull(),
         );
     }
 }

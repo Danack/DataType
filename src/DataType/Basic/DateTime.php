@@ -10,6 +10,9 @@ use DataType\ExtractRule\GetString;
 use DataType\ProcessRule\MinLength;
 use DataType\ProcessRule\MaxLength;
 
+/**
+ * Required datetime input. Accepts common ISO/RFC formats; optional constructor argument restricts to specific formats.
+ */
 #[\Attribute]
 class DateTime implements HasInputType
 {

@@ -6,6 +6,9 @@ use DataType\ExtractRule\GetString;
 use DataType\HasInputType;
 use DataType\InputType;
 
+/**
+ * Required string input.
+ */
 #[\Attribute]
 class BasicString implements HasInputType
 {

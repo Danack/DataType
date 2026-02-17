@@ -8,6 +8,9 @@ use DataType\HasInputType;
 use DataType\InputType;
 use DataType\ProcessRule\SkipIfNull;
 
+/**
+ * Optional float input for latitude/longitude (-90 to 90, -180 to 180). When the parameter is missing, the property receives null.
+ */
 #[\Attribute]
 class GpsFloat implements HasInputType
 {

@@ -21,12 +21,12 @@ use DataType\ValidationResult;
  */
 class GetBoolOrDefault implements ExtractRule
 {
-    private ?bool $default;
+    private bool|null $default;
 
     /**
-     * @param ?bool $default The default value to use.
+     * @param bool|null $default The default value to use.
      */
-    public function __construct(?bool $default)
+    public function __construct(bool|null $default)
     {
         $this->default = $default;
     }

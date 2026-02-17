@@ -6,6 +6,9 @@ use DataType\ExtractRule\GetInt;
 use DataType\HasInputType;
 use DataType\InputType;
 
+/**
+ * Required integer input.
+ */
 #[\Attribute]
 class BasicInteger implements HasInputType
 {

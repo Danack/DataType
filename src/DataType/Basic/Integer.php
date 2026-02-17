@@ -9,6 +9,9 @@ use DataType\ExtractRule\GetString;
 use DataType\ProcessRule\MinLength;
 use DataType\ProcessRule\MaxLength;
 
+/**
+ * Required integer input.
+ */
 #[\Attribute]
 class Integer implements HasInputType
 {

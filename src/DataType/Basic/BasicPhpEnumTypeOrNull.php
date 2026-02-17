@@ -8,6 +8,9 @@ use DataType\HasInputType;
 use DataType\InputType;
 use DataType\ProcessRule\SkipIfNull;
 
+/**
+ * Optional backed-enum input. When the parameter is missing, the property receives null. Value must match a case of the given enum.
+ */
 #[\Attribute]
 class BasicPhpEnumTypeOrNull implements HasInputType
 {

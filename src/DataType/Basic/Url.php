@@ -9,6 +9,9 @@ use DataType\ProcessRule\MinLength;
 use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\ValidUrl;
 
+/**
+ * Required string input validated as a URL (with scheme). Min length 12, max 2048.
+ */
 #[\Attribute]
 class Url implements HasInputType
 {

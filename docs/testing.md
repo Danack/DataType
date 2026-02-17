@@ -109,3 +109,53 @@ To identify what needs test coverage:
 - All new code must have 100% line coverage
 - Error handling paths marked with `@codeCoverageIgnoreStart`/`@codeCoverageIgnoreEnd` are exceptions
 - Edge cases and error conditions must be tested
+
+### Test Behaviour, Not Interfaces
+
+**Only test behaviour, not that a class implements interfaces.** Do not assert `assertInstanceOf(DataType::class, ...)` or similar. Interface checks are implementation details; tests should verify that the code does what it's supposed to do (e.g. parses input correctly), not what contracts it declares.
+
+
+### DataProviders
+
+When tests have multiple input/output cases, use PHPUnit DataProviders to separate test data from test logic. Use a **generic test method** that receives input and expected output, rather than separate test methods per case.
+
+**Naming convention:**
+- DataProvider method name should be `provides_` + test method name (without `test_` prefix)
+- Example: Test method `test_fetch_external_parses_input_to_expected_output` → DataProvider `provides_fetch_external_input_and_expected_output`
+
+**Placement:** Put the data provider method **above/before** the test method that uses it in the file.
+
+**Use `yield` instead of returning arrays.** Optional string keys (e.g. `'missing key defaults to true'`) improve failure messages—PHPUnit includes them when a case fails.
+
+```php
+/**
+ * @return \Generator<string, array{array, bool}>
+ */
+public static function provides_fetch_external_input_and_expected_output(): \Generator
+{
+    yield 'missing key defaults to true' => [[], true];
+    yield 'true string' => [['fetch_external' => 'true'], true];
+    yield 'false string' => [['fetch_external' => 'false'], false];
+    yield '1 string' => [['fetch_external' => '1'], true];
+    yield '0 string' => [['fetch_external' => '0'], false];
+}
+
+/**
+ * @covers \Bristolian\Parameters\TinnedFish\BarcodeLookupParams
+ * @covers \Bristolian\Parameters\PropertyType\OptionalBoolDefaultTrue
+ * @dataProvider provides_fetch_external_input_and_expected_output
+ */
+public function test_fetch_external_parses_input_to_expected_output(
+    array $input,
+    bool $expectedFetchExternal
+): void {
+    $params = BarcodeLookupParams::createFromVarMap(new ArrayVarMap($input));
+    $this->assertSame($expectedFetchExternal, $params->fetch_external);
+}
+```
+
+**Benefits of using `yield`:**
+- Cleaner syntax with less nesting
+- Each case is clearly labeled (optional keys improve failure messages)
+- Easier to add/remove cases
+- Better memory efficiency for large datasets

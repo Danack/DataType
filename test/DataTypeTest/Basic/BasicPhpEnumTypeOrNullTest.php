@@ -89,7 +89,7 @@ class BasicPhpEnumTypeOrNullFixture implements DataType
 
     public function __construct(
         #[BasicPhpEnumTypeOrNull('enum_input', TestEnum::class)]
-        public readonly ?string $value,
+        public readonly string|null $value,
     ) {
     }
 }

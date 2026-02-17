@@ -14,7 +14,7 @@ use DataType\ValidationResult;
  */
 class GetDatetimeOrDefault implements ExtractRule
 {
-    private ?\DateTimeInterface $default;
+    private \DateTimeInterface|null $default;
 
     private GetDatetime $getDatetime;
 
@@ -22,7 +22,7 @@ class GetDatetimeOrDefault implements ExtractRule
      * @param \DateTimeInterface|null $default
      * @param string[]|null $allowedFormats
      */
-    public function __construct(?\DateTimeInterface $default, ?array $allowedFormats = null)
+    public function __construct(\DateTimeInterface|null $default, ?array $allowedFormats = null)
     {
         $this->default = $default;
         $this->getDatetime = new GetDatetime($allowedFormats);

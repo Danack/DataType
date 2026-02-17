@@ -15,12 +15,12 @@ use DataType\ValidationResult;
  */
 class GetFloatOrDefault implements ExtractRule
 {
-    private ?float $default;
+    private float|null $default;
 
     /**
      * @param float $default
      */
-    public function __construct(?float  $default)
+    public function __construct(float|null $default)
     {
         $this->default = $default;
     }

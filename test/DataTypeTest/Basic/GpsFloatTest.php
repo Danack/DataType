@@ -81,7 +81,7 @@ class GpsFloatFixture implements DataType
 
     public function __construct(
         #[GpsFloat('gps_input')]
-        public readonly ?float $value,
+        public readonly float|null $value,
     ) {
     }
 }
