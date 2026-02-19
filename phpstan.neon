@@ -2,6 +2,7 @@ includes:
   - vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
   editorUrl: 'phpstorm://open?file=/Users/danack/projects/github/DataType/%%relFile%%&line=%%line%%'
+  level: 10
   treatPhpDocTypesAsCertain: false
   excludePaths:
     - *GetArticlesParams*
