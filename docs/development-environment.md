@@ -12,19 +12,44 @@ All PHP-related commands (tests, Behat, PHPUnit, Composer, etc.) must run inside
 
 ```bash
 # Run PHP unit tests
-docker exec bristolian-php_fpm-1 bash -c "sh runUnitTests.sh"
+docker exec datatype-developing_8_2-1 bash -c "sh runUnitTests.sh"
 
 # Run Behat browser tests
-docker exec bristolian-php_fpm-1 bash -c "sh runBehat.sh"
+docker exec datatype-developing_8_2-1 bash -c "sh runBehat.sh"
 
 # Run PHPStan
-docker exec bristolian-php_fpm-1 bash -c "sh runPhpStan.sh"
+docker exec datatype-developing_8_2-1 bash -c "sh runPhpStan.sh"
 
 # Run Composer commands
-docker exec bristolian-php_fpm-1 bash -c "composer install"
+docker exec datatype-developing_8_2-1 bash -c "composer install"
 
 # Run PHP CLI commands
-docker exec bristolian-php_fpm-1 bash -c "php cli.php <command>"
+docker exec datatype-developing_8_2-1 bash -c "php cli.php <command>"
+
+# Run mutation testing
+docker exec datatype-developing_8_2-1 bash -c "sh runMutationTests.sh"
+```
+
+
+### Finding Uncovered Lines of Code
+
+To identify which lines of code need test coverage, first run the unit tests to generate a coverage report:
+
+```bash
+docker exec datatype-developing_8_2-1 bash -c "sh runUnitTests.sh --no-progress"
+```
+
+Then use the `list_uncovered_lines.php` script to find uncovered lines. You can filter by namespace or directory:
+
+```bash
+# Find all uncovered lines in a specific namespace
+docker exec datatype-developing_8_2-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType"
+
+# Find all uncovered lines in a specific directory
+docker exec datatype-developing_8_2-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType/Create"
+
+# Count uncovered lines for a namespace
+docker exec datatype-developing_8_2-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType | wc -l"
 ```
 
 **Note**: Use `bash -c` without `-it` flags to avoid TTY errors when running non-interactive commands.
@@ -35,7 +60,7 @@ To get an interactive shell inside a container:
 
 ```bash
 # PHP container
-docker exec -it bristolian-php_fpm-1 bash
+docker exec -it datatype-developing_8_2-1 bash
 
 # Then run commands directly:
 sh runUnitTests.sh
@@ -49,26 +74,20 @@ All Node.js, npm, and JavaScript-related commands must run inside the `js_builde
 
 ```bash
 # Run Jest tests
-docker exec bristolian-js_builder-1 bash -c "npm run test"
+docker exec datatype-developing_8_2-1 bash -c "npm run test"
 
 # Run npm commands
-docker exec bristolian-js_builder-1 bash -c "npm install"
-docker exec bristolian-js_builder-1 bash -c "npm run build"
+docker exec datatype-developing_8_2-1 bash -c "npm install"
+docker exec datatype-developing_8_2-1 bash -c "npm run build"
 
 # Check TypeScript compilation logs after editing TypeScript files
-docker logs bristolian-js_builder-1 --tail 100
+docker logs datatype-developing_8_2-1 --tail 100
 ```
 
 ### Script Files
 
 Script files in the project root (e.g., `runBehat.sh`, `runUnitTests.sh`) are designed to be executed **inside** the container, not on the host. They contain the actual commands without docker-compose exec calls.
 
-## Container Names
-
-Common container names (may vary based on Docker Compose project name):
-- `bristolian-php_fpm-1` - PHP application container
-- `bristolian-js_builder-1` - Node.js/JavaScript build container
-- `bristolian-php_fpm_debug-1` - PHP debug container (with Xdebug)
 
 ## Key Points
 
@@ -77,22 +96,4 @@ Common container names (may vary based on Docker Compose project name):
 3. **Script files don't call docker-compose exec** - they're meant to be executed inside containers
 4. **Use `docker exec` from the host** to run commands inside containers
 5. **Use `bash -c` for non-interactive commands** to avoid TTY issues
-6. **Check js_builder logs after editing TypeScript files** - Use `docker logs bristolian-js_builder-1 --tail 100` to verify TypeScript compilation succeeded (look for "webpack compiled" message)
-7. Frontend and backend are deployed together; avoid legacy/fallback response handling—prefer updating both sides in tandem.
-
-## Example Workflow
-
-```bash
-# From host machine:
-# 1. Start containers
-./runLocal.sh
-
-# 2. Run tests inside container
-docker exec bristolian-php_fpm-1 bash -c "sh runUnitTests.sh"
-
-# 3. Or get interactive shell and run commands
-docker exec -it bristolian-php_fpm-1 bash
-# Inside container:
-sh runBehat.sh
-```
 
