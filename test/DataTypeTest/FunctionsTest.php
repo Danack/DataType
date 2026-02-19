@@ -1212,6 +1212,7 @@ class FunctionsTest extends BaseTestCase
     public function test_generateOpenApiV300DescriptionForDataType_errors()
     {
         $this->expectException(\DataType\Exception\DataTypeNotImplementedException::class);
+        /** @phpstan-ignore argument.type (deliberately passing non-DataType class to test exception) */
         generateOpenApiV300DescriptionForDataType(\stdClass::class);
     }
 }

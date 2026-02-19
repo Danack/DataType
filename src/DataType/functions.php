@@ -18,11 +18,11 @@ use DataType\ExtractRule\GetType;
 use DataType\OpenApi\OpenApiV300ParamDescription;
 
 /**
- * @template T
+ * @template T of object
  * @param class-string<T> $classname
  * @param \DataType\InputType[] $inputTypeList
  * @param DataStorage $dataStorage
- * @return T of object
+ * @return T
  * @throws ValidationException
  * @throws \ReflectionException
  */
@@ -49,11 +49,11 @@ function create(
 }
 
 /**
- * @template T
+ * @template T of object
  * @param class-string<T> $classname
  * @param \DataType\InputType[] $inputTypes
  * @param DataStorage $dataStorage
- * @return array{0:?object, 1:\DataType\ValidationProblem[]}
+ * @return array{0: T|null, 1: \DataType\ValidationProblem[]}
  * @throws Exception\DataTypeException
  * @throws ValidationException
  *
@@ -76,13 +76,15 @@ function createOrError($classname, $inputTypes, DataStorage $dataStorage)
 
     $object = createObjectFromProcessedValues($classname, $processedValues);
 
+    /** @var T $object */
     return [$object, []];
 }
 
 
 /**
- * @param object $dto
- * @return array{0:?object, 1:\DataType\ValidationProblem[]}
+ * @template T of object
+ * @param T $dto
+ * @return array{0: T|null, 1: \DataType\ValidationProblem[]}
  * @throws Exception\DataTypeException
  * @throws DataTypeDefinitionException
  * @throws MissingClassExceptionData
@@ -110,9 +112,8 @@ function validate(object $dto)
 
 
 /**
- * @template T
- * @param string $type
- * @psalm-param class-string<T> $type
+ * @template T of object
+ * @param class-string<T> $type
  * @param array<int|string, mixed> $data
  * @return T[]
  * @throws ValidationException
@@ -135,11 +136,10 @@ function createArrayOfType(string $type, array $data): array
 
 
 /**
- * @template T
- * @param string $type
- * @psalm-param class-string<T> $type
+ * @template T of object
+ * @param class-string<T> $type
  * @param array<int|string, mixed> $data
- * @return array{0:null, 1:\DataType\ValidationProblem[]}|array{0:T[], 1:null}
+ * @return array{0: null, 1: \DataType\ValidationProblem[]}|array{0: T[], 1: null}
  */
 function createArrayOfTypeOrError(string $type, array $data): array
 {
@@ -158,7 +158,7 @@ function createArrayOfTypeOrError(string $type, array $data): array
 }
 
 /**
- * @param string $classname
+ * @param class-string<DataType> $classname
  * @return array<int, array<string, mixed>>
  * @throws DataTypeNotImplementedException
  * @throws Exception\OpenApiExceptionData
@@ -183,8 +183,9 @@ function generateOpenApiV300DescriptionForDataType(string $classname)
 
 
 /**
- * @param class-string<\BackedEnum> $typeString
- * @return array<\BackedEnum>
+ * @template T of \BackedEnum
+ * @param class-string<T> $typeString
+ * @return list<T>
  */
 function getEnumCases(string $typeString): array
 {
@@ -202,7 +203,10 @@ function getEnumCases(string $typeString): array
     }
 
     // Get enum cases
-    return $cases = $typeString::cases();
+    /** @var list<T> $cases */
+    $cases = $typeString::cases();
+
+    return $cases;
 }
 /**
  * @param class-string<\BackedEnum> $typeString

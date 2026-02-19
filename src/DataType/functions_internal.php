@@ -29,10 +29,10 @@ use DataType\ProcessRule\ProcessRule;
 use DataType\Value\Ordering;
 
 /**
- * @template T
+ * @template T of object
  * @param class-string<T> $classname
  * @param ProcessedValues $processedValues
- * @return T of object
+ * @return T
  * @throws \ReflectionException
  * @throws NoConstructorExceptionData
  */
@@ -70,7 +70,7 @@ function createObjectFromProcessedValues(string $classname, ProcessedValues $pro
     /**  @psalm-suppress MixedArgumentTypeCoercion */
     $object = $reflection_class->newInstanceArgs($built_parameters);
 
-    /** @var T&object $object */
+    /** @var T $object */
     return $object;
 }
 
@@ -130,7 +130,7 @@ function createArrayOfTypeFromInputStorage(
 
 
 /**
- * @param string $className
+ * @param string $className Class name implementing DataType (validated at runtime).
  * @return \DataType\InputType[]
  * @throws DataTypeDefinitionException
  * @throws MissingClassExceptionData
@@ -173,9 +173,8 @@ function getInputTypeListForClass(string $className): array
 
 
 /**
- * @template T
- * @param class-string<T> $classname
- * @param \ReflectionParameter[] $constructor_parameters,
+ * @param class-string<object> $classname
+ * @param \ReflectionParameter[] $constructor_parameters
  * @param ProcessedValues $processedValues
  * @return mixed[]
  * @throws \ReflectionException
@@ -294,7 +293,7 @@ function array_value_exists(array $array, $value): bool
 
 /**
  * @param string|int $value  The value of the variable
- * @return null|string returns an error string, when there is an error
+ * @return string|null returns an error string, when there is an error
  */
 function check_only_digits(string|int $value)
 {
@@ -537,6 +536,7 @@ function checkAllowedFormatsAreStrings(array $allowedFormats): array
 
 /**
  * @template T of object
+ * @param class-string<object> $class
  * @param class-string<T> $attributeClassname
  * @return \ReflectionClass<T>
  */
@@ -557,9 +557,7 @@ function getReflectionClassOfAttribute(
 }
 
 /**
- * @template T
- * @param string|object $class
- * @psalm-param class-string<T> $class
+ * @param class-string<object> $class
  * @return InputType[]
  * @throws \ReflectionException
  */
