@@ -80,6 +80,43 @@ function createOrError($classname, $inputTypes, DataStorage $dataStorage)
     return [$object, []];
 }
 
+/**
+ * Creates a DataType instance from input, returning a result object instead of a tuple.
+ * Use isValid(), getValue() and getErrors() for type-safe, discoverable access.
+ *
+ * @experimental The CreateResult class is an experiment in making the library easier to use. It is not guaranteed to be in future versions. If you like it, please let Danack know.
+ *
+ * @template T of object
+ * @param class-string<T> $classname
+ * @param \DataType\InputType[] $inputTypes
+ * @param DataStorage $dataStorage
+ * @return CreateResult<T>
+ * @throws Exception\DataTypeException
+ * @throws ValidationException
+ */
+function createWithResult($classname, $inputTypes, DataStorage $dataStorage): CreateResult
+{
+    $processedValues = new ProcessedValues();
+
+    $validationProblems = processInputTypesFromStorage(
+        $inputTypes,
+        $processedValues,
+        $dataStorage
+    );
+
+    if (count($validationProblems) !== 0) {
+        /** @var CreateResult<T> $result */
+        $result = CreateResult::failure($validationProblems);
+        return $result;
+    }
+
+    $object = createObjectFromProcessedValues($classname, $processedValues);
+
+    /** @var T $object */
+    /** @var CreateResult<T> $result */
+    $result = CreateResult::success($object);
+    return $result;
+}
 
 /**
  * @template T of object

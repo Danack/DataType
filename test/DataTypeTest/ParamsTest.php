@@ -23,6 +23,7 @@ use DataType\InputType;
 use DataType\Exception\UnknownParamException;
 use function DataType\create;
 use function DataType\createOrError;
+use function DataType\createWithResult;
 use function DataType\processInputTypesFromStorage;
 
 /**
@@ -239,5 +240,53 @@ class ParamsTest extends BaseTestCase
         $this->assertNoValidationProblems($errors);
         $this->assertInstanceOf(\DataTypeTest\Integration\FooParams::class, $fooParams);
         $this->assertEquals(5, $fooParams->getLimit());
+    }
+
+    /**
+     * @covers ::DataType\createWithResult
+     * @covers \DataType\CreateResult
+     */
+    public function testCreateWithResult_Works(): void
+    {
+        $dataStorage = TestArrayDataStorage::fromArray(['limit' => 5]);
+        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+
+        $result = createWithResult(
+            \DataTypeTest\Integration\FooParams::class,
+            $rules,
+            $dataStorage
+        );
+
+        $this->assertTrue($result->isValid());
+        $this->assertSame([], $result->getErrors());
+        $fooParams = $result->getValue();
+        $this->assertInstanceOf(\DataTypeTest\Integration\FooParams::class, $fooParams);
+        $this->assertSame(5, $fooParams->getLimit());
+    }
+
+    /**
+     * @covers ::DataType\createWithResult
+     * @covers \DataType\CreateResult
+     */
+    public function testCreateWithResult_ErrorIsReturned(): void
+    {
+        $dataStorage = TestArrayDataStorage::fromArray([]);
+        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+
+        $result = createWithResult(
+            \DataTypeTest\Integration\FooParams::class,
+            $rules,
+            $dataStorage
+        );
+
+        $this->assertFalse($result->isValid());
+        $this->assertNull($result->getValue());
+        $errors = $result->getErrors();
+        $this->assertCount(1, $errors);
+        $this->assertValidationProblem(
+            '/limit',
+            'Value not set.',
+            $errors
+        );
     }
 }
