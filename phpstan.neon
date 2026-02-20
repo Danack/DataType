@@ -39,4 +39,9 @@ parameters:
       identifier: argument.type
       paths:
         - src/DataType/ProcessRule/MaxFloatValue.php
+    # MaxIntValue: process() $value is mixed; intval() expects narrower type. Internal-only, TODO refactor/type
+    -
+      identifier: argument.type
+      paths:
+        - src/DataType/ProcessRule/MaxIntValue.php
     

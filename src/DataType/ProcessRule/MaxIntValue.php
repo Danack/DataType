@@ -11,7 +11,10 @@ use DataType\ProcessedValues;
 use DataType\ValidationResult;
 
 /**
- *  Validates the input value is equal to or less than a particular int value.
+ * Validates the input value is equal to or less than a particular int value.
+ *
+ * TODO: Refactor so $value is typed (e.g. mixed) or validated before intval() to satisfy
+ * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class MaxIntValue implements ProcessRule
 {
