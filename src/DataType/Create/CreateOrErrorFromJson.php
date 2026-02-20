@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
+use DataType\Exception\ValidationException;
 use function DataType\json_decode_safe;
 use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;
@@ -25,6 +26,12 @@ trait CreateOrErrorFromJson
     public static function createOrErrorFromJson(string $json)
     {
         $data = json_decode_safe($json);
+        if (!\is_array($data)) {
+            throw new ValidationException(
+                'JSON root must be an object (associative array), got ' . \get_debug_type($data),
+                []
+            );
+        }
         $inputTypeList = getInputTypeListForClass(self::class);
         $dataStorage = ArrayDataStorage::fromArray($data);
 

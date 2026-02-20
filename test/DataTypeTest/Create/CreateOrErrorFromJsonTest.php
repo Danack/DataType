@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Create;
 
+use DataType\Exception\ValidationException;
 use DataTypeTest\BaseTestCase;
 use DataTypeTest\Integration\IntArrayParams;
 use function DataType\json_encode_safe;
@@ -66,5 +67,16 @@ class CreateOrErrorFromJsonTest extends BaseTestCase
         );
 
         $this->assertSame('/counts', $validationProblem->getInputStorage()->getPath());
+    }
+
+    /**
+     * @covers \DataType\Create\CreateOrErrorFromJson
+     */
+    public function testThrowsValidationExceptionWhenJsonRootIsNotAnArray(): void
+    {
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessage('JSON root must be an object (associative array), got string');
+
+        IntArrayParams::createOrErrorFromJson('"hello"');
     }
 }
