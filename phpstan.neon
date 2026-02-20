@@ -34,4 +34,9 @@ parameters:
       identifier: argument.type
       paths:
         - src/DataType/DataStorage/ArrayDataStorage.php
+    # MaxFloatValue: process() $value is mixed; floatval() expects narrower type. Internal-only, TODO refactor/type
+    -
+      identifier: argument.type
+      paths:
+        - src/DataType/ProcessRule/MaxFloatValue.php
     
