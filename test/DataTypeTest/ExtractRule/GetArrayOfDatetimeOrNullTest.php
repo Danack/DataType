@@ -39,8 +39,10 @@ class GetArrayOfDatetimeOrNullTest extends BaseTestCase
 
         $this->assertNoProblems($result);
         $this->assertFalse($result->isFinalResult());
-        $this->assertCount(3, $result->getValue());
-        $this->assertInstanceOf(\DateTimeInterface::class, $result->getValue()[0]);
+        /** @var array<int, \DateTimeInterface|null> $value */
+        $value = $result->getValue();
+        $this->assertCount(3, $value);
+        $this->assertInstanceOf(\DateTimeInterface::class, $value[0]);
     }
 
     /**
