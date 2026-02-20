@@ -58,6 +58,7 @@ class DescriptionTest extends BaseTestCase
         $descriptionExpectations = [
             'required' => true,
         ];
+        /** @var array<int, InputType> $rules */
         $rules = RequiredStringExample::getInputParameterList();
         $this->performFullTest([], $descriptionExpectations, $rules);
     }
@@ -68,6 +69,7 @@ class DescriptionTest extends BaseTestCase
             'minLength' => RequiredStringExample::MIN_LENGTH,
         ];
 
+        /** @var array<int, InputType> $rules */
         $rules = RequiredStringExample::getInputParameterList();
         $this->performSchemaTest($schemaExpectations, $rules);
     }
@@ -78,6 +80,7 @@ class DescriptionTest extends BaseTestCase
             'maxLength' => RequiredStringExample::MAX_LENGTH,
         ];
 
+        /** @var array<int, InputType> $rules */
         $rules = RequiredStringExample::getInputParameterList();
         $this->performSchemaTest($schemaExpectations, $rules);
     }
@@ -423,12 +426,15 @@ class DescriptionTest extends BaseTestCase
      */
     private function performSchemaTest($schemaExpectations, $rules)
     {
+        /** @var array<int, array<string, mixed>> $paramDescription */
         $paramDescription = OpenApiV300ParamDescription::createFromInputTypes($rules);
 
         $this->assertCount(1, $paramDescription);
+        /** @var array<string, mixed> $statusDescription */
         $statusDescription = $paramDescription[0];
 
         $this->assertArrayHasKey('schema', $statusDescription);
+        /** @var array<string, mixed> $schema */
         $schema = $statusDescription['schema'];
 
         foreach ($schemaExpectations as $key => $value) {
@@ -449,12 +455,15 @@ class DescriptionTest extends BaseTestCase
      */
     private function performFullTest($schemaExpectations, $paramExpectations, $rules)
     {
+        /** @var array<int, array<string, mixed>> $paramDescription */
         $paramDescription = OpenApiV300ParamDescription::createFromInputTypes($rules);
 
         $this->assertCount(1, $paramDescription);
+        /** @var array<string, mixed> $openApiDescription */
         $openApiDescription = $paramDescription[0];
 
         $this->assertArrayHasKey('schema', $openApiDescription);
+        /** @var array<string, mixed> $schema */
         $schema = $openApiDescription['schema'];
 
         foreach ($schemaExpectations as $key => $value) {
