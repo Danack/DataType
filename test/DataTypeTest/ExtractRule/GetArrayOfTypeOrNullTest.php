@@ -35,8 +35,10 @@ class GetArrayOfTypeOrNullTest extends BaseTestCase
         $this->assertNoProblems($result);
         $this->assertFalse($result->isFinalResult());
 
-        $this->assertCount(1, $result->getValue());
-        $item = ($result->getValue())[0];
+        /** @var array<int, ReviewScore|null> $value */
+        $value = $result->getValue();
+        $this->assertCount(1, $value);
+        $item = $value[0];
         $this->assertInstanceOf(ReviewScore::class, $item);
         /** @var ReviewScore $item */
         $this->assertSame(5, $item->getScore());
