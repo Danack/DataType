@@ -29,12 +29,11 @@ class StringOrDefaultTest extends BaseTestCase
 
     /**
      * @dataProvider provides_works_parses_input_to_expected
-     * @param class-string<DataType> $fixtureClass
+     * @param class-string<StringOrDefaultFixture|StringOrDefaultNullFixture> $fixtureClass
      * @param array<string, mixed> $data
      */
     public function test_works_parses_input_to_expected(string $fixtureClass, array $data, string|null $expected): void
     {
-        /** @phpstan-ignore staticMethod.notFound (fixture classes use CreateFromVarMap trait) */
         $result = $fixtureClass::createFromVarMap(new ArrayVarMap($data));
         $this->assertSame($expected, $result->value);
     }
