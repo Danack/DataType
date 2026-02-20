@@ -12,6 +12,9 @@ use DataType\ValidationResult;
 
 /**
  * Validates the input value is equal to or greater than a particular float value.
+ *
+ * TODO: Refactor so $value is typed (e.g. mixed) or validated before floatval() to satisfy
+ * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class MinFloatValue implements ProcessRule
 {
