@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace DataTypeTest\Integration;
 
 use DataType\DataStorage\DataStorage;
+use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\ProcessRule;
@@ -41,18 +42,31 @@ class ArrayAllMultiplesOf implements ProcessRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
+        if (!\is_array($value)) {
+            return ValidationResult::errorResult($inputStorage, Messages::ERROR_MESSAGE_NOT_ARRAY);
+        }
+
         $errors = [];
 
         $index = 0;
         foreach ($value as $item) {
-            if (($item % $this->multiplicand) !== 0) {
+            if (!\is_scalar($item) && $item !== null) {
+                $errors[] = new ValidationProblem(
+                    $inputStorage,
+                    sprintf('Value at position [%d] must be int or string, got %s', $index, \gettype($item))
+                );
+                $index += 1;
+                continue;
+            }
+            $itemInt = \is_int($item) ? $item : (int) $item;
+            if (($itemInt % $this->multiplicand) !== 0) {
                 // Because this is operating on an array of items, we need to put the complete name
                 // not just the index
                 $message = sprintf(
                     'Value at position [%d] is not a multiple of %s but has value [%s]',
                     $index,
                     $this->multiplicand,
-                    $item
+                    (string) $item
                 );
 
                 $errors[] = new ValidationProblem($inputStorage, $message);
