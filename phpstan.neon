@@ -29,4 +29,9 @@ parameters:
       message: '#.*#'
       paths:
         - test/fixtures.php
+    # ArrayDataStorage: $data becomes mixed after $data = $data[$key]; internal-only, TODO refactor
+    -
+      identifier: argument.type
+      paths:
+        - src/DataType/DataStorage/ArrayDataStorage.php
     

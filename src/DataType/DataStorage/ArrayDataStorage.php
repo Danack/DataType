@@ -12,6 +12,9 @@ use DataType\Exception\InvalidLocationExceptionData;
  * All entries in the hierarchy of data must be either an array or a scalar value.
  * i.e. no objects in it.
  *
+ * TODO: Refactor getCurrentValue() and isValueAvailable() so that after $data = $data[$key]
+ * the type is narrowed (e.g. assert is_array($data) when more path segments remain) to satisfy
+ * PHPStan without ignoring. This is internal-only code so the ignore is acceptable for now.
  */
 class ArrayDataStorage implements DataStorage
 {
