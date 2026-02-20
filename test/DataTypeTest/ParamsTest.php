@@ -115,7 +115,7 @@ class ParamsTest extends BaseTestCase
     public function testErrorResultStopsProcessing()
     {
         $shouldntBeInvoked = new class($this) implements ProcessRule {
-            private $test;
+            private BaseTestCase $test;
             public function __construct(BaseTestCase $test)
             {
                 $this->test = $test;
@@ -124,8 +124,8 @@ class ParamsTest extends BaseTestCase
             public function process($value, ProcessedValues $processedValues, DataStorage $inputStorage) : ValidationResult
             {
                 $this->test->fail("This shouldn't be reached.");
-                $key = "foo";
                 //this code won't be executed.
+                /** @phpstan-ignore deadCode.unreachable */
                 return ValidationResult::errorResult($inputStorage, "Shouldn't be called");
             }
 
