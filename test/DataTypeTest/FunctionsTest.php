@@ -435,6 +435,7 @@ class FunctionsTest extends BaseTestCase
         $this->assertInstanceOf(ValidationResult::class, $result);
         $this->assertFalse($result->anyErrorsFound());
 
+        /** @var array<int, \TestParams> $items */
         $items = $result->getValue();
         $this->assertCount(3, $items);
 
