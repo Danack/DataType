@@ -96,9 +96,9 @@ class EnumMapTest extends BaseTestCase
     /**
      * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\EnumMap
-     * @param mixed $testValue
+     * @param string|int $testValue
      */
-    public function testErrors($testValue)
+    public function testErrors(string|int $testValue)
     {
         $enumMap = [
             'z' => 'zoq',
