@@ -64,4 +64,9 @@ parameters:
       identifier: argument.type
       paths:
         - src/DataType/ProcessRule/RangeFloatValue.php
+    # RangeIntValue: process() $value is mixed; intval() expects narrower type. Internal-only, TODO refactor/type
+    -
+      identifier: argument.type
+      paths:
+        - src/DataType/ProcessRule/RangeIntValue.php
     

@@ -12,6 +12,9 @@ use DataType\ValidationResult;
 
 /**
  * Validates that a int value is between a range of int values inclusive.
+ *
+ * TODO: Refactor so $value is typed (e.g. mixed) or validated before intval() to satisfy
+ * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class RangeIntValue implements ProcessRule
 {
