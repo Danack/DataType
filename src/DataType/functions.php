@@ -168,7 +168,9 @@ function createArrayOfType(string $type, array $data): array
         );
     }
 
-    return $validationResult->getValue();
+    $value = $validationResult->getValue();
+    /** @var T[] $value */
+    return $value;
 }
 
 
