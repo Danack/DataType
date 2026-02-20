@@ -41,16 +41,18 @@ class GetArrayOfTypeTest extends BaseTestCase
         $this->assertNoProblems($result);
         $this->assertFalse($result->isFinalResult());
 
-        $this->assertCount(2, $result->getValue());
+        /** @var array<int, ReviewScore> $value */
+        $value = $result->getValue();
+        $this->assertCount(2, $value);
 
-        $item1 = ($result->getValue())[0];
+        $item1 = $value[0];
         $this->assertInstanceOf(ReviewScore::class, $item1);
         /** @var ReviewScore $item1 */
         $this->assertSame(5, $item1->getScore());
         $this->assertSame($niceComment, $item1->getComment());
 
 
-        $item2 = ($result->getValue())[1];
+        $item2 = $value[1];
         $this->assertInstanceOf(ReviewScore::class, $item2);
         /** @var ReviewScore $item2 */
         $this->assertSame(2, $item2->getScore());
@@ -86,16 +88,18 @@ class GetArrayOfTypeTest extends BaseTestCase
         $this->assertNoProblems($result);
         $this->assertFalse($result->isFinalResult());
 
-        $this->assertCount(2, $result->getValue());
+        /** @var array<int, ReviewScore> $value */
+        $value = $result->getValue();
+        $this->assertCount(2, $value);
 
-        $item1 = ($result->getValue())[0];
+        $item1 = $value[0];
         $this->assertInstanceOf(ReviewScore::class, $item1);
         /** @var ReviewScore $item1 */
         $this->assertSame(5, $item1->getScore());
         $this->assertSame($niceComment, $item1->getComment());
 
 
-        $item2 = ($result->getValue())[1];
+        $item2 = $value[1];
         $this->assertInstanceOf(ReviewScore::class, $item2);
         /** @var ReviewScore $item2 */
         $this->assertSame(2, $item2->getScore());
@@ -120,8 +124,10 @@ class GetArrayOfTypeTest extends BaseTestCase
 
         $this->assertFalse($result->isFinalResult());
 
-        $this->assertCount(1, $result->getValue());
-        $item = ($result->getValue())[0];
+        /** @var array<int, SingleIntParams> $value */
+        $value = $result->getValue();
+        $this->assertCount(1, $value);
+        $item = $value[0];
         $this->assertInstanceOf(SingleIntParams::class, $item);
 
         $this->assertNoProblems($result);
