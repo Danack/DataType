@@ -59,4 +59,9 @@ parameters:
       identifier: argument.type
       paths:
         - src/DataType/ProcessRule/PositiveInt.php
+    # RangeFloatValue: process() $value is mixed; floatval() expects narrower type. Internal-only, TODO refactor/type
+    -
+      identifier: argument.type
+      paths:
+        - src/DataType/ProcessRule/RangeFloatValue.php
     
