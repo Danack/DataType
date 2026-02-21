@@ -36,7 +36,6 @@ use DataTypeTest\Integration\FooParams;
 use DataTypeTest\InputType\Quantity;
 use DataTypeTest\DTOTypes\BasicDTO;
 use function DataType\array_value_exists;
-//use function DataType\check_only_digits;
 use function DataType\checkAllowedFormatsAreStrings;
 use function DataType\createArrayOfScalarsFromDataStorage;
 use function DataType\createArrayOfType;
@@ -83,27 +82,6 @@ class FunctionsTest extends BaseTestCase
         $this->assertEquals($expectedName, $name);
         $this->assertEquals($expectedOrder, $order);
     }
-
-//    /**
-//     * @covers ::DataType\check_only_digits
-//     */
-//    public function testCheckOnlyDigits()
-//    {
-//        // An integer gets short circuited
-//        $errorMsg = check_only_digits(12345);
-//        $this->assertNull($errorMsg);
-//
-//        // Correct string passes through
-//        $errorMsg = check_only_digits('12345');
-//        $this->assertNull($errorMsg);
-//
-//        // Incorrect string passes through
-//        $errorMsg = check_only_digits('123X45');
-//        $this->assertNotNull($errorMsg);
-//
-//        // TODO - update string matching.
-//        $this->assertStringMatchesFormat("%sposition 3%s", $errorMsg);
-//    }
 
     /**
      * @covers ::DataType\array_value_exists
