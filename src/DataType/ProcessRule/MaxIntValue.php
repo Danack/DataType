@@ -12,12 +12,11 @@ use DataType\ValidationResult;
 
 /**
  * Validates the input value is equal to or less than a particular int value.
- *
- * TODO: Refactor so $value is typed (e.g. mixed) or validated before intval() to satisfy
- * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class MaxIntValue implements ProcessRule
 {
+    use CheckInt;
+
     private int $maxValue;
 
     public function __construct(int $maxValue)
@@ -31,7 +30,7 @@ class MaxIntValue implements ProcessRule
         DataStorage $inputStorage
     ): ValidationResult {
 
-        $value = intval($value);
+        $value = $this->checkInt($value);
         if ($value > $this->maxValue) {
             $message = sprintf(
                 Messages::INT_TOO_LARGE,

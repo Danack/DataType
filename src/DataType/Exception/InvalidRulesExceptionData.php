@@ -33,4 +33,24 @@ class InvalidRulesExceptionData extends \DataType\Exception\DataTypeException
 
         return new self($message);
     }
+
+    public static function expectsIntForProcessing(string $classname): self
+    {
+        $message = sprintf(
+            Messages::BAD_TYPE_FOR_INT_PROCESS_RULE,
+            $classname
+        );
+
+        return new self($message);
+    }
+
+    public static function expectsFloatForProcessing(string $classname): self
+    {
+        $message = sprintf(
+            Messages::BAD_TYPE_FOR_FLOAT_PROCESS_RULE,
+            $classname
+        );
+
+        return new self($message);
+    }
 }

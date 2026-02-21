@@ -12,12 +12,10 @@ use DataType\ValidationResult;
 
 /**
  * Validates that a float value is between a range of float values inclusive.
- *
- * TODO: Refactor so $value is typed (e.g. mixed) or validated before floatval() to satisfy
- * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class RangeFloatValue implements ProcessRule
 {
+    use CheckFloat;
     /**
      *
      * @param float $minValue Value is inclusive
@@ -34,7 +32,7 @@ class RangeFloatValue implements ProcessRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        $value = floatval($value);
+        $value = $this->checkFloat($value);
         if ($value < $this->minValue) {
             $message = sprintf(
                 Messages::FLOAT_TOO_SMALL,

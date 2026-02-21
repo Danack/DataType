@@ -24,8 +24,8 @@ class MaxFloatValueTest extends BaseTestCase
         $overValue = $maxValue + 1;
 
         return [
-            [$maxValue, (string)$underValue],
-            [$maxValue, (string)$exactValue],
+            [$maxValue, $underValue],
+            [$maxValue, $exactValue],
             // TODO - think about these cases.
 //            [$maxValue, 125.5, true],
 //            [$maxValue, 'banana', true]
@@ -36,7 +36,7 @@ class MaxFloatValueTest extends BaseTestCase
      * @dataProvider provideMaxFloatCases
      * @covers \DataType\ProcessRule\MaxFloatValue
      */
-    public function testValidation(float $maxValue, string $inputValue)
+    public function testValidation(float $maxValue, float $inputValue)
     {
         $rule = new MaxFloatValue($maxValue);
         $processedValues = new ProcessedValues();
@@ -55,13 +55,13 @@ class MaxFloatValueTest extends BaseTestCase
 
     public function provideMaxFloatErrors()
     {
-        $maxValue = 256;
+        $maxValue = 256.0;
         $underValue = $maxValue - 1;
         $exactValue = $maxValue ;
         $overValue = $maxValue + 1;
 
         return [
-            [$maxValue, (string)$overValue],
+            [$maxValue, $overValue],
 
             // TODO - think about these cases.
 //            [$maxValue, 125.5, true],
@@ -73,7 +73,7 @@ class MaxFloatValueTest extends BaseTestCase
      * @dataProvider provideMaxFloatErrors
      * @covers \DataType\ProcessRule\MaxFloatValue
      */
-    public function testErrors(float $maxValue, string $inputValue)
+    public function testErrors(float $maxValue, float $inputValue)
     {
         $rule = new MaxFloatValue($maxValue);
         $processedValues = new ProcessedValues();

@@ -13,11 +13,11 @@ use DataType\ValidationResult;
 /**
  * Validates the input value is equal to or greater than a particular int value.
  *
- * TODO: Refactor so $value is typed (e.g. mixed) or validated before intval() to satisfy
- * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class MinIntValue implements ProcessRule
 {
+    use CheckInt;
+
     private int $minValue;
 
     public function __construct(int $minValue)
@@ -30,7 +30,7 @@ class MinIntValue implements ProcessRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        $value = intval($value);
+        $value = $this->checkInt($value);
         if ($value < $this->minValue) {
             $message = sprintf(
                 Messages::INT_TOO_SMALL,

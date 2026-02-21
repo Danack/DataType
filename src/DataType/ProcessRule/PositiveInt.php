@@ -13,12 +13,11 @@ use function DataType\check_only_digits;
 
 /**
  * Checks an input is above zero and a sane int for a web application. i.e. less than a trillion.
- *
- * TODO: Refactor so $value is typed (e.g. mixed) or validated before check_only_digits/intval() to satisfy
- * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class PositiveInt implements ProcessRule
 {
+    use CheckInt;
+
     const MAX_SANE_VALUE = 1_024 * 1_024 * 1_024 * 1_024;
 
     public function process(
@@ -27,13 +26,13 @@ class PositiveInt implements ProcessRule
         DataStorage $inputStorage
     ): ValidationResult {
 
-        /**  @psalm-suppress MixedArgument */
+        $value = $this->checkIntOrString($value);
         $errorMessage = check_only_digits($value);
         if ($errorMessage !== null) {
             return ValidationResult::errorResult($inputStorage, $errorMessage);
         }
 
-        $value = intval($value);
+        $value = (int) $value;
         $maxValue = self::MAX_SANE_VALUE;
         if ($value > $maxValue) {
             $message = sprintf(

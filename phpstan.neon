@@ -34,39 +34,4 @@ parameters:
       identifier: argument.type
       paths:
         - src/DataType/DataStorage/ArrayDataStorage.php
-    # MaxFloatValue: process() $value is mixed; floatval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/MaxFloatValue.php
-    # MaxIntValue: process() $value is mixed; intval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/MaxIntValue.php
-    # MinFloatValue: process() $value is mixed; floatval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/MinFloatValue.php
-    # MinIntValue: process() $value is mixed; intval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/MinIntValue.php
-    # PositiveInt: process() $value is mixed; check_only_digits/intval() expect narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/PositiveInt.php
-    # RangeFloatValue: process() $value is mixed; floatval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/RangeFloatValue.php
-    # RangeIntValue: process() $value is mixed; intval() expects narrower type. Internal-only, TODO refactor/type
-    -
-      identifier: argument.type
-      paths:
-        - src/DataType/ProcessRule/RangeIntValue.php
     

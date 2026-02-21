@@ -53,4 +53,32 @@ class InvalidRulesExceptionTest extends BaseTestCase
 
         $this->assertSame(0, $exception->getCode());
     }
+
+    /**
+     * @covers \DataType\Exception\InvalidRulesExceptionData
+     */
+    public function testExpectsIntForProcessing(): void
+    {
+        $exception = InvalidRulesExceptionData::expectsIntForProcessing('SomeIntRule');
+        $this->assertStringMatchesTemplateString(
+            Messages::BAD_TYPE_FOR_INT_PROCESS_RULE,
+            $exception->getMessage()
+        );
+        $this->assertStringContainsString('SomeIntRule', $exception->getMessage());
+        $this->assertSame(0, $exception->getCode());
+    }
+
+    /**
+     * @covers \DataType\Exception\InvalidRulesExceptionData
+     */
+    public function testExpectsFloatForProcessing(): void
+    {
+        $exception = InvalidRulesExceptionData::expectsFloatForProcessing('SomeFloatRule');
+        $this->assertStringMatchesTemplateString(
+            Messages::BAD_TYPE_FOR_FLOAT_PROCESS_RULE,
+            $exception->getMessage()
+        );
+        $this->assertStringContainsString('SomeFloatRule', $exception->getMessage());
+        $this->assertSame(0, $exception->getCode());
+    }
 }

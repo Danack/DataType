@@ -12,12 +12,10 @@ use DataType\ValidationResult;
 
 /**
  * Validates that a int value is between a range of int values inclusive.
- *
- * TODO: Refactor so $value is typed (e.g. mixed) or validated before intval() to satisfy
- * PHPStan without ignoring. This is internal process-rule code; the ignore is acceptable for now.
  */
 class RangeIntValue implements ProcessRule
 {
+    use CheckInt;
     private int $minValue;
 
     private int $maxValue;
@@ -40,7 +38,7 @@ class RangeIntValue implements ProcessRule
         ProcessedValues $processedValues,
         DataStorage $inputStorage
     ): ValidationResult {
-        $value = intval($value);
+        $value = $this->checkInt($value);
         if ($value < $this->minValue) {
             $message = sprintf(
                 Messages::INT_TOO_SMALL,

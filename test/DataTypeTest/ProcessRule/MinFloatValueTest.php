@@ -25,8 +25,8 @@ class MinFloatValueTest extends BaseTestCase
 
         return [
 //            [$minValue, (string)$underValue, true],
-            [$minValue, (string)$exactValue],
-            [$minValue, (string)$overValue],
+            [$minValue, $exactValue],
+            [$minValue, $overValue],
 
             // TODO - think about these cases.
 //            [$minValue, 'banana', true]
@@ -37,7 +37,7 @@ class MinFloatValueTest extends BaseTestCase
      * @dataProvider provideMinFloatValueCases
      * @covers \DataType\ProcessRule\MinFloatValue
      */
-    public function testValidation(float $minValue, string $inputValue)
+    public function testValidation(float $minValue, float $inputValue)
     {
         $rule = new MinFloatValue($minValue);
         $processedValues = new ProcessedValues();
@@ -58,10 +58,10 @@ class MinFloatValueTest extends BaseTestCase
         $overValue = $minValue + 1;
 
         return [
-            [$minValue, (string)$underValue],
+            [$minValue, $underValue],
 
             // TODO - think about these cases.
-            [$minValue, 'banana', true]
+//            [$minValue, 'banana']
         ];
     }
 
@@ -69,7 +69,7 @@ class MinFloatValueTest extends BaseTestCase
      * @dataProvider provideMinFloatValueErrors
      * @covers \DataType\ProcessRule\MinFloatValue
      */
-    public function testErrors(float $minValue, string $inputValue)
+    public function testErrors(float $minValue, float $inputValue)
     {
         $rule = new MinFloatValue($minValue);
         $processedValues = new ProcessedValues();

@@ -24,8 +24,8 @@ class RangeFloatValueTest extends BaseTestCase
         $overValue = $minValue + 1;
 
         return [
-            [$minValue, $maxValue, (string)$exactValue, false],
-            [$minValue, $maxValue, (string)$overValue, false],
+            [$minValue, $maxValue, $exactValue, false],
+            [$minValue, $maxValue, $overValue, false],
 //            // TODO - think about these cases.
 //            [$minValue, 'banana', true]
         ];
@@ -40,8 +40,8 @@ class RangeFloatValueTest extends BaseTestCase
         $overValue = $maxValue + 1;
 
         return [
-            [$minValue, $maxValue, (string)$underValue],
-            [$minValue, $maxValue, (string)$exactValue],
+            [$minValue, $maxValue, $underValue],
+            [$minValue, $maxValue, $exactValue],
 
 
             // TODO - think about these cases.
@@ -60,7 +60,7 @@ class RangeFloatValueTest extends BaseTestCase
      * @dataProvider provideRangeFloatValueCases
      * @covers \DataType\ProcessRule\RangeFloatValue
      */
-    public function testValidation(float $minValue, float $maxValue, string $inputValue)
+    public function testValidation(float $minValue, float $maxValue, float $inputValue)
     {
         $rule = new RangeFloatValue($minValue, $maxValue);
         $processedValues = new ProcessedValues();
@@ -82,7 +82,7 @@ class RangeFloatValueTest extends BaseTestCase
         $exactValue = $minValue ;
         $overValue = $minValue + 1;
 
-        yield [$minValue, $maxValue, (string)$underValue, Messages::INT_TOO_SMALL];
+        yield [$minValue, $maxValue, $underValue, Messages::INT_TOO_SMALL];
 
         // Maximum boundary tests.
         $minValue = 100;
@@ -91,7 +91,7 @@ class RangeFloatValueTest extends BaseTestCase
         $exactValue = $maxValue ;
         $overValue = $maxValue + 1;
 
-        yield [$minValue, $maxValue, (string)$overValue, Messages::INT_TOO_LARGE];
+        yield [$minValue, $maxValue, $overValue, Messages::INT_TOO_LARGE];
     }
 
 
@@ -99,7 +99,7 @@ class RangeFloatValueTest extends BaseTestCase
      * @dataProvider provideRangeFloatErrorCases
      * @covers \DataType\ProcessRule\RangeFloatValue
      */
-    public function testErrors(int|float $minValue, int|float $maxValue, string $inputValue, string $message)
+    public function testErrors(int|float $minValue, int|float $maxValue, float $inputValue, string $message)
     {
         $rule = new RangeFloatValue($minValue, $maxValue);
         $processedValues = new ProcessedValues();
