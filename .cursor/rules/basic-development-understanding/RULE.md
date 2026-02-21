@@ -9,3 +9,4 @@ alwaysApply: true
 - If you are writing any code, or running any scripts, read the document @docs/development-environment.md.
 - When I say "all tests" I am including PHP Unit, PhpStan, code sniffer and others. There should be a script to run them all.
 - If you are doing any coding, read the document @docs/testing.md to learn how to run the tests.
+- DO NOT ABBREVIATE VARIABLES. Please use full words and/or snake case. Variables need to be 50 characters long before the length is a problem
