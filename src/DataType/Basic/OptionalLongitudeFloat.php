@@ -1,18 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DataType\Basic;
 
 use DataType\ExtractRule\GetOptionalFloat;
 use DataType\HasInputType;
 use DataType\InputType;
+use DataType\ProcessRule\RangeFloatValue;
 use DataType\ProcessRule\SkipIfNull;
 
 /**
- * Optional float input for latitude/longitude (-90 to 90, -180 to 180). When the parameter is missing, the property receives null.
+ * Optional float input for longitude (-180 to 180 inclusive). When the parameter is missing, the property receives null.
  */
 #[\Attribute]
-class GpsFloat implements HasInputType
+class OptionalLongitudeFloat implements HasInputType
 {
+    private const MIN_LONGITUDE = -180.0;
+    private const MAX_LONGITUDE = 180.0;
+
     public function __construct(
         private string $name
     ) {
@@ -24,7 +30,7 @@ class GpsFloat implements HasInputType
             $this->name,
             new GetOptionalFloat(),
             new SkipIfNull(),
-            // TODO - add sanity checks?
+            new RangeFloatValue(self::MIN_LONGITUDE, self::MAX_LONGITUDE),
         );
     }
 }
