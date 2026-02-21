@@ -103,7 +103,7 @@ class Messages
     public const ERROR_MAXIMUM_COUNT_MINIMUM = "Maximum count must be zero or above.";
     public const ERROR_MINIMUM_COUNT_MINIMUM = "Minimum count must be zero or above.";
     public const MUST_DUPLICATE_PARAMETER = "Must be duplicate of %s";
-    public const PAIR_PARAM_BOTH_OR_NEITHER = "Parameters '%s' and '%s' must both be set or both be missing.";
+    public const PAIR_PARAM_BOTH_OR_NEITHER = "Parameters '%s' and '%s' must both be set or both be either null or not set.";
     public const TIME_MUST_BE_X_MINUTES_AFTER_PREVIOUS_VALUE = "Time must be at least %d minutes after %s.";
 
     // Time

@@ -60,7 +60,8 @@ class LongitudeFloatTest extends BaseTestCase
         try {
             LongitudeFloatFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail('Expected ValidationException was not thrown.');
-        } catch (\DataType\Exception\ValidationException $ve) {
+        }
+        catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
     }

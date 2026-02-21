@@ -60,7 +60,8 @@ class OptionalLongitudeFloatTest extends BaseTestCase
         try {
             OptionalLongitudeFloatFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail('Expected ValidationException was not thrown.');
-        } catch (\DataType\Exception\ValidationException $ve) {
+        }
+        catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
     }
