@@ -24,8 +24,8 @@ class MaxIntValueTest extends BaseTestCase
         $overValue = $maxValue + 1;
 
         return [
-            [$maxValue, (string)$underValue],
-            [$maxValue, (string)$exactValue],
+            [$maxValue, $underValue],
+            [$maxValue, $exactValue],
             // TODO - think about these cases.
 //            [$maxValue, 125.5, true],
 //            [$maxValue, 'banana', true]
@@ -36,7 +36,7 @@ class MaxIntValueTest extends BaseTestCase
      * @dataProvider provideMaxIntCases
      * @covers \DataType\ProcessRule\MaxIntValue
      */
-    public function testValidation(int $maxValue, string $inputValue)
+    public function testValidation(int $maxValue, int $inputValue)
     {
         $rule = new MaxIntValue($maxValue);
         $processedValues = new ProcessedValues();
@@ -61,7 +61,7 @@ class MaxIntValueTest extends BaseTestCase
         $overValue = $maxValue + 1;
 
         return [
-            [$maxValue, (string)$overValue],
+            [$maxValue, $overValue],
 
             // TODO - think about these cases.
 //            [$maxValue, 125.5, true],
@@ -73,7 +73,7 @@ class MaxIntValueTest extends BaseTestCase
      * @dataProvider provideMaxIntErrors
      * @covers \DataType\ProcessRule\MaxIntValue
      */
-    public function testErrors(int $maxValue, string $inputValue)
+    public function testErrors(int $maxValue, int $inputValue)
     {
         $rule = new MaxIntValue($maxValue);
         $processedValues = new ProcessedValues();

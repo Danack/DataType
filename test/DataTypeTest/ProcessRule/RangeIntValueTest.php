@@ -24,8 +24,8 @@ class RangeIntValueTest extends BaseTestCase
         $overValue = $minValue + 1;
 
         return [
-            [$minValue, $maxValue, (string)$exactValue, false],
-            [$minValue, $maxValue, (string)$overValue, false],
+            [$minValue, $maxValue, $exactValue, false],
+            [$minValue, $maxValue, $overValue, false],
 //            // TODO - think about these cases.
 //            [$minValue, 'banana', true]
         ];
@@ -40,8 +40,8 @@ class RangeIntValueTest extends BaseTestCase
         $overValue = $maxValue + 1;
 
         return [
-            [$minValue, $maxValue, (string)$underValue],
-            [$minValue, $maxValue, (string)$exactValue],
+            [$minValue, $maxValue, $underValue],
+            [$minValue, $maxValue, $exactValue],
 
 
             // TODO - think about these cases.
@@ -60,7 +60,7 @@ class RangeIntValueTest extends BaseTestCase
      * @dataProvider provideRangeIntValueCases
      * @covers \DataType\ProcessRule\RangeIntValue
      */
-    public function testValidation(int $minValue, int $maxValue, string $inputValue)
+    public function testValidation(int $minValue, int $maxValue, int $inputValue)
     {
         $rule = new RangeIntValue($minValue, $maxValue);
         $processedValues = new ProcessedValues();
@@ -82,7 +82,7 @@ class RangeIntValueTest extends BaseTestCase
         $exactValue = $minValue ;
         $overValue = $minValue + 1;
 
-        yield [$minValue, $maxValue, (string)$underValue, Messages::INT_TOO_SMALL];
+        yield [$minValue, $maxValue, $underValue, Messages::INT_TOO_SMALL];
 
         // Maximum boundary tests.
         $minValue = 100;
@@ -91,7 +91,7 @@ class RangeIntValueTest extends BaseTestCase
         $exactValue = $maxValue ;
         $overValue = $maxValue + 1;
 
-        yield [$minValue, $maxValue, (string)$overValue, Messages::INT_TOO_LARGE];
+        yield [$minValue, $maxValue, $overValue, Messages::INT_TOO_LARGE];
     }
 
 
@@ -99,7 +99,7 @@ class RangeIntValueTest extends BaseTestCase
      * @dataProvider provideRangeIntErrorCases
      * @covers \DataType\ProcessRule\RangeIntValue
      */
-    public function testErrors(int $minValue, int $maxValue, string $inputValue, string $message)
+    public function testErrors(int $minValue, int $maxValue, int $inputValue, string $message)
     {
         $rule = new RangeIntValue($minValue, $maxValue);
         $processedValues = new ProcessedValues();

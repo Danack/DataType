@@ -14,7 +14,6 @@ use DataType\DataType;
 use DataType\ProcessRule\CastToInt;
 use DataType\Create\CreateFromVarMap;
 
-
 /**
  * This is a bonkers datatype that has an error in getInputTypes.
  * A DateTime object is extracted, which then is processed with an
@@ -42,5 +41,4 @@ class BonkersDataType implements DataType
             )
         ];
     }
-
 }

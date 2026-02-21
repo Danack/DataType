@@ -9,7 +9,6 @@ use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
-use function DataType\check_only_digits;
 
 /**
  * Checks an input is above zero and a sane int for a web application. i.e. less than a trillion.
@@ -26,13 +25,7 @@ class PositiveInt implements ProcessRule
         DataStorage $inputStorage
     ): ValidationResult {
 
-        $value = $this->checkIntOrString($value);
-        $errorMessage = check_only_digits($value);
-        if ($errorMessage !== null) {
-            return ValidationResult::errorResult($inputStorage, $errorMessage);
-        }
-
-        $value = (int) $value;
+        $value = $this->checkInt($value);
         $maxValue = self::MAX_SANE_VALUE;
         if ($value > $maxValue) {
             $message = sprintf(

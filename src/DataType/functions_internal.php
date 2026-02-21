@@ -291,39 +291,39 @@ function array_value_exists(array $array, $value): bool
     return in_array($value, $array, true);
 }
 
-/**
- * @param string|int $value  The value of the variable
- * @return string|null returns an error string, when there is an error
- */
-function check_only_digits(string|int $value)
-{
-    if (is_int($value) === true) {
-        return null;
-    }
-
-    $count = preg_match("/[^0-9]+/", $value, $matches, PREG_OFFSET_CAPTURE);
-
-    if ($count === false) {
-        // @codeCoverageIgnoreStart
-        // This seems impossible to test.
-        throw new LogicExceptionData("preg_match failed");
-        // @codeCoverageIgnoreEnd
-    }
-
-    if ($count !== 0) {
-        /**  @psalm-suppress MixedArrayAccess */
-        $badCharPosition = $matches[0][1];
-
-        /** @psalm-suppress MixedArgument */
-        $message = sprintf(
-            Messages::INT_REQUIRED_FOUND_NON_DIGITS,
-            $badCharPosition
-        );
-        return $message;
-    }
-
-    return null;
-}
+///**
+// * @param string|int $value  The value of the variable
+// * @return string|null returns an error string, when there is an error
+// */
+//function check_only_digits(string|int $value)
+//{
+//    if (is_int($value) === true) {
+//        return null;
+//    }
+//
+//    $count = preg_match("/[^0-9]+/", $value, $matches, PREG_OFFSET_CAPTURE);
+//
+//    if ($count === false) {
+//        // @codeCoverageIgnoreStart
+//        // This seems impossible to test.
+//        throw new LogicExceptionData("preg_match failed");
+//        // @codeCoverageIgnoreEnd
+//    }
+//
+//    if ($count !== 0) {
+//        /**  @psalm-suppress MixedArrayAccess */
+//        $badCharPosition = $matches[0][1];
+//
+//        /** @psalm-suppress MixedArgument */
+//        $message = sprintf(
+//            Messages::INT_REQUIRED_FOUND_NON_DIGITS,
+//            $badCharPosition
+//        );
+//        return $message;
+//    }
+//
+//    return null;
+//}
 
 
 /**
