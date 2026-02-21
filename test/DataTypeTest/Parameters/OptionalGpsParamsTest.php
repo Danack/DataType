@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace DataTypeTest\Integration;
+namespace DataTypeTest\Parameters;
 
 use DataType\Messages;
+use DataType\Parameters\OptionalGpsParams;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
 
 /**
- * @covers \DataTypeTest\Integration\OptionalGpsParams
+ * @covers \DataType\Parameters\OptionalGpsParams
  * @covers \DataType\ProcessRule\BothOrNeitherParam
  */
 class OptionalGpsParamsTest extends BaseTestCase
