@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataTypeTest\BaseTestCase;
 use DataType\Exception\InvalidLocationExceptionData;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

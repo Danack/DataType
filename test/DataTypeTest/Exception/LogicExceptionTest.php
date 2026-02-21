@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
 use DataType\Exception\LogicExceptionData;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

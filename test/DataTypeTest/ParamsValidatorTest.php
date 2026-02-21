@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace DataTypeTest;
 
+use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetInt;
 use DataType\InputType;
-use DataType\ProcessRule\MaxIntValue;
-use DataTypeTest\BaseTestCase;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\AlwaysEndsRule;
-use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ProcessRule\MaxIntValue;
 use function DataType\processInputTypeWithDataStorage;
 
 /**

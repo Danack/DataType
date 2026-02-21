@@ -2,13 +2,13 @@
 
 namespace DataTypeTest\Basic;
 
-use DataTypeTest\BaseTestCase;
+use DataType\Basic\OptionalBasicString;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
+use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
-use DataType\Basic\OptionalBasicString;
 
 /**
  * @covers \DataType\Basic\OptionalBasicString

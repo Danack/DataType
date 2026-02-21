@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DataTypeTest;
 
-use DataTypeTest\DTOTypes\BasicDTO;
 use DataType\Messages;
-use DataTypeTest\InputType\KnownColors;
 use DataTypeTest\DTOTypes\AdvancedDTO;
+use DataTypeTest\DTOTypes\BasicDTO;
+use DataTypeTest\InputType\KnownColors;
 use function DataType\validate;
 
 /**

@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace DataTypeTest;
 
-use DataType\ProcessedValues;
 use DataType\Exception\LogicExceptionData;
-use DataType\InputType;
 use DataType\ExtractRule\GetStringOrDefault;
+use DataType\InputType;
 use DataType\ProcessedValue;
+use DataType\ProcessedValues;
 
 /**
  * @coversNothing

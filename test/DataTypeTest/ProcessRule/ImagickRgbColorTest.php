@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Messages;
+use DataType\Exception\InvalidRulesExceptionData;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\ImagickIsRgbColor;
 use DataTypeTest\BaseTestCase;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataType\Exception\InvalidRulesExceptionData;
 
 /**
  * @coversNothing

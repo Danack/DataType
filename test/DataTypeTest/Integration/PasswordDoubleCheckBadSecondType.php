@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Integration;
 
+use DataType\Create\CreateOrErrorFromVarMap;
 use DataType\DataType;
-use DataType\SafeAccess;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetString;
-use DataType\ProcessRule\MinLength;
-use DataType\ProcessRule\MaxLength;
-use DataType\Create\CreateOrErrorFromVarMap;
-use DataType\ProcessRule\DuplicatesParam;
 use DataType\InputType;
+use DataType\ProcessRule\DuplicatesParam;
+use DataType\ProcessRule\MaxLength;
+use DataType\ProcessRule\MinLength;
+use DataType\SafeAccess;
 
 class PasswordDoubleCheckBadSecondType implements DataType
 {

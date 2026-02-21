@@ -6,12 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataType\ProcessRule\MultipleEnum;
-use DataType\ProcessRule\CheckOnlyAllowedCharacters;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\StartsWithString;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\StartsWithString;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

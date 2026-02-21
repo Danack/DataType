@@ -2,9 +2,9 @@
 
 namespace DataType\Basic;
 
-use DataType\InputType;
-use DataType\HasInputType;
 use DataType\ExtractRule\GetString;
+use DataType\HasInputType;
+use DataType\InputType;
 
 /**
  * Required string input. Alias for BasicString with the same behaviour.

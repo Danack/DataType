@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\Exception\InvalidRulesExceptionData;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\CheckString;
 use DataType\Messages;
+use DataType\ProcessRule\CheckString;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

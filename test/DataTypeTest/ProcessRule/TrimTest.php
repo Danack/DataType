@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\Trim;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\Trim;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

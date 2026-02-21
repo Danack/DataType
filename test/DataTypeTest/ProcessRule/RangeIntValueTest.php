@@ -6,9 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\RangeIntValue;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\RangeIntValue;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

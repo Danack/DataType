@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
+use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
 
 /**
  * @coversNothing

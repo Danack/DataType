@@ -6,9 +6,9 @@ namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
 use DataType\Exception\ValidationException;
-use function DataType\json_decode_safe;
 use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;
+use function DataType\json_decode_safe;
 
 /**
  * Creates a DataType from JSON.

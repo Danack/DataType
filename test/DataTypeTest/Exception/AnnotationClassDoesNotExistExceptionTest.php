@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
+use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
 
 /**
  * @coversNothing

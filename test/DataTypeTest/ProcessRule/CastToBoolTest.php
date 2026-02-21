@@ -6,10 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataType\OpenApi\OpenApiV300ParamDescription;
+use DataType\ProcessedValues;
 use DataType\ProcessRule\CastToBool;
 use DataTypeTest\BaseTestCase;
-use DataType\ProcessedValues;
 
 /**
  * @coversNothing

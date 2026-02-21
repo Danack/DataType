@@ -6,10 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\MaxFloatValue;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\MaxFloatValue;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

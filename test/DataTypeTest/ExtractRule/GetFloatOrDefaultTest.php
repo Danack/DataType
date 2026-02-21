@@ -7,8 +7,8 @@ namespace DataTypeTest\ExtractRule;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetFloatOrDefault;
 use DataType\Messages;
-use DataTypeTest\BaseTestCase;
 use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

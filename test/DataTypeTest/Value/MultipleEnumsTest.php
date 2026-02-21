@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception\Validator;
 
-use DataTypeTest\BaseTestCase;
 use DataType\Value\MultipleEnums;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

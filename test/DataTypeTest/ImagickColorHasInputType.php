@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace DataTypeTest;
 
 use Attribute;
+use DataType\ExtractRule\GetStringOrDefault;
 use DataType\HasInputType;
 use DataType\InputType;
-use DataType\ExtractRule\GetStringOrDefault;
 use DataType\ProcessRule\ImagickIsRgbColor;
 
 // This InputTypeSpec is repeatable, so that it can be used more

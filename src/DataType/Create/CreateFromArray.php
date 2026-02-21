@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use VarMap\VarMap;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;
 

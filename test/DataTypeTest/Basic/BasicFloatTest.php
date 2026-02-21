@@ -2,10 +2,7 @@
 
 namespace DataTypeTest\Basic;
 
-use DataType\Basic\BasicFloat;
 use DataTypeTest\BaseTestCase;
-use DataType\Create\CreateFromVarMap;
-use DataType\GetInputTypesFromAttributes;
 use VarMap\ArrayVarMap;
 
 class BasicFloatTest extends BaseTestCase

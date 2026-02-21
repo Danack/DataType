@@ -3,12 +3,11 @@
 
 namespace DataTypeTest;
 
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UriInterface;
-
-use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Stream;
 use Laminas\Diactoros\Uri;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Mock implementation of ServerRequestInterface for testing.

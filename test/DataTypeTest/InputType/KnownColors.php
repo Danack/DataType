@@ -4,9 +4,9 @@
 namespace DataTypeTest\InputType;
 
 use DataType\ExtractRule\GetStringOrDefault;
-use DataType\ProcessRule\Enum;
-use DataType\InputType;
 use DataType\HasInputType;
+use DataType\InputType;
+use DataType\ProcessRule\Enum;
 
 #[\Attribute]
 class KnownColors implements HasInputType

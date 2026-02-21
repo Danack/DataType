@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DataTypeTest\OpenApi;
 
+use DataType\Create\CreateFromVarMap;
 use DataType\ExtractRule\GetInt;
 use DataType\InputType;
 use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MinIntValue;
 use DataType\SafeAccess;
-use DataType\Create\CreateFromVarMap;
 
 class RequiredIntExample
 {

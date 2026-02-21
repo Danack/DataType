@@ -6,10 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\MaxLength;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\MaxLength;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

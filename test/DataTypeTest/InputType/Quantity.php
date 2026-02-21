@@ -3,8 +3,8 @@
 namespace DataTypeTest\InputType;
 
 use DataType\ExtractRule\GetInt;
-use DataType\InputType;
 use DataType\HasInputType;
+use DataType\InputType;
 use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MinIntValue;
 

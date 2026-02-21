@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace DataTypeTest\DTOTypes;
 
 use DataType\DataType;
+use DataType\GetInputTypesFromAttributes;
 use DataTypeTest\InputType\KnownColors;
 use DataTypeTest\InputType\Quantity;
-use DataType\GetInputTypesFromAttributes;
 
 class BasicDTO implements DataType
 {

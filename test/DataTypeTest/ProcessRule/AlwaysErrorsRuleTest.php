@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
-use DataType\ProcessedValues;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\AlwaysErrorsRule;
-use DataType\OpenApi\OpenApiV300ParamDescription;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ProcessedValues;
+use DataType\ProcessRule\AlwaysErrorsRule;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

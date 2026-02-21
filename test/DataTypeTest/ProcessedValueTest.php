@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace DataTypeTest;
 
+use DataType\ExtractRule\FixedValue;
 use DataType\InputType;
 use DataType\ProcessedValue;
-use DataType\ExtractRule\FixedValue;
 
 /**
  * @coversNothing

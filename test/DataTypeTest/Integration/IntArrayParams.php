@@ -10,15 +10,15 @@ use DataType\Create\CreateFromRequest;
 use DataType\Create\CreateOrErrorFromArray;
 use DataType\Create\CreateOrErrorFromJson;
 use DataType\Create\CreateOrErrorFromRequest;
+use DataType\DataType;
 use DataType\ExtractRule\GetArrayOfInt;
+use DataType\ExtractRule\GetString;
 use DataType\InputType;
 use DataType\ProcessRule\MaxIntValue;
-use DataType\ProcessRule\MinIntValue;
-use DataType\SafeAccess;
-use DataType\ProcessRule\MinLength;
 use DataType\ProcessRule\MaxLength;
-use DataType\ExtractRule\GetString;
-use DataType\DataType;
+use DataType\ProcessRule\MinIntValue;
+use DataType\ProcessRule\MinLength;
+use DataType\SafeAccess;
 
 class IntArrayParams implements DataType
 {

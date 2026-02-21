@@ -4,8 +4,8 @@
 namespace DataTypeTest\InputType;
 
 use DataType\ExtractRule\GetArrayOfType;
-use DataType\InputType;
 use DataType\HasInputType;
+use DataType\InputType;
 use DataTypeTest\DTOTypes\BasicDTO;
 
 #[\Attribute]

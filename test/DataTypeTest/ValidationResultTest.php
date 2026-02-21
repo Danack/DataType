@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest;
 
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\LogicExceptionData;
 use DataType\ValidationProblem;
 use DataType\ValidationResult;
-use DataType\Exception\LogicExceptionData;
 
 /**
  * @covers \DataType\ValidationResult

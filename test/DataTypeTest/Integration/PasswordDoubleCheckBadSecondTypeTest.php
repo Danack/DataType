@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace DataTypeTest\Integration;
 
 use DataType\Messages;
-use VarMap\ArrayVarMap;
 use DataTypeTest\BaseTestCase;
+use VarMap\ArrayVarMap;
 
 /**
  * @coversNothing

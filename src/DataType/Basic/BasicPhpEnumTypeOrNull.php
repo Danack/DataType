@@ -2,10 +2,10 @@
 
 namespace DataType\Basic;
 
-use DataType\ProcessRule\PhpEnum;
 use DataType\ExtractRule\GetOptionalString;
 use DataType\HasInputType;
 use DataType\InputType;
+use DataType\ProcessRule\PhpEnum;
 use DataType\ProcessRule\SkipIfNull;
 
 /**

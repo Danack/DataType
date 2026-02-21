@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Integration;
 
-use VarMap\ArrayVarMap;
 use DataTypeTest\BaseTestCase;
+use VarMap\ArrayVarMap;
 
 /**
  * @coversNothing

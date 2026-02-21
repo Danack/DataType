@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataType\Create;
 
-use Psr\Http\Message\ServerRequestInterface;
 use DataType\DataStorage\ArrayDataStorage;
 use DataType\Exception;
+use Psr\Http\Message\ServerRequestInterface;
 use VarMap\Psr7VarMap;
 use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;

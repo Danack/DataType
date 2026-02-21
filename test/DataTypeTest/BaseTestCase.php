@@ -2,15 +2,14 @@
 
 namespace DataTypeTest;
 
-use DataType\Exception\LogicExceptionData;
+use Danack\PHPUnitHelper\StringTemplateMatching;
 use DataType\OpenApi\OpenApiV300ParamDescription;
+use DataType\OpenApi\ParamDescription;
+use DataType\ProcessedValues;
 use DataType\Rule;
 use DataType\ValidationResult;
 use PHPUnit\Framework\TestCase;
-use DataType\ProcessedValues;
-use DataType\OpenApi\ParamDescription;
-use Danack\PHPUnitHelper\StringTemplateMatching;
-use function \Danack\PHPUnitHelper\templateStringToRegExp;
+use function Danack\PHPUnitHelper\templateStringToRegExp;
 
 /**
  * @coversNothing

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataTypeTest;
 
-use VarMap\ArrayVarMap;
 use DataTypeTest\Integration\FooParamsCreateFromVarMap;
 use DataTypeTest\Integration\FooParamsCreateOrErrorFromVarMap;
+use VarMap\ArrayVarMap;
 
 /**
  * @coversNothing

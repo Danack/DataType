@@ -7,10 +7,9 @@ namespace DataTypeTest\ProcessRule;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
-use DataType\ProcessRule\ValidDate;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\ValidDatetime;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\ValidDatetime;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

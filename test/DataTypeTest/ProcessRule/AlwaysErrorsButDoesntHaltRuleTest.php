@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
-use DataType\ProcessedValues;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\AlwaysErrorsButDoesntHaltRule;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ProcessedValues;
+use DataType\ProcessRule\AlwaysErrorsButDoesntHaltRule;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

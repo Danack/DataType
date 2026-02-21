@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\PhpEnum;
-use DataTypeTest\ProcessRule\FixtureEnum;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\PhpEnum;
+use DataTypeTest\BaseTestCase;
 use function DataType\getEnumCaseValues;
 
 /**

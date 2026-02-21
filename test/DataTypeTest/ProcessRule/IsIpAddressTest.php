@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\IsIpAddress;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\InvalidRulesExceptionData;
 
 /**
  * @coversNothing

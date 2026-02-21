@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace DataType\Exception;
 
-use DataType\Messages;
 use DataType\DataType;
+use DataType\Messages;
 
 class DataTypeNotImplementedException extends DataTypeException
 {

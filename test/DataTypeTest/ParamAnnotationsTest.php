@@ -6,16 +6,7 @@ namespace DataTypeTest;
 
 use DataType\ExtractRule\GetStringOrDefault;
 use DataType\InputType;
-use DataType\Messages;
-use DataType\ProcessRule\ImagickIsRgbColor;
-use DataTypeTest\Integration\IntArrayParams;
 use VarMap\ArrayVarMap;
-use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
-use DataType\Exception\IncorrectNumberOfParametersExceptionData;
-use DataType\Exception\NoConstructorExceptionData;
-use DataType\Exception\MissingConstructorParameterNameExceptionData;
-use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
-use function DataType\createOrError;
 
 /**
  * @coversNothing

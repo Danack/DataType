@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Integration;
 
-use DataType\ExtractRule\GetInt;
-use DataType\InputType;
-use DataType\SafeAccess;
-use DataType\ExtractRule\GetString;
 use DataType\Create\CreateOrErrorFromVarMap;
+use DataType\ExtractRule\GetInt;
+use DataType\ExtractRule\GetString;
+use DataType\InputType;
 use DataType\ProcessRule\DuplicatesParam;
+use DataType\SafeAccess;
 
 class DuplicateButWrongTypeParams
 {

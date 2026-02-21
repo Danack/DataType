@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DataTypeTest\ExtractRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
 use DataType\ExtractRule\GetOptionalInt;
+use DataType\Messages;
 use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

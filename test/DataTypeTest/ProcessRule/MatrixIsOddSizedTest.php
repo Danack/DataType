@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\Order;
-use DataType\Value\Ordering;
-use DataType\ProcessedValues;
 use DataType\Messages;
+use DataType\ProcessedValues;
 use DataType\ProcessRule\MatrixIsOddSized;
+use DataTypeTest\BaseTestCase;
 
 /**
  * Checks that a matrix has an odd number of both rows and columns.

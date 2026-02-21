@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Integration;
 
-use DataType\ExtractRule\GetString;
-
-use DataType\DataType;
-use DataType\ProcessRule\MaxLength;
-use DataType\SafeAccess;
 use DataType\Create\CreateFromVarMap;
 use DataType\Create\CreateOrErrorFromVarMap;
+use DataType\DataType;
 use DataType\ExtractRule\GetArrayOfType;
+use DataType\ExtractRule\GetString;
 use DataType\InputType;
+use DataType\ProcessRule\MaxLength;
+use DataType\SafeAccess;
 
 class ItemParams implements DataType
 {

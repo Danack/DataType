@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Integration;
 
-use DataType\Create\CreateFromVarMap;
 use DataType\Create\CreateArrayOfTypeFromArray;
+use DataType\Create\CreateFromVarMap;
+use DataType\DataType;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetString;
 use DataType\InputType;
 use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MinLength;
 use DataType\SafeAccess;
-use DataType\DataType;
 
 class ReviewScore implements DataType
 {

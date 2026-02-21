@@ -9,7 +9,6 @@ use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
-use DataType\ExtractRule\ExtractRule;
 
 /**
  * Extracts a string value or null. The parameter key must exist, but the value may be null.

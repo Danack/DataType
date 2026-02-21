@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
+use DataType\Exception\NoConstructorExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\NoConstructorExceptionData;
 
 /**
  * @coversNothing

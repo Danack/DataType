@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataType\Exception\InvalidDatetimeFormatExceptionData;
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ExtractRule\GetDatetime;
-use DataType\ProcessedValues;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\InvalidDatetimeFormatExceptionData;
+use DataType\ExtractRule\GetDatetime;
+use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

@@ -6,8 +6,8 @@ namespace DataTypeTest\DataStorage;
 
 use DataType\DataStorage\ComplexDataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataTypeTest\BaseTestCase;
 use DataType\Exception\InvalidLocationExceptionData;
+use DataTypeTest\BaseTestCase;
 use function DataType\json_decode_safe;
 
 /**

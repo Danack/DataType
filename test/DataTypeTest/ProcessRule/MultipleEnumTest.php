@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataType\ProcessRule\Order;
-use DataTypeTest\BaseTestCase;
+use DataType\Messages;
+use DataType\ProcessedValues;
 use DataType\ProcessRule\MultipleEnum;
 use DataType\Value\MultipleEnums;
-use DataType\ProcessedValues;
-use DataType\Messages;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

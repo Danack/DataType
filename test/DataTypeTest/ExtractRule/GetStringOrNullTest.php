@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ExtractRule\GetStringOrNull;
-use DataType\ProcessedValues;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ExtractRule\GetStringOrNull;
+use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

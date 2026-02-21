@@ -7,7 +7,6 @@ namespace DataType\Create;
 use DataType\DataStorage\ArrayDataStorage;
 use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
-use VarMap\VarMap;
 use function DataType\createArrayOfTypeFromInputStorage;
 
 /**

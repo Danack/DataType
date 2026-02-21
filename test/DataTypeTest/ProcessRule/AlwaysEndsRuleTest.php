@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\AlwaysEndsRule;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\AlwaysEndsRule;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

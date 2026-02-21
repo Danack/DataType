@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataTypeTest\BaseTestCase;
+use DataType\DataStorage\ArrayDataStorage;
 use DataType\ExtractRule\FixedValue;
 use DataType\ProcessedValues;
-use DataType\DataStorage\ArrayDataStorage;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

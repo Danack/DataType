@@ -7,10 +7,9 @@ namespace DataType\Create;
 use DataType\DataStorage\ArrayDataStorage;
 use DataType\Exception\ValidationException;
 use DataType\ValidationProblem;
-use VarMap\ArrayVarMap;
-use function DataType\json_decode_safe;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;
+use function DataType\json_decode_safe;
 
 /**
  * Creates a DataType from JSON or throws a ValidationException if there is a

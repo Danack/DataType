@@ -2,22 +2,21 @@
 
 namespace DataTypeTest;
 
+use DataType\Exception\JsonDecodeException;
+use DataType\Exception\JsonEncodeException;
 use DataType\Exception\LogicExceptionData;
 use DataType\Exception\MissingConstructorParameterNameExceptionData;
 use DataType\ExtractRule\GetInt;
-use DataType\Exception\JsonEncodeException;
-use DataType\Exception\JsonDecodeException;
 use DataType\Messages;
 use DataType\ProcessedValue;
-use DataTypeTest\Fixtures\ClassThatHasSingleConstructorParameter;
 use DataType\ProcessedValues;
+use DataTypeTest\Fixtures\ClassThatHasSingleConstructorParameter;
 use function Danack\PHPUnitHelper\templateStringToRegExp;
 use function DataType\get_all_constructor_parameters;
-use function DataType\json_decode_safe;
-use function DataType\json_encode_safe;
-
 use function DataType\getEnumCases;
 use function DataType\getEnumCaseValues;
+use function DataType\json_decode_safe;
+use function DataType\json_encode_safe;
 
 class FunctionsInternalTest extends BaseTestCase
 {

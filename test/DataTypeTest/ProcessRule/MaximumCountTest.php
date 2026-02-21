@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\MaximumCount;
-use DataType\Exception\LogicExceptionData;
-use DataType\ProcessedValues;
 use DataType\DataStorage\TestArrayDataStorage;
-use function \Danack\PHPUnitHelper\templateStringToRegExp;
+use DataType\Exception\LogicExceptionData;
+use DataType\Messages;
+use DataType\ProcessedValues;
+use DataType\ProcessRule\MaximumCount;
+use DataTypeTest\BaseTestCase;
+use function Danack\PHPUnitHelper\templateStringToRegExp;
 
 /**
  * @coversNothing

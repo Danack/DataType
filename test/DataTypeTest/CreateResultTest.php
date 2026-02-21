@@ -7,7 +7,6 @@ namespace DataTypeTest;
 use DataType\CreateResult;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ValidationProblem;
-use DataTypeTest\BaseTestCase;
 
 /**
  * @covers \DataType\CreateResult

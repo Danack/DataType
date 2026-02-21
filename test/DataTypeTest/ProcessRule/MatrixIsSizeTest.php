@@ -9,7 +9,6 @@ use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\MatrixIsSize;
 use DataTypeTest\BaseTestCase;
-use DataType\OpenApi\OpenApiV300ParamDescription;
 
 /**
  * @coversNothing

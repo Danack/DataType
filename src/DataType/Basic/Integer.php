@@ -3,11 +3,8 @@
 namespace DataType\Basic;
 
 use DataType\ExtractRule\GetInt;
-use DataType\InputType;
 use DataType\HasInputType;
-use DataType\ExtractRule\GetString;
-use DataType\ProcessRule\MinLength;
-use DataType\ProcessRule\MaxLength;
+use DataType\InputType;
 
 /**
  * Required integer input.

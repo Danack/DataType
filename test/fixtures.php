@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-use DataType\ExtractRule\GetString;
-use DataType\ExtractRule\GetStringOrDefault;
+use DataType\Create\CreateFromArray;
+use DataType\Create\CreateFromVarMap;
+use DataType\Create\CreateOrErrorFromArray;
 use DataType\DataType;
-use DataType\HasInputType;
+use DataType\ExtractRule\GetString;
+use DataType\GetInputTypesFromAttributes;
 use DataType\InputType;
 use DataType\ProcessRule\AlwaysErrorsRule;
-use DataType\ProcessRule\ImagickIsRgbColor;
 use DataType\SafeAccess;
 use DataTypeTest\ImagickColorHasInputType;
-use DataType\Create\CreateFromArray;
-use DataType\Create\CreateOrErrorFromArray;
-use DataType\Create\CreateFromVarMap;
-use DataType\GetInputTypesFromAttributes;
 
 class TestObject
 {

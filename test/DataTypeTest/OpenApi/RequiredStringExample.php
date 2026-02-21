@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace DataTypeTest\OpenApi;
 
+use DataType\Create\CreateFromVarMap;
+use DataType\ExtractRule\GetString;
 use DataType\InputType;
 use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\MinLength;
-use DataType\ExtractRule\GetString;
 use DataType\SafeAccess;
-use DataType\Create\CreateFromVarMap;
 
 class RequiredStringExample
 {

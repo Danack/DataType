@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DataType\ExtractRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
 use DataType\Exception\JsonDecodeException;
+use DataType\Exception\LogicExceptionData;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;

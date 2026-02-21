@@ -5,12 +5,11 @@ declare(strict_types = 1);
 namespace DataTypeTest\DataStorage;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\DataStorage\DataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataTypeTest\BaseTestCase;
 use DataType\Exception\InvalidLocationExceptionData;
+use DataTypeTest\BaseTestCase;
+
 //use function TypeSpec\getJsonPointerParts;
-use function DataType\json_decode_safe;
 
 /**
  * @covers \DataType\DataStorage\ArrayDataStorage

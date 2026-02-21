@@ -6,9 +6,9 @@ namespace DataTypeTest\ExtractRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetIntOrDefault;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessedValues;
 use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

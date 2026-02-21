@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace DataTypeTest\ExtractRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use VarMap\ArrayVarMap;
-use DataTypeTest\BaseTestCase;
 use DataType\ExtractRule\GetStringOrDefault;
-use DataType\ProcessedValues;
 use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
+use VarMap\ArrayVarMap;
 
 /**
  * @coversNothing

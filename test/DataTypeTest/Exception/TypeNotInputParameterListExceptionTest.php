@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest\Exception;
 
 use DataType\DataType;
+use DataType\Exception\DataTypeNotImplementedException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\DataTypeNotImplementedException;
 
 /**
  * @coversNothing

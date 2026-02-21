@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace DataTypeTest;
 
-use DataType\ValidationProblem;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ValidationProblem;
 
 /**
  * @coversNothing

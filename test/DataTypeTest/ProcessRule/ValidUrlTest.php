@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\ValidUrl;
-use DataType\ProcessedValues;
 use DataType\Messages;
+use DataType\ProcessedValues;
+use DataType\ProcessRule\ValidUrl;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

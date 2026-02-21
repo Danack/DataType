@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Basic;
 
+use DataType\Basic\Integer;
+use DataType\Exception\ValidationException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Basic\Integer;
 use function DataType\createSingleValue;
-use DataType\Exception\ValidationException;
 
 /**
  * @coversNothing

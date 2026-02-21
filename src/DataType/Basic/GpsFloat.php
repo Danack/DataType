@@ -2,7 +2,6 @@
 
 namespace DataType\Basic;
 
-use DataType\ExtractRule\GetFloat;
 use DataType\ExtractRule\GetOptionalFloat;
 use DataType\HasInputType;
 use DataType\InputType;

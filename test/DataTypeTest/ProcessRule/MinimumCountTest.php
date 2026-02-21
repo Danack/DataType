@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\LogicExceptionData;
 use DataType\Messages;
+use DataType\ProcessedValues;
 use DataType\ProcessRule\MinimumCount;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\LogicExceptionData;
-use DataType\ProcessedValues;
-use function \Danack\PHPUnitHelper\templateStringToRegExp;
+use function Danack\PHPUnitHelper\templateStringToRegExp;
 
 /**
  * @coversNothing

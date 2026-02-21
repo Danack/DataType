@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Integration;
 
+use DataType\DataType;
 use DataType\ExtractRule\GetInt;
 use DataType\InputType;
+use DataType\ProcessRule\CastToInt;
 use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MinIntValue;
 use DataType\SafeAccess;
-use DataType\ProcessRule\CastToInt;
-use DataType\DataType;
 
 class SingleIntParams implements DataType
 {

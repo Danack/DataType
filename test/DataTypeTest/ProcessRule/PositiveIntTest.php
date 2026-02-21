@@ -7,9 +7,9 @@ namespace DataTypeTest\ProcessRule;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\PositiveInt;
 use DataType\ProcessedValues;
+use DataType\ProcessRule\PositiveInt;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

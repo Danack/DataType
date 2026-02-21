@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception\Validator;
 
-use DataTypeTest\BaseTestCase;
 use DataType\Value\OrderElement;
 use DataType\Value\Ordering;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

@@ -5,9 +5,8 @@ declare(strict_types = 1);
 namespace DataTypeTest;
 
 use DataType\ExtractRule\GetInt;
-use DataType\InputType;
-use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetString;
+use DataType\InputType;
 use DataType\ProcessRule\RangeIntValue;
 
 /**

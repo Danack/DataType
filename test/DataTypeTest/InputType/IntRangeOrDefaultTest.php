@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace DataTypeTest\InputType;
 
-use DataType\DataStorage\DataStorage;
-use DataType\InputType;
+use DataType\DataStorage\TestArrayDataStorage;
+use DataType\InputType\IntRangeOrDefault;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\AlwaysErrorsRule;
-use DataType\InputType\IntRangeOrDefault;
-use DataType\DataStorage\TestArrayDataStorage;
 use function DataType\processInputTypeWithDataStorage;
 
 /**

@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ExtractRule\GetArrayOfString;
-use DataType\ProcessedValues;
-use DataType\ProcessRule\MaxLength;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ExtractRule\GetArrayOfString;
+use DataType\Messages;
+use DataType\ProcessedValues;
 use DataType\ProcessRule\AlwaysErrorsButDoesntHaltRule;
+use DataType\ProcessRule\MaxLength;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

@@ -6,10 +6,9 @@ namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\PositiveInt;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\IsRgbColor;
+use DataTypeTest\BaseTestCase;
 
 /**
  * @coversNothing

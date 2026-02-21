@@ -3,11 +3,11 @@
 namespace DataTypeTest\Basic;
 
 use DataType\Basic\BasicString;
-use DataTypeTest\BaseTestCase;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
+use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
 
 /**

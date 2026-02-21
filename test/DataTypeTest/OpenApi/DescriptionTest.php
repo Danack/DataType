@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace DataTypeTest\OpenApi;
 
-use DataType\InputType;
-use DataType\OpenApi\ShouldNeverBeCalledParamDescription;
-use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataType\ProcessRule\Enum;
+use DataType\Exception\OpenApiExceptionData;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;
 use DataType\ExtractRule\GetOptionalInt;
 use DataType\ExtractRule\GetOptionalString;
 use DataType\ExtractRule\GetString;
 use DataType\ExtractRule\GetStringOrDefault;
+use DataType\InputType;
+use DataType\OpenApi\OpenApiV300ParamDescription;
+use DataType\OpenApi\ShouldNeverBeCalledParamDescription;
+use DataType\ProcessRule\AlwaysEndsRule;
+use DataType\ProcessRule\Enum;
 use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\MinIntValue;
 use DataType\ProcessRule\MinLength;
+use DataType\ProcessRule\NullIfEmpty;
 use DataType\ProcessRule\PositiveInt;
 use DataType\ProcessRule\Trim;
 use DataType\ProcessRule\ValidDate;
 use DataType\ProcessRule\ValidDatetime;
 use DataTypeTest\BaseTestCase;
-use DataType\ProcessRule\AlwaysEndsRule;
-use DataType\Exception\OpenApiExceptionData;
-use DataType\ProcessRule\NullIfEmpty;
 
 /**
  * @coversNothing

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataType\Messages;
-use DataTypeTest\Integration\ReviewScore;
-use DataTypeTest\BaseTestCase;
+use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetOptionalType;
 use DataType\ProcessedValues;
-use DataType\DataStorage\TestArrayDataStorage;
+use DataTypeTest\BaseTestCase;
+use DataTypeTest\Integration\ReviewScore;
 
 /**
  * @coversNothing

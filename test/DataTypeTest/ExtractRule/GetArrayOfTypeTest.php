@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
-use DataType\Messages;
-use DataTypeTest\BaseTestCase;
-use DataType\ExtractRule\GetArrayOfType;
-use DataTypeTest\Integration\ReviewScore;
-use DataType\ProcessedValues;
-use DataTypeTest\Integration\SingleIntParams;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\ExtractRule\GetArrayOfType;
+use DataType\Messages;
+use DataType\ProcessedValues;
+use DataTypeTest\BaseTestCase;
+use DataTypeTest\Integration\ReviewScore;
+use DataTypeTest\Integration\SingleIntParams;
 
 /**
  * @coversNothing
