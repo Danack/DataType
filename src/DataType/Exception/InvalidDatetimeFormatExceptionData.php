@@ -6,7 +6,7 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class InvalidDatetimeFormatExceptionData extends \DataType\Exception\DataTypeException
+class InvalidDatetimeFormatExceptionData extends DataTypeLogicException
 {
     /**
      * Only strings are allowed datetime format.

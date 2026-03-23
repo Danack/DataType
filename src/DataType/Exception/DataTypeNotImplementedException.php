@@ -7,7 +7,7 @@ namespace DataType\Exception;
 use DataType\DataType;
 use DataType\Messages;
 
-class DataTypeNotImplementedException extends DataTypeException
+class DataTypeNotImplementedException extends DataTypeLogicException
 {
     public static function fromClassname(string $classname): self
     {

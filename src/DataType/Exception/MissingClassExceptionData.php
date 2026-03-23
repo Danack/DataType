@@ -6,7 +6,7 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class MissingClassExceptionData extends DataTypeException
+class MissingClassExceptionData extends DataTypeLogicException
 {
     public static function fromClassname(string $classname): self
     {

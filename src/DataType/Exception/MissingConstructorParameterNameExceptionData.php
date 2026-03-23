@@ -7,7 +7,11 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class MissingConstructorParameterNameExceptionData extends DataTypeException
+/**
+ * The object-class that the code is trying to create has a parameter
+ * for which no value is available.
+ */
+class MissingConstructorParameterNameExceptionData extends DataTypeLogicException
 {
     public static function missingParam(string $classname, string $param_name): self
     {

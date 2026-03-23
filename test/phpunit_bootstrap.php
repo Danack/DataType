@@ -11,7 +11,7 @@ require_once __DIR__ . "/fixtures.php";
 /**
  * @param array<string, mixed> $keyValues
  * @return ProcessedValues
- * @throws \DataType\Exception\LogicExceptionData
+ * @throws \DataType\Exception\DataTypeLogicException
  */
 function createProcessedValuesFromArray(array $keyValues): ProcessedValues
 {

@@ -7,11 +7,23 @@ parameters:
   excludePaths:
     - *GetArticlesParams*
     - *CreateFromVarMap*
+  exceptions:
+    uncheckedExceptionRegexes:
+      - '#^PHPUnit\\#' # Mark exceptions from PHPUnit\Framework namespace as unchecked
+      - '#^SebastianBergmann\\#'
+      - '#^Laminas\\#'
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
   ignoreErrors:
     -
       identifier: trait.unused
       paths:
         - src/*
+    -
+      identifier: missingType.checkedException
+      paths:
+        - test/*
     -
       identifier: missingType.return
       paths:

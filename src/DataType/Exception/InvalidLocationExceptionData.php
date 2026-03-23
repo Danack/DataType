@@ -5,9 +5,10 @@ declare(strict_types = 1);
 namespace DataType\Exception;
 
 /**
- * Thrown when someone calls getValue DataStorage object
+ * Thrown when code calls getValue DataStorage object with an invalid
+ * path.
  */
-class InvalidLocationExceptionData extends DataTypeException
+class InvalidLocationExceptionData extends DataTypeLogicException
 {
     /**
      * @var string[]

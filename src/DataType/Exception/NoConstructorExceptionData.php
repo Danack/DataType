@@ -7,7 +7,11 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class NoConstructorExceptionData extends DataTypeException
+/**
+ * The object-class that the code is trying to create has no
+ * constructor
+ */
+class NoConstructorExceptionData extends DataTypeLogicException
 {
     public static function noConstructor(string $classname): self
     {

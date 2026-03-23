@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace DataType\Exception;
 
 /**
- * Root class for all exceptions for this library.
+ * The root class for all 'checked' exceptions for this library.
+ *
+ * @checked
  */
 class DataTypeException extends \Exception
 {

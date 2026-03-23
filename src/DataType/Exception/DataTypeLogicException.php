@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace DataType\Exception;
 
 /**
- * Class LogicException
- * You have called something that has no meaning.
+ * DataTypeLogicException - this represents something a programmer has
+ * done wrong, and can't be handled locally in code.
+ *
+ * There may be some edge-cases (e.g. if you allow users to input the date
+ * format that values should be parsed as, and forget to check the format is
+ * valid before passing it to this library)
+ *
+ * @unchecked
  */
-class LogicExceptionData extends DataTypeException
+class DataTypeLogicException extends \Exception
 {
     public const ONLY_KEYS = "Processed values must have string keys";
 

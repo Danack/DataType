@@ -6,7 +6,7 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class InvalidRulesExceptionData extends \DataType\Exception\DataTypeException
+class InvalidRulesExceptionData extends DataTypeLogicException
 {
     /**
      * Only strings and ints are allowed as array key.

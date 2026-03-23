@@ -7,7 +7,7 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class IncorrectNumberOfParametersExceptionData extends DataTypeException
+class IncorrectNumberOfParametersExceptionData extends DataTypeLogicException
 {
     public static function wrongNumber(string $classname, int $expected, int $available): self
     {

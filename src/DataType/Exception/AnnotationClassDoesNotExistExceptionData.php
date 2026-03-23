@@ -7,7 +7,10 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class AnnotationClassDoesNotExistExceptionData extends DataTypeException
+/**
+ *
+ */
+class AnnotationClassDoesNotExistExceptionData extends DataTypeLogicException
 {
     public static function create(
         string $classname,

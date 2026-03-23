@@ -7,7 +7,10 @@ namespace DataType\Exception;
 use DataType\InputType;
 use DataType\Messages;
 
-class DataTypeDefinitionException extends DataTypeException
+/**
+ *
+ */
+class DataTypeDefinitionException extends DataTypeLogicException
 {
     public static function foundNonPropertyDefinition(int $index, string $classname): self
     {
