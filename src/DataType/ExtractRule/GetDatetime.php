@@ -75,7 +75,6 @@ class GetDatetime implements ExtractRule
         }
 
         foreach ($this->allowedFormats as $allowedFormat) {
-
             try {
                 $dateTime = \DateTimeImmutable::createFromFormat($allowedFormat, $value);
             }

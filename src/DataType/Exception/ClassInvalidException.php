@@ -2,7 +2,6 @@
 
 namespace DataType\Exception;
 
-
 class ClassInvalidException extends DataTypeLogicException
 {
     const CLASS_DOESNT_EXIST_MESSAGE = 'Class "%s" does not exist';
@@ -21,4 +20,3 @@ class ClassInvalidException extends DataTypeLogicException
         return new self($message);
     }
 }
-

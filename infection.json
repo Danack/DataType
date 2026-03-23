@@ -29,6 +29,19 @@
                 "DataType\\DataStorage\\ArrayDataStorage::moveKey"
             ]
         },
+        "Concat": {
+            "ignore": [
+                "DataType\\ProcessRule\\EarlierThanParam::process",
+                "DataType\\ProcessRule\\LaterThanParam::process"
+            ]
+        },
+        "ConcatOperandRemoval": {
+            "ignore": [
+                "DataType\\ProcessRule\\EarlierThanParam::process",
+                "DataType\\ProcessRule\\LaterThanParam::process"
+            ]
+        },
+
         "FalseValue": {
             "ignore": [
                 "*::updateParamDescription",
