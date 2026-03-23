@@ -27,4 +27,12 @@ class InvalidDatetimeFormatExceptionData extends DataTypeLogicException
 
         return new self($message);
     }
+
+    public static function invalidTimeOffset(
+        string $message,
+        int $code,
+        \DateInvalidOperationException $previous
+    ): self {
+        return new self($message, $code, $previous);
+    }
 }

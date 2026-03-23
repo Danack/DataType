@@ -10,6 +10,7 @@ use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
+use DataType\Exception\InvalidDatetimeFormatExceptionData;
 
 /**
  * Checks that one parameter represents an earlier time than another parameter
@@ -78,8 +79,17 @@ class EarlierThanParam implements ProcessRule
             );
         }
 
-        /** @var \DateTimeImmutable|\DateTime $previousValue */
-        $timeToCompare = $previousValue->sub($timeOffset);
+        try {
+            /** @var \DateTimeImmutable|\DateTime $previousValue */
+            $timeToCompare = $previousValue->sub($timeOffset);
+        }
+        catch (\DateInvalidOperationException $dioe) {
+            throw InvalidDatetimeFormatExceptionData::invalidTimeOffset(
+                "Time offset is invalid: " . $dioe->getMessage(),
+                $dioe->getCode(),
+                $dioe
+            );
+        }
 
         if ($value <= $timeToCompare) {
             return ValidationResult::valueResult($value);

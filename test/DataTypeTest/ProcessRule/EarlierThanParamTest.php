@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\InvalidDatetimeFormatExceptionData;
 use DataType\Messages;
 use DataType\ProcessRule\EarlierThanParam;
 use DataTypeTest\BaseTestCase;
@@ -196,6 +197,38 @@ class EarlierThanParamTest extends BaseTestCase
             "'minutesEarlier' value is invalid",
             $validationResult->getValidationProblems()
         );
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\EarlierThanParam
+     */
+    public function testDateInvalidOperationExceptionIsWrapped(): void
+    {
+        if (!class_exists('DateInvalidOperationException')) {
+            $this->markTestSkipped('DateInvalidOperationException is only available in newer PHP versions.');
+        }
+
+        $previousTime = new class ('2002-10-03T10:10:00-05:00') extends \DateTimeImmutable {
+            public function sub(\DateInterval $interval): \DateTimeImmutable
+            {
+                $exceptionClass = 'DateInvalidOperationException';
+                throw new $exceptionClass('Operation failed');
+            }
+        };
+
+        $value = \DateTimeImmutable::createFromFormat(
+            \DateTime::RFC3339,
+            '2002-10-03T10:00:00-05:00'
+        );
+
+        $processedValues = createProcessedValuesFromArray(['foo' => $previousTime]);
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);
+        $rule = new EarlierThanParam('foo', 10);
+
+        $this->expectException(InvalidDatetimeFormatExceptionData::class);
+        $this->expectExceptionMessage('Time offset is invalid: Operation failed');
+
+        $rule->process($value, $processedValues, $dataStorage);
     }
 
     /**
