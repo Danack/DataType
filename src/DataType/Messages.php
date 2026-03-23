@@ -29,6 +29,7 @@ class Messages
     public const ERROR_INVALID_DATETIME = 'Value was not a valid RFC3339 date time apparently';
     public const ERROR_DATETIME_MUST_START_AS_STRING = 'Input for datetime must be string';
     public const ERROR_DATE_FORMAT_MUST_BE_STRING = 'Datetime format must be array of strings. Found type %s at position %d';
+    public const ERROR_INVALID_DATETIME_NULL_BYTES = 'Value contains NULL-bytes';
 
     public const ERROR_EMAIL_NO_AT_CHARACTER = "Email addresses must contain an '@' character.";
     public const ERROR_EMAIL_INVALID = "Not a valid email address.";

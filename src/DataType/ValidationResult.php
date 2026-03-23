@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataType;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 
 /**
  *
@@ -77,10 +77,10 @@ class ValidationResult
     {
         foreach ($validationProblems as $key => $validationProblem) {
             if (is_int($key)  === false) {
-                throw LogicExceptionData::keysMustBeIntegers();
+                throw DataTypeLogicException::keysMustBeIntegers();
             }
             if (!($validationProblem instanceof ValidationProblem)) {
-                throw LogicExceptionData::onlyValidationProblemsAllowed(
+                throw DataTypeLogicException::onlyValidationProblemsAllowed(
                     $validationProblem
                 );
             }

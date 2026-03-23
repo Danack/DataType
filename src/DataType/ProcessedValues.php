@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataType;
 
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 
 /**
  * A class to stores the processed parameters, so that they can be accessed by subsequent rules.
@@ -20,14 +20,14 @@ class ProcessedValues
     /**
      * @param ProcessedValue[] $processedValues
      * @return self
-     * @throws LogicExceptionData
+     * @throws DataTypeLogicException
      */
     public static function fromArray(array $processedValues): self
     {
         foreach ($processedValues as $processedValue) {
             /** @psalm-suppress DocblockTypeContradiction */
             if (!($processedValue instanceof ProcessedValue)) {
-                throw LogicExceptionData::onlyProcessedValues();
+                throw DataTypeLogicException::onlyProcessedValues();
             }
         }
 
@@ -89,7 +89,7 @@ class ProcessedValues
                 return $processedValue->getValue();
             }
         }
-        throw LogicExceptionData::missingValue($name);
+        throw DataTypeLogicException::missingValue($name);
     }
 
 

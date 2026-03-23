@@ -7,6 +7,10 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
+/**
+ * Thrown when the number of resolved constructor arguments does not match
+ * the target class constructor parameter count.
+ */
 class IncorrectNumberOfParametersExceptionData extends DataTypeLogicException
 {
     public static function wrongNumber(string $classname, int $expected, int $available): self

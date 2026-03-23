@@ -8,10 +8,8 @@ parameters:
     - *GetArticlesParams*
     - *CreateFromVarMap*
   exceptions:
-    uncheckedExceptionRegexes:
-      - '#^PHPUnit\\#' # Mark exceptions from PHPUnit\Framework namespace as unchecked
-      - '#^SebastianBergmann\\#'
-      - '#^Laminas\\#'
+    uncheckedExceptionClasses:
+      - 'DataType\Exception\DataTypeLogicException'
     check:
       missingCheckedExceptionInThrows: true
       tooWideThrowType: true

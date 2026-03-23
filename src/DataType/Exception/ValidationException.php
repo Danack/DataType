@@ -4,7 +4,10 @@ declare(strict_types = 1);
 
 namespace DataType\Exception;
 
-class ValidationException extends DataTypeException
+/**
+ * Thrown when user-provided input fails one or more validation rules.
+ */
+class ValidationException extends DataTypeRuntimeException
 {
     /**
      * @var \DataType\ValidationProblem[]

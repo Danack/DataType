@@ -923,7 +923,7 @@ class FunctionsTest extends BaseTestCase
     /**
      * @covers ::\DataType\createSingleValue
      * @throws ValidationException
-     * @throws \DataType\Exception\DataTypeException
+     * @throws \DataType\Exception\DataTypeRuntimeException
      */
     public function testCreateSingleValue()
     {
@@ -953,7 +953,7 @@ class FunctionsTest extends BaseTestCase
     /**
      * @covers ::\DataType\createSingleValueOrError
      * @throws ValidationException
-     * @throws \DataType\Exception\DataTypeException
+     * @throws \DataType\Exception\DataTypeRuntimeException
      */
     public function testCreateSingleValueOrError()
     {
@@ -1009,7 +1009,7 @@ class FunctionsTest extends BaseTestCase
 
     /**
      * @return void
-     * @throws \DataType\Exception\LogicExceptionData
+     * @throws \DataType\Exception\DataTypeLogicException
      */
     public function test_createArrayOfScalarsFromDataStorage_process_error()
     {
@@ -1046,7 +1046,7 @@ class FunctionsTest extends BaseTestCase
     /**
      * @covers ::\DataType\createArrayOfScalarsFromDataStorage
      * @return void
-     * @throws \DataType\Exception\LogicExceptionData
+     * @throws \DataType\Exception\DataTypeLogicException
      */
     public function test_createArrayOfScalarsFromDataStorage_process_error_twice()
     {

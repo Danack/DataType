@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DataType\OpenApi;
 
+use DataType\Exception\OpenApiExceptionData;
+
 /**
  * Used for testing that Rules that shouldn't affect
  * the parameter descriptions.
@@ -13,151 +15,151 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
 {
     public function setName(string $name): void
     {
-        throw new \Exception("setName should not be called.");
+        throw new OpenApiExceptionData("setName should not be called.");
     }
 
     public function setIn(string $in): void
     {
-        throw new \Exception("setIn should not be called.");
+        throw new OpenApiExceptionData("setIn should not be called.");
     }
 
     public function setDescription(string $description): void
     {
-        throw new \Exception("setDescription should not be called.");
+        throw new OpenApiExceptionData("setDescription should not be called.");
     }
 
     public function getFormat(): ?string
     {
-        throw new \Exception("getFormat should not be called.");
+        throw new OpenApiExceptionData("getFormat should not be called.");
     }
 
     public function setRequired(bool $required): void
     {
-        throw new \Exception("setRequired should not be called.");
+        throw new OpenApiExceptionData("setRequired should not be called.");
     }
 
     public function getRequired(): ?bool
     {
-        throw new \Exception("getRequired should not be called.");
+        throw new OpenApiExceptionData("getRequired should not be called.");
     }
 
     public function setSchema(string $schema): void
     {
-        throw new \Exception("setSchema should not be called.");
+        throw new OpenApiExceptionData("setSchema should not be called.");
     }
 
     public function setType(string $type): void
     {
-        throw new \Exception("setType should not be called.");
+        throw new OpenApiExceptionData("setType should not be called.");
     }
 
     public function setFormat(string $format): void
     {
-        throw new \Exception("setFormat should not be called.");
+        throw new OpenApiExceptionData("setFormat should not be called.");
     }
 
     public function setAllowEmptyValue(bool $allowEmptyValue): void
     {
-        throw new \Exception("setAllowEmptyValue should not be called.");
+        throw new OpenApiExceptionData("setAllowEmptyValue should not be called.");
     }
 
     public function getItems(): ItemsObject
     {
-        throw new \Exception("getItems should not be called.");
+        throw new OpenApiExceptionData("getItems should not be called.");
     }
 
     public function setItems(ItemsObject $itemsObject): void
     {
-        throw new \Exception("setItems should not be called.");
+        throw new OpenApiExceptionData("setItems should not be called.");
     }
 
     public function setCollectionFormat(string $collectionFormat): void
     {
-        throw new \Exception("setCollectionFormat should not be called.");
+        throw new OpenApiExceptionData("setCollectionFormat should not be called.");
     }
 
     public function getCollectionFormat(): ?string
     {
-        throw new \Exception("getCollectionFormat should not be called.");
+        throw new OpenApiExceptionData("getCollectionFormat should not be called.");
     }
 
     public function setDefault($default): void
     {
-        throw new \Exception("setDefault should not be called.");
+        throw new OpenApiExceptionData("setDefault should not be called.");
     }
 
     public function setMaximum($maximum): void
     {
-        throw new \Exception("setMaximum should not be called.");
+        throw new OpenApiExceptionData("setMaximum should not be called.");
     }
 
     public function setExclusiveMaximum(bool $exclusiveMaximum): void
     {
-        throw new \Exception("setExclusiveMaximum should not be called.");
+        throw new OpenApiExceptionData("setExclusiveMaximum should not be called.");
     }
 
     public function setMinimum($minimum): void
     {
-        throw new \Exception("setMinimum should not be called.");
+        throw new OpenApiExceptionData("setMinimum should not be called.");
     }
 
     public function setExclusiveMinimum(bool $exclusiveMinimum): void
     {
-        throw new \Exception("setExclusiveMinimum should not be called.");
+        throw new OpenApiExceptionData("setExclusiveMinimum should not be called.");
     }
 
     public function setMaxLength(int $maxLength): void
     {
-        throw new \Exception("setMaxLength should not be called.");
+        throw new OpenApiExceptionData("setMaxLength should not be called.");
     }
 
     public function setMinLength(int $minLength): void
     {
-        throw new \Exception("setMinLength should not be called.");
+        throw new OpenApiExceptionData("setMinLength should not be called.");
     }
 
     public function setPattern(string $pattern): void
     {
-        throw new \Exception("setPattern should not be called.");
+        throw new OpenApiExceptionData("setPattern should not be called.");
     }
 
     public function setMaxItems(int $maxItems): void
     {
-        throw new \Exception("setMaxItems should not be called.");
+        throw new OpenApiExceptionData("setMaxItems should not be called.");
     }
 
     public function setMinItems(int $minItems): void
     {
-        throw new \Exception("setMinItems should not be called.");
+        throw new OpenApiExceptionData("setMinItems should not be called.");
     }
 
     public function setNullAllowed(bool $allowed): void
     {
-        throw new \Exception("setNullAllowed should not be called.");
+        throw new OpenApiExceptionData("setNullAllowed should not be called.");
     }
 
     public function setUniqueItems(bool $uniqueItems): void
     {
-        throw new \Exception("setUniqueItems should not be called.");
+        throw new OpenApiExceptionData("setUniqueItems should not be called.");
     }
 
     /**
      * @param list<mixed> $enumValues
-     * @throws \Exception
+     * @throws OpenApiExceptionData
      */
     public function setEnum(array $enumValues): void
     {
-        throw new \Exception("setEnum should not be called.");
+        throw new OpenApiExceptionData("setEnum should not be called.");
     }
 
     public function setMultipleOf($multiple): void
     {
-        throw new \Exception("setMultipleOf should not be called.");
+        throw new OpenApiExceptionData("setMultipleOf should not be called.");
     }
 
     public function getDescription(): ?string
     {
-        throw new \Exception("getDescription should not be called.");
+        throw new OpenApiExceptionData("getDescription should not be called.");
     }
 
     /**
@@ -165,22 +167,22 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
      */
     public function getEnum(): ?array
     {
-        throw new \Exception("getEnum should not be called.");
+        throw new OpenApiExceptionData("getEnum should not be called.");
     }
 
     public function getMaxItems(): ?int
     {
-        throw new \Exception("getMaxItems should not be called.");
+        throw new OpenApiExceptionData("getMaxItems should not be called.");
     }
 
     public function getMinItems(): ?int
     {
-        throw new \Exception("getMinItems should not be called.");
+        throw new OpenApiExceptionData("getMinItems should not be called.");
     }
 
     public function getNullAllowed(): ?bool
     {
-        throw new \Exception("getNullAllowed should not be called.");
+        throw new OpenApiExceptionData("getNullAllowed should not be called.");
     }
 
     /**
@@ -188,7 +190,7 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
      */
     public function getMaximum()
     {
-        throw new \Exception("getMaximum should not be called.");
+        throw new OpenApiExceptionData("getMaximum should not be called.");
     }
 
     /**
@@ -196,37 +198,37 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
      */
     public function getMinimum()
     {
-        throw new \Exception("getMinimum should not be called.");
+        throw new OpenApiExceptionData("getMinimum should not be called.");
     }
 
     public function getMaxLength(): ?int
     {
-        throw new \Exception("getMaxLength should not be called.");
+        throw new OpenApiExceptionData("getMaxLength should not be called.");
     }
 
     public function getMinLength(): ?int
     {
-        throw new \Exception("getMinLength should not be called.");
+        throw new OpenApiExceptionData("getMinLength should not be called.");
     }
 
     public function isExclusiveMaximum(): ?bool
     {
-        throw new \Exception("isExclusiveMaximum should not be called.");
+        throw new OpenApiExceptionData("isExclusiveMaximum should not be called.");
     }
 
     public function isExclusiveMinimum(): ?bool
     {
-        throw new \Exception("isExclusiveMinimum should not be called.");
+        throw new OpenApiExceptionData("isExclusiveMinimum should not be called.");
     }
 
     public function getExclusiveMinimum(): ?bool
     {
-        throw new \Exception("getExclusiveMinimum should not be called.");
+        throw new OpenApiExceptionData("getExclusiveMinimum should not be called.");
     }
 
     public function getExclusiveMaximum(): ?bool
     {
-        throw new \Exception("getExclusiveMaximum should not be called.");
+        throw new OpenApiExceptionData("getExclusiveMaximum should not be called.");
     }
 
     /**
@@ -234,7 +236,7 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
      */
     public function getDefault()
     {
-        throw new \Exception("getDefault should not be called.");
+        throw new OpenApiExceptionData("getDefault should not be called.");
     }
 
     /**
@@ -242,11 +244,11 @@ class ShouldNeverBeCalledParamDescription implements ParamDescription
      */
     public function getEnumValues(): ?array
     {
-        throw new \Exception("getEnumValues should not be called.");
+        throw new OpenApiExceptionData("getEnumValues should not be called.");
     }
 
     public function getType(): ?string
     {
-        throw new \Exception("getType should not be called.");
+        throw new OpenApiExceptionData("getType should not be called.");
     }
 }

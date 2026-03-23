@@ -75,7 +75,13 @@ class GetDatetime implements ExtractRule
         }
 
         foreach ($this->allowedFormats as $allowedFormat) {
-            $dateTime = \DateTimeImmutable::createFromFormat($allowedFormat, $value);
+
+            try {
+                $dateTime = \DateTimeImmutable::createFromFormat($allowedFormat, $value);
+            }
+            catch (\ValueError $ve) {
+                return ValidationResult::errorResult($dataStorage, Messages::ERROR_INVALID_DATETIME_NULL_BYTES);
+            }
 
             if ($dateTime instanceof \DateTimeInterface) {
                 return ValidationResult::valueResult($dateTime);

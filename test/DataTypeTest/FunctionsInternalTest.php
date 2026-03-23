@@ -4,7 +4,8 @@ namespace DataTypeTest;
 
 use DataType\Exception\JsonDecodeException;
 use DataType\Exception\JsonEncodeException;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\ClassInvalidException;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Exception\MissingConstructorParameterNameExceptionData;
 use DataType\ExtractRule\GetInt;
 use DataType\Messages;
@@ -22,7 +23,7 @@ class FunctionsInternalTest extends BaseTestCase
 {
     /**
      * @covers ::\DataType\get_all_constructor_parameters
-     * @throws LogicExceptionData
+     * @throws DataTypeLogicException
      */
     public function test_get_all_constructor_parameters_works()
     {
@@ -54,7 +55,7 @@ class FunctionsInternalTest extends BaseTestCase
 
     /**
      * @covers ::\DataType\get_all_constructor_parameters
-     * @throws LogicExceptionData
+     * @throws DataTypeLogicException
      */
     public function test_get_all_constructor_parameters_errors()
     {
@@ -158,8 +159,8 @@ class FunctionsInternalTest extends BaseTestCase
      */
     public function test_getEnumCases_errors_for_non_existent_class()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("does not exist");
+        $this->expectException(ClassInvalidException::class);
+        $this->expectExceptionMessageMatchesTemplateString(ClassInvalidException::CLASS_DOESNT_EXIST_MESSAGE);
 
         /** @phpstan-ignore-next-line */
         getEnumCases('NonExistentClass');
@@ -170,8 +171,8 @@ class FunctionsInternalTest extends BaseTestCase
      */
     public function test_getEnumCases_errors_for_non_enum_class()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("is not an enum");
+        $this->expectException(ClassInvalidException::class);
+        $this->expectExceptionMessageMatchesTemplateString(ClassInvalidException::CLASS_IS_NOT_ENUM);
 
         /** @phpstan-ignore-next-line */
         getEnumCases(\stdClass::class);
@@ -195,8 +196,10 @@ class FunctionsInternalTest extends BaseTestCase
      */
     public function test_getEnumCaseValues_errors_for_non_existent_class()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("does not exist");
+        $this->expectException(ClassInvalidException::class);
+        $this->expectExceptionMessageMatchesTemplateString(ClassInvalidException::CLASS_DOESNT_EXIST_MESSAGE);
+
+
 
         /** @phpstan-ignore-next-line */
         getEnumCaseValues('NonExistentClass');
@@ -207,8 +210,8 @@ class FunctionsInternalTest extends BaseTestCase
      */
     public function test_getEnumCaseValues_errors_for_non_enum_class()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("is not an enum");
+        $this->expectException(ClassInvalidException::class);
+        $this->expectExceptionMessageMatchesTemplateString(ClassInvalidException::CLASS_IS_NOT_ENUM);
 
         /** @phpstan-ignore-next-line */
         getEnumCaseValues(\stdClass::class);

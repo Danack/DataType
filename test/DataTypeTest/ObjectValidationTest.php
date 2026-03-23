@@ -61,7 +61,7 @@ class ObjectValidationTest extends BaseTestCase
      * @throws \DataType\Exception\MissingClassExceptionData
      * @throws \DataType\Exception\DataTypeDefinitionException
      * @throws \DataType\Exception\DataTypeNotImplementedException
-     * @throws \DataType\Exception\DataTypeException
+     * @throws \DataType\Exception\DataTypeRuntimeException
      * @throws \DataType\Exception\ValidationException
      */
     public function testWorksAdvanced()

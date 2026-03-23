@@ -8,7 +8,10 @@ use DataType\InputType;
 use DataType\Messages;
 
 /**
+ * Thrown when a DataType class has an invalid static definition.
  *
+ * Currently this is raised when a class's input type list contains values
+ * that are not `InputType` instances.
  */
 class DataTypeDefinitionException extends DataTypeLogicException
 {

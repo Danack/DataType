@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -25,7 +25,7 @@ class MaximumCount implements ProcessRule
     public function __construct(int $maximumCount)
     {
         if ($maximumCount < 0) {
-            throw new LogicExceptionData(Messages::ERROR_MAXIMUM_COUNT_MINIMUM);
+            throw new DataTypeLogicException(Messages::ERROR_MAXIMUM_COUNT_MINIMUM);
         }
 
         $this->maximumCount = $maximumCount;
@@ -42,7 +42,7 @@ class MaximumCount implements ProcessRule
                 gettype($value)
             );
 
-            throw new LogicExceptionData($message);
+            throw new DataTypeLogicException($message);
         }
 
         $actualCount = count($value);

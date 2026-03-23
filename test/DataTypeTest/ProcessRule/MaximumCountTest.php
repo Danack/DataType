@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\MaximumCount;
@@ -86,7 +86,7 @@ class MaximumCountTest extends BaseTestCase
      */
     public function testMinimimCountZero()
     {
-        $this->expectException(LogicExceptionData::class);
+        $this->expectException(DataTypeLogicException::class);
         $this->expectExceptionMessage(Messages::ERROR_MAXIMUM_COUNT_MINIMUM);
         new MaximumCount(-2);
     }
@@ -97,7 +97,7 @@ class MaximumCountTest extends BaseTestCase
     public function testInvalidOperand()
     {
         $rule = new MaximumCount(3);
-        $this->expectException(LogicExceptionData::class);
+        $this->expectException(DataTypeLogicException::class);
 
         $processedValues = new ProcessedValues();
         $this->expectErrorMessageMatches(

@@ -6,6 +6,9 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
+/**
+ * Thrown when a referenced class name cannot be found.
+ */
 class MissingClassExceptionData extends DataTypeLogicException
 {
     public static function fromClassname(string $classname): self

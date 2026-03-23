@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\MinimumCount;
@@ -87,7 +87,7 @@ class MinimumCountTest extends BaseTestCase
      */
     public function testMinimimCountZero()
     {
-        $this->expectException(LogicExceptionData::class);
+        $this->expectException(DataTypeLogicException::class);
         $this->expectExceptionMessage(Messages::ERROR_MINIMUM_COUNT_MINIMUM);
         new MinimumCount(-2);
     }
@@ -98,7 +98,7 @@ class MinimumCountTest extends BaseTestCase
     public function testInvalidOperand()
     {
         $rule = new MinimumCount(3);
-        $this->expectException(LogicExceptionData::class);
+        $this->expectException(DataTypeLogicException::class);
 
         $processedValues = new ProcessedValues();
         $this->expectErrorMessageMatches(

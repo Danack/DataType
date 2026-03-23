@@ -7,6 +7,9 @@ namespace DataType\Exception;
 use DataType\DataType;
 use DataType\Messages;
 
+/**
+ * Thrown when a class is expected to implement `DataType` but does not.
+ */
 class DataTypeNotImplementedException extends DataTypeLogicException
 {
     public static function fromClassname(string $classname): self

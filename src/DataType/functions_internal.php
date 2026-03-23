@@ -32,7 +32,6 @@ use DataType\Value\Ordering;
  * @param class-string<T> $classname
  * @param ProcessedValues $processedValues
  * @return T
- * @throws \ReflectionException
  * @throws NoConstructorExceptionData
  */
 function createObjectFromProcessedValues(string $classname, ProcessedValues $processedValues)
@@ -176,7 +175,6 @@ function getInputTypeListForClass(string $className): array
  * @param \ReflectionParameter[] $constructor_parameters
  * @param ProcessedValues $processedValues
  * @return mixed[]
- * @throws \ReflectionException
  * @throws NoConstructorExceptionData
  */
 function get_all_constructor_parameters(
@@ -204,7 +202,7 @@ function get_all_constructor_parameters(
  * @param \DataType\HasInputType $hasDataType
  * @param mixed $inputValue
  * @return mixed
- * @throws Exception\DataTypeException
+ * @throws Exception\DataTypeRuntimeException
  * @throws ValidationException
  *
  * Validates and creates a single value according to the HasInputType
@@ -246,7 +244,7 @@ function createSingleValue(HasInputType $hasDataType, mixed $inputValue)
  * @param \DataType\HasInputType $propertyInputType
  * @param mixed $inputValue
  * @return array{0:mixed, 1:\DataType\ValidationProblem[]}
- * @throws Exception\DataTypeException
+ * @throws Exception\DataTypeRuntimeException
  * @throws ValidationException
  *
  * Validates and creates a single value according to the HasInputType
@@ -576,7 +574,7 @@ function getInputTypesFromAnnotations(string $class): array
  * @param DataStorage $dataStorage
  * @param ProcessRule[] $subsequentRules
  * @return ValidationResult
- * @throws \DataType\Exception\LogicExceptionData
+ * @throws \DataType\Exception\DataTypeLogicException
  */
 function createArrayOfScalarsFromDataStorage(
     DataStorage $dataStorage,
@@ -678,7 +676,12 @@ function json_decode_safe(?string $json)
  */
 function json_encode_safe($data, $options = 0): string
 {
-    $result = json_encode($data, $options);
+    try {
+        $result = json_encode($data, $options);
+    }
+    catch (\JsonException $e) {
+        throw new JsonEncodeException($e->getMessage(), $e->getCode(), $e);
+    }
 
     if ($result === false) {
         throw new JsonEncodeException("Failed to encode data as json: " . json_last_error_msg());

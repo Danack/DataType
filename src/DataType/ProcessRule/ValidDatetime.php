@@ -28,7 +28,14 @@ class ValidDatetime implements ProcessRule
 
         // TODO - Change this to \DateTime::RFC3339_EXTENDED when
         // someone complains.
-        $dateTime = \DateTimeImmutable::createFromFormat(\DateTime::RFC3339, $value);
+
+        try {
+            $dateTime = \DateTimeImmutable::createFromFormat(\DateTime::RFC3339, $value);
+        }
+        catch (\ValueError $ve) {
+            return ValidationResult::errorResult($inputStorage, Messages::ERROR_INVALID_DATETIME_NULL_BYTES);
+        }
+
         if ($dateTime instanceof \DateTimeInterface) {
             return ValidationResult::valueResult($dateTime);
         }

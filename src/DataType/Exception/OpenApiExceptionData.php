@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace DataType\Exception;
 
-class OpenApiExceptionData extends DataTypeException
+/**
+ * Thrown when OpenAPI schema/description generation encounters invalid state.
+ */
+class OpenApiExceptionData extends DataTypeLogicException
 {
 
 }

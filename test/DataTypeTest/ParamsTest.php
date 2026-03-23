@@ -170,7 +170,7 @@ class ParamsTest extends BaseTestCase
     public function testException()
     {
         $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
-        $this->expectException(\DataType\Exception\DataTypeException::class);
+        $this->expectException(\DataType\Exception\DataTypeRuntimeException::class);
 
         $dataStorage =  TestArrayDataStorage::fromArraySetFirstValue([]);
 

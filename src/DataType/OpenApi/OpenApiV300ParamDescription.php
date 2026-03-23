@@ -204,7 +204,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     public function setIn(string $in): void
     {
         // TODO: Implement setIn() method.
-        throw new \Exception("setIn not implemented yet.");
+        throw new OpenApiExceptionData("setIn not implemented yet.");
     }
 
     public function setDescription(string $description): void
@@ -244,7 +244,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     public function setSchema(string $schema): void
     {
         // TODO: Implement setSchema() method.
-        throw new \Exception("setSchema not implemented yet.");
+        throw new OpenApiExceptionData("setSchema not implemented yet.");
     }
 
     public function setType(string $type): void
@@ -296,19 +296,19 @@ class OpenApiV300ParamDescription implements ParamDescription
     public function setAllowEmptyValue(bool $allowEmptyValue): void
     {
         // TODO: Implement setAllowEmptyValue() method.
-        throw new \Exception("setAllowEmptyValue not implemented yet.");
+        throw new OpenApiExceptionData("setAllowEmptyValue not implemented yet.");
     }
 
     public function getItems(): ItemsObject
     {
         // TODO: Implement getItems() method.
-        throw new \Exception("getItems not implemented yet.");
+        throw new OpenApiExceptionData("getItems not implemented yet.");
     }
 
     public function setItems(ItemsObject $itemsObject): void
     {
         // TODO: Implement setItems() method.
-        throw new \Exception("setItems not implemented yet.");
+        throw new OpenApiExceptionData("setItems not implemented yet.");
     }
 
     public function setCollectionFormat(string $collectionFormat): void
@@ -319,7 +319,7 @@ class OpenApiV300ParamDescription implements ParamDescription
 
         // TODO - version 3, replaces collectionFormat
         // with style = simple
-//        throw new \Exception("setCollectionFormat not implemented yet.");
+//        throw new OpenApiExceptionData("setCollectionFormat not implemented yet.");
     }
 
 
@@ -408,7 +408,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     public function setUniqueItems(bool $uniqueItems): void
     {
         // TODO: Implement setUniqueItems() method.
-        throw new \Exception("setUniqueItems not implemented yet.");
+        throw new OpenApiExceptionData("setUniqueItems not implemented yet.");
     }
 
     /**
@@ -439,7 +439,7 @@ class OpenApiV300ParamDescription implements ParamDescription
     public function setMultipleOf($multiple): void
     {
         // TODO: Implement setMultipleOf() method.
-        throw new \Exception("setMultipleOf not implemented yet.");
+        throw new OpenApiExceptionData("setMultipleOf not implemented yet.");
     }
 
     /**

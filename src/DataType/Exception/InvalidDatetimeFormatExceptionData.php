@@ -6,6 +6,9 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
+/**
+ * Thrown when configured datetime format values are invalid (non-string).
+ */
 class InvalidDatetimeFormatExceptionData extends DataTypeLogicException
 {
     /**

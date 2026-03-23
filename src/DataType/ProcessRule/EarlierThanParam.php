@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -31,7 +31,7 @@ class EarlierThanParam implements ProcessRule
         $this->minutesEarlier = $minutesEarlier;
 
         if ($minutesEarlier < 0) {
-            throw new LogicExceptionData(Messages::MINUTES_MUST_BE_GREATER_THAN_ZERO);
+            throw new DataTypeLogicException(Messages::MINUTES_MUST_BE_GREATER_THAN_ZERO);
         }
     }
 
@@ -68,7 +68,15 @@ class EarlierThanParam implements ProcessRule
             );
         }
 
-        $timeOffset = new \DateInterval('PT'  . $this->minutesEarlier . 'M');
+        try {
+            $timeOffset = new \DateInterval('PT' . $this->minutesEarlier . 'M');
+        }
+        catch (\DateMalformedIntervalStringException|\Exception $e) {
+            return ValidationResult::errorResult(
+                $inputStorage,
+                "'minutesEarlier' value is invalid: " . $e->getMessage()
+            );
+        }
 
         /** @var \DateTimeImmutable|\DateTime $previousValue */
         $timeToCompare = $previousValue->sub($timeOffset);

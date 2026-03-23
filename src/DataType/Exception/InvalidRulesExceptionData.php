@@ -6,6 +6,9 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
+/**
+ * Thrown when a process-rule is configured or invoked with unsupported types.
+ */
 class InvalidRulesExceptionData extends DataTypeLogicException
 {
     /**

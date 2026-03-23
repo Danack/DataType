@@ -16,6 +16,7 @@ use DataType\Exception\MissingClassExceptionData;
 use DataType\Exception\ValidationException;
 use DataType\ExtractRule\GetType;
 use DataType\OpenApi\OpenApiV300ParamDescription;
+use DataType\Exception\ClassInvalidException;
 
 /**
  * @template T of object
@@ -54,7 +55,7 @@ function create(
  * @param \DataType\InputType[] $inputTypes
  * @param DataStorage $dataStorage
  * @return array{0: T|null, 1: \DataType\ValidationProblem[]}
- * @throws Exception\DataTypeException
+ * @throws Exception\DataTypeRuntimeException
  * @throws ValidationException
  *
  * The rules are passed separately to the classname so that we can
@@ -91,7 +92,7 @@ function createOrError($classname, $inputTypes, DataStorage $dataStorage)
  * @param \DataType\InputType[] $inputTypes
  * @param DataStorage $dataStorage
  * @return CreateResult<T>
- * @throws Exception\DataTypeException
+ * @throws Exception\DataTypeRuntimeException
  * @throws ValidationException
  */
 function createWithResult($classname, $inputTypes, DataStorage $dataStorage): CreateResult
@@ -122,7 +123,7 @@ function createWithResult($classname, $inputTypes, DataStorage $dataStorage): Cr
  * @template T of object
  * @param T $dto
  * @return array{0: T|null, 1: \DataType\ValidationProblem[]}
- * @throws Exception\DataTypeException
+ * @throws Exception\DataTypeRuntimeException
  * @throws DataTypeDefinitionException
  * @throws MissingClassExceptionData
  * @throws DataTypeNotImplementedException
@@ -230,7 +231,7 @@ function getEnumCases(string $typeString): array
 {
     // Check if the class exists
     if (!class_exists($typeString)) {
-        throw new \InvalidArgumentException("Class '$typeString' does not exist.");
+        throw ClassInvalidException::classNotFound($typeString);
     }
 
     // Use Reflection to inspect the class
@@ -238,7 +239,7 @@ function getEnumCases(string $typeString): array
 
     // Check if it's an enum
     if (!$reflection->isEnum()) {
-        throw new \InvalidArgumentException("Class '$typeString' is not an enum.");
+        throw ClassInvalidException::classIsNotEnum($typeString);
     }
 
     // Get enum cases
@@ -255,7 +256,7 @@ function getEnumCaseValues(string $typeString): array
 {
     // Check if the class exists
     if (!class_exists($typeString)) {
-        throw new \InvalidArgumentException("Class '$typeString' does not exist.");
+        throw ClassInvalidException::classNotFound($typeString);
     }
 
     // Use Reflection to inspect the class
@@ -263,7 +264,7 @@ function getEnumCaseValues(string $typeString): array
 
     // Check if it's an enum
     if (!$reflection->isEnum()) {
-        throw new \InvalidArgumentException("Class '$typeString' is not an enum.");
+        throw ClassInvalidException::classIsNotEnum($typeString);
     }
 
     // Get enum cases

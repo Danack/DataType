@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -31,7 +31,7 @@ class LaterThanParam implements ProcessRule
         $this->minutesLater = $minutesLater;
 
         if ($minutesLater < 0) {
-            throw new LogicExceptionData(Messages::MINUTES_MUST_BE_GREATER_THAN_ZERO);
+            throw new DataTypeLogicException(Messages::MINUTES_MUST_BE_GREATER_THAN_ZERO);
         }
     }
 
@@ -67,7 +67,15 @@ class LaterThanParam implements ProcessRule
             );
         }
 
-        $timeOffset = new \DateInterval('PT'  . $this->minutesLater . 'M');
+        try {
+            $timeOffset = new \DateInterval('PT' . $this->minutesLater . 'M');
+        }
+        catch (\DateMalformedIntervalStringException|\Exception $e) {
+            return ValidationResult::errorResult(
+                $inputStorage,
+                "'minutesLater' value is invalid: " . $e->getMessage()
+            );
+        }
 
         /** @var \DateTimeImmutable|\DateTime $previousValue */
         $timeToCompare = $previousValue->add($timeOffset);
@@ -75,7 +83,6 @@ class LaterThanParam implements ProcessRule
         if ($value > $timeToCompare) {
             return ValidationResult::valueResult($value);
         }
-
 
         $message = sprintf(
             Messages::TIME_MUST_BE_X_MINUTES_AFTER_PARAM_ERROR,

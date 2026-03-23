@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -24,7 +24,7 @@ class MinimumCount implements ProcessRule
     public function __construct(int $minimumCount)
     {
         if ($minimumCount < 0) {
-            throw new LogicExceptionData(Messages::ERROR_MINIMUM_COUNT_MINIMUM);
+            throw new DataTypeLogicException(Messages::ERROR_MINIMUM_COUNT_MINIMUM);
         }
 
         $this->minimumCount = $minimumCount;
@@ -41,7 +41,7 @@ class MinimumCount implements ProcessRule
                 gettype($value)
             );
 
-            throw new LogicExceptionData($message);
+            throw new DataTypeLogicException($message);
         }
 
         $actualCount = count($value);

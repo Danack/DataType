@@ -24,7 +24,13 @@ class ValidDate implements ProcessRule
     ): ValidationResult {
         $value = $this->checkString($value);
 
-        $dateTime = \DateTimeImmutable::createFromFormat('Y-m-d', $value);
+        try {
+            $dateTime = \DateTimeImmutable::createFromFormat('Y-m-d', $value);
+        }
+        catch (\ValueError $ve) {
+            return ValidationResult::errorResult($inputStorage, Messages::ERROR_INVALID_DATETIME_NULL_BYTES);
+        }
+
         if ($dateTime instanceof \DateTimeInterface) {
             $dateTime = $dateTime->setTime(0, 0, 0, 0);
             return ValidationResult::valueResult($dateTime);

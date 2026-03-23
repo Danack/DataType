@@ -7,7 +7,10 @@ namespace DataType\Exception;
 
 use DataType\Messages;
 
-class PropertyHasMultipleInputTypeAnnotationsException extends DataTypeException
+/**
+ * Thrown when a single property declares more than one InputType annotation.
+ */
+class PropertyHasMultipleInputTypeAnnotationsException extends DataTypeLogicException
 {
     public static function create(string $classname, string $property_name): self
     {

@@ -6,7 +6,7 @@ namespace DataType\ExtractRule;
 
 use DataType\DataStorage\DataStorage;
 use DataType\Exception\JsonDecodeException;
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -32,14 +32,14 @@ class GetKernelMatrixOrDefault implements ExtractRule
         foreach ($default as $row) {
             /** @psalm-suppress RedundantConditionGivenDocblockType */
             if (is_array($row) !== true) {
-                throw new LogicExceptionData(Messages::MATRIX_INVALID_BAD_ROW);
+                throw new DataTypeLogicException(Messages::MATRIX_INVALID_BAD_ROW);
             }
 
             /** @psalm-suppress DocblockTypeContradiction */
             foreach ($row as $value) {
                 /** @psalm-suppress RedundantConditionGivenDocblockType */
                 if (is_float($value) === false && is_int($value) === false) {
-                    throw new LogicExceptionData(Messages::MATRIX_INVALID_BAD_CELL);
+                    throw new DataTypeLogicException(Messages::MATRIX_INVALID_BAD_CELL);
                 }
             }
         }
@@ -50,7 +50,7 @@ class GetKernelMatrixOrDefault implements ExtractRule
 
     /**
      * @throws JsonDecodeException
-     * @throws LogicExceptionData
+     * @throws DataTypeLogicException
      */
     public function process(
         ProcessedValues $processedValues,
@@ -63,7 +63,7 @@ class GetKernelMatrixOrDefault implements ExtractRule
         $currentValue = $dataStorage->getCurrentValue();
 
         if (is_string($currentValue) !== true) {
-            throw new LogicExceptionData(Messages::BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE);
+            throw new DataTypeLogicException(Messages::BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE);
         }
 
         // TODO - this needs to be replaced with something that gives the

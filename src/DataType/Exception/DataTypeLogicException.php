@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DataType\Exception;
 
 /**
- * DataTypeLogicException - this represents something a programmer has
- * done wrong, and can't be handled locally in code.
+ * DataTypeLogicException - this is the root exception for something
+ * a programmer has done wrong, and can't be handled locally in code.
  *
  * There may be some edge-cases (e.g. if you allow users to input the date
  * format that values should be parsed as, and forget to check the format is

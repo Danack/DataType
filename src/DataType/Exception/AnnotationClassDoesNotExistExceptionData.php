@@ -8,7 +8,8 @@ namespace DataType\Exception;
 use DataType\Messages;
 
 /**
- *
+ * Thrown when a property references an annotation/attribute class name
+ * that does not exist or cannot be autoloaded.
  */
 class AnnotationClassDoesNotExistExceptionData extends DataTypeLogicException
 {
