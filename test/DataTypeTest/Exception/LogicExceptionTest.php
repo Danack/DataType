@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\LogicExceptionData;
+use DataType\Exception\DataTypeLogicException;
 use DataTypeTest\BaseTestCase;
 
 /**
@@ -13,37 +13,37 @@ use DataTypeTest\BaseTestCase;
 class LogicExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\LogicExceptionData
+     * @covers \DataType\Exception\DataTypeLogicException
      */
     public function testWorks()
     {
-        $exception = LogicExceptionData::keysMustBeStrings();
+        $exception = DataTypeLogicException::keysMustBeStrings();
         $this->assertStringMatchesTemplateString(
-            LogicExceptionData::ONLY_KEYS,
+            DataTypeLogicException::ONLY_KEYS,
             $exception->getMessage()
         );
 
-        $exception = LogicExceptionData::onlyValidationProblemsAllowed('foo');
+        $exception = DataTypeLogicException::onlyValidationProblemsAllowed('foo');
         $this->assertStringMatchesTemplateString(
-            LogicExceptionData::NOT_VALIDATION_PROBLEM,
+            DataTypeLogicException::NOT_VALIDATION_PROBLEM,
             $exception->getMessage()
         );
 
-        $exception = LogicExceptionData::keysMustBeIntegers();
+        $exception = DataTypeLogicException::keysMustBeIntegers();
         $this->assertStringMatchesTemplateString(
-            LogicExceptionData::ONLY_INT_KEYS,
+            DataTypeLogicException::ONLY_INT_KEYS,
             $exception->getMessage()
         );
 
-        $exception = LogicExceptionData::missingValue('foo');
+        $exception = DataTypeLogicException::missingValue('foo');
         $this->assertStringMatchesTemplateString(
-            LogicExceptionData::MISSING_VALUE,
+            DataTypeLogicException::MISSING_VALUE,
             $exception->getMessage()
         );
 
-        $exception = LogicExceptionData::onlyProcessedValues();
+        $exception = DataTypeLogicException::onlyProcessedValues();
         $this->assertStringMatchesTemplateString(
-            LogicExceptionData::ONLY_PROCESSED_VALUES,
+            DataTypeLogicException::ONLY_PROCESSED_VALUES,
             $exception->getMessage()
         );
     }
