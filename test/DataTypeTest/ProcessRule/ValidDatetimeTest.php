@@ -94,6 +94,29 @@ class ValidDatetimeTest extends BaseTestCase
     /**
      * @covers \DataType\ProcessRule\ValidDatetime
      */
+    public function testValidationNullByteErrors()
+    {
+        $input = "2002-10-02T10:00:00-05:00\0";
+        $rule = new ValidDatetime();
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', $input);
+
+        $validationResult = $rule->process(
+            $input,
+            $processedValues,
+            $dataStorage
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::ERROR_INVALID_DATETIME_NULL_BYTES,
+            $validationResult->getValidationProblems()
+        );
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\ValidDatetime
+     */
     public function testDescription()
     {
         $rule = new ValidDatetime();

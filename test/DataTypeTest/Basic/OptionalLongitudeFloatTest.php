@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use DataType\Basic\OptionalLatitudeFloat;
 use DataType\Basic\OptionalLongitudeFloat;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
@@ -80,6 +81,51 @@ class OptionalLongitudeFloatTest extends BaseTestCase
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
     }
+
+    /**
+     * @return \Generator<string, array{array<string, mixed>, float|null}>
+     */
+    public static function provides_with_pair_param_parses_input_to_expected(): \Generator
+    {
+        yield 'both set' => [['latitude' => 51.4545, 'longitude' => -0.4545], -0.4545];
+        yield 'both missing' => [[], null];
+    }
+
+    /**
+     * @dataProvider provides_with_pair_param_parses_input_to_expected
+     * @param array<string, mixed> $data
+     */
+    public function test_with_pair_param_parses_input_to_expected(array $data, float|null $expected): void
+    {
+        $result = OptionalLongitudeFloatWithPairFixture::createFromVarMap(new ArrayVarMap($data));
+        $this->assertSame($expected, $result->value);
+    }
+
+    /**
+     * @return \Generator<string, array{array<string, mixed>, string, string}>
+     */
+    public static function provides_with_pair_param_fails_with_validation_error(): \Generator
+    {
+        yield 'longitude only' => [['longitude' => -0.4545], '/longitude', Messages::PAIR_PARAM_BOTH_OR_NEITHER];
+        yield 'latitude only' => [['latitude' => 51.4545], '/longitude', Messages::PAIR_PARAM_BOTH_OR_NEITHER];
+    }
+
+    /**
+     * @dataProvider provides_with_pair_param_fails_with_validation_error
+     * @param array<string, mixed> $data
+     */
+    public function test_with_pair_param_fails_with_validation_error(
+        array $data,
+        string $path,
+        string $messagePattern
+    ): void {
+        try {
+            OptionalLongitudeFloatWithPairFixture::createFromVarMap(new ArrayVarMap($data));
+            $this->fail('Expected ValidationException was not thrown.');
+        } catch (\DataType\Exception\ValidationException $ve) {
+            $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
+        }
+    }
 }
 
 class OptionalLongitudeFloatFixture implements DataType
@@ -89,6 +135,20 @@ class OptionalLongitudeFloatFixture implements DataType
 
     public function __construct(
         #[OptionalLongitudeFloat('lng')]
+        public readonly float|null $value,
+    ) {
+    }
+}
+
+class OptionalLongitudeFloatWithPairFixture implements DataType
+{
+    use CreateFromVarMap;
+    use GetInputTypesFromAttributes;
+
+    public function __construct(
+        #[OptionalLatitudeFloat('latitude')]
+        public readonly float|null $latitude,
+        #[OptionalLongitudeFloat('longitude', 'latitude')]
         public readonly float|null $value,
     ) {
     }

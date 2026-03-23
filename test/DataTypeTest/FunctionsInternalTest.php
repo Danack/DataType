@@ -109,6 +109,18 @@ class FunctionsInternalTest extends BaseTestCase
     }
 
     /**
+     * @covers ::\DataType\json_encode_safe
+     */
+    public function test_json_encode_safe_catches_json_exception()
+    {
+        // Invalid UTF-8 bytes trigger JsonException with JSON_THROW_ON_ERROR.
+        $data = "\xB1\x31";
+
+        $this->expectException(JsonEncodeException::class);
+        json_encode_safe($data, JSON_THROW_ON_ERROR);
+    }
+
+    /**
      * @covers ::\DataType\json_decode_safe
      */
     public function test_json_decode_safe_errors_with_null()

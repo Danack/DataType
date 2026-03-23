@@ -171,6 +171,33 @@ class LaterThanParamTest extends BaseTestCase
     /**
      * @covers \DataType\ProcessRule\LaterThanParam
      */
+    public function testInvalidMinutesIntervalErrors()
+    {
+        $previousTime = \DateTimeImmutable::createFromFormat(
+            \DateTime::RFC3339,
+            '2002-10-02T10:00:00-05:00'
+        );
+        $value = \DateTimeImmutable::createFromFormat(
+            \DateTime::RFC3339,
+            '2002-10-03T10:00:00-05:00'
+        );
+
+        $processedValues = createProcessedValuesFromArray(['foo' => $previousTime]);
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('newtime', $value);
+        $rule = new LaterThanParam('foo', PHP_INT_MAX);
+
+        $validationResult = $rule->process($value, $processedValues, $dataStorage);
+
+        $this->assertValidationProblemRegexp(
+            '/newtime',
+            "'minutesLater' value is invalid",
+            $validationResult->getValidationProblems()
+        );
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\LaterThanParam
+     */
     public function testErrorsCorrect()
     {
 

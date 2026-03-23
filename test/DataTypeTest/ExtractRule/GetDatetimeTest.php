@@ -124,6 +124,30 @@ class GetDatetimeTest extends BaseTestCase
     /**
      * @covers \DataType\ExtractRule\GetDatetime
      */
+    public function testNullBytesInDatetimeInput()
+    {
+        $allowedFormats = [\DateTime::RFC3339];
+        $rule = new GetDatetime($allowedFormats);
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition(
+            'foo',
+            "2002-10-02T10:00:00-05:00\0"
+        );
+
+        $validationResult = $rule->process(
+            new ProcessedValues(),
+            $dataStorage
+        );
+
+        $this->assertValidationProblemRegexp(
+            '/foo',
+            Messages::ERROR_INVALID_DATETIME_NULL_BYTES,
+            $validationResult->getValidationProblems()
+        );
+    }
+
+    /**
+     * @covers \DataType\ExtractRule\GetDatetime
+     */
     public function testFromArrayErrors()
     {
         $index = 'foo';

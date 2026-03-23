@@ -1,0 +1,6 @@
+parameters:
+  exceptions:
+    uncheckedExceptionClasses:
+      - 'DataType\Exception\DataTypeLogicException'
+    checkedExceptionClasses:
+      - 'DataType\Exception\DataTypeRuntimeException'
