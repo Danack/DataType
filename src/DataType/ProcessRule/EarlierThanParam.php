@@ -83,7 +83,6 @@ class EarlierThanParam implements ProcessRule
             /** @var \DateTimeImmutable|\DateTime $previousValue */
             $timeToCompare = $previousValue->sub($timeOffset);
         }
-        // @phpstan-ignore-next-line
         catch (\DateInvalidOperationException $dioe) {
             throw InvalidDatetimeFormatExceptionData::invalidTimeOffset(
                 "Time offset is invalid: " . $dioe->getMessage(),

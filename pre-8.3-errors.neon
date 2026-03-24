@@ -1,0 +1,6 @@
+parameters:
+  ignoreErrors:
+    -
+      message: "#^Dead catch - DateInvalidOperationException is never thrown in the try block\\.$#"
+      count: 1
+      path: src/DataType/ProcessRule/EarlierThanParam.php

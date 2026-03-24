@@ -1,5 +1,6 @@
 includes:
   - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - ignore-by-php-version.neon.php
 parameters:
   editorUrl: 'phpstorm://open?file=/Users/danack/projects/github/DataType/%%relFile%%&line=%%line%%'
   level: 10
