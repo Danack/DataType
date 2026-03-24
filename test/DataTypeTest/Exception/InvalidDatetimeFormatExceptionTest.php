@@ -28,5 +28,22 @@ class InvalidDatetimeFormatExceptionTest extends BaseTestCase
             $exception->getMessage()
         );
         $this->assertStringContainsString('array', $exception->getMessage());
+
+        $test_message = "Invalid date interval";
+        $test_code = 123;
+
+        if (PHP_VERSION_ID < 80300) {
+            $this->markTestSkipped("DateInvalidOperationException only exists on PHP >= 8.3");
+        }
+
+        $previous = new \DateInvalidOperationException();
+        $exception = InvalidDatetimeFormatExceptionData::invalidTimeOffset(
+            $test_message,
+            $test_code,
+            $previous
+        );
+
+        $this->assertStringContainsString($test_message, $exception->getMessage());
+
     }
 }
