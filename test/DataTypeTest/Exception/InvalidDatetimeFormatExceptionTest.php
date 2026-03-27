@@ -44,6 +44,5 @@ class InvalidDatetimeFormatExceptionTest extends BaseTestCase
         );
 
         $this->assertStringContainsString($test_message, $exception->getMessage());
-
     }
 }
