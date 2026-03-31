@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetInt;
 use DataType\Messages;
@@ -32,7 +33,7 @@ class GetIntTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['5', 5],
@@ -42,10 +43,10 @@ class GetIntTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetInt
-     * @dataProvider provideTestWorksCases
      * @param int|string $input
      * @param int $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks($input, $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -61,7 +62,7 @@ class GetIntTest extends BaseTestCase
     }
 
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield [null, Messages::INT_REQUIRED_UNSUPPORTED_TYPE];
         yield ['', Messages::INT_REQUIRED_FOUND_EMPTY_STRING];
@@ -71,10 +72,10 @@ class GetIntTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetInt
-     * @dataProvider provideTestErrorCases
      * @param mixed $input
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($input, $message)
     {
         $rule = new GetInt();

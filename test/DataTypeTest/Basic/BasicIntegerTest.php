@@ -9,6 +9,7 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\BasicIntegerFixture;
 
 /**
  * @covers \DataType\Basic\BasicInteger
@@ -95,17 +96,5 @@ class BasicIntegerTest extends BaseTestCase
         
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
-    }
-}
-
-class BasicIntegerFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[BasicInteger('integer_input')]
-        public readonly int $value,
-    ) {
     }
 }

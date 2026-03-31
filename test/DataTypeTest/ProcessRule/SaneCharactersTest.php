@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -18,7 +19,7 @@ use DataTypeTest\BaseTestCase;
  */
 class SaneCharactersTest extends BaseTestCase
 {
-    public function provideSuccessCases()
+    public static function provideSuccessCases()
     {
         return [
             ["John Smith"],
@@ -36,7 +37,7 @@ class SaneCharactersTest extends BaseTestCase
         ];
     }
 
-    public function provideFailureCases()
+    public static function provideFailureCases()
     {
         return [
             ["a̧͈͖r͒͑"],
@@ -47,9 +48,9 @@ class SaneCharactersTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideSuccessCases
      * @covers \DataType\ProcessRule\SaneCharacters
      */
+    #[DataProvider('provideSuccessCases')]
     public function testValidationSuccess(string $testValue)
     {
         $rule = new SaneCharacters();
@@ -62,9 +63,9 @@ class SaneCharactersTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideFailureCases
      * @covers \DataType\ProcessRule\SaneCharacters
      */
+    #[DataProvider('provideFailureCases')]
     public function testValidationErrors(string $testValue)
     {
         $rule = new SaneCharacters();

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\DataStorage;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\ComplexDataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidLocationExceptionData;
@@ -163,7 +164,7 @@ class ComplexDataStorageTest extends BaseTestCase
         $this->assertFalse($dataStorage->isValueAvailable());
     }
 
-    public function providesPathsAreCorrect()
+    public static function providesPathsAreCorrect()
     {
         yield ['/3', [3]];
         yield ['/', []];
@@ -179,10 +180,10 @@ class ComplexDataStorageTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider providesPathsAreCorrect
      * @param string $expected
      * @param array<int, string|int> $pathParts
      */
+    #[DataProvider('providesPathsAreCorrect')]
     public function testPathsAreCorrect(string $expected, array $pathParts)
     {
         $dataStorage = ComplexDataStorage::fromData([]);

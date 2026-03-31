@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetBoolOrNull;
 use DataType\Messages;
@@ -32,7 +33,7 @@ class GetBoolOrNullTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         yield from getBoolTestWorks();
         yield [null, null];
@@ -40,10 +41,10 @@ class GetBoolOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrNull
-     * @dataProvider provideTestWorksCases
      * @param bool|string|null $input
      * @param bool|null $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks(bool|string|null $input, ?bool $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -58,7 +59,7 @@ class GetBoolOrNullTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         return [
             [fopen('php://memory', 'r+')],
@@ -69,9 +70,9 @@ class GetBoolOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrNull
-     * @dataProvider provideTestErrorCases
      * @param mixed $value
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($value)
     {
         $rule = new GetBoolOrNull();
@@ -88,16 +89,16 @@ class GetBoolOrNullTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrorCasesForBadStrings()
+    public static function provideTestErrorCasesForBadStrings()
     {
         yield from getBoolBadStrings();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrNull
-     * @dataProvider provideTestErrorCasesForBadStrings
      * @param string $value
      */
+    #[DataProvider('provideTestErrorCasesForBadStrings')]
     public function testErrorsWithBadStrings(string $value)
     {
         $rule = new GetBoolOrNull();

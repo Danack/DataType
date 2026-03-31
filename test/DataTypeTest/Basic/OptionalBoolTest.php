@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\OptionalBool;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
@@ -11,6 +12,8 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\OptionalBoolDefaultTrueFixture;
+use DataTypeTestFixture\Basic\OptionalBoolFixture;
 
 /**
  * @covers \DataType\Basic\OptionalBool
@@ -29,10 +32,10 @@ class OptionalBoolTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_works_parses_input_to_expected
      * @param class-string<OptionalBoolFixture|OptionalBoolDefaultTrueFixture> $fixtureClass
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_works_parses_input_to_expected')]
     public function test_works_parses_input_to_expected(string $fixtureClass, array $data, bool $expected): void
     {
         $result = $fixtureClass::createFromVarMap(new ArrayVarMap($data));
@@ -49,9 +52,9 @@ class OptionalBoolTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_validation_error')]
     public function test_fails_with_validation_error(array $data, string $path, string $messagePattern): void
     {
         try {
@@ -60,29 +63,5 @@ class OptionalBoolTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
-    }
-}
-
-class OptionalBoolFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[OptionalBool('flag')]
-        public readonly bool $value,
-    ) {
-    }
-}
-
-class OptionalBoolDefaultTrueFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[OptionalBool('flag', true)]
-        public readonly bool $value,
-    ) {
     }
 }

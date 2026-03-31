@@ -9,6 +9,7 @@ use DataType\ProcessedValues;
 use DataType\ProcessRule\PhpEnum;
 use DataTypeTest\BaseTestCase;
 use function DataType\getEnumCaseValues;
+use DataTypeTestFixture\ProcessRule\FixtureEnum;
 
 /**
  * @coversNothing

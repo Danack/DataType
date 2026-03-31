@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidDatetimeFormatExceptionData;
 use DataType\ExtractRule\GetDatetime;
@@ -54,7 +55,7 @@ class GetDatetimeTest extends BaseTestCase
         ]);
     }
 
-    public function providesValidationWorks()
+    public static function providesValidationWorks()
     {
         yield [
             '2002-10-02T10:00:00-05:00',
@@ -64,11 +65,11 @@ class GetDatetimeTest extends BaseTestCase
 
 
     /**
-     * @dataProvider providesValidationWorks
      * @covers \DataType\ExtractRule\GetDatetime
      * @param string $inputValue
      * @param \DateTimeImmutable $expectedValue
      */
+    #[DataProvider('providesValidationWorks')]
     public function testValidationWorks(string $inputValue, \DateTimeImmutable $expectedValue)
     {
         $rule = new GetDatetime();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\OpenApi;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Exception\OpenApiExceptionData;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;
@@ -26,6 +27,7 @@ use DataType\ProcessRule\Trim;
 use DataType\ProcessRule\ValidDate;
 use DataType\ProcessRule\ValidDatetime;
 use DataTypeTest\BaseTestCase;
+use DataTypeTestFixture\OpenApi\RequiredStringExample;
 
 /**
  * @coversNothing
@@ -222,15 +224,15 @@ class DescriptionTest extends BaseTestCase
         $this->performSchemaTest($schemaExpectations, $rules);
     }
 
-    public function providesValidMinimumLength()
+    public static function providesValidMinimumLength()
     {
         return [[1], [2], [100] ];
     }
 
     /**
-     * @dataProvider providesValidMinimumLength
      * @param int $minLength
      */
+    #[DataProvider('providesValidMinimumLength')]
     public function testMininumLength($minLength)
     {
         $schemaExpectations = [
@@ -248,15 +250,15 @@ class DescriptionTest extends BaseTestCase
         $this->performSchemaTest($schemaExpectations, $rules);
     }
 
-    public function providesInvalidMininumLength()
+    public static function providesInvalidMininumLength()
     {
         return [[0], [-1], [-2], [-3] ];
     }
 
     /**
      * @param int $minLength
-     * @dataProvider providesInvalidMininumLength
      */
+    #[DataProvider('providesInvalidMininumLength')]
     public function testInvalidMininumLength($minLength)
     {
         $rules = [
@@ -272,15 +274,15 @@ class DescriptionTest extends BaseTestCase
     }
 
 
-    public function providesInvalidMaximumLength()
+    public static function providesInvalidMaximumLength()
     {
         return [[0], [-1] ];
     }
 
     /**
      * @param int $maxLength
-     * @dataProvider providesInvalidMaximumLength
      */
+    #[DataProvider('providesInvalidMaximumLength')]
     public function testInvalidMaximumLength($maxLength)
     {
         $rules = [
@@ -295,15 +297,15 @@ class DescriptionTest extends BaseTestCase
         OpenApiV300ParamDescription::createFromInputTypes($rules);
     }
 
-    public function providesValidMaximumLength()
+    public static function providesValidMaximumLength()
     {
         return [[1], [2], [100] ];
     }
 
     /**
      * @param int $maxLength
-     * @dataProvider providesValidMaximumLength
      */
+    #[DataProvider('providesValidMaximumLength')]
     public function testValidMaximumLength($maxLength)
     {
         $rules = [

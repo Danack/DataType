@@ -1,0 +1,28 @@
+<?php
+
+namespace DataTypeTestFixture\InputType;
+
+use DataType\ExtractRule\GetInt;
+use DataType\HasInputType;
+use DataType\InputType;
+use DataType\ProcessRule\MaxIntValue;
+use DataType\ProcessRule\MinIntValue;
+
+#[\Attribute]
+class Quantity implements HasInputType
+{
+    public function __construct(
+        private string $name
+    ) {
+    }
+
+    public function getInputType(): InputType
+    {
+        return new InputType(
+            $this->name,
+            new GetInt(),
+            new MinIntValue(1),
+            new MaxIntValue(20),
+        );
+    }
+}

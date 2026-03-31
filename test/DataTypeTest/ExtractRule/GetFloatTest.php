@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetFloat;
 use DataType\Messages;
@@ -33,7 +34,7 @@ class GetFloatTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['5', 5],
@@ -45,10 +46,10 @@ class GetFloatTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloat
-     * @dataProvider provideTestWorksCases
      * @param int|string $input
      * @param float|int $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks($input, $expectedValue)
     {
         $variableName = 'foo';
@@ -62,7 +63,7 @@ class GetFloatTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield ['5.a'];
         yield ['banana'];
@@ -70,9 +71,9 @@ class GetFloatTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloat
-     * @dataProvider provideTestErrorCases
      * @param string $value
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($value)
     {
         $rule = new GetFloat();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -17,7 +18,7 @@ use DataTypeTest\BaseTestCase;
 class MultipleEnumTest extends BaseTestCase
 {
 
-    public function providesMultipleEnumWorks()
+    public static function providesMultipleEnumWorks()
     {
         return [
             ['foo', ['foo']],
@@ -26,10 +27,10 @@ class MultipleEnumTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider providesMultipleEnumWorks
      * @covers \DataType\ProcessRule\MultipleEnum
      * @param array<int, string> $expectedResult
      */
+    #[DataProvider('providesMultipleEnumWorks')]
     public function testMultipleEnumWorks(string $inputString, array $expectedResult)
     {
         $rule = new MultipleEnum(['foo', 'bar']);
@@ -69,7 +70,7 @@ class MultipleEnumTest extends BaseTestCase
         );
     }
 
-    public function provideMultipleEnumCases()
+    public static function provideMultipleEnumCases()
     {
         return [
             ['foo,', ['foo']],
@@ -78,10 +79,10 @@ class MultipleEnumTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMultipleEnumCases
      * @covers \DataType\ProcessRule\MultipleEnum
      * @param array<int, string> $expectedOutput
      */
+    #[DataProvider('provideMultipleEnumCases')]
     public function testMultipleEnum_emptySegments(string $input, array $expectedOutput)
     {
         $enumRule = new MultipleEnum(['foo', 'bar']);
@@ -98,7 +99,7 @@ class MultipleEnumTest extends BaseTestCase
     }
 
     // TODO - these appear to be duplicate tests.
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             ['time', ['time']],
@@ -106,10 +107,10 @@ class MultipleEnumTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MultipleEnum
      * @param array<int, string> $expectedMultipleEnumValues
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation(string $testValue, array $expectedMultipleEnumValues)
     {
         $rule = new MultipleEnum(['time', 'distance']);
@@ -127,15 +128,15 @@ class MultipleEnumTest extends BaseTestCase
     }
 
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['bar'];
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MultipleEnum
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue)
     {
         $values = ['time', 'distance'];

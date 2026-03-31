@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -17,7 +18,7 @@ use DataTypeTest\BaseTestCase;
 class IsRgbColorTest extends BaseTestCase
 {
 
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ['rgb(100,100,100)'];
         yield ['rgb(100, 100, 100)'];
@@ -104,9 +105,9 @@ class IsRgbColorTest extends BaseTestCase
 
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\IsRgbColor
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new IsRgbColor();
@@ -143,16 +144,16 @@ class IsRgbColorTest extends BaseTestCase
     }
 
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         // TODO - these should give a precise position of the error.
         yield ['rgb("100,"100","100")'];
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsRgbColor
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue)
     {
         $rule = new IsRgbColor();

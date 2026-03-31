@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetStringOrNull;
 use DataType\Messages;
@@ -71,18 +72,17 @@ class GetStringOrNullTest extends BaseTestCase
     }
 
 
-
-    public function providesErrors()
+    public static function providesErrors()
     {
         yield [[1, 2, 3], Messages::STRING_EXPECTED];
     }
 
     /**
      * @covers \DataType\ExtractRule\GetStringOrNull
-     * @dataProvider providesErrors
      * @param mixed $input
      * @param string $expected_error
      */
+    #[DataProvider('providesErrors')]
     public function testErrors($input, $expected_error)
     {
         $index = 'foo';

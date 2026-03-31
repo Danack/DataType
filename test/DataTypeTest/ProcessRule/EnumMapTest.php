@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -47,7 +48,7 @@ class EnumMapTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         return [
             ['z', 'zoq'],
@@ -57,11 +58,11 @@ class EnumMapTest extends BaseTestCase
 
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\EnumMap
      * @param mixed $testValue
      * @param mixed $expectedValue
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks($testValue, $expectedValue)
     {
         $enumMap = [
@@ -84,8 +85,7 @@ class EnumMapTest extends BaseTestCase
     }
 
 
-
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         return [
             ['Zebranky '],
@@ -94,10 +94,10 @@ class EnumMapTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\EnumMap
      * @param string|int $testValue
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string|int $testValue)
     {
         $enumMap = [
@@ -152,7 +152,7 @@ class EnumMapTest extends BaseTestCase
 
         $this->expectException(InvalidRulesExceptionData::class);
         // TODO - this should break when PHP changes double => float.
-        $this->expectErrorMessageMatches("/.*double.*/");
+        $this->expectExceptionMessageMatches("/.*double.*/");
 
         $rule->process(
             5.0,

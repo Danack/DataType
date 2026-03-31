@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MatchesRegexTest extends BaseTestCase
 {
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ['^[a-z]+$', 'abc'];
         yield ['^[0-9]+$', '123'];
@@ -26,9 +27,9 @@ class MatchesRegexTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\MatchesRegex
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $pattern, string $testValue)
     {
         $rule = new MatchesRegex($pattern);
@@ -64,7 +65,7 @@ class MatchesRegexTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['^[a-z]+$', 'ABC123', Messages::ERROR_PATTERN_MISMATCH];
         yield ['^[0-9]+$', 'abc', Messages::ERROR_PATTERN_MISMATCH];
@@ -72,12 +73,12 @@ class MatchesRegexTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatchesRegex
      * @param string $pattern
      * @param string $testValue
      * @param string $expected_error
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $pattern, string $testValue, string $expected_error)
     {
         $rule = new MatchesRegex($pattern);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\InputType;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\InputType\IntRange;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use function DataType\processInputTypeWithDataStorage;
  */
 class IntRangeTest extends BaseTestCase
 {
-    function provideTestWorks()
+    static function provideTestWorks()
     {
         yield [0, 100, 0];
         yield [0, 100, 50];
@@ -25,8 +26,8 @@ class IntRangeTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\IntRange
-     * @dataProvider provideTestWorks
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(int $minimum, int $maximum, int $expected_value)
     {
         $intRange = new IntRange(
@@ -55,7 +56,7 @@ class IntRangeTest extends BaseTestCase
         $this->assertSame($expected_value, $result_value);
     }
 
-    function provideTestErrors()
+    static function provideTestErrors()
     {
         yield [0, 100, -1, Messages::INT_TOO_SMALL];
         yield [0, 100, 101, Messages::INT_TOO_LARGE];
@@ -63,8 +64,8 @@ class IntRangeTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\IntRange
-     * @dataProvider provideTestErrors
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(int $minimum, int $maximum, int $expected_value, string $expected_message)
     {
         $intRange = new IntRange(

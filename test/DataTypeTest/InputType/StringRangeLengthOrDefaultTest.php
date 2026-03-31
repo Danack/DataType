@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\InputType;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\InputType\StringRangeLengthOrDefault;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use function DataType\processInputTypeWithDataStorage;
  */
 class StringRangeLengthOrDefaultTest extends BaseTestCase
 {
-    function provideTestWorks()
+    static function provideTestWorks()
     {
         $string = "tenletters";
 
@@ -27,8 +28,8 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\StringRangeLengthOrDefault
-     * @dataProvider provideTestWorks
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(int $minimum, int $maximum, string $test_string)
     {
         $intRange = new StringRangeLengthOrDefault(
@@ -86,7 +87,7 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
         $this->assertSame($default_value, $result_value);
     }
 
-    function provideTestErrors()
+    static function provideTestErrors()
     {
         $string = "tenletters";
         yield [10, 100, "tooshort", Messages::STRING_TOO_SHORT];
@@ -95,10 +96,10 @@ class StringRangeLengthOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\StringRangeLengthOrDefault
-     * @dataProvider provideTestErrors
      * @param mixed $input_value
      * @param string $expected_message
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(int $minimum, int $maximum, $input_value, $expected_message)
     {
         $intRange = new StringRangeLengthOrDefault(

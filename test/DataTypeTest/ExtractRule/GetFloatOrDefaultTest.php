@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetFloatOrDefault;
 use DataType\Messages;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class GetFloatOrDefaultTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
 //            // Test value is read as string
@@ -40,11 +41,11 @@ class GetFloatOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloatOrDefault
-     * @dataProvider provideTestCases
      * @param array<string, mixed> $data
      * @param float|null $default
      * @param float|null $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation(array $data, float|null $default, float|null $expectedValue)
     {
         $rule = new GetFloatOrDefault($default);
@@ -62,7 +63,7 @@ class GetFloatOrDefaultTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield [null, Messages::FLOAT_REQUIRED_WRONG_TYPE];
         yield ['', Messages::NEED_FLOAT_NOT_EMPTY_STRING];
@@ -73,10 +74,10 @@ class GetFloatOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloatOrDefault
-     * @dataProvider provideTestErrorCases
      * @param string|null $inputValue
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors(string|null $inputValue, string $message)
     {
         $default = 5.0;

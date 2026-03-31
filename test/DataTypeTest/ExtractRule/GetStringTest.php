@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetString;
 use DataType\Messages;
@@ -52,7 +53,7 @@ class GetStringTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function providesErrors()
+    public static function providesErrors()
     {
         yield [[1, 2, 3], Messages::STRING_EXPECTED];
         yield [null, Messages::STRING_EXPECTED];
@@ -60,10 +61,10 @@ class GetStringTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetString
-     * @dataProvider providesErrors
      * @param mixed $input
      * @param string $expected_error
      */
+    #[DataProvider('providesErrors')]
     public function testErrors(mixed $input, string $expected_error)
     {
         $index = 'foo';

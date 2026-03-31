@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,16 +16,16 @@ use DataTypeTest\BaseTestCase;
  */
 class ValidUrlTest extends BaseTestCase
 {
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         yield ["https://www.google.com"];
         yield ["http://t.ly/"];
     }
 
     /**
-     * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\ValidUrl
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testValidationWorks(string $input)
     {
         $rule = new ValidUrl(true);
@@ -39,7 +40,7 @@ class ValidUrlTest extends BaseTestCase
     }
 
 
-    public function provideTestErrorsCases()
+    public static function provideTestErrorsCases()
     {
         yield ['John', Messages::ERROR_INVALID_URL];
         yield ['https://www.', Messages::ERROR_INVALID_URL];
@@ -47,9 +48,9 @@ class ValidUrlTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrorsCases
      * @covers \DataType\ProcessRule\ValidUrl
      */
+    #[DataProvider('provideTestErrorsCases')]
     public function testValidationErrors(string $input, string $expected_error)
     {
         $rule = new ValidUrl(true);
@@ -68,7 +69,7 @@ class ValidUrlTest extends BaseTestCase
     }
 
 
-    public function provideTestWorksCases_scheme_optional()
+    public static function provideTestWorksCases_scheme_optional()
     {
         yield ["https://www.google.com"];
         yield ["http://t.ly/"];
@@ -78,9 +79,9 @@ class ValidUrlTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorksCases_scheme_optional
      * @covers \DataType\ProcessRule\ValidUrl
      */
+    #[DataProvider('provideTestWorksCases_scheme_optional')]
     public function testValidationWorks_scheme_optional(string $input)
     {
         $rule = new ValidUrl(false);
@@ -95,16 +96,16 @@ class ValidUrlTest extends BaseTestCase
     }
 
 
-    public function provideTestErrorsCases_scheme_optional()
+    public static function provideTestErrorsCases_scheme_optional()
     {
         yield ['John', Messages::ERROR_INVALID_URL];
         yield ['https://www.', Messages::ERROR_INVALID_URL];
     }
 
     /**
-     * @dataProvider provideTestErrorsCases_scheme_optional
      * @covers \DataType\ProcessRule\ValidUrl
      */
+    #[DataProvider('provideTestErrorsCases_scheme_optional')]
     public function testValidationErrors_scheme_optional(string $input, string $expected_error)
     {
         $rule = new ValidUrl(true);

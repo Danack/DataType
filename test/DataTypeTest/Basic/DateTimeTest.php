@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\DateTime as DateTimeProcess;
 use DataTypeTest\BaseTestCase;
 use function DataType\createSingleValue;
@@ -16,7 +17,7 @@ class DateTimeTest extends BaseTestCase
     /**
      * @return \Generator<array{0: string, 1: string}>
      */
-    public function provideTestWorksCases(): \Generator
+    public static function provideTestWorksCases(): \Generator
     {
         $date1 = \DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T10:00:00-05:00');
         $date2 = \DateTime::createFromFormat(\DateTime::RFC3339, '2002-10-02T15:00:00Z');
@@ -39,10 +40,10 @@ class DateTimeTest extends BaseTestCase
 
     /**
      * @covers \DataType\Basic\DateTime
-     * @dataProvider provideTestWorksCases
      * @param string $input
      * @param string $expected_output
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks(string $input, string $expected_output)
     {
         $integer = new DateTimeProcess('john');

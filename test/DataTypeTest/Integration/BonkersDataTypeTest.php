@@ -6,6 +6,7 @@ use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Integration\BonkersDataType;
 
 /**
  * @coversNothing

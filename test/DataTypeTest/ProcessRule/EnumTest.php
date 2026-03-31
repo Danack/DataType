@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class EnumTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             ['zoq',  'zoq'],
@@ -27,11 +28,11 @@ class EnumTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\Enum
      * @param mixed $testValue
      * @param mixed $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testWorks($testValue, $expectedValue)
     {
         $enumValues = ['zoq', 'fot', 'pik', '12345'];
@@ -47,17 +48,17 @@ class EnumTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['Zebranky '];
         yield [12345, ];
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\Enum
      * @param mixed $testValue
      */
+    #[DataProvider('provideTestErrors')]
     public function testValidationErrors($testValue)
     {
         $enumValues = ['zoq', 'fot', 'pik', '12345'];

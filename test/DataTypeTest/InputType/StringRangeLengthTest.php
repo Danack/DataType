@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\InputType;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\InputType\StringRangeLength;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use function DataType\processInputTypeWithDataStorage;
  */
 class StringRangeLengthTest extends BaseTestCase
 {
-    function provideTestWorks()
+    static function provideTestWorks()
     {
         $string = "tenletters";
 
@@ -27,8 +28,8 @@ class StringRangeLengthTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\StringRangeLength
-     * @dataProvider provideTestWorks
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(int $minimum, int $maximum, string $expected_value)
     {
         $intRange = new StringRangeLength(
@@ -57,7 +58,7 @@ class StringRangeLengthTest extends BaseTestCase
         $this->assertSame($expected_value, $result_value);
     }
 
-    function provideTestErrors()
+    static function provideTestErrors()
     {
         $string = "tenletters";
         yield [10, 100, "tooshort", Messages::STRING_TOO_SHORT];
@@ -66,8 +67,8 @@ class StringRangeLengthTest extends BaseTestCase
 
     /**
      * @covers \DataType\InputType\StringRangeLength
-     * @dataProvider provideTestErrors
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(int $minimum, int $maximum, string $input_value, string $expected_message)
     {
         $intRange = new StringRangeLength(

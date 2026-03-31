@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
@@ -17,7 +18,7 @@ use function Danack\PHPUnitHelper\templateStringToRegExp;
  */
 class MaximumCountTest extends BaseTestCase
 {
-    public function provideWorksCases()
+    public static function provideWorksCases()
     {
         return [
             [3, []], // 3 <= 3
@@ -27,10 +28,10 @@ class MaximumCountTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MaximumCount
      * @param array<int, mixed> $values
      */
+    #[DataProvider('provideWorksCases')]
     public function testWorks(int $maximumCount, array $values)
     {
         $rule = new MaximumCount($maximumCount);
@@ -43,7 +44,7 @@ class MaximumCountTest extends BaseTestCase
         $this->assertSame($values, $validationResult->getValue());
     }
 
-    public function provideFailsCases()
+    public static function provideFailsCases()
     {
         return [
             [0, [1, 2, 3]], // 3 > 0
@@ -52,10 +53,10 @@ class MaximumCountTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideFailsCases
      * @covers \DataType\ProcessRule\MaximumCount
      * @param array<int, mixed> $values
      */
+    #[DataProvider('provideFailsCases')]
     public function testFails(int $maximumCount, $values)
     {
         $rule = new MaximumCount($maximumCount);
@@ -100,7 +101,7 @@ class MaximumCountTest extends BaseTestCase
         $this->expectException(DataTypeLogicException::class);
 
         $processedValues = new ProcessedValues();
-        $this->expectErrorMessageMatches(
+        $this->expectExceptionMessageMatches(
             templateStringToRegExp(Messages::ERROR_WRONG_TYPE_VARIANT_1)
         );
 

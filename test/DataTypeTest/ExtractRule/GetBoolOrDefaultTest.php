@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetBoolOrDefault;
 use DataType\Messages;
@@ -37,17 +38,17 @@ class GetBoolOrDefaultTest extends BaseTestCase
         }
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         yield from getBoolTestWorks();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrDefault
-     * @dataProvider provideTestWorksCases
      * @param bool|string $input
      * @param bool $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks(string|bool $input, bool $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -61,7 +62,7 @@ class GetBoolOrDefaultTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCasesBadTypes()
+    public static function provideTestErrorCasesBadTypes()
     {
         // todo - we should test the exact error.
         yield [fopen('php://memory', 'r+')];
@@ -79,9 +80,9 @@ class GetBoolOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrDefault
-     * @dataProvider provideTestErrorCasesBadTypes
      * @param mixed $value
      */
+    #[DataProvider('provideTestErrorCasesBadTypes')]
     public function testErrors(mixed $value)
     {
         $rule = new GetBoolOrDefault(false);
@@ -98,16 +99,16 @@ class GetBoolOrDefaultTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrorCasesBadString()
+    public static function provideTestErrorCasesBadString()
     {
         yield from getBoolBadStrings();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetBoolOrDefault
-     * @dataProvider provideTestErrorCasesBadString
      * @param mixed $value
      */
+    #[DataProvider('provideTestErrorCasesBadString')]
     public function testErrorsBadStrings(mixed $value)
     {
         $rule = new GetBoolOrDefault(false);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class RangeFloatValueTest extends BaseTestCase
 {
-    public function provideMinFloatValueCases()
+    public static function provideMinFloatValueCases()
     {
         $minValue = 100;
         $maxValue = 200;
@@ -24,14 +25,14 @@ class RangeFloatValueTest extends BaseTestCase
         $overValue = $minValue + 1;
 
         return [
-            [$minValue, $maxValue, $exactValue, false],
-            [$minValue, $maxValue, $overValue, false],
+            [$minValue, $maxValue, $exactValue],
+            [$minValue, $maxValue, $overValue],
 //            // TODO - think about these cases.
 //            [$minValue, 'banana', true]
         ];
     }
 
-    public function provideMaxFloatCases()
+    public static function provideMaxFloatCases()
     {
         $minValue = 100;
         $maxValue = 256;
@@ -50,16 +51,16 @@ class RangeFloatValueTest extends BaseTestCase
         ];
     }
 
-    public function provideRangeFloatValueCases()
+    public static function provideRangeFloatValueCases()
     {
-        yield from $this->provideMinFloatValueCases();
-        yield from $this->provideMaxFloatCases();
+        yield from self::provideMinFloatValueCases();
+        yield from self::provideMaxFloatCases();
     }
 
     /**
-     * @dataProvider provideRangeFloatValueCases
      * @covers \DataType\ProcessRule\RangeFloatValue
      */
+    #[DataProvider('provideRangeFloatValueCases')]
     public function testValidation(float $minValue, float $maxValue, float $inputValue)
     {
         $rule = new RangeFloatValue($minValue, $maxValue);
@@ -73,7 +74,7 @@ class RangeFloatValueTest extends BaseTestCase
     }
 
 
-    public function provideRangeFloatErrorCases()
+    public static function provideRangeFloatErrorCases()
     {
         // Minimum boundary tests
         $minValue = 100;
@@ -96,9 +97,9 @@ class RangeFloatValueTest extends BaseTestCase
 
 
     /**
-     * @dataProvider provideRangeFloatErrorCases
      * @covers \DataType\ProcessRule\RangeFloatValue
      */
+    #[DataProvider('provideRangeFloatErrorCases')]
     public function testErrors(int|float $minValue, int|float $maxValue, float $inputValue, string $message)
     {
         $rule = new RangeFloatValue($minValue, $maxValue);

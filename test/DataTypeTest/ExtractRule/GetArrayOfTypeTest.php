@@ -9,8 +9,8 @@ use DataType\ExtractRule\GetArrayOfType;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\ReviewScore;
-use DataTypeTest\Integration\SingleIntParams;
+use DataTypeTestFixture\Integration\ReviewScore;
+use DataTypeTestFixture\Integration\SingleIntParams;
 
 /**
  * @coversNothing

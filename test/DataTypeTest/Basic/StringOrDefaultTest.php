@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\StringOrDefault;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
@@ -11,6 +12,8 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\StringOrDefaultFixture;
+use DataTypeTestFixture\Basic\StringOrDefaultNullFixture;
 
 /**
  * @covers \DataType\Basic\StringOrDefault
@@ -28,10 +31,10 @@ class StringOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_works_parses_input_to_expected
      * @param class-string<StringOrDefaultFixture|StringOrDefaultNullFixture> $fixtureClass
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_works_parses_input_to_expected')]
     public function test_works_parses_input_to_expected(string $fixtureClass, array $data, string|null $expected): void
     {
         $result = $fixtureClass::createFromVarMap(new ArrayVarMap($data));
@@ -47,9 +50,9 @@ class StringOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_validation_error')]
     public function test_fails_with_validation_error(array $data, string $path, string $messagePattern): void
     {
         try {
@@ -58,29 +61,5 @@ class StringOrDefaultTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
-    }
-}
-
-class StringOrDefaultFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[StringOrDefault('sort', 'date')]
-        public readonly string|null $value,
-    ) {
-    }
-}
-
-class StringOrDefaultNullFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[StringOrDefault('sort', null)]
-        public readonly string|null $value,
-    ) {
     }
 }

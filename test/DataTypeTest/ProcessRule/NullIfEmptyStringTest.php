@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\NullIfEmptyString;
@@ -14,7 +15,7 @@ use DataTypeTest\BaseTestCase;
  */
 class NullIfEmptyStringTest extends BaseTestCase
 {
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['pk_foobar', false],
@@ -27,9 +28,9 @@ class NullIfEmptyStringTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\NullIfEmptyString
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testValidationWorks(string|null $testValue, bool $shouldBeNull)
     {
         $rule = new NullIfEmptyString();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetIntOrDefault;
 use DataType\Messages;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class GetIntOrDefaultTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
 
@@ -37,11 +38,11 @@ class GetIntOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetIntOrDefault
-     * @dataProvider provideTestCases
      * @param array<string, int> $data
      * @param int|null $default
      * @param int|null $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation(array $data, $default, $expectedValue)
     {
         $rule = new GetIntOrDefault($default);
@@ -59,7 +60,7 @@ class GetIntOrDefaultTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield [null, Messages::INT_REQUIRED_UNSUPPORTED_TYPE];
         yield ['', Messages::INT_REQUIRED_FOUND_EMPTY_STRING];
@@ -70,8 +71,8 @@ class GetIntOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetIntOrDefault
-     * @dataProvider provideTestErrorCases
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors(string|null $inputValue, string $message)
     {
         $default = 5;

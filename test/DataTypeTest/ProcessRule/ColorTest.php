@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class ColorTest extends BaseTestCase
 {
-    public function provideRgbColorWorks()
+    public static function provideRgbColorWorks()
     {
         return [
             ['rgb(255, 255, 0)'],
@@ -24,9 +25,9 @@ class ColorTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideRgbColorWorks
      * @covers \DataType\ProcessRule\IsRgbColor
      */
+    #[DataProvider('provideRgbColorWorks')]
     public function testValidation(string $inputString)
     {
         $rule = new IsRgbColor();
@@ -39,7 +40,7 @@ class ColorTest extends BaseTestCase
         $this->assertNoProblems($validationResult);
     }
 
-    public function provideRgbColorErrors()
+    public static function provideRgbColorErrors()
     {
         return [
             ['rgb(255, 255, )', Messages::BAD_COLOR_STRING],
@@ -48,9 +49,9 @@ class ColorTest extends BaseTestCase
 
 
     /**
-     * @dataProvider provideRgbColorErrors
      * @covers \DataType\ProcessRule\IsRgbColor
      */
+    #[DataProvider('provideRgbColorErrors')]
     public function testErrors(string $testValue, string $message)
     {
         $rule = new IsRgbColor();

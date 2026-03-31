@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
  */
 class IsEmailTest extends BaseTestCase
 {
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ['john@example.com'];
         yield ['test@example.com'];
@@ -26,9 +27,9 @@ class IsEmailTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\IsEmail
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new IsEmail();
@@ -64,7 +65,7 @@ class IsEmailTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['rgb', Messages::ERROR_EMAIL_NO_AT_CHARACTER];
         yield ['john at example.com', Messages::ERROR_EMAIL_NO_AT_CHARACTER];
@@ -73,11 +74,11 @@ class IsEmailTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsEmail
      * @param string $testValue
      * @param string $expected_error
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors($testValue, $expected_error)
     {
         $rule = new IsEmail();

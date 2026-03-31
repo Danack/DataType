@@ -9,6 +9,7 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\OptionalBasicStringFixture;
 
 /**
  * @covers \DataType\Basic\OptionalBasicString
@@ -82,17 +83,5 @@ class OptionalBasicStringTest extends BaseTestCase
         
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
-    }
-}
-
-class OptionalBasicStringFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[OptionalBasicString('string_input')]
-        public readonly string|null $value,
-    ) {
     }
 }

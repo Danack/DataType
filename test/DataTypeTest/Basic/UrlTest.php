@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\Url;
 use DataType\Exception\ValidationException;
 use DataType\Messages;
@@ -39,7 +40,7 @@ class UrlTest extends BaseTestCase
         $this->assertSame($input, $result);
     }
 
-    public function providesErrors()
+    public static function providesErrors()
     {
         $input = str_pad('http://www.google.com/', 2049, 'a');
 
@@ -55,10 +56,10 @@ class UrlTest extends BaseTestCase
 
     /**
      * @covers \DataType\Basic\Url
-     * @dataProvider providesErrors
      * @param mixed $invalid_input
      * @param string $expected_problem
      */
+    #[DataProvider('providesErrors')]
     public function testErrors($invalid_input, $expected_problem)
     {
         $textString = new Url('john');

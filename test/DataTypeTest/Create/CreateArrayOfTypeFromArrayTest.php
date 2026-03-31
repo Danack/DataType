@@ -6,7 +6,7 @@ namespace DataTypeTest\Create;
 
 use DataType\Exception\ValidationException;
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\ReviewScore;
+use DataTypeTestFixture\Integration\ReviewScore;
 
 /**
  * @coversNothing

@@ -9,6 +9,8 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\BasicPhpEnumTypeOrNullFixture;
+use DataTypeTestFixture\Basic\TestEnum;
 
 /**
  * @covers \DataType\Basic\BasicPhpEnumTypeOrNull
@@ -80,26 +82,4 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
     }
-}
-
-class BasicPhpEnumTypeOrNullFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[BasicPhpEnumTypeOrNull('enum_input', TestEnum::class)]
-        public readonly string|null $value,
-    ) {
-    }
-}
-
-/**
- * Used for testing. Update the tests if you change the number of entries.
- */
-enum TestEnum: string
-{
-    case VALUE1 = 'VALUE1';
-    case VALUE2 = 'VALUE2';
-    case VALUE3 = 'VALUE3';
 }

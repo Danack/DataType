@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -19,7 +20,7 @@ class PositiveIntTest extends BaseTestCase
     /**
      * @return list<array{int, int}>
      */
-    public function provideTestCasesWorks(): array
+    public static function provideTestCasesWorks(): array
     {
         return [
             [5, 5],
@@ -30,9 +31,9 @@ class PositiveIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCasesWorks
      * @covers \DataType\ProcessRule\PositiveInt
      */
+    #[DataProvider('provideTestCasesWorks')]
     public function testValidationWorks(int $testValue, int $expectedResult): void
     {
         $rule = new PositiveInt();
@@ -58,9 +59,9 @@ class PositiveIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideNonIntValues
      * @covers \DataType\ProcessRule\PositiveInt
      */
+    #[DataProvider('provideNonIntValues')]
     public function test_non_int_throws_invalid_rules_exception(mixed $testValue): void
     {
         $rule = new PositiveInt();
@@ -75,7 +76,7 @@ class PositiveIntTest extends BaseTestCase
     /**
      * @return list<array{int, string}>
      */
-    public function provideTestErrors(): array
+    public static function provideTestErrors(): array
     {
         return [
             [PositiveInt::MAX_SANE_VALUE + 1, Messages::INT_OVER_LIMIT],
@@ -83,9 +84,9 @@ class PositiveIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\PositiveInt
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(int $testValue, string $message): void
     {
         $rule = new PositiveInt();

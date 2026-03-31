@@ -6,6 +6,7 @@ namespace DataTypeTest\Integration;
 
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Integration\ItemParams;
 
 /**
  * @coversNothing

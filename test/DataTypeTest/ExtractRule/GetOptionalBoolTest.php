@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetOptionalBool;
 use DataType\Messages;
@@ -15,17 +16,17 @@ use DataTypeTest\BaseTestCase;
  */
 class GetOptionalBoolTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         yield from getBoolTestWorks();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalBool
-     * @dataProvider provideTestCases
      * @param mixed $input
      * @param bool $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($input, $expectedValue)
     {
         $rule = new GetOptionalBool();
@@ -55,7 +56,7 @@ class GetOptionalBoolTest extends BaseTestCase
     }
 
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield [fopen('php://memory', 'r+'), Messages::UNSUPPORTED_TYPE]; // a stream is not a bool
         yield [[1, 2, 3], Messages::UNSUPPORTED_TYPE];  // an array is not a bool
@@ -64,10 +65,10 @@ class GetOptionalBoolTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalBool
-     * @dataProvider provideTestErrorCases
      * @param mixed $inputValue
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testBadInputErrors($inputValue, $message)
     {
         $validator = new ProcessedValues();

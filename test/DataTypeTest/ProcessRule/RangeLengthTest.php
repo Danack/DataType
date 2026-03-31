@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class RangeLengthTest extends BaseTestCase
 {
-    public function provideMaxLengthCases()
+    public static function provideMaxLengthCases()
     {
         $maxLength = 12;
         $underLengthMaxString = str_repeat('a', $maxLength - 1);
@@ -76,9 +77,9 @@ class RangeLengthTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxLengthCases
      * @covers \DataType\ProcessRule\RangeStringLength
      */
+    #[DataProvider('provideMaxLengthCases')]
     public function testValidation(
         int $minLength,
         int $maxLength,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\SkipIfNull;
@@ -14,7 +15,7 @@ use DataTypeTest\BaseTestCase;
  */
 class SkipIfNullTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             [null, true],
@@ -27,10 +28,10 @@ class SkipIfNullTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\SkipIfNull
      * @param array<int, mixed>|int|string|null $testValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($testValue, bool $expectIsFinalResult)
     {
         $rule = new SkipIfNull();

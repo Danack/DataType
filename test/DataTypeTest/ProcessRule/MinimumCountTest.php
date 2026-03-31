@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\DataTypeLogicException;
 use DataType\Messages;
@@ -17,7 +18,7 @@ use function Danack\PHPUnitHelper\templateStringToRegExp;
  */
 class MinimumCountTest extends BaseTestCase
 {
-    public function provideWorksCases()
+    public static function provideWorksCases()
     {
         return [
             [0, [1]], // 0 <= 1
@@ -28,10 +29,10 @@ class MinimumCountTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\MinimumCount
      * @param array<int, mixed> $values
      */
+    #[DataProvider('provideWorksCases')]
     public function testWorks(int $minimumCount, array $values)
     {
         $rule = new MinimumCount($minimumCount);
@@ -45,7 +46,7 @@ class MinimumCountTest extends BaseTestCase
         $this->assertSame($values, $validationResult->getValue());
     }
 
-    public function provideFailsCases()
+    public static function provideFailsCases()
     {
         return [
             [1, []], // 3 > 0
@@ -55,10 +56,10 @@ class MinimumCountTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideFailsCases
      * @covers \DataType\ProcessRule\MinimumCount
      * @param array<int, mixed> $values
      */
+    #[DataProvider('provideFailsCases')]
     public function testFails(int $minimumCount, array $values)
     {
         $rule = new MinimumCount($minimumCount);
@@ -101,7 +102,7 @@ class MinimumCountTest extends BaseTestCase
         $this->expectException(DataTypeLogicException::class);
 
         $processedValues = new ProcessedValues();
-        $this->expectErrorMessageMatches(
+        $this->expectExceptionMessageMatches(
             templateStringToRegExp(Messages::ERROR_WRONG_TYPE)
         );
 

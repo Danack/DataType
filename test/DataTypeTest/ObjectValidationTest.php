@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace DataTypeTest;
 
 use DataType\Messages;
-use DataTypeTest\DTOTypes\AdvancedDTO;
-use DataTypeTest\DTOTypes\BasicDTO;
-use DataTypeTest\InputType\KnownColors;
+use DataTypeTestFixture\DTOTypes\AdvancedDTO;
+use DataTypeTestFixture\DTOTypes\BasicDTO;
+use DataTypeTestFixture\InputType\KnownColors;
 use function DataType\validate;
 
 /**

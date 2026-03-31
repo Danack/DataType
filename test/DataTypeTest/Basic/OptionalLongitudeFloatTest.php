@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\OptionalLatitudeFloat;
 use DataType\Basic\OptionalLongitudeFloat;
 use DataType\Create\CreateFromVarMap;
@@ -12,6 +13,8 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\OptionalLongitudeFloatFixture;
+use DataTypeTestFixture\Basic\OptionalLongitudeFloatWithPairFixture;
 
 /**
  * @covers \DataType\Basic\OptionalLongitudeFloat
@@ -32,9 +35,9 @@ class OptionalLongitudeFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_works_parses_input_to_expected
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_works_parses_input_to_expected')]
     public function test_works_parses_input_to_expected(array $data, float|null $expected): void
     {
         $result = OptionalLongitudeFloatFixture::createFromVarMap(new ArrayVarMap($data));
@@ -53,9 +56,9 @@ class OptionalLongitudeFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_validation_error')]
     public function test_fails_with_validation_error(array $data, string $path, string $messagePattern): void
     {
         try {
@@ -92,9 +95,9 @@ class OptionalLongitudeFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_with_pair_param_parses_input_to_expected
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_with_pair_param_parses_input_to_expected')]
     public function test_with_pair_param_parses_input_to_expected(array $data, float|null $expected): void
     {
         $result = OptionalLongitudeFloatWithPairFixture::createFromVarMap(new ArrayVarMap($data));
@@ -111,9 +114,9 @@ class OptionalLongitudeFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_with_pair_param_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_with_pair_param_fails_with_validation_error')]
     public function test_with_pair_param_fails_with_validation_error(
         array $data,
         string $path,
@@ -125,31 +128,5 @@ class OptionalLongitudeFloatTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
-    }
-}
-
-class OptionalLongitudeFloatFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[OptionalLongitudeFloat('lng')]
-        public readonly float|null $value,
-    ) {
-    }
-}
-
-class OptionalLongitudeFloatWithPairFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[OptionalLatitudeFloat('latitude')]
-        public readonly float|null $latitude,
-        #[OptionalLongitudeFloat('longitude', 'latitude')]
-        public readonly float|null $value,
-    ) {
     }
 }

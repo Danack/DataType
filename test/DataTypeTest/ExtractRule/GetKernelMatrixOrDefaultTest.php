@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\JsonDecodeException;
 use DataType\ExtractRule\GetKernelMatrixOrDefault;
@@ -18,7 +19,7 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
 {
     const UNIT_MATRIX = [[1]];
 
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         $expected = [
             [-1, -1, -1],
@@ -30,11 +31,11 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetKernelMatrixOrDefault
-     * @dataProvider provideTestWorks
      * @param string $input
      * @param array<int, array<int, float|int>> $expected
      * @param array<int, array<int, float|int>> $default
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks($input, $expected, $default)
     {
         $rule = new GetKernelMatrixOrDefault($default);
@@ -54,7 +55,6 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetKernelMatrixOrDefault
-     * @dataProvider provideTestWorks
      */
     public function testMissingGivesDefault()
     {
@@ -133,7 +133,6 @@ class GetKernelMatrixOrDefaultTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetKernelMatrixOrDefault
-     * @dataProvider provideTestWorks
      */
     public function testBadInput_not_a_string()
     {

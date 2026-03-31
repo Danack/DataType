@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace DataTypeTest\Integration;
 
 use DataTypeTest\BaseTestCase;
+use DataTypeTestFixture\Integration\IntArrayParams;
 
 /**
  * @coversNothing
@@ -12,7 +13,7 @@ use DataTypeTest\BaseTestCase;
 class IntArrayParamsTest extends BaseTestCase
 {
     /**
-     * @covers \DataTypeTest\Integration\IntArrayParams
+     * @covers \DataTypeTestFixture\Integration\IntArrayParams
      */
     public function testWorks()
     {

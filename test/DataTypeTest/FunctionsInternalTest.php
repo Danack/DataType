@@ -11,7 +11,7 @@ use DataType\ExtractRule\GetInt;
 use DataType\Messages;
 use DataType\ProcessedValue;
 use DataType\ProcessedValues;
-use DataTypeTest\Fixtures\ClassThatHasSingleConstructorParameter;
+use DataTypeTestFixture\Fixtures\ClassThatHasSingleConstructorParameter;
 use function Danack\PHPUnitHelper\templateStringToRegExp;
 use function DataType\get_all_constructor_parameters;
 use function DataType\getEnumCases;
@@ -71,7 +71,7 @@ class FunctionsInternalTest extends BaseTestCase
         $constructor_parameters = $r_constructor->getParameters();
 
         $this->expectException(MissingConstructorParameterNameExceptionData::class);
-        $this->expectErrorMessageMatches(
+        $this->expectExceptionMessageMatches(
             templateStringToRegExp(Messages::MISSING_PARAMETER_NAME)
         );
 

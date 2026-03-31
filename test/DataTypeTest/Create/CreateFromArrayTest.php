@@ -6,7 +6,7 @@ namespace DataTypeTest\Create;
 
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\IntArrayParams;
+use DataTypeTestFixture\Integration\IntArrayParams;
 
 /**
  * @coversNothing
@@ -33,7 +33,7 @@ class CreateFromArrayTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataTypeTest\Integration\IntArrayParams
+     * @covers \DataTypeTestFixture\Integration\IntArrayParams
      */
     public function testBadInt()
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\BoolOrNull;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
@@ -11,6 +12,7 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\BoolOrNullFixture;
 
 /**
  * @covers \DataType\Basic\BoolOrNull
@@ -28,9 +30,9 @@ class BoolOrNullTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_works_parses_input_to_expected
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_works_parses_input_to_expected')]
     public function test_works_parses_input_to_expected(array $data, bool|null $expected): void
     {
         $result = BoolOrNullFixture::createFromVarMap(new ArrayVarMap($data));
@@ -48,9 +50,9 @@ class BoolOrNullTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_validation_error')]
     public function test_fails_with_validation_error(array $data, string $path, string $messagePattern): void
     {
         try {
@@ -59,17 +61,5 @@ class BoolOrNullTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
-    }
-}
-
-class BoolOrNullFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[BoolOrNull('flag')]
-        public readonly bool|null $value,
-    ) {
     }
 }

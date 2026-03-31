@@ -7,6 +7,8 @@ namespace DataTypeTest\Integration;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Integration\PasswordDoubleCheck;
+use DataTypeTestFixture\Integration\PasswordDoubleCheckBadSecondType;
 
 /**
  * @coversNothing
@@ -14,7 +16,7 @@ use VarMap\ArrayVarMap;
 class PasswordDoubleCheckBadSecondTypeTest extends BaseTestCase
 {
     /**
-     * @covers \DataTypeTest\Integration\PasswordDoubleCheck
+     * @covers \DataTypeTestFixture\Integration\PasswordDoubleCheck
      */
     public function testWrongTypePreviousValue()
     {

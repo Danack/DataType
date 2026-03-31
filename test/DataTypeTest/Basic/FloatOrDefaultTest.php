@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Basic;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\FloatOrDefault;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
 use DataType\GetInputTypesFromAttributes;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\FloatOrDefaultFixture;
+use DataTypeTestFixture\Basic\FloatOrDefaultNullFixture;
 
 /**
  * @covers \DataType\Basic\FloatOrDefault
@@ -27,10 +30,10 @@ class FloatOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_works_parses_input_to_expected
      * @param class-string<FloatOrDefaultFixture|FloatOrDefaultNullFixture> $fixtureClass
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_works_parses_input_to_expected')]
     public function test_works_parses_input_to_expected(string $fixtureClass, array $data, float|null $expected): void
     {
         $result = $fixtureClass::createFromVarMap(new ArrayVarMap($data));
@@ -46,9 +49,9 @@ class FloatOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_validation_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_validation_error')]
     public function test_fails_with_validation_error(array $data, string $path, string $messagePattern): void
     {
         try {
@@ -57,29 +60,5 @@ class FloatOrDefaultTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
-    }
-}
-
-class FloatOrDefaultFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[FloatOrDefault('rate', 1.0)]
-        public readonly float|null $value,
-    ) {
-    }
-}
-
-class FloatOrDefaultNullFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[FloatOrDefault('rate', null)]
-        public readonly float|null $value,
-    ) {
     }
 }

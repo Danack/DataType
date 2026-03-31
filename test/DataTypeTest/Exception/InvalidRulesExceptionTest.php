@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use DataType\Exception\InvalidRulesExceptionData;
@@ -14,7 +15,7 @@ use DataType\Exception\InvalidRulesExceptionData;
 class InvalidRulesExceptionTest extends BaseTestCase
 {
 
-    public function providesInvalidRulesException()
+    public static function providesInvalidRulesException()
     {
         yield [new \stdClass(), 'object'];
         yield [[], 'array'];
@@ -23,8 +24,8 @@ class InvalidRulesExceptionTest extends BaseTestCase
 
     /**
      * @covers \DataType\Exception\InvalidRulesExceptionData::badTypeForArrayAccess
-     * @dataProvider providesInvalidRulesException
      */
+    #[DataProvider('providesInvalidRulesException')]
     public function testInvalidRulesException(mixed $badValue, string $badTypeString)
     {
         $exception = InvalidRulesExceptionData::badTypeForArrayAccess($badValue);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\DataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
@@ -31,10 +32,11 @@ use DataType\ProcessRule\MaxIntValue;
 use DataType\ProcessRule\MinLength;
 use DataType\ValidationResult;
 use DataType\Value\Ordering;
-use DataTypeTest\DTOTypes\BasicDTO;
-use DataTypeTest\InputType\Quantity;
-use DataTypeTest\Integration\FooErrorsButContinuesParams;
-use DataTypeTest\Integration\FooParams;
+use DataTypeTestFixture\DTOTypes\BasicDTO;
+use DataTypeTestFixture\InputType\Quantity;
+use DataTypeTestFixture\Integration\FooErrorsButContinuesParams;
+use DataTypeTestFixture\Integration\FooParams;
+use DataTypeTestFixture\ImagickColorHasInputType;
 use function DataType\array_value_exists;
 use function DataType\checkAllowedFormatsAreStrings;
 use function DataType\createArrayOfScalarsFromDataStorage;
@@ -62,7 +64,7 @@ use function DataType\validate;
  */
 class FunctionsTest extends BaseTestCase
 {
-    public function providesNormaliseOrderParameter()
+    public static function providesNormaliseOrderParameter()
     {
         return [
             ['foo', 'foo', Ordering::ASC],
@@ -72,9 +74,9 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider providesNormaliseOrderParameter
      * @covers ::DataType\normalise_order_parameter
      */
+    #[DataProvider('providesNormaliseOrderParameter')]
     public function testNormaliseOrderParameter(string $input, string $expectedName, string $expectedOrder)
     {
         list($name, $order) = normalise_order_parameter($input);
@@ -101,7 +103,7 @@ class FunctionsTest extends BaseTestCase
         $this->assertFalse($foundJuggledType);
     }
 
-    public function provides_getRawCharacters()
+    public static function provides_getRawCharacters()
     {
         yield ['Hello', '48, 65, 6c, 6c, 6f'];
         yield ["ÁGUEDA", 'c3, 81, 47, 55, 45, 44, 41'];
@@ -109,11 +111,11 @@ class FunctionsTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_getRawCharacters
      * @covers ::\DataType\getRawCharacters
      * @param string $inputString
      * @param string $expectedOutput
      */
+    #[DataProvider('provides_getRawCharacters')]
     public function test_getRawCharacters(string $inputString, $expectedOutput)
     {
         $actualOutput = getRawCharacters($inputString);

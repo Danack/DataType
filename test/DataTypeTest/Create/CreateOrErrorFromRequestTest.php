@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace DataTypeTest\Create;
 
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\IntArrayParams;
-use DataTypeTest\MockRequest;
+use DataTypeTestFixture\Integration\IntArrayParams;
+use DataTypeTestFixture\MockRequest;
 
 /**
  * @coversNothing

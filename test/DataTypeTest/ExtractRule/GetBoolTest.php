@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetBool;
 use DataType\Messages;
@@ -33,17 +34,17 @@ class GetBoolTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         yield from getBoolTestWorks();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetBool
-     * @dataProvider provideTestWorksCases
      * @param bool|string $input
      * @param bool $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks(bool|string $input, bool $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -57,7 +58,7 @@ class GetBoolTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         return [
             // todo - we should test the exact error.
@@ -69,9 +70,9 @@ class GetBoolTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetBool
-     * @dataProvider provideTestErrorCases
      * @param mixed $value
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($value)
     {
         $rule = new GetBool();
@@ -88,16 +89,16 @@ class GetBoolTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrorCasesForBadStrings()
+    public static function provideTestErrorCasesForBadStrings()
     {
         yield from getBoolBadStrings();
     }
 
     /**
      * @covers \DataType\ExtractRule\GetBool
-     * @dataProvider provideTestErrorCasesForBadStrings
      * @param string $value
      */
+    #[DataProvider('provideTestErrorCasesForBadStrings')]
     public function testErrorsWithBadStrings(string $value)
     {
         $rule = new GetBool();

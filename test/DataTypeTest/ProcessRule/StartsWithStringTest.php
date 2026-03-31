@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class StartsWithStringTest extends BaseTestCase
 {
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['pk_', 'pk_foobar'],
@@ -24,9 +25,9 @@ class StartsWithStringTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\StartsWithString
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testValidationWorks(string $prefix, string $testValue)
     {
         $rule = new StartsWithString($prefix);
@@ -40,7 +41,7 @@ class StartsWithStringTest extends BaseTestCase
         $this->assertSame($validationResult->getValue(), $testValue);
     }
 
-    public function provideTestFailsCases()
+    public static function provideTestFailsCases()
     {
         return [
             ['pk_', 'dk_foobar'],
@@ -49,9 +50,9 @@ class StartsWithStringTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestFailsCases
      * @covers \DataType\ProcessRule\StartsWithString
      */
+    #[DataProvider('provideTestFailsCases')]
     public function testValidationErrors(string $prefix, string $testValue)
     {
         $rule = new StartsWithString($prefix);

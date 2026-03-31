@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MaxLengthTest extends BaseTestCase
 {
-    public function provideMaxLengthWorks()
+    public static function provideMaxLengthWorks()
     {
         $maxLength = 10;
         $underLengthString = str_repeat('a', $maxLength - 1);
@@ -46,9 +47,9 @@ class MaxLengthTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxLengthWorks
      * @covers \DataType\ProcessRule\MaxLength
      */
+    #[DataProvider('provideMaxLengthWorks')]
     public function testValidationWorks(int $maxLength, string $string)
     {
         $rule = new MaxLength($maxLength);
@@ -63,7 +64,7 @@ class MaxLengthTest extends BaseTestCase
         $this->assertNoProblems($validationResult);
     }
 
-    public function provideMaxLengthErrors()
+    public static function provideMaxLengthErrors()
     {
         $maxLength = 10;
         $overLengthString = str_repeat('a', $maxLength + 1);
@@ -82,9 +83,9 @@ class MaxLengthTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxLengthErrors
      * @covers \DataType\ProcessRule\MaxLength
      */
+    #[DataProvider('provideMaxLengthErrors')]
     public function testErrors(int $maxLength, string $string)
     {
         $rule = new MaxLength($maxLength);

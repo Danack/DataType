@@ -9,6 +9,7 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\BasicDateTimeFixture;
 
 /**
  * @covers \DataType\Basic\BasicDateTime
@@ -86,17 +87,5 @@ class BasicDateTimeTest extends BaseTestCase
         
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
-    }
-}
-
-class BasicDateTimeFixture implements DataType
-{
-    use CreateFromVarMap;
-    use GetInputTypesFromAttributes;
-
-    public function __construct(
-        #[BasicDateTime('datetime_input')]
-        public readonly \DateTimeInterface $value,
-    ) {
     }
 }

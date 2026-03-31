@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetOptionalInt;
 use DataType\Messages;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class GetOptionalIntTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             // Test value is read as string
@@ -31,10 +32,10 @@ class GetOptionalIntTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalInt
-     * @dataProvider provideTestCases
      * @param int|string $input
      * @param int $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($input, $expectedValue)
     {
         $rule = new GetOptionalInt();
@@ -48,7 +49,7 @@ class GetOptionalIntTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield [null, Messages::INT_REQUIRED_UNSUPPORTED_TYPE];
         yield ['', Messages::INT_REQUIRED_FOUND_EMPTY_STRING];
@@ -59,10 +60,10 @@ class GetOptionalIntTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalInt
-     * @dataProvider provideTestErrorCases
      * @param mixed $inputValue
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($inputValue, $message)
     {
         $validator = new ProcessedValues();

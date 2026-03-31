@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -17,7 +18,7 @@ use DataTypeTest\BaseTestCase;
  */
 class IsDigitTest extends BaseTestCase
 {
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ['0'];
         yield ['123'];
@@ -26,9 +27,9 @@ class IsDigitTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\IsDigit
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new IsDigit();
@@ -64,7 +65,7 @@ class IsDigitTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['abc', Messages::ERROR_NOT_DIGIT];
         yield ['123abc', Messages::ERROR_NOT_DIGIT];
@@ -76,11 +77,11 @@ class IsDigitTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsDigit
      * @param string $testValue
      * @param string $expected_error
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue, string $expected_error)
     {
         $rule = new IsDigit();

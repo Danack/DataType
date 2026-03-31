@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessRule\EarlierThanTime;
@@ -35,7 +36,7 @@ class EarlierThanTimeTest extends BaseTestCase
         $this->assertFalse($validationResult->isFinalResult());
     }
 
-    public function providesErrorsCorrectly()
+    public static function providesErrorsCorrectly()
     {
         yield ['2020-01-01', '2001-01-01'];
         yield ['2020-01-01 12:00:00', '2020-01-01 12:00:00'];
@@ -43,10 +44,10 @@ class EarlierThanTimeTest extends BaseTestCase
 
     /**
      * @covers \DataType\ProcessRule\EarlierThanTime
-     * @dataProvider providesErrorsCorrectly
      * @param string $input_time
      * @param string $boundary_time
      */
+    #[DataProvider('providesErrorsCorrectly')]
     public function testErrorsCorrectly($input_time, $boundary_time)
     {
         $value = new \DateTime($input_time);

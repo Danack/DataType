@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MinLengthTest extends BaseTestCase
 {
-    public function provideMaxLengthCases()
+    public static function provideMaxLengthCases()
     {
         $minLength = 8;
         $underLengthMinString = str_repeat('a', $minLength - 1);
@@ -34,23 +35,23 @@ class MinLengthTest extends BaseTestCase
 
         return [
 //            [$minLength, $underLengthMinString, true],
-            [$minLength, $exactLengthMinString, false],
-            [$minLength, $overLengthMinString, false],
+            [$minLength, $exactLengthMinString],
+            [$minLength, $overLengthMinString],
 
 //            [$minLength, $underLengthMinWithMBString, true],
-            [$minLength, $exactLengthMinWithMBString, false],
-            [$minLength, $overLengthMinWithMBString, false],
+            [$minLength, $exactLengthMinWithMBString],
+            [$minLength, $overLengthMinWithMBString],
 
 //            [$minLength, $underLengthMinMBStringOnly, true],
-            [$minLength, $exactLengthMinMBStringOnly, false],
-            [$minLength, $overLengthMinMBStringOnly, false],
+            [$minLength, $exactLengthMinMBStringOnly],
+            [$minLength, $overLengthMinMBStringOnly],
         ];
     }
 
     /**
-     * @dataProvider provideMaxLengthCases
      * @covers \DataType\ProcessRule\MinLength
      */
+    #[DataProvider('provideMaxLengthCases')]
     public function testValidation(int $minLength, string $string)
     {
         $rule = new MinLength($minLength);
@@ -64,7 +65,7 @@ class MinLengthTest extends BaseTestCase
     }
 
 
-    public function provideMinLengthErrors()
+    public static function provideMinLengthErrors()
     {
         $minLength = 8;
         $underLengthMinString = str_repeat('a', $minLength - 1);
@@ -76,16 +77,16 @@ class MinLengthTest extends BaseTestCase
         $underLengthMinMBStringOnly = str_repeat("\xC2\xA3", $minLength - 1);
 
         return [
-            [$minLength, $underLengthMinString, true],
-            [$minLength, $underLengthMinWithMBString, true],
-            [$minLength, $underLengthMinMBStringOnly, true],
+            [$minLength, $underLengthMinString],
+            [$minLength, $underLengthMinWithMBString],
+            [$minLength, $underLengthMinMBStringOnly],
         ];
     }
 
     /**
-     * @dataProvider provideMinLengthErrors
      * @covers \DataType\ProcessRule\MinLength
      */
+    #[DataProvider('provideMinLengthErrors')]
     public function testErrors(int $minLength, string $string)
     {
         $rule = new MinLength($minLength);

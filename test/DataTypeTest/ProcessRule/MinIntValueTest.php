@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MinIntValueTest extends BaseTestCase
 {
-    public function provideMinIntValueCases()
+    public static function provideMinIntValueCases()
     {
         $minValue = 100;
         $underValue = $minValue - 1;
@@ -33,9 +34,9 @@ class MinIntValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMinIntValueCases
      * @covers \DataType\ProcessRule\MinIntValue
      */
+    #[DataProvider('provideMinIntValueCases')]
     public function testValidation(int $minValue, int $inputValue)
     {
         $rule = new MinIntValue($minValue);
@@ -49,7 +50,7 @@ class MinIntValueTest extends BaseTestCase
     }
 
 
-    public function provideMinIntValueErrors()
+    public static function provideMinIntValueErrors()
     {
         $minValue = 100;
         $underValue = $minValue - 1;
@@ -65,9 +66,9 @@ class MinIntValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMinIntValueErrors
      * @covers \DataType\ProcessRule\MinIntValue
      */
+    #[DataProvider('provideMinIntValueErrors')]
     public function testErrors(int $minValue, int $inputValue)
     {
         $rule = new MinIntValue($minValue);

@@ -6,7 +6,7 @@ namespace DataTypeTest\Create;
 
 use DataType\Exception\ValidationException;
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\IntArrayParams;
+use DataTypeTestFixture\Integration\IntArrayParams;
 use function DataType\json_encode_safe;
 
 /**

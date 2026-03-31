@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,37 +16,37 @@ use DataTypeTest\BaseTestCase;
  */
 class MatrixIsSizeTest extends BaseTestCase
 {
-    private $values3 = [
+    private static $values3 = [
         [1, 2, 3],
         [1, 2, 3],
         [1, 2, 3],
     ];
 
-    private $values1 = [
+    private static $values1 = [
         [1],
     ];
 
-    private $values1x3 = [
+    private static $values1x3 = [
         [1, 2, 3],
     ];
 
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
-        yield [$this->values1, 1, 1];
-        yield [$this->values3, 3, 3];
-        yield [$this->values1x3, 1, 3];
+        yield [self::$values1, 1, 1];
+        yield [self::$values3, 3, 3];
+        yield [self::$values1x3, 1, 3];
 
-        yield [$this->values1, 1, null];
-        yield [$this->values3, null, 3];
-        yield [$this->values1x3, 1, null];
-        yield [$this->values1x3, null, 3];
+        yield [self::$values1, 1, null];
+        yield [self::$values3, null, 3];
+        yield [self::$values1x3, 1, null];
+        yield [self::$values1x3, null, 3];
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\MatrixIsSize
      * @param array<int, array<int, int|float>> $testValue
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(array $testValue, ?int $row, ?int $columns)
     {
         $rule = new MatrixIsSize($row, $columns);
@@ -61,34 +62,34 @@ class MatrixIsSizeTest extends BaseTestCase
         $this->assertEquals($testValue, $validationResult->getValue());
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         // Both set - rows wrong
-        yield [$this->values1, 2, 1, Messages::MATRIX_MUST_BE_OF_SIZE];
-        yield [$this->values3, 2, 3, Messages::MATRIX_MUST_BE_OF_SIZE];
-        yield [$this->values1x3, 2, 3, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values1, 2, 1, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values3, 2, 3, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values1x3, 2, 3, Messages::MATRIX_MUST_BE_OF_SIZE];
 
         // Both set - column wrong
-        yield [$this->values1, 1, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
-        yield [$this->values3, 3, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
-        yield [$this->values1x3, 1, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values1, 1, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values3, 3, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
+        yield [self::$values1x3, 1, 2, Messages::MATRIX_MUST_BE_OF_SIZE];
 
         // One set - rows wrong
-        yield [$this->values1, 2, null, Messages::MATRIX_MUST_BE_OF_ROW_SIZE];
-        yield [$this->values1x3, 2, null, Messages::MATRIX_MUST_BE_OF_ROW_SIZE];
+        yield [self::$values1, 2, null, Messages::MATRIX_MUST_BE_OF_ROW_SIZE];
+        yield [self::$values1x3, 2, null, Messages::MATRIX_MUST_BE_OF_ROW_SIZE];
 
         // One set - columns wrong
-        yield [$this->values3, null, 2, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
-        yield [$this->values1x3, null, 2, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
-        yield [$this->values1x3, null, 4, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
+        yield [self::$values3, null, 2, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
+        yield [self::$values1x3, null, 2, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
+        yield [self::$values1x3, null, 4, Messages::MATRIX_MUST_BE_OF_COLUMN_SIZE];
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsSize
      * @param array<int, array<int, mixed>> $testValue
      * @param string $expectedErrorMessage
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors($testValue, ?int $row, ?int $columns, $expectedErrorMessage)
     {
         $rule = new MatrixIsSize($row, $columns);

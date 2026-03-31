@@ -1,0 +1,87 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DataTypeTestFixture\Integration;
+
+use DataType\Create\CreateFromArray;
+use DataType\Create\CreateFromJson;
+use DataType\Create\CreateFromRequest;
+use DataType\Create\CreateOrErrorFromArray;
+use DataType\Create\CreateOrErrorFromJson;
+use DataType\Create\CreateOrErrorFromRequest;
+use DataType\DataType;
+use DataType\ExtractRule\GetArrayOfInt;
+use DataType\ExtractRule\GetString;
+use DataType\InputType;
+use DataType\ProcessRule\MaxIntValue;
+use DataType\ProcessRule\MaxLength;
+use DataType\ProcessRule\MinIntValue;
+use DataType\ProcessRule\MinLength;
+use DataType\SafeAccess;
+use DataTypeTestFixture\Integration\ArrayAllMultiplesOf;
+
+class IntArrayParams implements DataType
+{
+    use SafeAccess;
+    use CreateFromArray;
+    use CreateFromJson;
+    use CreateFromRequest;
+    use CreateOrErrorFromArray;
+    use CreateOrErrorFromJson;
+    use CreateOrErrorFromRequest;
+
+
+    /** @var string  */
+    private $name;
+
+    /** @var int[] */
+    private $counts;
+
+    /**
+     *
+     * @param string $name
+     * @param array<int, int> $counts
+     */
+    public function __construct(string $name, array $counts)
+    {
+        $this->name = $name;
+        $this->counts = $counts;
+    }
+
+    public static function getInputTypes(): array
+    {
+        return [
+            new InputType(
+                'name',
+                new GetString(),
+                new MinLength(4),
+                new MaxLength(16)
+            ),
+            new InputType(
+                'counts',
+                new GetArrayOfInt(
+                    new MinIntValue(1),
+                    new MaxIntValue(50)
+                ),
+                new ArrayAllMultiplesOf(3)
+            )
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getCounts(): array
+    {
+        return $this->counts;
+    }
+}

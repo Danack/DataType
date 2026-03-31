@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
  */
 class ValidDateTest extends BaseTestCase
 {
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             [
@@ -34,9 +35,9 @@ class ValidDateTest extends BaseTestCase
 
 
     /**
-     * @dataProvider provideTestWorksCases
      * @covers \DataType\ProcessRule\ValidDate
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testValidationWorks(string $input, \DateTimeInterface $expectedTime)
     {
         $rule = new ValidDate();
@@ -50,7 +51,7 @@ class ValidDateTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedTime);
     }
 
-    public function provideTestErrorsCases()
+    public static function provideTestErrorsCases()
     {
         return [
             ['2pm on Tuesday'],
@@ -59,9 +60,9 @@ class ValidDateTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrorsCases
      * @covers \DataType\ProcessRule\ValidDate
      */
+    #[DataProvider('provideTestErrorsCases')]
     public function testValidationErrors(string $input)
     {
         $rule = new ValidDate();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessRule\CheckFloat;
@@ -26,9 +27,9 @@ class CheckFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_check_float_accepts_valid_input
      * @covers \DataType\ProcessRule\CheckFloat::checkFloat
      */
+    #[DataProvider('provides_check_float_accepts_valid_input')]
     public function test_check_float_accepts_valid_input(mixed $input, float $expected): void
     {
         $obj = new class {
@@ -48,9 +49,9 @@ class CheckFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_check_float_rejects_invalid_type
      * @covers \DataType\ProcessRule\CheckFloat::checkFloat
      */
+    #[DataProvider('provides_check_float_rejects_invalid_type')]
     public function test_check_float_rejects_invalid_type(mixed $invalidInput): void
     {
         $obj = new class {

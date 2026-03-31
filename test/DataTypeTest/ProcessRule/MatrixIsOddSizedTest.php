@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -18,7 +19,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MatrixIsOddSizedTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         $values3 = [
             [1, 2, 3],
@@ -35,10 +36,10 @@ class MatrixIsOddSizedTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MatrixIsOddSized
      * @param array<int, array<int, mixed>> $testValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($testValue)
     {
         $rule = new MatrixIsOddSized();
@@ -54,7 +55,7 @@ class MatrixIsOddSizedTest extends BaseTestCase
         $this->assertEquals($testValue, $validationResult->getValue());
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         $values2x3 = [
             [1, 2, 3],
@@ -72,11 +73,11 @@ class MatrixIsOddSizedTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsOddSized
      * @param array<int, array<int, mixed>> $testValue
      * @param string $expectedErrorMessage
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors($testValue, $expectedErrorMessage)
     {
         $rule = new MatrixIsOddSized();

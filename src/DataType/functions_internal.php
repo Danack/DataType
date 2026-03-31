@@ -460,19 +460,19 @@ function getRawCharacters(string $string): string
 function getDefaultSupportedTimeFormats(): array
 {
     return [
-        \DateTime::ATOM,
-        \DateTime::COOKIE,
-        \DateTime::ISO8601,
-        \DateTime::RFC822,
-        \DateTime::RFC850,
-        \DateTime::RFC1036,
-        \DateTime::RFC1123,
-        \DateTime::RFC2822,
-        \DateTime::RFC3339,
-        \DateTime::RFC3339_EXTENDED,
-        \DateTime::RFC7231,
-        \DateTime::RSS,
-        \DateTime::W3C,
+        'Y-m-d\TH:i:sP', // \DateTime::ATOM
+        'l, d-M-Y H:i:s T', // \DateTime::COOKIE
+        'Y-m-d\TH:i:sO', // \DateTime::ISO8601
+        'D, d M y H:i:s O', // \DateTime::RFC822
+        'l, d-M-y H:i:s T', // \DateTime::RFC850
+        'D, d M y H:i:s O', // \DateTime::RFC1036
+        'D, d M Y H:i:s O', // \DateTime::RFC1123
+        'D, d M Y H:i:s O', // \DateTime::RFC2822
+        'Y-m-d\TH:i:sP', // \DateTime::RFC3339
+        'Y-m-d\TH:i:s.vP', // \DateTime::RFC3339_EXTENDED
+        'D, d M Y H:i:s \G\M\T', // \DateTime::RFC7231
+        'D, d M Y H:i:s O', // \DateTime::RSS
+        'Y-m-d\TH:i:sP', // \DateTime::W3C
     ];
 }
 

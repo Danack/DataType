@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MaxIntValueTest extends BaseTestCase
 {
-    public function provideMaxIntCases()
+    public static function provideMaxIntCases()
     {
         $maxValue = 256;
         $underValue = $maxValue - 1;
@@ -32,9 +33,9 @@ class MaxIntValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxIntCases
      * @covers \DataType\ProcessRule\MaxIntValue
      */
+    #[DataProvider('provideMaxIntCases')]
     public function testValidation(int $maxValue, int $inputValue)
     {
         $rule = new MaxIntValue($maxValue);
@@ -51,8 +52,7 @@ class MaxIntValueTest extends BaseTestCase
     }
 
 
-
-    public function provideMaxIntErrors()
+    public static function provideMaxIntErrors()
     {
         $maxValue = 256;
         $underValue = $maxValue - 1;
@@ -69,9 +69,9 @@ class MaxIntValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxIntErrors
      * @covers \DataType\ProcessRule\MaxIntValue
      */
+    #[DataProvider('provideMaxIntErrors')]
     public function testErrors(int $maxValue, int $inputValue)
     {
         $rule = new MaxIntValue($maxValue);

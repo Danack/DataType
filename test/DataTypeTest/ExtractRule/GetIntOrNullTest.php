@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetIntOrNull;
 use DataType\Messages;
@@ -32,7 +33,7 @@ class GetIntOrNullTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['5', 5],
@@ -43,10 +44,10 @@ class GetIntOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetIntOrNull
-     * @dataProvider provideTestWorksCases
      * @param int|string|null $input
      * @param int|null $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks($input, $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -62,7 +63,7 @@ class GetIntOrNullTest extends BaseTestCase
     }
 
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield ['', Messages::INT_REQUIRED_FOUND_EMPTY_STRING];
         yield ['6 apples', Messages::INT_REQUIRED_FOUND_NON_DIGITS2];
@@ -71,10 +72,10 @@ class GetIntOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetIntOrNull
-     * @dataProvider provideTestErrorCases
      * @param string $input
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($input, $message)
     {
         $rule = new GetIntOrNull();

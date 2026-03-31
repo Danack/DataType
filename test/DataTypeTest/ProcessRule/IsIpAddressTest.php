@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
  */
 class IsIpAddressTest extends BaseTestCase
 {
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         // IPv4 addresses
         yield ['127.0.0.1'];
@@ -33,9 +34,9 @@ class IsIpAddressTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\IsIpAddress
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new IsIpAddress();
@@ -49,7 +50,7 @@ class IsIpAddressTest extends BaseTestCase
         $this->assertEquals($testValue, $validationResult->getValue());
     }
 
-    public function provideTestWorksIpv4Only()
+    public static function provideTestWorksIpv4Only()
     {
         yield ['127.0.0.1'];
         yield ['192.168.1.1'];
@@ -57,9 +58,9 @@ class IsIpAddressTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorksIpv4Only
      * @covers \DataType\ProcessRule\IsIpAddress
      */
+    #[DataProvider('provideTestWorksIpv4Only')]
     public function testWorksIpv4Only(string $testValue)
     {
         $rule = new IsIpAddress(true, false);
@@ -73,7 +74,7 @@ class IsIpAddressTest extends BaseTestCase
         $this->assertEquals($testValue, $validationResult->getValue());
     }
 
-    public function provideTestWorksIpv6Only()
+    public static function provideTestWorksIpv6Only()
     {
         yield ['2001:0db8:85a3:0000:0000:8a2e:0370:7334'];
         yield ['2001:db8:85a3::8a2e:370:7334'];
@@ -81,9 +82,9 @@ class IsIpAddressTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorksIpv6Only
      * @covers \DataType\ProcessRule\IsIpAddress
      */
+    #[DataProvider('provideTestWorksIpv6Only')]
     public function testWorksIpv6Only(string $testValue)
     {
         $rule = new IsIpAddress(false, true);
@@ -119,7 +120,7 @@ class IsIpAddressTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['not an ip', Messages::ERROR_INVALID_IP_ADDRESS];
         yield ['256.1.1.1', Messages::ERROR_INVALID_IP_ADDRESS];
@@ -129,11 +130,11 @@ class IsIpAddressTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsIpAddress
      * @param string $testValue
      * @param string $expected_error
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue, string $expected_error)
     {
         $rule = new IsIpAddress();

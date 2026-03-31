@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class CastToFloatTest extends BaseTestCase
 {
-    public function provideWorksCases()
+    public static function provideWorksCases()
     {
         return [
             [5.0, 5.0],
@@ -27,9 +28,9 @@ class CastToFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideWorksCases
      * @covers \DataType\ProcessRule\CastToFloat
      */
+    #[DataProvider('provideWorksCases')]
     public function testValidationWorks(float|string $inputValue, float $expectedValue)
     {
         $rule = new CastToFloat();
@@ -43,7 +44,7 @@ class CastToFloatTest extends BaseTestCase
         $this->assertEquals($expectedValue, $validationResult->getValue());
     }
 
-    public function provideErrorCases()
+    public static function provideErrorCases()
     {
         return [
             [[], Messages::FLOAT_REQUIRED_WRONG_TYPE],
@@ -59,11 +60,11 @@ class CastToFloatTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideErrorCases
      * @covers \DataType\ProcessRule\CastToFloat
      * @param array<int, mixed>|string|null $inputValue
      * @param string $message
      */
+    #[DataProvider('provideErrorCases')]
     public function testValidationErrors($inputValue, $message)
     {
         $rule = new CastToFloat();

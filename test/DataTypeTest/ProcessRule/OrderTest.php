@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
@@ -17,7 +18,7 @@ use DataTypeTest\BaseTestCase;
  */
 class OrderTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             ['time', ['time' => Ordering::ASC]],
@@ -25,10 +26,10 @@ class OrderTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\Order
      * @param array<int, string> $expectedOrdering
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation(string $testValue, array $expectedOrdering)
     {
         $orderParams = ['time', 'distance'];
@@ -47,15 +48,15 @@ class OrderTest extends BaseTestCase
         $this->assertEquals($expectedOrdering, $value->toOrderArray());
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['bar'];
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\Order
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue)
     {
         $orderParams = ['time', 'distance'];

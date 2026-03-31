@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class CastToIntTest extends BaseTestCase
 {
-    public function provideIntValueWorksCases()
+    public static function provideIntValueWorksCases()
     {
         return [
             [5, 5],
@@ -27,9 +28,9 @@ class CastToIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideIntValueWorksCases
      * @covers \DataType\ProcessRule\CastToInt
      */
+    #[DataProvider('provideIntValueWorksCases')]
     public function testValidationWorks(int|string $inputValue, int $expectedValue)
     {
         $rule = new CastToInt();
@@ -44,7 +45,7 @@ class CastToIntTest extends BaseTestCase
         $this->assertEquals($expectedValue, $validationResult->getValue());
     }
 
-    public function providesDetectsErrorsCorrectly()
+    public static function providesDetectsErrorsCorrectly()
     {
         return [
             // todo - we should test the exact error.
@@ -58,10 +59,10 @@ class CastToIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider providesDetectsErrorsCorrectly
      * @covers \DataType\ProcessRule\CastToInt
      * @param array<int, mixed>|string $inputValue
      */
+    #[DataProvider('providesDetectsErrorsCorrectly')]
     public function testDetectsErrorsCorrectly($inputValue, string $message)
     {
         $rule = new CastToInt();

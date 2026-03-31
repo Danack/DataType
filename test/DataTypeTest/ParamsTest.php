@@ -169,13 +169,13 @@ class ParamsTest extends BaseTestCase
      */
     public function testException()
     {
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
         $this->expectException(\DataType\Exception\DataTypeRuntimeException::class);
 
         $dataStorage =  TestArrayDataStorage::fromArraySetFirstValue([]);
 
 
-        create(\DataTypeTest\Integration\FooParams::class, $rules, $dataStorage);
+        create(\DataTypeTestFixture\Integration\FooParams::class, $rules, $dataStorage);
     }
 
     /**
@@ -186,14 +186,14 @@ class ParamsTest extends BaseTestCase
         $data = ['limit' => 5];
         $dataStorage =  TestArrayDataStorage::fromArray($data);
 
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
         $fooParams = create(
-            \DataTypeTest\Integration\FooParams::class,
+            \DataTypeTestFixture\Integration\FooParams::class,
             $rules,
             $dataStorage
         );
 
-        /** @var \DataTypeTest\Integration\FooParams $fooParams */
+        /** @var \DataTypeTestFixture\Integration\FooParams $fooParams */
         $this->assertEquals(5, $fooParams->getLimit());
     }
 
@@ -204,9 +204,9 @@ class ParamsTest extends BaseTestCase
     {
         $dataStorage = TestArrayDataStorage::fromArray([]);
 
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
         [$params, $validationProblems] = createOrError(
-            \DataTypeTest\Integration\FooParams::class,
+            \DataTypeTestFixture\Integration\FooParams::class,
             $rules,
             $dataStorage
         );
@@ -228,15 +228,15 @@ class ParamsTest extends BaseTestCase
     {
         $dataStorage = TestArrayDataStorage::fromArray(['limit' => 5]);
 
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
         [$fooParams, $errors] = createOrError(
-            \DataTypeTest\Integration\FooParams::class,
+            \DataTypeTestFixture\Integration\FooParams::class,
             $rules,
             $dataStorage
         );
 
         $this->assertNoValidationProblems($errors);
-        $this->assertInstanceOf(\DataTypeTest\Integration\FooParams::class, $fooParams);
+        $this->assertInstanceOf(\DataTypeTestFixture\Integration\FooParams::class, $fooParams);
         $this->assertEquals(5, $fooParams->getLimit());
     }
 
@@ -247,10 +247,10 @@ class ParamsTest extends BaseTestCase
     public function testCreateWithResult_Works(): void
     {
         $dataStorage = TestArrayDataStorage::fromArray(['limit' => 5]);
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
 
         $result = createWithResult(
-            \DataTypeTest\Integration\FooParams::class,
+            \DataTypeTestFixture\Integration\FooParams::class,
             $rules,
             $dataStorage
         );
@@ -258,7 +258,7 @@ class ParamsTest extends BaseTestCase
         $this->assertTrue($result->isValid());
         $this->assertSame([], $result->getErrors());
         $fooParams = $result->getValue();
-        $this->assertInstanceOf(\DataTypeTest\Integration\FooParams::class, $fooParams);
+        $this->assertInstanceOf(\DataTypeTestFixture\Integration\FooParams::class, $fooParams);
         $this->assertSame(5, $fooParams->getLimit());
     }
 
@@ -269,10 +269,10 @@ class ParamsTest extends BaseTestCase
     public function testCreateWithResult_ErrorIsReturned(): void
     {
         $dataStorage = TestArrayDataStorage::fromArray([]);
-        $rules = \DataTypeTest\Integration\FooParams::getInputTypes();
+        $rules = \DataTypeTestFixture\Integration\FooParams::getInputTypes();
 
         $result = createWithResult(
-            \DataTypeTest\Integration\FooParams::class,
+            \DataTypeTestFixture\Integration\FooParams::class,
             $rules,
             $dataStorage
         );

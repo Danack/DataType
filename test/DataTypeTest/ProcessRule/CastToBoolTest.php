@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,15 +16,15 @@ use DataTypeTest\BaseTestCase;
  */
 class CastToBoolTest extends BaseTestCase
 {
-    public function provideBoolValueWorksCases()
+    public static function provideBoolValueWorksCases()
     {
         yield from getBoolTestWorks();
     }
 
     /**
-     * @dataProvider provideBoolValueWorksCases
      * @covers \DataType\ProcessRule\CastToBool
      */
+    #[DataProvider('provideBoolValueWorksCases')]
     public function testValidationWorks(string|bool $inputValue, bool $expectedValue)
     {
         $rule = new CastToBool();
@@ -38,7 +39,7 @@ class CastToBoolTest extends BaseTestCase
         $this->assertEquals($expectedValue, $validationResult->getValue());
     }
 
-    public function provideBoolValueErrorsCases()
+    public static function provideBoolValueErrorsCases()
     {
         yield [fopen('php://memory', 'r+'), Messages::UNSUPPORTED_TYPE];
         yield [[1, 2, 3], Messages::UNSUPPORTED_TYPE];
@@ -47,9 +48,9 @@ class CastToBoolTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideBoolValueErrorsCases
      * @covers \DataType\ProcessRule\CastToBool
      */
+    #[DataProvider('provideBoolValueErrorsCases')]
     public function testValidationErrors(mixed $inputValue, string $message)
     {
         $rule = new CastToBool();

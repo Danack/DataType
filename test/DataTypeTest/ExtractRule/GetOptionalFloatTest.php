@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetOptionalFloat;
 use DataType\Messages;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class GetOptionalFloatTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         // Test value is read as string
         yield ['5', 5];
@@ -35,10 +36,10 @@ class GetOptionalFloatTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalFloat
-     * @dataProvider provideTestCases
      * @param int|string $input
      * @param float|int $expectedValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($input, $expectedValue)
     {
         $rule = new GetOptionalFloat();
@@ -52,7 +53,7 @@ class GetOptionalFloatTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         // If set, null not allowed
         yield [null, Messages::FLOAT_REQUIRED_WRONG_TYPE];
@@ -65,10 +66,10 @@ class GetOptionalFloatTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetOptionalFloat
-     * @dataProvider provideTestErrorCases
      * @param mixed $inputValue
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($inputValue, $message)
     {
         $validator = new ProcessedValues();

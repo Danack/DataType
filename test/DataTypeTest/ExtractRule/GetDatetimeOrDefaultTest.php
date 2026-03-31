@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetDatetimeOrDefault;
 use DataType\Messages;
@@ -48,7 +49,7 @@ class GetDatetimeOrDefaultTest extends BaseTestCase
         $this->assertNull($validationResult->getValue());
     }
 
-    public function providesValidationWorks()
+    public static function providesValidationWorks()
     {
         yield [
             '2002-10-02T10:00:00-05:00',
@@ -57,11 +58,11 @@ class GetDatetimeOrDefaultTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider providesValidationWorks
      * @covers \DataType\ExtractRule\GetDatetimeOrDefault
      * @param string $inputValue
      * @param \DateTimeImmutable $expectedValue
      */
+    #[DataProvider('providesValidationWorks')]
     public function testValidationWorks(string $inputValue, \DateTimeImmutable $expectedValue)
     {
         $default = new \DateTimeImmutable('2020-01-01T00:00:00+00:00');

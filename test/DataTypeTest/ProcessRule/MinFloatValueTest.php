@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MinFloatValueTest extends BaseTestCase
 {
-    public function provideMinFloatValueCases()
+    public static function provideMinFloatValueCases()
     {
         $minValue = 100.5;
         $underValue = $minValue - 1;
@@ -33,9 +34,9 @@ class MinFloatValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMinFloatValueCases
      * @covers \DataType\ProcessRule\MinFloatValue
      */
+    #[DataProvider('provideMinFloatValueCases')]
     public function testValidation(float $minValue, float $inputValue)
     {
         $rule = new MinFloatValue($minValue);
@@ -49,7 +50,7 @@ class MinFloatValueTest extends BaseTestCase
     }
 
 
-    public function provideMinFloatValueErrors()
+    public static function provideMinFloatValueErrors()
     {
         $minValue = 100.5;
         $underValue = $minValue - 1;
@@ -65,9 +66,9 @@ class MinFloatValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMinFloatValueErrors
      * @covers \DataType\ProcessRule\MinFloatValue
      */
+    #[DataProvider('provideMinFloatValueErrors')]
     public function testErrors(float $minValue, float $inputValue)
     {
         $rule = new MinFloatValue($minValue);

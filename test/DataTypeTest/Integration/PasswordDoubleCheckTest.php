@@ -7,6 +7,7 @@ namespace DataTypeTest\Integration;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Integration\PasswordDoubleCheck;
 
 /**
  * @coversNothing
@@ -14,7 +15,7 @@ use VarMap\ArrayVarMap;
 class PasswordDoubleCheckTest extends BaseTestCase
 {
     /**
-     * @covers \DataTypeTest\Integration\PasswordDoubleCheck
+     * @covers \DataTypeTestFixture\Integration\PasswordDoubleCheck
      */
     public function testWorks()
     {
@@ -56,7 +57,7 @@ class PasswordDoubleCheckTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataTypeTest\Integration\PasswordDoubleCheck
+     * @covers \DataTypeTestFixture\Integration\PasswordDoubleCheck
      */
     public function testDifferentValue()
     {
@@ -81,7 +82,7 @@ class PasswordDoubleCheckTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataTypeTest\Integration\PasswordDoubleCheck
+     * @covers \DataTypeTestFixture\Integration\PasswordDoubleCheck
      */
     public function testMissingPreviousValue()
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessRule\CheckInt;
@@ -23,9 +24,9 @@ class CheckIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_check_int_accepts_valid_input
      * @covers \DataType\ProcessRule\CheckInt::checkInt
      */
+    #[DataProvider('provides_check_int_accepts_valid_input')]
     public function test_check_int_accepts_valid_input(int $input, int $expected): void
     {
         $obj = new class {
@@ -48,9 +49,9 @@ class CheckIntTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_check_int_rejects_invalid_type
      * @covers \DataType\ProcessRule\CheckInt::checkInt
      */
+    #[DataProvider('provides_check_int_rejects_invalid_type')]
     public function test_check_int_rejects_invalid_type(mixed $invalidInput): void
     {
         $obj = new class {

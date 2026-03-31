@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Parameters;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Messages;
 use DataType\Parameters\OptionalGpsParams;
 use DataTypeTest\BaseTestCase;
@@ -34,9 +35,9 @@ class OptionalGpsParamsTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_parses_input_to_expected_latitude_and_longitude
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_parses_input_to_expected_latitude_and_longitude')]
     public function test_parses_input_to_expected_latitude_and_longitude(
         array $data,
         float|null $expectedLatitude,
@@ -66,9 +67,9 @@ class OptionalGpsParamsTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_fails_with_both_or_neither_error
      * @param array<string, mixed> $data
      */
+    #[DataProvider('provides_fails_with_both_or_neither_error')]
     public function test_fails_with_both_or_neither_error(
         array $data,
         string $path,

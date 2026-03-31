@@ -4,6 +4,7 @@ namespace DataTypeTest\Basic;
 
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
+use DataTypeTestFixture\Basic\BasicFloatFixture;
 
 class BasicFloatTest extends BaseTestCase
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ExtractRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetFloatOrNull;
 use DataType\Messages;
@@ -32,7 +33,7 @@ class GetFloatOrNullTest extends BaseTestCase
         );
     }
 
-    public function provideTestWorksCases()
+    public static function provideTestWorksCases()
     {
         return [
             ['5', 5.0],
@@ -47,10 +48,10 @@ class GetFloatOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloatOrNull
-     * @dataProvider provideTestWorksCases
      * @param int|float|string|null $input
      * @param float|null $expectedValue
      */
+    #[DataProvider('provideTestWorksCases')]
     public function testWorks($input, $expectedValue)
     {
         $validator = new ProcessedValues();
@@ -65,7 +66,7 @@ class GetFloatOrNullTest extends BaseTestCase
         $this->assertEquals($validationResult->getValue(), $expectedValue);
     }
 
-    public function provideTestErrorCases()
+    public static function provideTestErrorCases()
     {
         yield ['5.a', Messages::FLOAT_REQUIRED];
         yield ['banana', Messages::FLOAT_REQUIRED];
@@ -73,10 +74,10 @@ class GetFloatOrNullTest extends BaseTestCase
 
     /**
      * @covers \DataType\ExtractRule\GetFloatOrNull
-     * @dataProvider provideTestErrorCases
      * @param string $input
      * @param string $message
      */
+    #[DataProvider('provideTestErrorCases')]
     public function testErrors($input, $message)
     {
         $rule = new GetFloatOrNull();

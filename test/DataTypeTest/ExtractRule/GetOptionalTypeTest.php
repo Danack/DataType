@@ -8,7 +8,7 @@ use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ExtractRule\GetOptionalType;
 use DataType\ProcessedValues;
 use DataTypeTest\BaseTestCase;
-use DataTypeTest\Integration\ReviewScore;
+use DataTypeTestFixture\Integration\ReviewScore;
 
 /**
  * @coversNothing

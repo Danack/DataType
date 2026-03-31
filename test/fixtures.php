@@ -11,7 +11,7 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\InputType;
 use DataType\ProcessRule\AlwaysErrorsRule;
 use DataType\SafeAccess;
-use DataTypeTest\ImagickColorHasInputType;
+use DataTypeTestFixture\ImagickColorHasInputType;
 
 class TestObject
 {

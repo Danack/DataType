@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessRule\BothOrNeitherParam;
@@ -24,10 +25,10 @@ class BothOrNeitherParamTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_process_passes
      * @param array<string, mixed> $processedValuesData
      * @covers \DataType\ProcessRule\BothOrNeitherParam
      */
+    #[DataProvider('provides_process_passes')]
     public function test_process_passes(
         array $processedValuesData,
         float|null $value,
@@ -69,10 +70,10 @@ class BothOrNeitherParamTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provides_process_errors
      * @param array<string, mixed> $processedValuesData
      * @covers \DataType\ProcessRule\BothOrNeitherParam
      */
+    #[DataProvider('provides_process_errors')]
     public function test_process_errors(
         array $processedValuesData,
         float|null $value,

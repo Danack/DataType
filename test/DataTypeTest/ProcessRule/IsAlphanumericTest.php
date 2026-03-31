@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
  */
 class IsAlphanumericTest extends BaseTestCase
 {
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ['abc'];
         yield ['ABC'];
@@ -28,9 +29,9 @@ class IsAlphanumericTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\IsAlphanumeric
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new IsAlphanumeric();
@@ -66,7 +67,7 @@ class IsAlphanumericTest extends BaseTestCase
         );
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         yield ['abc def', Messages::ERROR_NOT_ALPHANUMERIC];
         yield ['abc-def', Messages::ERROR_NOT_ALPHANUMERIC];
@@ -76,11 +77,11 @@ class IsAlphanumericTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\IsAlphanumeric
      * @param string $testValue
      * @param string $expected_error
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors(string $testValue, string $expected_error)
     {
         $rule = new IsAlphanumeric();

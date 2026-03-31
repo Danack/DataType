@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\ProcessedValues;
@@ -16,7 +17,7 @@ use DataTypeTest\BaseTestCase;
 class ImagickRgbColorTest extends BaseTestCase
 {
 
-    public function provideTestWorks()
+    public static function provideTestWorks()
     {
         yield ["DarkSeaGreen3"];
         yield ["DodgerBlue2"];
@@ -24,9 +25,9 @@ class ImagickRgbColorTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestWorks
      * @covers \DataType\ProcessRule\ImagickIsRgbColor
      */
+    #[DataProvider('provideTestWorks')]
     public function testWorks(string $testValue)
     {
         $rule = new ImagickIsRgbColor();

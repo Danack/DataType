@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\CheckOnlyAllowedCharacters;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class CheckOnlyAllowedCharactersTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         return [
             ['a-zA-Z', 'john', null],
@@ -27,9 +28,9 @@ class CheckOnlyAllowedCharactersTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\CheckOnlyAllowedCharacters
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation(
         string $validCharactersPattern,
         string $testValue,

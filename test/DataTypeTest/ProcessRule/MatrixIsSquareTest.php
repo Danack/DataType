@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MatrixIsSquareTest extends BaseTestCase
 {
-    public function provideTestCases()
+    public static function provideTestCases()
     {
         $values3 = [
             [1, 2, 3],
@@ -32,10 +33,10 @@ class MatrixIsSquareTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestCases
      * @covers \DataType\ProcessRule\MatrixIsSquare
      * @param array<int, array<int, mixed>> $testValue
      */
+    #[DataProvider('provideTestCases')]
     public function testValidation($testValue)
     {
         $rule = new MatrixIsSquare();
@@ -51,7 +52,7 @@ class MatrixIsSquareTest extends BaseTestCase
         $this->assertEquals($testValue, $validationResult->getValue());
     }
 
-    public function provideTestErrors()
+    public static function provideTestErrors()
     {
         $values1x3 = [
             [1, 2, 3],
@@ -74,13 +75,13 @@ class MatrixIsSquareTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideTestErrors
      * @covers \DataType\ProcessRule\MatrixIsSquare
      * @param array<int, array<int, mixed>> $testValue
      * @param string $expectedErrorMessage
      * @param int $rows
      * @param int $columns
      */
+    #[DataProvider('provideTestErrors')]
     public function testErrors($testValue, $expectedErrorMessage, $rows, $columns)
     {
         $rule = new MatrixIsSquare();

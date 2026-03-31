@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -15,7 +16,7 @@ use DataTypeTest\BaseTestCase;
  */
 class MaxFloatValueTest extends BaseTestCase
 {
-    public function provideMaxFloatCases()
+    public static function provideMaxFloatCases()
     {
         $maxValue = 256.5;
         $underValue = $maxValue - 1;
@@ -32,9 +33,9 @@ class MaxFloatValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxFloatCases
      * @covers \DataType\ProcessRule\MaxFloatValue
      */
+    #[DataProvider('provideMaxFloatCases')]
     public function testValidation(float $maxValue, float $inputValue)
     {
         $rule = new MaxFloatValue($maxValue);
@@ -51,8 +52,7 @@ class MaxFloatValueTest extends BaseTestCase
     }
 
 
-
-    public function provideMaxFloatErrors()
+    public static function provideMaxFloatErrors()
     {
         $maxValue = 256.0;
         $underValue = $maxValue - 1;
@@ -69,9 +69,9 @@ class MaxFloatValueTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideMaxFloatErrors
      * @covers \DataType\ProcessRule\MaxFloatValue
      */
+    #[DataProvider('provideMaxFloatErrors')]
     public function testErrors(float $maxValue, float $inputValue)
     {
         $rule = new MaxFloatValue($maxValue);
