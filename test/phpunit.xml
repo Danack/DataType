@@ -42,7 +42,7 @@
 <!--    </exclude>-->
     <report>
       <clover outputFile="clover.xml"/>
-      <html outputDirectory="../tmp/coverage" lowUpperBound="35" highLowerBound="70"/>
+      <html outputDirectory="../tmp/coverage" lowUpperBound="90" highLowerBound="100"/>
       <text outputFile="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>
     </report>
   </coverage>

@@ -13,6 +13,7 @@ use DataType\ExtractRule\GetOptionalString;
 use DataType\ExtractRule\GetString;
 use DataType\ExtractRule\GetStringOrDefault;
 use DataType\InputType;
+use DataType\OpenApi\ItemsObject;
 use DataType\OpenApi\OpenApiV300ParamDescription;
 use DataType\OpenApi\ShouldNeverBeCalledParamDescription;
 use DataType\ProcessRule\AlwaysEndsRule;
@@ -516,5 +517,162 @@ class DescriptionTest extends BaseTestCase
         $description = new OpenApiV300ParamDescription('John');
         $rule->updateParamDescription($description);
         $this->assertTrue($description->getNullAllowed());
+    }
+
+    public function testPatternAndNullableAreIncludedInSchema(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+        $description->setPattern('^foo$');
+        $description->setNullAllowed(true);
+
+        $result = $description->toArray();
+
+        $this->assertSame('^foo$', $result['schema']['pattern']);
+        $this->assertTrue($result['schema']['nullable']);
+    }
+
+    public function testGetNameReturnsCurrentName(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->assertSame('John', $description->getName());
+    }
+
+    public function testSetMaxItemsStoresValue(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+        $description->setMaxItems(7);
+
+        $this->assertSame(7, $description->getMaxItems());
+    }
+
+    #[DataProvider('providesMethodsThatThrowNotImplementedException')]
+    public function testMethodsThrowNotImplementedException(
+        string $method_name,
+        array $parameters,
+        string $expected_message
+    ): void {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage($expected_message);
+        $description->{$method_name}(...$parameters);
+    }
+
+    /**
+     * @return \Generator<string, array{string, array<mixed>, string}>
+     */
+    public static function providesMethodsThatThrowNotImplementedException(): \Generator
+    {
+        yield 'setIn' => ['setIn', ['query'], 'setIn not implemented yet.'];
+        yield 'setSchema' => ['setSchema', ['schema'], 'setSchema not implemented yet.'];
+        yield 'setAllowEmptyValue' => ['setAllowEmptyValue', [true], 'setAllowEmptyValue not implemented yet.'];
+        yield 'getItems' => ['getItems', [], 'getItems not implemented yet.'];
+        yield 'setItems' => ['setItems', [self::createItemsObject()], 'setItems not implemented yet.'];
+        yield 'setUniqueItems' => ['setUniqueItems', [true], 'setUniqueItems not implemented yet.'];
+        yield 'setMultipleOf' => ['setMultipleOf', [5], 'setMultipleOf not implemented yet.'];
+    }
+
+    public function testSetTypeThrowsForUnknownType(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage("Type [nonsense] is not known for the OpenApi spec.");
+        $description->setType('nonsense');
+    }
+
+    public function testSetFormatThrowsForUnknownNumberFormat(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+        $description->setType('number');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage("Format [bogus] is not known for type 'number' the OpenApi spec.");
+        $description->setFormat('bogus');
+    }
+
+    public function testSetFormatWorksForIntegerType(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+        $description->setType('integer');
+        $description->setFormat('int32');
+
+        $this->assertSame('int32', $description->getFormat());
+    }
+
+    public function testSetFormatThrowsForUnknownIntegerFormat(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+        $description->setType('integer');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage("Format [bogus] is not known for type 'integer' the OpenApi spec.");
+        $description->setFormat('bogus');
+    }
+
+    private static function createItemsObject(): ItemsObject
+    {
+        return new class implements ItemsObject {
+            public function setType(string $type): void
+            {
+            }
+
+            public function setFormat(string $format): void
+            {
+            }
+
+            public function setItems(string $items): void
+            {
+            }
+
+            public function setMaximum($maximum): void
+            {
+            }
+
+            public function setExclusiveMaximum(bool $exclusiveMinimum): void
+            {
+            }
+
+            public static function setMinimum($number): void
+            {
+            }
+
+            public function setExclusiveMinimum(bool $exclusiveMinimum): void
+            {
+            }
+
+            public function setMaxLength(int $maxLength): void
+            {
+            }
+
+            public function setMinLength(int $minLength): void
+            {
+            }
+
+            public function setPattern(string $pattern): void
+            {
+            }
+
+            public function setMaxItems(int $maxItems): void
+            {
+            }
+
+            public function setMinItems(int $minItems): void
+            {
+            }
+
+            public function setUniqueItems(bool $uniqueItems): void
+            {
+            }
+
+            public function setEnum(array $enum): void
+            {
+            }
+
+            public function setMultipleOf($number): void
+            {
+            }
+        };
     }
 }

@@ -33,10 +33,10 @@ To start the Docker development container, run `sh runLocal.sh`.
 
 ## Running Tests in Docker
 
-Tests run inside the `datatype-developing_8_2-1` container. To run commands manually:
+Tests run inside the `datatype-developing_8_5-1` container. To run commands manually:
 
 ```bash
-docker exec datatype-developing_8_2-1 bash -c "sh runUnitTests.sh"
+docker exec datatype-developing_8_5-1 bash -c "sh runUnitTests.sh"
 ```
 
 ## Test Fixtures

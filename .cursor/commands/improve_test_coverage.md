@@ -12,14 +12,14 @@ You can either:
 
 ### Step 1: Read Testing Guidelines
 
-Read `docs/developing/testing_guidelines.md` before doing any of the steps below. It defines PHPUnit coverage annotations, data providers, the no-mocks rule, use of test fixtures, and other patterns you must follow when writing tests.
+Read `docs/testing.md` before doing any of the steps below. It defines PHPUnit coverage annotations, data providers, the no-mocks rule, use of test fixtures, and other patterns you must follow when writing tests.
 
 ### Step 2: Generate Coverage Report
 
 Run the unit tests to generate a coverage report:
 
 ```bash
-docker exec datatype-developing_8_2-1 bash -c "sh runUnitTests.sh --no-progress"
+docker exec datatype-developing_8_5-1 bash -c "sh runUnitTests.sh --no-progress"
 ```
 
 ### Step 3: Find Uncovered Lines
@@ -28,10 +28,10 @@ Identify uncovered lines for the specified directory/namespace:
 
 ```bash
 # For a namespace (e.g., Bristolian/Response)
-docker exec datatype-developing_8_2-1 bash -c "php list_uncovered_lines.php clover.xml | grep Bristolian/Response"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep Bristolian/Response"
 
 # For a directory (e.g., src/Bristolian/Response)
-docker exec datatype-developing_8_2-1 bash -c "php list_uncovered_lines.php clover.xml | grep src/Bristolian/Response"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep src/Bristolian/Response"
 ```
 
 ### Step 4: Analyze Existing Tests
