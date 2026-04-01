@@ -63,10 +63,6 @@ class GetDatetime implements ExtractRule
 
         $value = $dataStorage->getCurrentValue();
 
-        if (is_array($value) === true) {
-            return ValidationResult::errorResult($dataStorage, Messages::ERROR_DATETIME_MUST_START_AS_STRING);
-        }
-
         if (is_string($value) !== true) {
             return ValidationResult::errorResult(
                 $dataStorage,

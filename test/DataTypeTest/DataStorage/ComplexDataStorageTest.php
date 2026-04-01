@@ -19,6 +19,10 @@ class ComplexDataStorageTest extends BaseTestCase
     public function testValueNotAvailable()
     {
         $dataStorage = ComplexDataStorage::fromData([]);
+
+        $initial_path = $dataStorage->getPath();
+        $this->assertSame('/', $initial_path);
+
         $dataStorageAtFoo = $dataStorage->moveKey('foo');
 
         $available = $dataStorageAtFoo->isValueAvailable();

@@ -29,6 +29,25 @@
                 "DataType\\DataStorage\\ArrayDataStorage::moveKey",
             ],
         },
+
+        "Catch_": {
+            "ignore": [
+                "DataType\\ProcessRule\\EarlierThanParam::process",
+                "DataType\\ProcessRule\\LaterThanParam::process"
+            ]
+        },
+        "Concat": {
+            "ignore": [
+                "DataType\\ProcessRule\\EarlierThanParam::process",
+                "DataType\\ProcessRule\\LaterThanParam::process"
+            ]
+        },
+        "ConcatOperandRemoval": {
+            "ignore": [
+                "DataType\\ProcessRule\\EarlierThanParam::process",
+                "DataType\\ProcessRule\\LaterThanParam::process"
+            ]
+        },
         "FalseValue": {
             "ignore": [
                 "*::updateParamDescription",
@@ -48,6 +67,12 @@
                 "DataType\\ProcessRule\\SaneCharacters::process",
                 "DataType\\ProcessRule\\CheckOnlyAllowedCharacters::process"
             ]
+        },
+        "LogicalAndAllSubExprNegation": {
+            "ignore": [
+                // TODO - remove when OpenAPI generation is implemented.
+                "DataType\\ProcessRule\\IsIpAddress::updateParamDescription"
+            ],
         },
         "MethodCallRemoval": {
             "ignore": [

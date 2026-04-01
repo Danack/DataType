@@ -217,6 +217,21 @@ class FunctionsTest extends BaseTestCase
         );
     }
 
+    /**
+     * @covers ::\DataType\createObjectFromProcessedValues
+     */
+    public function test_CreateObjectFromParams_nonexistent_class()
+    {
+        $this->expectException(MissingClassExceptionData::class);
+        createObjectFromProcessedValues(
+            // @phpstan-ignore class.notFound
+            \DoesNotExist::class,
+            createProcessedValuesFromArray([
+            ])
+        );
+    }
+
+
     public function provides_getJsonPointerParts()
     {
         yield ['', []];

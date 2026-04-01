@@ -13,7 +13,6 @@ use function DataType\createSingleValue;
 
 /**
  * @coversNothing
- * @group wip
  */
 class UrlTest extends BaseTestCase
 {

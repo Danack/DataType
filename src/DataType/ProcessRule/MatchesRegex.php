@@ -42,6 +42,8 @@ class MatchesRegex implements ProcessRule
         $fullPattern = $this->pattern;
         
         // If pattern doesn't have delimiters, add them
+        // TODO - this is probably not a great idea. Users should probably just pass
+        // the correct regex pattern with delimiters
         $hasDelimiters = preg_match('/^\/.+\/[imsxADSUXJu]*$/', $this->pattern) === 1;
         if (!$hasDelimiters) {
             $fullPattern = '/' . $this->pattern . '/';
@@ -59,7 +61,7 @@ class MatchesRegex implements ProcessRule
             $fullPattern = $replaced;
         }
 
-        $matches = preg_match($fullPattern, $value);
+        $matches = @preg_match($fullPattern, $value);
 
         // @codeCoverageIgnoreStart
         if ($matches === false) {

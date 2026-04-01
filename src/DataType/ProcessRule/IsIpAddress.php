@@ -71,6 +71,11 @@ class IsIpAddress implements ProcessRule
         if ($this->allowIpv4 && $this->allowIpv6) {
             // Both allowed - use ipv4 format as default, or could use a pattern
             $paramDescription->setFormat('ipv4');
+            //            oneOf:
+            //            - type: string
+            //      format: ipv4
+            //            - type: string
+            //      format: ipv6
         } elseif ($this->allowIpv4) {
             $paramDescription->setFormat('ipv4');
         } elseif ($this->allowIpv6) {

@@ -6,6 +6,7 @@ namespace DataTypeTest\ProcessRule;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
+use DataType\Exception\DataTypeLogicException;
 use DataType\Exception\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessedValues;
@@ -125,6 +126,28 @@ class MatchesRegexTest extends BaseTestCase
     /**
      * @covers \DataType\ProcessRule\MatchesRegex
      */
+    public function testDescriptionDoesNotStripSuffixThatOnlyLooksLikeDelimitedRegex(): void
+    {
+        $rule = new MatchesRegex('prefix/[a-z]+$/i');
+        $description = $this->applyRuleToDescription($rule);
+        /** @var \DataType\OpenApi\OpenApiV300ParamDescription $description */
+        $this->assertSame('prefix/[a-z]+$/i', $description->getPattern());
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\MatchesRegex
+     */
+    public function testDescriptionDoesNotStripPatternWithTrailingCharactersAfterDelimitedRegex(): void
+    {
+        $rule = new MatchesRegex('/^[a-z]+$/i-suffix');
+        $description = $this->applyRuleToDescription($rule);
+        /** @var \DataType\OpenApi\OpenApiV300ParamDescription $description */
+        $this->assertSame('/^[a-z]+$/i-suffix', $description->getPattern());
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\MatchesRegex
+     */
     public function testWorksWithFlags()
     {
         $rule = new MatchesRegex('^[a-z]+$', 'i');
@@ -152,5 +175,44 @@ class MatchesRegexTest extends BaseTestCase
 
         $this->assertNoProblems($validationResult);
         $this->assertEquals('ABC', $validationResult->getValue());
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\MatchesRegex
+     */
+    public function testWorksWhenPatternContainsEscapedSlashesAtEnd(): void
+    {
+        $testValue = 'foo/bar/';
+        $rule = new MatchesRegex('foo\/bar\/');
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', $testValue);
+
+        $validationResult = $rule->process(
+            $testValue,
+            $processedValues,
+            $dataStorage
+        );
+
+        $this->assertNoProblems($validationResult);
+        $this->assertSame($testValue, $validationResult->getValue());
+    }
+
+    /**
+     * @covers \DataType\ProcessRule\MatchesRegex
+     */
+    public function testMalformedPatternStartingWithSlashIsWrappedBeforePregMatch(): void
+    {
+        $rule = new MatchesRegex('/foo/bar');
+        $processedValues = new ProcessedValues();
+        $dataStorage = TestArrayDataStorage::fromSingleValueAndSetCurrentPosition('foo', 'anything');
+
+        $this->expectException(DataTypeLogicException::class);
+        $this->expectExceptionMessage('preg_match failed for pattern: //foo/bar/');
+
+        $rule->process(
+            'anything',
+            $processedValues,
+            $dataStorage
+        );
     }
 }

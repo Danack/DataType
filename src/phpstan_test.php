@@ -21,7 +21,6 @@ namespace {
 
 }
 
-
 namespace debugging {
 
     use DataType\Create\CreateFromJson;

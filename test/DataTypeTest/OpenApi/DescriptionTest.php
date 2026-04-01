@@ -525,6 +525,7 @@ class DescriptionTest extends BaseTestCase
         $description->setPattern('^foo$');
         $description->setNullAllowed(true);
 
+        /** @var array{name: string, schema: array{pattern: string, nullable: bool}} $result */
         $result = $description->toArray();
 
         $this->assertSame('^foo$', $result['schema']['pattern']);
@@ -546,31 +547,67 @@ class DescriptionTest extends BaseTestCase
         $this->assertSame(7, $description->getMaxItems());
     }
 
-    #[DataProvider('providesMethodsThatThrowNotImplementedException')]
-    public function testMethodsThrowNotImplementedException(
-        string $method_name,
-        array $parameters,
-        string $expected_message
-    ): void {
+    public function testSetInThrowsNotImplementedException(): void
+    {
         $description = new OpenApiV300ParamDescription('John');
 
         $this->expectException(OpenApiExceptionData::class);
-        $this->expectExceptionMessage($expected_message);
-        $description->{$method_name}(...$parameters);
+        $this->expectExceptionMessage('setIn not implemented yet.');
+        $description->setIn('query');
     }
 
-    /**
-     * @return \Generator<string, array{string, array<mixed>, string}>
-     */
-    public static function providesMethodsThatThrowNotImplementedException(): \Generator
+    public function testSetSchemaThrowsNotImplementedException(): void
     {
-        yield 'setIn' => ['setIn', ['query'], 'setIn not implemented yet.'];
-        yield 'setSchema' => ['setSchema', ['schema'], 'setSchema not implemented yet.'];
-        yield 'setAllowEmptyValue' => ['setAllowEmptyValue', [true], 'setAllowEmptyValue not implemented yet.'];
-        yield 'getItems' => ['getItems', [], 'getItems not implemented yet.'];
-        yield 'setItems' => ['setItems', [self::createItemsObject()], 'setItems not implemented yet.'];
-        yield 'setUniqueItems' => ['setUniqueItems', [true], 'setUniqueItems not implemented yet.'];
-        yield 'setMultipleOf' => ['setMultipleOf', [5], 'setMultipleOf not implemented yet.'];
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('setSchema not implemented yet.');
+        $description->setSchema('schema');
+    }
+
+    public function testSetAllowEmptyValueThrowsNotImplementedException(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('setAllowEmptyValue not implemented yet.');
+        $description->setAllowEmptyValue(true);
+    }
+
+    public function testGetItemsThrowsNotImplementedException(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('getItems not implemented yet.');
+        $description->getItems();
+    }
+
+    public function testSetItemsThrowsNotImplementedException(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('setItems not implemented yet.');
+        $description->setItems(self::createItemsObject());
+    }
+
+    public function testSetUniqueItemsThrowsNotImplementedException(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('setUniqueItems not implemented yet.');
+        $description->setUniqueItems(true);
+    }
+
+    public function testSetMultipleOfThrowsNotImplementedException(): void
+    {
+        $description = new OpenApiV300ParamDescription('John');
+
+        $this->expectException(OpenApiExceptionData::class);
+        $this->expectExceptionMessage('setMultipleOf not implemented yet.');
+        $description->setMultipleOf(5);
     }
 
     public function testSetTypeThrowsForUnknownType(): void

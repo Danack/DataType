@@ -25,7 +25,6 @@ use DataType\Exception\ClassInvalidException;
  * @param DataStorage $dataStorage
  * @return T
  * @throws ValidationException
- * @throws \ReflectionException
  */
 function create(
     $classname,
@@ -43,6 +42,7 @@ function create(
     if (count($validationProblems) !== 0) {
         throw new ValidationException("Validation problems", $validationProblems);
     }
+
     $object = createObjectFromProcessedValues($classname, $processedValues);
 
     /** @var T $object */

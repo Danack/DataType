@@ -12,7 +12,6 @@ use function DataType\createSingleValue;
 
 /**
  * @coversNothing
- * @group wip
  */
 class TextStringTest extends BaseTestCase
 {

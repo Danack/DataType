@@ -36,7 +36,16 @@ use DataType\Value\Ordering;
  */
 function createObjectFromProcessedValues(string $classname, ProcessedValues $processedValues)
 {
-    $reflection_class = new \ReflectionClass($classname);
+    try {
+        $reflection_class = new \ReflectionClass($classname);
+    }
+    // @phpstan-ignore catch.neverThrown
+    catch (\ReflectionException $re) {
+        // So, although if the users of this library are running PHPStan,
+        // the ReflectionException will never be thrown, in practice,
+        // not all users will use PHPStan.
+        throw MissingClassExceptionData::fromClassname($classname, $re);
+    }
 
     $r_constructor = $reflection_class->getConstructor();
 

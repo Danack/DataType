@@ -68,8 +68,11 @@ interface ParamDescription
     const FORMAT_DATE       = "date";    // string date As defined by full-date - RFC3339
     const FORMAT_DATETIME   = "date-time"; // string date-time As defined by date-time - RFC3339
     const FORMAT_PASSWORD   = "password";  // string password Used to hint UIs the input needs to be obscured.
+
     // string The extending format for the previously mentioned type. See
     // Data Type Formats for further details.
+    // @TODO - parameters can have multiple formats. We currently only allow
+    // one format per parameter.
     public function setFormat(string $format): void;
 
     // boolean Sets the ability to pass empty-valued parameters. This is valid

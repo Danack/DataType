@@ -11,13 +11,20 @@ use DataType\Messages;
  */
 class MissingClassExceptionData extends DataTypeLogicException
 {
-    public static function fromClassname(string $classname): self
-    {
+    public static function fromClassname(
+        string $classname,
+        \ReflectionException|null $re = null
+    ): self {
         $message = sprintf(
             Messages::CLASS_NOT_FOUND,
             $classname
         );
 
-        return new self($message);
+        $code = 0;
+        if ($re !== null) {
+            $code = $re->getCode();
+        }
+
+        return new self($message, $code, $re);
     }
 }

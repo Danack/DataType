@@ -6,8 +6,8 @@ namespace DataTypeExample;
 
 use DataType\ExtractRule\GetArrayOfType;
 use VarMap\ArrayVarMap;
-use DataTypeTest\Integration\ReviewScore;
-use DataTypeTest\Integration\ItemParams;
+use DataTypeTestFixture\Integration\ReviewScore;
+use DataTypeTestFixture\Integration\ItemParams;
 
 require __DIR__ . "/../vendor/autoload.php";
 

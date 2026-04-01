@@ -21,6 +21,7 @@ trait CreateFromJson
      * @param string $json
      * @return static
      * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\JsonDecodeException
      */
     public static function createFromJson(string $json): static
     {
@@ -38,11 +39,14 @@ trait CreateFromJson
         }
         $dataStorage = ArrayDataStorage::fromArray($data);
 
+
         $object = create(
             static::class,
             $inputTypeList,
             $dataStorage
         );
+
+
 
         return $object;
     }

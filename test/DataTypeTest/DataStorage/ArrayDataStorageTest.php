@@ -20,6 +20,10 @@ class ArrayDataStorageTest extends BaseTestCase
     public function testValueNotAvailable()
     {
         $dataStorage = ArrayDataStorage::fromArray([]);
+
+        $initial_path = $dataStorage->getPath();
+        $this->assertSame('/', $initial_path);
+
         $dataStorageAtFoo = $dataStorage->moveKey('foo');
 
         $available = $dataStorageAtFoo->isValueAvailable();

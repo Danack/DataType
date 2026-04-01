@@ -30,6 +30,7 @@ class CreateArrayOfTypeFromArrayTest extends BaseTestCase
         ];
 
         $items = ReviewScore::createArrayOfTypeFromArray($data);
+        $this->assertCount(2, $items);
 
         $index = 0;
         foreach ($items as $item) {
