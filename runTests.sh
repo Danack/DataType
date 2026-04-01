@@ -14,7 +14,11 @@ bash runExamples.sh
 echo ""
 echo "Tests completed without problem"
 
-bash runMutationTests.sh
+if php -r 'exit(version_compare(PHP_VERSION, "8.2.0", ">=") ? 0 : 1);'; then
+    bash runMutationTests.sh
+else
+    echo "Skipping mutation tests because PHP is lower than 8.2"
+fi
 
 
 # rerun unit tests to get the stats again, to save scrolling...
