@@ -650,7 +650,9 @@ function json_decode_safe(?string $json)
         throw new JsonDecodeException("Error decoding JSON: cannot decode null.");
     }
 
-    $data = json_decode($json, true);
+    // TODO - 8 picked as reasonable values for depth.
+    // Feed free to increase it.
+    $data = json_decode($json, true, 8);
 
     if (json_last_error() === JSON_ERROR_NONE) {
         if ($data === null) {
