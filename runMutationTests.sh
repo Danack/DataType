@@ -2,7 +2,7 @@
 
 rm infection.log
 
-php infection.phar "$@"
+php infection.phar "$@" --static-analysis-tool=phpstan
 
 
 infection_exit_code=$?

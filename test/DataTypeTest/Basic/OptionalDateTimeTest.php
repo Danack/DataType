@@ -37,7 +37,8 @@ class OptionalDateTimeTest extends BaseTestCase
         $result = OptionalDateTimeFixture::createFromVarMap(new ArrayVarMap($data));
         if ($expectDateTime) {
             $this->assertInstanceOf(\DateTimeInterface::class, $result->value);
-        } else {
+        }
+        else {
             $this->assertNull($result->value);
         }
     }

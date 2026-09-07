@@ -76,6 +76,7 @@ class Messages
     public const STRING_EXPECTED = "String expected, but have type %s.";
     public const STRING_TOO_SHORT = "String too short, min characters is %d";
     public const STRING_TOO_LONG = "String too long, max characters is %d.";
+    public const STRING_EXACT_LENGTH = "String is %d characters long, must be %d.";
     public const STRING_INVALID_COMBINING_CHARACTERS = "Invalid combining characters found at position %s";
     public const STRING_REQUIRES_PREFIX = "The string must start with [%s].";
     public const STRING_FOUND_INVALID_CHAR = "Invalid character at position %d. Allowed characters are %s";

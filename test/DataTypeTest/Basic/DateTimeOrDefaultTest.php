@@ -37,7 +37,8 @@ class DateTimeOrDefaultTest extends BaseTestCase
         $result = DateTimeOrDefaultNullFixture::createFromVarMap(new ArrayVarMap($data));
         if ($expectDateTime) {
             $this->assertInstanceOf(\DateTimeInterface::class, $result->value);
-        } else {
+        }
+        else {
             $this->assertNull($result->value);
         }
     }

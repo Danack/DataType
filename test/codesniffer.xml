@@ -40,5 +40,9 @@
         </properties>
     </rule>
 
-    <rule ref="../vendor/yoast/yoastcs/Yoast/Sniffs/ControlStructures/IfElseDeclarationSniff.php"/>
+<!--    <rule ref="../vendor/yoast/yoastcs/Yoast/Sniffs/ControlStructures/IfElseDeclarationSniff.php"/>-->
+
+    <rule ref="../vendor/phpcsstandards/phpcsextra/Universal/Sniffs/ControlStructures/IfElseDeclarationSniff.php"/>
+
+
 </ruleset>
