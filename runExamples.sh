@@ -13,6 +13,12 @@ examples+=('example/5_other_validator.php')
 examples+=('example/6_array_of_type_as_items.php')
 examples+=('example/7_array_of_type_as_root.php')
 examples+=('example/8_open_api_descriptions.php')
+examples+=('example/9_dto_validation.php')
+examples+=('example/10_better_example.php')
+examples+=('example/11_datatype_without_annotations.php')
+examples+=('example/12_basic_example_for_doc.php')
+examples+=('example/13_datatype_factory_trait.php')
+examples+=('example/14_multi_level_example.php')
 
 for example in "${examples[@]}"
 do
