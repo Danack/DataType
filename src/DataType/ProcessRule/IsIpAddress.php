@@ -50,7 +50,8 @@ class IsIpAddress implements ProcessRule
         $flags = 0;
         if ($this->allowIpv4 && !$this->allowIpv6) {
             $flags = FILTER_FLAG_IPV4;
-        } elseif ($this->allowIpv6 && !$this->allowIpv4) {
+        }
+        elseif ($this->allowIpv6 && !$this->allowIpv4) {
             $flags = FILTER_FLAG_IPV6;
         }
 
@@ -76,9 +77,11 @@ class IsIpAddress implements ProcessRule
             //      format: ipv4
             //            - type: string
             //      format: ipv6
-        } elseif ($this->allowIpv4) {
+        }
+        elseif ($this->allowIpv4) {
             $paramDescription->setFormat('ipv4');
-        } elseif ($this->allowIpv6) {
+        }
+        elseif ($this->allowIpv6) {
             $paramDescription->setFormat('ipv6');
         }
     }
