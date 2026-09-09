@@ -43,6 +43,9 @@ jobs:
 
       - run: php composer.phar update
 
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+
       - name: "Install PHPUnit"
         run: bash runTests.sh
 
