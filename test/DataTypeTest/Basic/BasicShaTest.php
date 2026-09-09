@@ -13,7 +13,7 @@ use VarMap\ArrayVarMap;
 use DataTypeTestFixture\Basic\BasicShaFixture;
 
 /**
- * @covers \DataType\Basic\BasicShaFixture
+ * @covers \DataTypeTestFixture\Basic\BasicShaFixture
  */
 class BasicShaTest extends BaseTestCase
 {

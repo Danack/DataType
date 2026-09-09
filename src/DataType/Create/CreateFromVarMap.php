@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
+use DataType\Exception\DataTypeDefinitionException;
+use DataType\Exception\DataTypeNotImplementedException;
+use DataType\Exception\MissingClassExceptionData;
+use DataType\Exception\ValidationException;
 use VarMap\VarMap;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;
@@ -18,7 +22,10 @@ trait CreateFromVarMap
     /**
      * @param VarMap $variableMap
      * @return static
-     * @throws \DataType\Exception\ValidationException
+     * @throws DataTypeDefinitionException
+     * @throws DataTypeNotImplementedException
+     * @throws MissingClassExceptionData
+     * @throws ValidationException
      */
     public static function createFromVarMap(VarMap $variableMap): static
     {
