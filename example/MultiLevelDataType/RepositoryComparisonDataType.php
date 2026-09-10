@@ -10,10 +10,18 @@ use DataType\GetInputTypesFromAttributes;
 use DataType\DataType;
 use DataType\Basic\BasicString;
 use DataType\ExtractRule\EasierGetType;
+use DataType\InputType\GetDataType;
 
-
-
-
+/**
+ * An example 'DataType' class that represents a type of data. You should
+ * probably name the imlementing classes how you think about types of data
+ * Some examples:
+ * - the body of an API call, I call those 'Params'
+ * - the input parameters for a command line programme, also 'Params'.
+ * - A representation of an external API call, again Params.
+ *
+ *
+ */
 class RepositoryComparisonDataType implements DataType
 {
     use CreateFromJson;
@@ -25,9 +33,9 @@ class RepositoryComparisonDataType implements DataType
         #[BasicString('repository')]
         public readonly string $repository,
 
-        #[GetTypeParam('base', BranchReference::class)]
+        #[GetDataType('base', BranchReference::class)]
         public readonly BranchReference $base,
-        #[GetTypeParam('comparison', BranchReference::class)]
+        #[GetDataType('comparison', BranchReference::class)]
         public readonly BranchReference $comparison,
     ) {
     }

@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MultiLevelDataType;
+namespace DataType\InputType;
 
-use DataType\ExtractRule\GetString;
 use DataType\HasInputType;
 use DataType\InputType;
-use DataType\ProcessRule\MaxLength;
-use DataType\ProcessRule\MinLength;
 use DataType\ExtractRule\EasierGetType;
 
 #[\Attribute]
-class GetTypeParam implements HasInputType
+class GetDataType implements HasInputType
 {
     /**
      * @param string $name,
@@ -32,4 +29,3 @@ class GetTypeParam implements HasInputType
         );
     }
 }
-
