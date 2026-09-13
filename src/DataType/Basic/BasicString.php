@@ -5,6 +5,7 @@ namespace DataType\Basic;
 use DataType\ExtractRule\GetString;
 use DataType\HasInputType;
 use DataType\InputType;
+use DataType\ProcessRule\MaxLength;
 
 /**
  * Required string input.
@@ -13,7 +14,8 @@ use DataType\InputType;
 class BasicString implements HasInputType
 {
     public function __construct(
-        private string $name
+        private string $name,
+        private int $maxLength = 1_000_000,
     ) {
     }
 
@@ -22,6 +24,7 @@ class BasicString implements HasInputType
         return new InputType(
             $this->name,
             new GetString(),
+            new MaxLength($this->maxLength),
         );
     }
 }

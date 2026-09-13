@@ -8,11 +8,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\StringOrNull;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
+use DataType\Exception\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
 use DataTypeTestFixture\Basic\StringOrNullFixture;
+use function DataType\createSingleValue;
 
 /**
  * @covers \DataType\Basic\StringOrNull
@@ -59,5 +61,21 @@ class StringOrNullTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
+    }
+
+    public function testFailsWhenLongerThanMaxLength(): void
+    {
+        $propertyType = new StringOrNull('name', 5);
+
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessageMatchesTemplateString(Messages::STRING_TOO_LONG);
+        createSingleValue($propertyType, 'abcdef');
+    }
+
+    public function testWorksAtMaxLength(): void
+    {
+        $propertyType = new StringOrNull('name', 5);
+        $result = createSingleValue($propertyType, 'abcde');
+        $this->assertSame('abcde', $result);
     }
 }

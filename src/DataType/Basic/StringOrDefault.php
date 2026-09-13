@@ -7,6 +7,8 @@ namespace DataType\Basic;
 use DataType\ExtractRule\GetStringOrDefault;
 use DataType\HasInputType;
 use DataType\InputType;
+use DataType\ProcessRule\MaxLength;
+use DataType\ProcessRule\SkipIfNull;
 
 /**
  * String input with a default when the parameter is missing.
@@ -16,7 +18,8 @@ class StringOrDefault implements HasInputType
 {
     public function __construct(
         private string $name,
-        private string|null $default
+        private string|null $default,
+        private int $maxLength = 1_000_000,
     ) {
     }
 
@@ -25,6 +28,8 @@ class StringOrDefault implements HasInputType
         return new InputType(
             $this->name,
             new GetStringOrDefault($this->default),
+            new SkipIfNull(),
+            new MaxLength($this->maxLength),
         );
     }
 }

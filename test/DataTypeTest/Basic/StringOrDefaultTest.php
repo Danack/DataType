@@ -8,12 +8,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\StringOrDefault;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
+use DataType\Exception\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
 use DataTypeTestFixture\Basic\StringOrDefaultFixture;
 use DataTypeTestFixture\Basic\StringOrDefaultNullFixture;
+use function DataType\createSingleValue;
 
 /**
  * @covers \DataType\Basic\StringOrDefault
@@ -61,5 +63,21 @@ class StringOrDefaultTest extends BaseTestCase
         } catch (\DataType\Exception\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
+    }
+
+    public function testFailsWhenLongerThanMaxLength(): void
+    {
+        $propertyType = new StringOrDefault('sort', 'date', 5);
+
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessageMatchesTemplateString(Messages::STRING_TOO_LONG);
+        createSingleValue($propertyType, 'abcdef');
+    }
+
+    public function testWorksAtMaxLength(): void
+    {
+        $propertyType = new StringOrDefault('sort', 'date', 5);
+        $result = createSingleValue($propertyType, 'abcde');
+        $this->assertSame('abcde', $result);
     }
 }

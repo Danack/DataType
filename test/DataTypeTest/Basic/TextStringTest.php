@@ -29,4 +29,26 @@ class TextStringTest extends BaseTestCase
         $this->expectExceptionMessageMatchesTemplateString(Messages::STRING_EXPECTED);
         createSingleValue($textString, 123);
     }
+
+    /**
+     * @covers \DataType\Basic\TextString
+     */
+    public function testFailsWhenLongerThanMaxLength()
+    {
+        $textString = new TextString('john', 5);
+
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessageMatchesTemplateString(Messages::STRING_TOO_LONG);
+        createSingleValue($textString, 'abcdef');
+    }
+
+    /**
+     * @covers \DataType\Basic\TextString
+     */
+    public function testWorksAtMaxLength()
+    {
+        $textString = new TextString('john', 5);
+        $result = createSingleValue($textString, 'abcde');
+        $this->assertSame('abcde', $result);
+    }
 }

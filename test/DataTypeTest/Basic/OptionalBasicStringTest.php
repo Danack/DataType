@@ -5,11 +5,13 @@ namespace DataTypeTest\Basic;
 use DataType\Basic\OptionalBasicString;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
+use DataType\Exception\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;
 use DataTypeTestFixture\Basic\OptionalBasicStringFixture;
+use function DataType\createSingleValue;
 
 /**
  * @covers \DataType\Basic\OptionalBasicString
@@ -83,5 +85,21 @@ class OptionalBasicStringTest extends BaseTestCase
         
         $this->assertInstanceOf(\DataType\InputType::class, $inputType);
         $this->assertSame('test_name', $inputType->getName());
+    }
+
+    public function testFailsWhenLongerThanMaxLength()
+    {
+        $propertyType = new OptionalBasicString('string_input', 5);
+
+        $this->expectException(ValidationException::class);
+        $this->expectExceptionMessageMatchesTemplateString(Messages::STRING_TOO_LONG);
+        createSingleValue($propertyType, 'abcdef');
+    }
+
+    public function testWorksAtMaxLength()
+    {
+        $propertyType = new OptionalBasicString('string_input', 5);
+        $result = createSingleValue($propertyType, 'abcde');
+        $this->assertSame('abcde', $result);
     }
 }

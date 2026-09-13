@@ -5,6 +5,7 @@ namespace DataType\Basic;
 use DataType\ExtractRule\GetOptionalString;
 use DataType\HasInputType;
 use DataType\InputType;
+use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\SkipIfNull;
 
 /**
@@ -14,7 +15,8 @@ use DataType\ProcessRule\SkipIfNull;
 class OptionalBasicString implements HasInputType
 {
     public function __construct(
-        private string $name
+        private string $name,
+        private int $maxLength = 1_000_000,
     ) {
     }
 
@@ -24,6 +26,7 @@ class OptionalBasicString implements HasInputType
             $this->name,
             new GetOptionalString(),
             new SkipIfNull(),
+            new MaxLength($this->maxLength),
         );
     }
 }
