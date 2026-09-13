@@ -6,6 +6,7 @@ namespace DataTypeTest\OpenApi;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Exception\OpenApiExceptionData;
+use DataType\ExtractRule\GetFloat;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;
 use DataType\ExtractRule\GetOptionalInt;
@@ -23,6 +24,7 @@ use DataType\ProcessRule\MaxLength;
 use DataType\ProcessRule\MinIntValue;
 use DataType\ProcessRule\MinLength;
 use DataType\ProcessRule\NullIfEmpty;
+use DataType\ProcessRule\PositiveFloat;
 use DataType\ProcessRule\PositiveInt;
 use DataType\ProcessRule\Trim;
 use DataType\ProcessRule\ValidDate;
@@ -365,6 +367,27 @@ class DescriptionTest extends BaseTestCase
                 'value',
                 new GetInt(),
                 new PositiveInt()
+            ),
+        ];
+
+        $this->performSchemaTest($schemaExpectations, $rules);
+    }
+
+    public function testPositiveFloat()
+    {
+        $schemaExpectations = [
+            'minimum' => 0,
+            'exclusiveMinimum' => false,
+            'maximum' => (float) PositiveFloat::MAX_SANE_VALUE,
+            'exclusiveMaximum' => false,
+            'type' => 'number'
+        ];
+
+        $rules = [
+            new InputType(
+                'value',
+                new GetFloat(),
+                new PositiveFloat()
             ),
         ];
 

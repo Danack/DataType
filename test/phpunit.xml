@@ -4,6 +4,8 @@
          beStrictAboutOutputDuringTests="true"
          failOnDeprecation="true"
          failOnWarning="true"
+         executionOrder="default"
+         resolveDependencies="true"
          xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd">
 
 <!--  beStrictAboutCoversAnnotation="false"-->
