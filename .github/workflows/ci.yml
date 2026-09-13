@@ -46,7 +46,7 @@ jobs:
       - name: "Install PHPUnit"
         run: bash runTests.sh
 
-#      - name: "Run mutation tests"
-#        if: ${{ matrix.php-version == '8.2' || matrix.php-version == '8.1' }}
-#        run: bash runMutationTests.sh
+      - name: "Run mutation tests"
+        if: ${{ matrix.php-version == '8.5' || matrix.php-version == '8.4' }}
+        run: bash runMutationTests.sh
 
