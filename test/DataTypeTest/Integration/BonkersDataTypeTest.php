@@ -2,7 +2,7 @@
 
 namespace DataTypeTest\Integration;
 
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use VarMap\ArrayVarMap;

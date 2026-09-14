@@ -2,11 +2,11 @@
 
 namespace DataTypeTest;
 
-use DataType\Exception\JsonDecodeException;
-use DataType\Exception\JsonEncodeException;
-use DataType\Exception\ClassInvalidException;
+use DataType\Exception\Runtime\JsonDecodeException;
+use DataType\Exception\Runtime\JsonEncodeException;
+use DataType\Exception\Logic\ClassInvalidException;
 use DataType\Exception\DataTypeLogicException;
-use DataType\Exception\MissingConstructorParameterNameExceptionData;
+use DataType\Exception\Logic\MissingConstructorParameterNameExceptionData;
 use DataType\ExtractRule\GetInt;
 use DataType\Messages;
 use DataType\ProcessedValue;

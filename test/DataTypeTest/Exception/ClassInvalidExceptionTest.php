@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\ClassInvalidException;
+use DataType\Exception\Logic\ClassInvalidException;
 use DataTypeTest\BaseTestCase;
 
 /**
@@ -13,7 +13,7 @@ use DataTypeTest\BaseTestCase;
 class ClassInvalidExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\ClassInvalidException
+     * @covers \DataType\Exception\Logic\ClassInvalidException
      */
     public function testClassNotFound(): void
     {
@@ -27,7 +27,7 @@ class ClassInvalidExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\ClassInvalidException
+     * @covers \DataType\Exception\Logic\ClassInvalidException
      */
     public function testClassIsNotEnum(): void
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\InvalidDatetimeFormatExceptionData;
+use DataType\Exception\Logic\InvalidDatetimeFormatExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class InvalidDatetimeFormatExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\InvalidDatetimeFormatExceptionData
+     * @covers \DataType\Exception\Logic\InvalidDatetimeFormatExceptionData
      */
     public function testWorks()
     {

@@ -7,7 +7,7 @@ namespace DataTypeTest\ProcessRule;
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\DataTypeLogicException;
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\MatchesRegex;

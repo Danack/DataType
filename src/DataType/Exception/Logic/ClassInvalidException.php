@@ -1,6 +1,8 @@
 <?php
 
-namespace DataType\Exception;
+namespace DataType\Exception\Logic;
+
+use DataType\Exception\DataTypeLogicException;
 
 class ClassInvalidException extends DataTypeLogicException
 {

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataType\ProcessRule;
 
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 
 trait CheckFloat
 {

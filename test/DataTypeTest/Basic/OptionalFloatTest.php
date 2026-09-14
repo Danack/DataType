@@ -55,7 +55,7 @@ class OptionalFloatTest extends BaseTestCase
         try {
             OptionalFloatFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail('Expected ValidationException was not thrown.');
-        } catch (\DataType\Exception\ValidationException $ve) {
+        } catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
     }

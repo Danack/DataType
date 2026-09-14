@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace DataTypeTest;
 
 use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\MissingValueException;
+use DataType\Exception\Logic\OnlyProcessedValuesException;
 use DataType\ExtractRule\GetStringOrDefault;
 use DataType\InputType;
 use DataType\ProcessedValue;
@@ -41,7 +43,7 @@ class ProcessedValuesTest extends BaseTestCase
         $processedValues = createProcessedValuesFromArray([]);
 
         $this->expectException(DataTypeLogicException::class);
-        $this->expectExceptionMessageMatchesTemplateString(DataTypeLogicException::MISSING_VALUE);
+        $this->expectExceptionMessageMatchesTemplateString(MissingValueException::MESSAGE);
         $processedValues->getValue('john');
     }
 
@@ -51,7 +53,7 @@ class ProcessedValuesTest extends BaseTestCase
     public function testBadArrayException()
     {
         $this->expectException(DataTypeLogicException::class);
-        $this->expectExceptionMessageMatchesTemplateString(DataTypeLogicException::ONLY_PROCESSED_VALUES);
+        $this->expectExceptionMessageMatchesTemplateString(OnlyProcessedValuesException::MESSAGE);
 
         // @phpstan-ignore argument.type
         $processedValues = ProcessedValues::fromArray(['foo']);

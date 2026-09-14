@@ -42,7 +42,7 @@ class BasicIntegerTest extends BaseTestCase
             BasicIntegerFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/integer_input', Messages::VALUE_NOT_SET]],
                 $ve->getValidationProblems()
@@ -58,7 +58,7 @@ class BasicIntegerTest extends BaseTestCase
             BasicIntegerFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/integer_input', Messages::INT_REQUIRED_FOUND_NON_DIGITS2]],
                 $ve->getValidationProblems()
@@ -74,7 +74,7 @@ class BasicIntegerTest extends BaseTestCase
             BasicIntegerFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/integer_input',
                 Messages::INT_REQUIRED_UNSUPPORTED_TYPE,

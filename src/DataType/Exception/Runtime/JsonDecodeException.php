@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace DataType\Exception;
+namespace DataType\Exception\Runtime;
+
+use DataType\Exception\DataTypeRuntimeException;
 
 /**
  * Thrown when JSON decoding fails or yields an invalid result.

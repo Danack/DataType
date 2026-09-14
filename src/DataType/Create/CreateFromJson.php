@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ValidationProblem;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;
@@ -20,8 +20,8 @@ trait CreateFromJson
     /**
      * @param string $json
      * @return static
-     * @throws \DataType\Exception\ValidationException
-     * @throws \DataType\Exception\JsonDecodeException
+     * @throws \DataType\Exception\Runtime\ValidationException
+     * @throws \DataType\Exception\Runtime\JsonDecodeException
      */
     public static function createFromJson(string $json): static
     {

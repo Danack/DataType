@@ -34,7 +34,7 @@ class BasicDateTimeTest extends BaseTestCase
             BasicDateTimeFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/datetime_input', Messages::VALUE_NOT_SET]],
                 $ve->getValidationProblems()
@@ -50,7 +50,7 @@ class BasicDateTimeTest extends BaseTestCase
             BasicDateTimeFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/datetime_input', Messages::ERROR_INVALID_DATETIME]],
                 $ve->getValidationProblems()
@@ -66,7 +66,7 @@ class BasicDateTimeTest extends BaseTestCase
             BasicDateTimeFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/datetime_input', Messages::ERROR_DATETIME_MUST_START_AS_STRING]],
                 $ve->getValidationProblems()

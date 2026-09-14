@@ -7,7 +7,7 @@ namespace DataTypeTest\Exception;
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 
 /**
  * @coversNothing
@@ -23,7 +23,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\InvalidRulesExceptionData::badTypeForArrayAccess
+     * @covers \DataType\Exception\Logic\InvalidRulesExceptionData::badTypeForArrayAccess
      */
     #[DataProvider('providesInvalidRulesException')]
     public function testInvalidRulesException(mixed $badValue, string $badTypeString)
@@ -40,7 +40,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\InvalidRulesExceptionData::expectsStringForProcessing
+     * @covers \DataType\Exception\Logic\InvalidRulesExceptionData::expectsStringForProcessing
      */
     public function testExpectsStringForProcessing()
     {
@@ -56,7 +56,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\InvalidRulesExceptionData::expectsIntForProcessing
+     * @covers \DataType\Exception\Logic\InvalidRulesExceptionData::expectsIntForProcessing
      */
     public function testExpectsIntForProcessing(): void
     {
@@ -70,7 +70,7 @@ class InvalidRulesExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\InvalidRulesExceptionData::expectsFloatForProcessing
+     * @covers \DataType\Exception\Logic\InvalidRulesExceptionData::expectsFloatForProcessing
      */
     public function testExpectsFloatForProcessing(): void
     {

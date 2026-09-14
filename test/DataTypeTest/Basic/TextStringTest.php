@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataTypeTest\Basic;
 
 use DataType\Basic\TextString;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use function DataType\createSingleValue;

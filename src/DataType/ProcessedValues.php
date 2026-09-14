@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace DataType;
 
 use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\MissingValueException;
+use DataType\Exception\Logic\OnlyProcessedValuesException;
 
 /**
  * A class to stores the processed parameters, so that they can be accessed by subsequent rules.
@@ -27,7 +29,7 @@ class ProcessedValues
         foreach ($processedValues as $processedValue) {
             /** @psalm-suppress DocblockTypeContradiction */
             if (!($processedValue instanceof ProcessedValue)) {
-                throw DataTypeLogicException::onlyProcessedValues();
+                throw new OnlyProcessedValuesException();
             }
         }
 
@@ -89,7 +91,7 @@ class ProcessedValues
                 return $processedValue->getValue();
             }
         }
-        throw DataTypeLogicException::missingValue($name);
+        throw new MissingValueException($name);
     }
 
 

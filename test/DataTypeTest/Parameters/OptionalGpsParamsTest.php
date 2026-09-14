@@ -78,7 +78,7 @@ class OptionalGpsParamsTest extends BaseTestCase
         try {
             OptionalGpsParams::createFromVarMap(new ArrayVarMap($data));
             $this->fail('Expected ValidationException was not thrown.');
-        } catch (\DataType\Exception\ValidationException $ve) {
+        } catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $problems = $ve->getValidationProblems();
             $this->assertCount(1, $problems);
             $this->assertValidationProblemRegexp($path, $messagePattern, $problems);

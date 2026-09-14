@@ -42,7 +42,7 @@ class BasicShaTest extends BaseTestCase
             $shaParamTest = BasicShaFixture::createFromVarMap(new ArrayVarMap($data));
             $this->assertSame($value, $shaParamTest->value);
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/sha_input',
                 $expected_error_message,
@@ -60,7 +60,7 @@ class BasicShaTest extends BaseTestCase
 //            BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
 //            $this->fail("Expected ValidationException was not thrown.");
 //        }
-//        catch (\DataType\Exception\ValidationException $ve) {
+//        catch (\DataType\Exception\Runtime\ValidationException $ve) {
 //            $this->assertValidationProblems(
 //                [['/string_input', Messages::VALUE_NOT_SET]],
 //                $ve->getValidationProblems()
@@ -76,7 +76,7 @@ class BasicShaTest extends BaseTestCase
 //            BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
 //            $this->fail("Expected ValidationException was not thrown.");
 //        }
-//        catch (\DataType\Exception\ValidationException $ve) {
+//        catch (\DataType\Exception\Runtime\ValidationException $ve) {
 //            $this->assertValidationProblemRegexp(
 //                '/string_input',
 //                Messages::STRING_EXPECTED,
@@ -93,7 +93,7 @@ class BasicShaTest extends BaseTestCase
 //            BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
 //            $this->fail("Expected ValidationException was not thrown.");
 //        }
-//        catch (\DataType\Exception\ValidationException $ve) {
+//        catch (\DataType\Exception\Runtime\ValidationException $ve) {
 //            $this->assertValidationProblemRegexp(
 //                '/string_input',
 //                Messages::STRING_EXPECTED,

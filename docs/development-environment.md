@@ -43,13 +43,13 @@ Then use the `list_uncovered_lines.php` script to find uncovered lines. You can 
 
 ```bash
 # Find all uncovered lines in a specific namespace
-docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php | grep DataType"
 
 # Find all uncovered lines in a specific directory
-docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType/Create"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php | grep DataType/Create"
 
 # Count uncovered lines for a namespace
-docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep DataType | wc -l"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php | grep DataType | wc -l"
 ```
 
 **Note**: Use `bash -c` without `-it` flags to avoid TTY errors when running non-interactive commands.

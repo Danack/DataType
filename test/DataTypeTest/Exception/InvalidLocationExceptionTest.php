@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\InvalidLocationExceptionData;
+use DataType\Exception\Logic\InvalidLocationExceptionData;
 use DataTypeTest\BaseTestCase;
 
 /**
@@ -13,7 +13,7 @@ use DataTypeTest\BaseTestCase;
 class InvalidLocationExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\InvalidLocationExceptionData
+     * @covers \DataType\Exception\Logic\InvalidLocationExceptionData
      */
     public function testWorksBadArray()
     {
@@ -31,7 +31,7 @@ class InvalidLocationExceptionTest extends BaseTestCase
     }
 
     /**
-     * @covers \DataType\Exception\InvalidLocationExceptionData
+     * @covers \DataType\Exception\Logic\InvalidLocationExceptionData
      */
     public function testWorksBadComplex()
     {

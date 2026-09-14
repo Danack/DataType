@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
+use DataType\Exception\Logic\PropertyHasMultipleInputTypeAnnotationsException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class PropertyHasMultipleParamAnnotationsExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException
+     * @covers \DataType\Exception\Logic\PropertyHasMultipleInputTypeAnnotationsException
      */
     public function testWorks()
     {

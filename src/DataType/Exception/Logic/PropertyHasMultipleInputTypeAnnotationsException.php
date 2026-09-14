@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 
-namespace DataType\Exception;
+namespace DataType\Exception\Logic;
+
+use DataType\Exception\DataTypeLogicException;
 
 use DataType\Messages;
 

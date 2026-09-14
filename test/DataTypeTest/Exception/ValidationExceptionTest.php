@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\Exception;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ValidationProblem;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ use DataTypeTest\BaseTestCase;
 class ValidationExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\ValidationException
+     * @covers \DataType\Exception\Runtime\ValidationException
      */
     public function testGetting()
     {

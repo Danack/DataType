@@ -34,7 +34,7 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
             BasicPhpEnumTypeOrNullFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/enum_input',
                 Messages::STRING_EXPECTED,
@@ -59,7 +59,7 @@ class BasicPhpEnumTypeOrNullTest extends BaseTestCase
             BasicPhpEnumTypeOrNullFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/enum_input',
                 Messages::ENUM_MAP_UNRECOGNISED_VALUE_SINGLE,

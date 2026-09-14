@@ -4,8 +4,8 @@
 namespace {
 
     use DataType\DataStorage\ArrayDataStorage;
-    use DataType\Exception\JsonDecodeException;
-    use DataType\Exception\ValidationException;
+    use DataType\Exception\Runtime\JsonDecodeException;
+    use DataType\Exception\Runtime\ValidationException;
     use DataType\ValidationProblem;
     use function DataType\create;
     use function DataType\getInputTypeListForClass;

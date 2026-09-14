@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\MissingClassExceptionData;
+use DataType\Exception\Logic\MissingClassExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class MissingClassExceptionTest extends BaseTestCase
 {
 
     /**
-     * @covers \DataType\Exception\MissingClassExceptionData
+     * @covers \DataType\Exception\Logic\MissingClassExceptionData
      */
     public function testInputParameterListException()
     {

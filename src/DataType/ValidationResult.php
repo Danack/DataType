@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace DataType;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\KeysMustBeIntegersException;
+use DataType\Exception\Logic\OnlyValidationProblemsAllowedException;
 
 /**
  *
@@ -77,10 +78,10 @@ class ValidationResult
     {
         foreach ($validationProblems as $key => $validationProblem) {
             if (is_int($key)  === false) {
-                throw DataTypeLogicException::keysMustBeIntegers();
+                throw new KeysMustBeIntegersException();
             }
             if (!($validationProblem instanceof ValidationProblem)) {
-                throw DataTypeLogicException::onlyValidationProblemsAllowed(
+                throw new OnlyValidationProblemsAllowedException(
                     $validationProblem
                 );
             }

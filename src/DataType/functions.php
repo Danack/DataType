@@ -10,13 +10,13 @@ namespace DataType;
 use DataType\DataStorage\ArrayDataStorage;
 use DataType\DataStorage\ComplexDataStorage;
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeDefinitionException;
-use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\MissingClassExceptionData;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Logic\DataTypeDefinitionException;
+use DataType\Exception\Logic\DataTypeNotImplementedException;
+use DataType\Exception\Logic\MissingClassExceptionData;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ExtractRule\GetType;
 use DataType\OpenApi\OpenApiV300ParamDescription;
-use DataType\Exception\ClassInvalidException;
+use DataType\Exception\Logic\ClassInvalidException;
 
 /**
  * @template T of object
@@ -201,7 +201,7 @@ function createArrayOfTypeOrError(string $type, array $data): array
  * @param class-string<DataType> $classname
  * @return array<int, array<string, mixed>>
  * @throws DataTypeNotImplementedException
- * @throws Exception\OpenApiExceptionData
+ * @throws Exception\Logic\OpenApiExceptionData
  */
 function generateOpenApiV300DescriptionForDataType(string $classname)
 {

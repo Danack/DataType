@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\IncorrectNumberOfParametersExceptionData;
+use DataType\Exception\Logic\IncorrectNumberOfParametersExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class IncorrectNumberOfParamsExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\IncorrectNumberOfParametersExceptionData
+     * @covers \DataType\Exception\Logic\IncorrectNumberOfParametersExceptionData
      */
     public function testWorks()
     {

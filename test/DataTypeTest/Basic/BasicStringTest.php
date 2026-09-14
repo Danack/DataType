@@ -5,7 +5,7 @@ namespace DataTypeTest\Basic;
 use DataType\Basic\BasicString;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
@@ -35,7 +35,7 @@ class BasicStringTest extends BaseTestCase
             BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblems(
                 [['/string_input', Messages::VALUE_NOT_SET]],
                 $ve->getValidationProblems()
@@ -51,7 +51,7 @@ class BasicStringTest extends BaseTestCase
             BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/string_input',
                 Messages::STRING_EXPECTED,
@@ -68,7 +68,7 @@ class BasicStringTest extends BaseTestCase
             BasicStringFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/string_input',
                 Messages::STRING_EXPECTED,

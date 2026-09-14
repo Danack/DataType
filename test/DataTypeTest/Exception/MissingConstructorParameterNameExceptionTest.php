@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\MissingConstructorParameterNameExceptionData;
+use DataType\Exception\Logic\MissingConstructorParameterNameExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class MissingConstructorParameterNameExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\MissingConstructorParameterNameExceptionData
+     * @covers \DataType\Exception\Logic\MissingConstructorParameterNameExceptionData
      */
     public function testWorks()
     {

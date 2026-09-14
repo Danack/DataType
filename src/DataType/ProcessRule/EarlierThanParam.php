@@ -5,12 +5,12 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\MinutesMustBeGreaterThanZeroException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
 use DataType\ValidationResult;
-use DataType\Exception\InvalidDatetimeFormatExceptionData;
+use DataType\Exception\Logic\InvalidDatetimeFormatExceptionData;
 
 /**
  * Checks that one parameter represents an earlier time than another parameter
@@ -32,7 +32,7 @@ class EarlierThanParam implements ProcessRule
         $this->minutesEarlier = $minutesEarlier;
 
         if ($minutesEarlier < 0) {
-            throw new DataTypeLogicException(Messages::MINUTES_MUST_BE_GREATER_THAN_ZERO);
+            throw new MinutesMustBeGreaterThanZeroException();
         }
     }
 

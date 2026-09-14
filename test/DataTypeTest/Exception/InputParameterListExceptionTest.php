@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\DataTypeDefinitionException;
+use DataType\Exception\Logic\DataTypeDefinitionException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -14,7 +14,7 @@ use DataTypeTest\BaseTestCase;
 class InputParameterListExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\DataTypeDefinitionException
+     * @covers \DataType\Exception\Logic\DataTypeDefinitionException
      */
     public function testInputParameterListException_foundNonInputParameter()
     {

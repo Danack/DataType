@@ -7,7 +7,7 @@ namespace DataTypeTest\DataStorage;
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\ComplexDataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\InvalidLocationExceptionData;
+use DataType\Exception\Logic\InvalidLocationExceptionData;
 use DataTypeTest\BaseTestCase;
 use function DataType\json_decode_safe;
 

@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace DataType\Exception;
+namespace DataType\Exception\Runtime;
+
+use DataType\Exception\DataTypeRuntimeException;
 
 /**
  * Failure to encode json. This is probably only used

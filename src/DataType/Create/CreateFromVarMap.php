@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\Exception\DataTypeDefinitionException;
-use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\MissingClassExceptionData;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Logic\DataTypeDefinitionException;
+use DataType\Exception\Logic\DataTypeNotImplementedException;
+use DataType\Exception\Logic\MissingClassExceptionData;
+use DataType\Exception\Runtime\ValidationException;
 use VarMap\VarMap;
 use function DataType\create;
 use function DataType\getInputTypeListForClass;

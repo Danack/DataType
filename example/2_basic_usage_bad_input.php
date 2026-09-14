@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use DataTypeExample\GetArticlesParameters;
 use VarMap\ArrayVarMap;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 
 require __DIR__ . "/../vendor/autoload.php";
 

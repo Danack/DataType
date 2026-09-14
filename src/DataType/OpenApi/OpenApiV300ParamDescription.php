@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataType\OpenApi;
 
-use DataType\Exception\OpenApiExceptionData;
+use DataType\Exception\Logic\OpenApiExceptionData;
 use function DataType\array_value_exists;
 
 /**

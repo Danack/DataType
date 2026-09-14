@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\StringOrDefault;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
@@ -60,7 +60,7 @@ class StringOrDefaultTest extends BaseTestCase
         try {
             StringOrDefaultFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail('Expected ValidationException was not thrown.');
-        } catch (\DataType\Exception\ValidationException $ve) {
+        } catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp($path, $messagePattern, $ve->getValidationProblems());
         }
     }

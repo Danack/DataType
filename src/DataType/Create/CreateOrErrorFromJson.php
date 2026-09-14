@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use function DataType\createOrError;
 use function DataType\getInputTypeListForClass;
 use function DataType\json_decode_safe;
@@ -21,7 +21,7 @@ trait CreateOrErrorFromJson
      * @param string $json
      * TODO - ValidationErrors is incorrect.
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createOrErrorFromJson(string $json)
     {

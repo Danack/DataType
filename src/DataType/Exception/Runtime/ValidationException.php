@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace DataType\Exception;
+namespace DataType\Exception\Runtime;
+
+use DataType\Exception\DataTypeRuntimeException;
 
 /**
  * Thrown when user-provided input fails one or more validation rules.

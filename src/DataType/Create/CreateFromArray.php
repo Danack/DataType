@@ -17,7 +17,7 @@ trait CreateFromArray
     /**
      * @param array<mixed> $data
      * @return static
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createFromArray(array $data): static
     {

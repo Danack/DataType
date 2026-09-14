@@ -2,7 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace DataType\Exception;
+namespace DataType\Exception\Logic;
+
+use DataType\Exception\DataTypeLogicException;
 
 /**
  * Thrown when code calls getValue DataStorage object with an invalid

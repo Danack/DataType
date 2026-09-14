@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\ProcessRule;
 
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\InvalidDatetimeFormatExceptionData;
+use DataType\Exception\Logic\InvalidDatetimeFormatExceptionData;
 use DataType\Messages;
 use DataType\ProcessRule\EarlierThanParam;
 use DataTypeTest\BaseTestCase;

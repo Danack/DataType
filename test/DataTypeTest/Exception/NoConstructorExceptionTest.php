@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\NoConstructorExceptionData;
+use DataType\Exception\Logic\NoConstructorExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class NoConstructorExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\NoConstructorExceptionData
+     * @covers \DataType\Exception\Logic\NoConstructorExceptionData
      */
     public function testNoConstructorWorks()
     {
@@ -32,7 +32,7 @@ class NoConstructorExceptionTest extends BaseTestCase
 
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\NoConstructorExceptionData
+     * @covers \DataType\Exception\Logic\NoConstructorExceptionData
      */
     public function testnotPublicConstructor()
     {

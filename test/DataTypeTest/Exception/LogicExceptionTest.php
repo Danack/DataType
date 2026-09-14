@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\KeysMustBeIntegersException;
+use DataType\Exception\Logic\KeysMustBeStringsException;
+use DataType\Exception\Logic\MissingValueException;
+use DataType\Exception\Logic\OnlyProcessedValuesException;
+use DataType\Exception\Logic\OnlyValidationProblemsAllowedException;
 use DataTypeTest\BaseTestCase;
 
 /**
@@ -13,37 +17,41 @@ use DataTypeTest\BaseTestCase;
 class LogicExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\DataTypeLogicException
+     * @covers \DataType\Exception\Logic\KeysMustBeStringsException
+     * @covers \DataType\Exception\Logic\OnlyValidationProblemsAllowedException
+     * @covers \DataType\Exception\Logic\KeysMustBeIntegersException
+     * @covers \DataType\Exception\Logic\MissingValueException
+     * @covers \DataType\Exception\Logic\OnlyProcessedValuesException
      */
     public function testWorks()
     {
-        $exception = DataTypeLogicException::keysMustBeStrings();
+        $exception = new KeysMustBeStringsException();
         $this->assertStringMatchesTemplateString(
-            DataTypeLogicException::ONLY_KEYS,
+            KeysMustBeStringsException::MESSAGE,
             $exception->getMessage()
         );
 
-        $exception = DataTypeLogicException::onlyValidationProblemsAllowed('foo');
+        $exception = new OnlyValidationProblemsAllowedException('foo');
         $this->assertStringMatchesTemplateString(
-            DataTypeLogicException::NOT_VALIDATION_PROBLEM,
+            OnlyValidationProblemsAllowedException::MESSAGE,
             $exception->getMessage()
         );
 
-        $exception = DataTypeLogicException::keysMustBeIntegers();
+        $exception = new KeysMustBeIntegersException();
         $this->assertStringMatchesTemplateString(
-            DataTypeLogicException::ONLY_INT_KEYS,
+            KeysMustBeIntegersException::MESSAGE,
             $exception->getMessage()
         );
 
-        $exception = DataTypeLogicException::missingValue('foo');
+        $exception = new MissingValueException('foo');
         $this->assertStringMatchesTemplateString(
-            DataTypeLogicException::MISSING_VALUE,
+            MissingValueException::MESSAGE,
             $exception->getMessage()
         );
 
-        $exception = DataTypeLogicException::onlyProcessedValues();
+        $exception = new OnlyProcessedValuesException();
         $this->assertStringMatchesTemplateString(
-            DataTypeLogicException::ONLY_PROCESSED_VALUES,
+            OnlyProcessedValuesException::MESSAGE,
             $exception->getMessage()
         );
     }

@@ -94,7 +94,7 @@ try {
     echo "Query: {$params->query}\n";
     echo "Limit: {$params->limit}\n";
     echo "Success!\n\n";
-} catch (\DataType\Exception\ValidationException $e) {
+} catch (\DataType\Exception\Runtime\ValidationException $e) {
     echo "Validation failed:\n";
     foreach ($e->getValidationProblemsAsStrings() as $error) {
         echo "  - $error\n";

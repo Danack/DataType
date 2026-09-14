@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataTypeTest\Create;
 
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataTypeTest\BaseTestCase;
 use DataTypeTestFixture\Integration\ReviewScore;
 

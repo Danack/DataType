@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\PregMatchFailedException;
+use DataType\Exception\Logic\PregReplaceFailedException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -55,7 +56,7 @@ class MatchesRegex implements ProcessRule
             $replaced = preg_replace('/\/[imsxADSUXJu]*$/', '/' . $this->flags, $fullPattern);
             // @codeCoverageIgnoreStart
             if ($replaced === null) {
-                throw new DataTypeLogicException("preg_replace failed for pattern: " . $fullPattern);
+                throw PregReplaceFailedException::forPattern($fullPattern);
             }
             // @codeCoverageIgnoreEnd
             $fullPattern = $replaced;
@@ -65,7 +66,7 @@ class MatchesRegex implements ProcessRule
 
         // @codeCoverageIgnoreStart
         if ($matches === false) {
-            throw new DataTypeLogicException("preg_match failed for pattern: " . $fullPattern);
+            throw PregMatchFailedException::forPattern($fullPattern);
         }
         // @codeCoverageIgnoreEnd
 

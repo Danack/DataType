@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace DataType\ExtractRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\JsonDecodeException;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\BadTypeForKernelMatrixException;
+use DataType\Exception\Runtime\JsonDecodeException;
+use DataType\Exception\Logic\MatrixInvalidBadCellException;
+use DataType\Exception\Logic\MatrixInvalidBadRowException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -32,14 +34,14 @@ class GetKernelMatrixOrDefault implements ExtractRule
         foreach ($default as $row) {
             /** @psalm-suppress RedundantConditionGivenDocblockType */
             if (is_array($row) !== true) {
-                throw new DataTypeLogicException(Messages::MATRIX_INVALID_BAD_ROW);
+                throw new MatrixInvalidBadRowException();
             }
 
             /** @psalm-suppress DocblockTypeContradiction */
             foreach ($row as $value) {
                 /** @psalm-suppress RedundantConditionGivenDocblockType */
                 if (is_float($value) === false && is_int($value) === false) {
-                    throw new DataTypeLogicException(Messages::MATRIX_INVALID_BAD_CELL);
+                    throw new MatrixInvalidBadCellException();
                 }
             }
         }
@@ -50,7 +52,7 @@ class GetKernelMatrixOrDefault implements ExtractRule
 
     /**
      * @throws JsonDecodeException
-     * @throws DataTypeLogicException
+     * @throws BadTypeForKernelMatrixException
      */
     public function process(
         ProcessedValues $processedValues,
@@ -63,7 +65,7 @@ class GetKernelMatrixOrDefault implements ExtractRule
         $currentValue = $dataStorage->getCurrentValue();
 
         if (is_string($currentValue) !== true) {
-            throw new DataTypeLogicException(Messages::BAD_TYPE_FOR_KERNEL_MATRIX_PROCESS_RULE);
+            throw new BadTypeForKernelMatrixException();
         }
 
         // TODO - this needs to be replaced with something that gives the

@@ -7,14 +7,14 @@ namespace DataTypeTest;
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\DataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
-use DataType\Exception\DataTypeDefinitionException;
-use DataType\Exception\DataTypeNotImplementedException;
-use DataType\Exception\IncorrectNumberOfParametersExceptionData;
-use DataType\Exception\MissingClassExceptionData;
-use DataType\Exception\MissingConstructorParameterNameExceptionData;
-use DataType\Exception\PropertyHasMultipleInputTypeAnnotationsException;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Logic\AnnotationClassDoesNotExistExceptionData;
+use DataType\Exception\Logic\DataTypeDefinitionException;
+use DataType\Exception\Logic\DataTypeNotImplementedException;
+use DataType\Exception\Logic\IncorrectNumberOfParametersExceptionData;
+use DataType\Exception\Logic\MissingClassExceptionData;
+use DataType\Exception\Logic\MissingConstructorParameterNameExceptionData;
+use DataType\Exception\Logic\PropertyHasMultipleInputTypeAnnotationsException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ExtractRule\ExtractRule;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetString;
@@ -170,7 +170,7 @@ class FunctionsTest extends BaseTestCase
     public function test_CreateObjectFromParams_no_constructor()
     {
         $this->expectExceptionMessageMatchesTemplateString(Messages::CLASS_LACKS_CONSTRUCTOR);
-        $this->expectException(\DataType\Exception\NoConstructorExceptionData::class);
+        $this->expectException(\DataType\Exception\Logic\NoConstructorExceptionData::class);
         createObjectFromProcessedValues(
             \OneColorNoConstructor::class,
             createProcessedValuesFromArray([])
@@ -183,7 +183,7 @@ class FunctionsTest extends BaseTestCase
     public function test_CreateObjectFromParams_private_constructor()
     {
         $this->expectExceptionMessageMatchesTemplateString(Messages::CLASS_LACKS_PUBLIC_CONSTRUCTOR);
-        $this->expectException(\DataType\Exception\NoConstructorExceptionData::class);
+        $this->expectException(\DataType\Exception\Logic\NoConstructorExceptionData::class);
         createObjectFromProcessedValues(
             \ThreeColorsPrivateConstructor::class,
             createProcessedValuesFromArray([])
@@ -957,7 +957,7 @@ class FunctionsTest extends BaseTestCase
         try {
             $value = createSingleValue($colorInputTypeSpec, $errorInputString);
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertCount(1, $ve->getValidationProblems());
             $this->assertValidationProblemRegexp(
                 '/background_color',
@@ -1207,7 +1207,7 @@ class FunctionsTest extends BaseTestCase
      */
     public function test_generateOpenApiV300DescriptionForDataType_errors()
     {
-        $this->expectException(\DataType\Exception\DataTypeNotImplementedException::class);
+        $this->expectException(\DataType\Exception\Logic\DataTypeNotImplementedException::class);
         /** @phpstan-ignore argument.type (deliberately passing non-DataType class to test exception) */
         generateOpenApiV300DescriptionForDataType(\stdClass::class);
     }

@@ -6,6 +6,8 @@ namespace DataTypeTest;
 
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\KeysMustBeIntegersException;
+use DataType\Exception\Logic\OnlyValidationProblemsAllowedException;
 use DataType\ValidationProblem;
 use DataType\ValidationResult;
 
@@ -112,14 +114,14 @@ class ValidationResultTest extends BaseTestCase
         $problemMessage = 'There was problem';
 
         $validationProblem = new ValidationProblem($dataStorage, $problemMessage);
-        $this->expectExceptionMessageMatchesTemplateString(DataTypeLogicException::ONLY_INT_KEYS);
+        $this->expectExceptionMessageMatchesTemplateString(KeysMustBeIntegersException::MESSAGE);
         $this->expectException(DataTypeLogicException::class);
         $validationResult = ValidationResult::fromValidationProblems(['foo' => $validationProblem]);
     }
 
     public function testFromValidationProblemsNotInputParameter()
     {
-        $this->expectExceptionMessageMatchesTemplateString(DataTypeLogicException::NOT_VALIDATION_PROBLEM);
+        $this->expectExceptionMessageMatchesTemplateString(OnlyValidationProblemsAllowedException::MESSAGE);
         $this->expectException(DataTypeLogicException::class);
         // @phpstan-ignore argument.type (intentionally passing invalid data to test error handling)
         $validationResult = ValidationResult::fromValidationProblems([new \stdClass()]);

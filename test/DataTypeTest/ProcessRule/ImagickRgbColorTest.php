@@ -6,7 +6,7 @@ namespace DataTypeTest\ProcessRule;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 use DataType\ProcessedValues;
 use DataType\ProcessRule\ImagickIsRgbColor;
 use DataTypeTest\BaseTestCase;

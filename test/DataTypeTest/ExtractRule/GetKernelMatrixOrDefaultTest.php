@@ -6,7 +6,7 @@ namespace DataTypeTest\ExtractRule;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\JsonDecodeException;
+use DataType\Exception\Runtime\JsonDecodeException;
 use DataType\ExtractRule\GetKernelMatrixOrDefault;
 use DataType\Messages;
 use DataType\ProcessedValues;

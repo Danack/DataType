@@ -30,7 +30,7 @@ trait CreateFromRequest
     /**
      * @param VarMap $variableMap
      * @return self
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createFromRequest(VarMap $variableMap)
     {
@@ -53,7 +53,7 @@ trait CreateOrErrorFromRequest
     /**
      * @param VarMap $variableMap
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createOrErrorFromRequest(VarMap $variableMap)
     {

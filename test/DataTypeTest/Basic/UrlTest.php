@@ -6,7 +6,7 @@ namespace DataTypeTest\Basic;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\Basic\Url;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 use function DataType\createSingleValue;

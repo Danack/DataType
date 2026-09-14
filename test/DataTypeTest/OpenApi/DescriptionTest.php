@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\OpenApi;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use DataType\Exception\OpenApiExceptionData;
+use DataType\Exception\Logic\OpenApiExceptionData;
 use DataType\ExtractRule\GetFloat;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;

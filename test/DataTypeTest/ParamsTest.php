@@ -7,7 +7,7 @@ namespace DataTypeTest;
 use DataType\DataStorage\DataStorage;
 use DataType\DataStorage\TestArrayDataStorage;
 use DataType\Exception\UnknownParamException;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ExtractRule\GetInt;
 use DataType\ExtractRule\GetIntOrDefault;
 use DataType\InputType;
@@ -74,7 +74,7 @@ class ParamsTest extends BaseTestCase
             )
         ];
 
-        $this->expectException(\DataType\Exception\ValidationException::class);
+        $this->expectException(\DataType\Exception\Runtime\ValidationException::class);
         // TODO - we should output the keys as well.
         $this->expectExceptionMessage("Value not set.");
         // @phpstan-ignore argument.type (testing error path with arbitrary class name)

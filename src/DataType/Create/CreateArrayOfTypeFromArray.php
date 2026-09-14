@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataType\Create;
 
 use DataType\DataStorage\ArrayDataStorage;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\ExtractRule\GetType;
 use function DataType\createArrayOfTypeFromInputStorage;
 
@@ -20,7 +20,7 @@ trait CreateArrayOfTypeFromArray
     /**
      * @param array<mixed> $data
      * @return static[]
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createArrayOfTypeFromArray(array $data)
     {

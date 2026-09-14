@@ -19,7 +19,7 @@ trait CreateFromRequest
     /**
      * @param ServerRequestInterface $request
      * @return static
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createFromRequest(ServerRequestInterface $request): static
     {

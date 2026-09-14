@@ -14,7 +14,7 @@ use DataType\ProcessedValues;
 use DataTypeTest\BaseTestCase;
 use DataTypeTestFixture\TriState\PatchNicknameParams;
 use DataTypeTestFixture\TriState\PatchNicknameStrictLength;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use function DataType\create;
 
 /**

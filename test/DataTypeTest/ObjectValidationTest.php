@@ -58,11 +58,11 @@ class ObjectValidationTest extends BaseTestCase
 
     /**
      * @return void
-     * @throws \DataType\Exception\MissingClassExceptionData
-     * @throws \DataType\Exception\DataTypeDefinitionException
-     * @throws \DataType\Exception\DataTypeNotImplementedException
+     * @throws \DataType\Exception\Logic\MissingClassExceptionData
+     * @throws \DataType\Exception\Logic\DataTypeDefinitionException
+     * @throws \DataType\Exception\Logic\DataTypeNotImplementedException
      * @throws \DataType\Exception\DataTypeRuntimeException
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public function testWorksAdvanced()
     {

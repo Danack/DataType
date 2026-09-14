@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace DataType\DataStorage;
 
-use DataType\Exception\InvalidLocationExceptionData;
+use DataType\Exception\Logic\InvalidLocationExceptionData;
 
 /**
  * Implementation of InputStorage that wraps around data structures that

@@ -28,10 +28,10 @@ Identify uncovered lines for the specified directory/namespace:
 
 ```bash
 # For a namespace (e.g., Bristolian/Response)
-docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep Bristolian/Response"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php | grep Bristolian/Response"
 
 # For a directory (e.g., src/Bristolian/Response)
-docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php clover.xml | grep src/Bristolian/Response"
+docker exec datatype-developing_8_5-1 bash -c "php list_uncovered_lines.php | grep src/Bristolian/Response"
 ```
 
 ### Step 4: Analyze Existing Tests

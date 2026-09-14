@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataType\OpenApi;
 
-use DataType\Exception\OpenApiExceptionData;
+use DataType\Exception\Logic\OpenApiExceptionData;
 
 /**
  * Used for testing that Rules that shouldn't affect

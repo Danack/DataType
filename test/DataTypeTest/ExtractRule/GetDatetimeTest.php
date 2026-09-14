@@ -6,7 +6,7 @@ namespace DataTypeTest\ExtractRule;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use DataType\DataStorage\TestArrayDataStorage;
-use DataType\Exception\InvalidDatetimeFormatExceptionData;
+use DataType\Exception\Logic\InvalidDatetimeFormatExceptionData;
 use DataType\ExtractRule\GetDatetime;
 use DataType\Messages;
 use DataType\ProcessedValues;

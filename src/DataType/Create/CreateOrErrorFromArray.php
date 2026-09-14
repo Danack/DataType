@@ -19,7 +19,7 @@ trait CreateOrErrorFromArray
      * @param array<mixed> $data
      * TODO - ValidationErrors is incorrect.
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createOrErrorFromArray(array $data)
     {

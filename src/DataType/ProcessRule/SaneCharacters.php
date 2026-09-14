@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\PregMatchFailedException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -109,7 +109,7 @@ class SaneCharacters implements ProcessRule
 
         // @codeCoverageIgnoreStart
         if ($count === false) {
-            throw new DataTypeLogicException("preg_match failed");
+            throw new PregMatchFailedException();
         }
         // @codeCoverageIgnoreEnd
 

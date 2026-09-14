@@ -5,7 +5,7 @@ namespace DataTypeTest\Basic;
 use DataType\Basic\OptionalBasicString;
 use DataType\Create\CreateFromVarMap;
 use DataType\DataType;
-use DataType\Exception\ValidationException;
+use DataType\Exception\Runtime\ValidationException;
 use DataType\GetInputTypesFromAttributes;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
@@ -43,7 +43,7 @@ class OptionalBasicStringTest extends BaseTestCase
             OptionalBasicStringFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/string_input',
                 Messages::STRING_EXPECTED,
@@ -63,7 +63,7 @@ class OptionalBasicStringTest extends BaseTestCase
             OptionalBasicStringFixture::createFromVarMap(new ArrayVarMap($data));
             $this->fail("Expected ValidationException was not thrown.");
         }
-        catch (\DataType\Exception\ValidationException $ve) {
+        catch (\DataType\Exception\Runtime\ValidationException $ve) {
             $this->assertValidationProblemRegexp(
                 '/string_input',
                 Messages::STRING_EXPECTED,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\ProcessRule;
 
-use DataType\Exception\InvalidRulesExceptionData;
+use DataType\Exception\Logic\InvalidRulesExceptionData;
 use DataType\Messages;
 use DataType\ProcessRule\CheckString;
 use DataTypeTest\BaseTestCase;

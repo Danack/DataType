@@ -22,7 +22,7 @@ trait CreateOrErrorFromRequest
      * @param ServerRequestInterface $request
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
      * @throws Exception\DataTypeRuntimeException
-     * @throws Exception\ValidationException
+     * @throws Exception\Runtime\ValidationException
      */
     public static function createOrErrorFromRequest(ServerRequestInterface $request)
     {

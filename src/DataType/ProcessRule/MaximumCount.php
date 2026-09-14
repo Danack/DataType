@@ -5,7 +5,8 @@ declare(strict_types = 1);
 namespace DataType\ProcessRule;
 
 use DataType\DataStorage\DataStorage;
-use DataType\Exception\DataTypeLogicException;
+use DataType\Exception\Logic\MaximumCountNegativeException;
+use DataType\Exception\Logic\WrongTypeForCountRuleException;
 use DataType\Messages;
 use DataType\OpenApi\ParamDescription;
 use DataType\ProcessedValues;
@@ -25,7 +26,7 @@ class MaximumCount implements ProcessRule
     public function __construct(int $maximumCount)
     {
         if ($maximumCount < 0) {
-            throw new DataTypeLogicException(Messages::ERROR_MAXIMUM_COUNT_MINIMUM);
+            throw new MaximumCountNegativeException();
         }
 
         $this->maximumCount = $maximumCount;
@@ -37,12 +38,7 @@ class MaximumCount implements ProcessRule
         DataStorage $inputStorage
     ): ValidationResult {
         if (is_array($value) !== true) {
-            $message = sprintf(
-                Messages::ERROR_WRONG_TYPE_VARIANT_1,
-                gettype($value)
-            );
-
-            throw new DataTypeLogicException($message);
+            throw WrongTypeForCountRuleException::forMaximumCount($value);
         }
 
         $actualCount = count($value);

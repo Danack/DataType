@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DataTypeTest\Exception;
 
-use DataType\Exception\AnnotationClassDoesNotExistExceptionData;
+use DataType\Exception\Logic\AnnotationClassDoesNotExistExceptionData;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ class AnnotationClassDoesNotExistExceptionTest extends BaseTestCase
 {
     /**
      * This test seems dumb.
-     * @covers \DataType\Exception\AnnotationClassDoesNotExistExceptionData
+     * @covers \DataType\Exception\Logic\AnnotationClassDoesNotExistExceptionData
      */
     public function testWorks()
     {

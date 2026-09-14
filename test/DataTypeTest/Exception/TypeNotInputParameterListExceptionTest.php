@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DataTypeTest\Exception;
 
 use DataType\DataType;
-use DataType\Exception\DataTypeNotImplementedException;
+use DataType\Exception\Logic\DataTypeNotImplementedException;
 use DataType\Messages;
 use DataTypeTest\BaseTestCase;
 
@@ -15,7 +15,7 @@ use DataTypeTest\BaseTestCase;
 class TypeNotInputParameterListExceptionTest extends BaseTestCase
 {
     /**
-     * @covers \DataType\Exception\DataTypeNotImplementedException
+     * @covers \DataType\Exception\Logic\DataTypeNotImplementedException
      */
     public function testInputParameterListException()
     {

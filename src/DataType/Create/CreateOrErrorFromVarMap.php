@@ -19,7 +19,7 @@ trait CreateOrErrorFromVarMap
     /**
      * @param VarMap $variableMap
      * @return array{0:?object, 1:\DataType\ValidationProblem[]}
-     * @throws \DataType\Exception\ValidationException
+     * @throws \DataType\Exception\Runtime\ValidationException
      */
     public static function createOrErrorFromVarMap(VarMap $variableMap)
     {
