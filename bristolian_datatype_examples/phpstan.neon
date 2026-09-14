@@ -1,0 +1,11 @@
+includes:
+    - phpstan-datatype-library.neon
+
+parameters:
+    level: 8
+    paths:
+        - examples/runnable
+        - tests
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    treatPhpDocTypesAsCertain: false

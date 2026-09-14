@@ -1,0 +1,17 @@
+{
+    "name": "bristolian/datatype-examples",
+    "description": "Worked examples for danack/datatype",
+    "require": {
+        "php": ">=8.2",
+        "danack/datatype": "*",
+        "psr/http-message": "^1.0 || ^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BristolianDatatypeExamples\\": "examples/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

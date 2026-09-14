@@ -1,0 +1,21 @@
+includes:
+    - phpstan-datatype-library.neon
+
+parameters:
+    level: 8
+    paths:
+        - examples
+    excludePaths:
+        - 'examples/*.0.php'
+        - 'examples/*.1.php'
+        - 'examples/*.2.php'
+        - 'examples/*.3.php'
+        - 'examples/*.4.php'
+        - 'examples/*.5.php'
+        - 'examples/*.6.php'
+        - 'examples/*.7.php'
+        - 'examples/*.8.php'
+        - 'examples/*.9.php'
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    treatPhpDocTypesAsCertain: false

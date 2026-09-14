@@ -1,0 +1,26 @@
+{
+    "name": "bristolian/datatype-examples",
+    "description": "Worked examples for danack/datatype",
+    "require": {
+        "php": ">=8.2",
+        "danack/datatype": "*",
+        "laminas/laminas-diactoros": ">=2.6",
+        "psr/http-message": "^1.0 || ^2.0"
+    },
+    "autoload": {
+        "files": [
+            "examples/runnable/query_request.php"
+        ],
+        "psr-4": {
+            "BristolianDatatypeExamples\\Runnable\\": "examples/runnable/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BristolianDatatypeExamples\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
